@@ -31,6 +31,9 @@ jobs:
         uses: changesets/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+#          publish: pnpm release
+          commit: "ci(changesets): version packages"
 
       - name: Testing changeset
         shell: bash

@@ -27,3 +27,8 @@ jobs:
         uses: changesets/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Testing releases
+        shell: bash
+        run: |
+          changeset version

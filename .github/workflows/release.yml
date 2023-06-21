@@ -28,7 +28,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Testing releases
+      - name: Testing changeset
+        shell: bash
+        run: |
+          npx changeset
+
+      - name: Testing versions
         shell: bash
         run: |
           npx changeset version

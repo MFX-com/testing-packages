@@ -17,7 +17,9 @@
     "release:patch": "npm version $(semver $npm_package_version -i patch)",
     "version:major": "standard-version --release-as major",
     "version:minor": "standard-version --release-as minor",
-    "version:patch": "standard-version --release-as patch"
+    "version:patch": "standard-version --release-as patch",
+    "version": "changeset version",
+    "release": "changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",

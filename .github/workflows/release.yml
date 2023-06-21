@@ -31,4 +31,4 @@ jobs:
       - name: Testing releases
         shell: bash
         run: |
-          changeset version
+          npx changeset version

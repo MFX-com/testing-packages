@@ -2,6 +2,8 @@ name: Release
 
 on:
   push:
+    branches-ignore:
+      - $default-branch
     branches:
       - main
 

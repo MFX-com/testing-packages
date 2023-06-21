@@ -1,7 +1,7 @@
 {
-  "name": "testing-patches",
-  "version": "1.0.1",
-  "description": "Testing patch",
+  "name": "second",
+  "version": "2.2.2",
+  "description": "Testing patch 2",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

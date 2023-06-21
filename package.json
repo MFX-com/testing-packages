@@ -1,0 +1,17 @@
+{
+  "name": "nexera-monorepo",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "engines": {
+    "node": ">=v18.16.0",
+    "pnpm": ">=8.5.1"
+  },
+  "packageManager": "pnpm@8.5.1",
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "@changesets/cli": "^2.26.1"
+  }
+}

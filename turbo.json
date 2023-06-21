@@ -1,0 +1,46 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": [
+  ],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        "notifications/**",
+        "types/**",
+        "smart-wallet-functions/**",
+        "dist/**",
+        "config/**",
+        "vault/**",
+        "build/**"
+      ],
+      "env": []
+    },
+    "dev": {
+      "cache": false
+    },
+    "serve": {
+      "cache": false
+    },
+    "start": {
+      "cache": false
+    },
+    "lint": {
+      "outputs": []
+    },
+    "test": {
+      "outputs": [],
+      "env": []
+    },
+    "build-storybook": {
+      "dependsOn": ["^build"],
+      "outputs": ["storybook-static/**"]
+    },
+    "build-storybook:macos": {
+      "dependsOn": ["^build"],
+      "outputs": ["storybook-static/**"]
+    }
+  }
+}

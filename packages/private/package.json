@@ -4,7 +4,8 @@
   "version": "0.0.7",
   "description": "Testing patch private",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"building private\""
   },
   "author": "",
   "license": "MIT"

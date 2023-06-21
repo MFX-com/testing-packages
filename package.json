@@ -11,8 +11,14 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "release:major": "npm version $(semver $npm_package_version -i major)",
+    "release:minor": "npm version $(semver $npm_package_version -i minor)",
+    "release:patch": "npm version $(semver $npm_package_version -i patch)"
+  },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
-    "turbo": "^1.10.3"
+    "turbo": "^1.10.3",
+    "semver": "^7.3.7"
   }
 }

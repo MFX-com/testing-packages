@@ -59,7 +59,7 @@ jobs:
           }
 
           team=mfx_staging
-          if [[ ${{ steps.extract_branch.outputs.branch }} == 'main' ]] ; then
+          if [[ "${{ steps.extract_branch.outputs.branch }}" == "staging" ]] ; then
             team=mfx_prod
           fi
 

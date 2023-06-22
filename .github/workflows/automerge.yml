@@ -36,9 +36,13 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
       # Check for all current approvals if they match with appropriate GH team
       - name: Checking for PR permissions
-        id: check_pr_permissions
         shell: bash
         run: |
           function exists_in_list() {
@@ -53,6 +57,11 @@ jobs:
               done
               return 1
           }
+
+          team=mfx_staging
+          if [[ ${{ steps.extract_branch.outputs.branch }} == 'main' ]] ; then
+            team=mfx_prod
+          fi
 
           approvedUsers=($(curl -L \
             -H "Accept: application/vnd.github+json" \

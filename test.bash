@@ -21,7 +21,7 @@ approvedUsers=($(curl -L \
 
 for value in "${approvedUsers[@]}"
 do
-   echo "HELLO $value"
+   echo "HELLO: $value"
 done
 
 # Get all members from GH Team, return the "id" property as a list

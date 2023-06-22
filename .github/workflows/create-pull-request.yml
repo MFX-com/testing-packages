@@ -38,6 +38,6 @@ jobs:
           title: ${{ inputs.source_branch }} to ${{ inputs.target_branch }}
           body: "**Automated pull request**"
           assignee: markoftw
-          label: automerge, ${{ inputs.target_branch == 'staging' && 'STAGING' || 'PRODUCTION' }}
+          label: automerge,${{ inputs.target_branch == 'staging' && 'STAGING' || 'PRODUCTION' }}
           draft: false
           ignore_users: "dependabot"

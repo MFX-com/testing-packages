@@ -28,11 +28,22 @@ on:
       - completed
   status: {}
 
+env:
+  PR_NUMBER: ${{ github.event.number }}
+
 jobs:
   automerge:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
+      # Check for all current approvals if they match with appropriate GH team
+      - name: Checking for PR permissions
+        id: check_pr_permissions
+        shell: bash
+        run: |
+          echo ${{ env.PR_NUMBER }}
+          exit 1
+
       - name: Generate token
         id: generate_token
         uses: tibdex/github-app-token@v1
@@ -52,11 +63,11 @@ jobs:
 
       - name: Automatic merge
         id: auto-merge
-        uses: "pascalgn/automerge-action@v0.15.6"
+        uses: pascalgn/automerge-action@v0.15.6
         env:
-          GITHUB_TOKEN: "${{ steps.generate_token.outputs.token }}"
-          MERGE_METHOD: "merge"
-          LOG: "DEBUG"
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          MERGE_METHOD: merge
+          LOG: DEBUG
 
       - name: Disable merge commits
         run: |

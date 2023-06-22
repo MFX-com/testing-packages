@@ -2,6 +2,8 @@ name: Auto Merge
 
 on:
   pull_request:
+    branches:
+      - main
     types:
       - labeled
       - unlabeled
@@ -12,9 +14,13 @@ on:
       - reopened
       - unlocked
   pull_request_review:
+    branches:
+      - main
     types:
       - submitted
   check_suite:
+    branches:
+      - main
     types:
       - completed
   status: {}
@@ -24,6 +30,15 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
+      - name: Enable merge commits
+        run: |
+          curl -L \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token ${{ secrets.BOT_ACCESS_TOKEN }}"\
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/MFX-com/testing-packages \
+            -d '{"allow_merge_commit":true}'
+
       - id: automerge
         name: Automatic merge
         uses: "pascalgn/automerge-action@v0.15.6"
@@ -31,3 +46,12 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_METHOD: "merge"
           LOG: "DEBUG"
+
+      - name: Disable merge commits
+        run: |
+          curl -L \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token ${{ secrets.BOT_ACCESS_TOKEN }}"\
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/MFX-com/testing-packages \
+            -d '{"allow_merge_commit":false}'

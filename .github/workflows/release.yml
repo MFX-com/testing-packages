@@ -36,12 +36,12 @@ jobs:
 #          publish: pnpm release
           commit: "ci(changesets): version packages"
 
-      - name: Testing changeset
-        shell: bash
-        run: |
-          npx changeset
-
-      - name: Testing versions
-        shell: bash
-        run: |
-          npx changeset version
+#      - name: Testing changeset
+#        shell: bash
+#        run: |
+#          npx changeset
+#
+#      - name: Testing versions
+#        shell: bash
+#        run: |
+#          npx changeset version

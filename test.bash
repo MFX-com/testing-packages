@@ -15,7 +15,7 @@ function exists_in_list() {
 # Get all PR reviews, filter out only the ones with "APPROVED",
 approvedUsers=($(curl -L \
   -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer x" \
+  -H "Authorization: Bearer xxx" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   https://api.github.com/repos/MFX-com/testing-packages/pulls/14/reviews | jq -r '.[] | select(.state == "APPROVED") | .user.id'))
 
@@ -27,13 +27,25 @@ done
 # Get all members from GH Team, return the "id" property as a list
 teamUserIDs=($(curl -L \
   -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer x" \
+  -H "Authorization: Bearer xxx" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   https://api.github.com/orgs/MFX-com/teams/mfx_staging/members | jq  -r '.[].id'))
 
+#          curl -L \
+#            -H "Accept: application/vnd.github+json" \
+#            -H "Authorization: Bearer ${{ secrets.BOT_ACCESS_TOKEN }}" \
+#            -H "X-GitHub-Api-Version: 2022-11-28" \
+#            https://api.github.com/repos/MFX-com/testing-packages/pulls/${{ env.PR_NUMBER }}/reviews
+#
+#          curl -L \
+#            -H "Accept: application/vnd.github+json" \
+#            -H "Authorization: Bearer ${{ secrets.BOT_ACCESS_TOKEN }}" \
+#            -H "X-GitHub-Api-Version: 2022-11-28" \
+#            https://api.github.com/orgs/MFX-com/teams/mfx_staging/members
+
 #curl -L \
 #  -H "Accept: application/vnd.github+json" \
-#  -H "Authorization: Bearer x" \
+#  -H "Authorization: Bearer xxx" \
 #  -H "X-GitHub-Api-Version: 2022-11-28" \
 #  https://api.github.com/orgs/MFX-com/teams/mfx_staging/members
 

@@ -24,6 +24,15 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
+      - name: Validate parameters
+        shell: bash
+        run: |
+          if [ ${{ inputs.source_branch }} == 'staging' ] && [ ${{ inputs.target_branch }} == 'staging' ]; then
+            exit 1
+          elif [ ${{ inputs.source_branch }} == 'development' ] && [ ${{ inputs.target_branch }} == 'main' ]; then
+            exit 1
+          fi
+
       - name: Checkout repository
         uses: actions/checkout@v3
         with:

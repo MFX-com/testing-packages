@@ -1,5 +1,55 @@
-curl -L \
+function exists_in_list() {
+    LIST=$1
+    DELIMITER=$2
+    VALUE=$3
+    LIST_WHITESPACES=$(echo "$LIST" | tr "$DELIMITER" " ")
+    for x in $LIST_WHITESPACES; do
+        if [ "$x" = "$VALUE" ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+
+# Get all PR reviews, filter out only the ones with "APPROVED",
+approvedUsers=($(curl -L \
   -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer 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" \
+  -H "Authorization: Bearer x" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
-  https://api.github.com/repos/MFX-com/testing-packages/pulls/PULL_NUMBER/reviews
+  https://api.github.com/repos/MFX-com/testing-packages/pulls/14/reviews | jq -r '.[] | select(.state == "APPROVED") | .user.id'))
+
+for value in "${approvedUsers[@]}"
+do
+   echo "HELLO $value"
+done
+
+# Get all members from GH Team, return the "id" property as a list
+teamUserIDs=($(curl -L \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer x" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/orgs/MFX-com/teams/mfx_staging/members | jq  -r '.[].id'))
+
+#curl -L \
+#  -H "Accept: application/vnd.github+json" \
+#  -H "Authorization: Bearer x" \
+#  -H "X-GitHub-Api-Version: 2022-11-28" \
+#  https://api.github.com/orgs/MFX-com/teams/mfx_staging/members
+
+COUNTER=0
+for value in "${approvedUsers[@]}"
+do
+     if exists_in_list "$teamUserIDs" " " $value; then
+       echo "$value is a valid user from the users list which are allowed to merge"
+       COUNTER=$((COUNTER+1))
+     else
+       echo "$value is NOT in the list of valid users to merge"
+     fi
+done
+
+if [[ $COUNTER -gt 0 ]] ; then
+  echo "Allowed to merge."
+else
+  echo "Not merging."
+fi

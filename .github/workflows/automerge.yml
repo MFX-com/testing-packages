@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - staging
     types:
       - labeled
       - unlabeled
@@ -16,11 +17,13 @@ on:
   pull_request_review:
     branches:
       - main
+      - staging
     types:
       - submitted
   check_suite:
     branches:
       - main
+      - staging
     types:
       - completed
   status: {}
@@ -39,8 +42,8 @@ jobs:
             https://api.github.com/repos/MFX-com/testing-packages \
             -d '{"allow_merge_commit":true}'
 
-      - id: automerge
-        name: Automatic merge
+      - name: Automatic merge
+        id: auto-merge
         uses: "pascalgn/automerge-action@v0.15.6"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"

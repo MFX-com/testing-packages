@@ -19,9 +19,6 @@ on:
       - submitted
       - edited
   check_suite:
-    branches:
-      - main
-      - staging
     types:
       - completed
 

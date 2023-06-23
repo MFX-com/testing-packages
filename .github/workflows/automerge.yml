@@ -35,7 +35,6 @@ env:
 jobs:
   automerge:
     runs-on: ubuntu-latest
-    permissions: write-all
     steps:
       # Check for all current approvals if they match with appropriate GH team
       - name: Checking for PR permissions

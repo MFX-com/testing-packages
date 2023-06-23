@@ -15,11 +15,9 @@ on:
       - reopened
       - unlocked
   pull_request_review:
-    branches:
-      - main
-      - staging
     types:
       - submitted
+      - edited
   check_suite:
     branches:
       - main

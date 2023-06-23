@@ -22,7 +22,6 @@ jobs:
   create-pull-request:
     name: Create pull request
     runs-on: ubuntu-latest
-    permissions: write-all
     steps:
       - name: Validate parameters
         shell: bash

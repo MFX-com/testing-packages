@@ -1,7 +1,7 @@
 {
   "name": "other",
   "version": "5.0.3",
-  "description": "Testing other",
+  "description": "Testing other!",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "echo \"building other!\""

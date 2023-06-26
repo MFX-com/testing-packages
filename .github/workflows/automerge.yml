@@ -1,33 +1,14 @@
 name: Auto Merge
 
 on:
-  pull_request:
-    branches:
-      - main
-      - staging
-    types:
-      - labeled
-      - unlabeled
-      - synchronize
-      - opened
-      - edited
-      - ready_for_review
-      - reopened
-      - unlocked
   pull_request_review:
     types:
       - submitted
       - edited
-  check_suite:
-    types:
-      - completed
-
-env:
-  GH_TEAM: ${{ github.base_ref == 'main' && 'mfx_prod' || 'mfx_staging' }}
 
 jobs:
   automerge:
-    if: ${{ github.base_ref == 'main' || github.base_ref == 'staging' }}
+    if: ${{ github.event.pull_request.base.ref == 'main' || github.event.pull_request.base.ref == 'staging' }}
     runs-on: ubuntu-latest
     steps:
       - name: Find Current Pull Request
@@ -36,6 +17,8 @@ jobs:
 
       # Check for all current approvals if they match with appropriate GH team
       - name: Checking for PR permissions
+        env:
+          GH_TEAM: ${{ github.event.pull_request.base.ref == 'main' && 'mfx_prod' || 'mfx_staging' }}
         shell: bash
         run: |
           function exists_in_list() {

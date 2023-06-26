@@ -1,9 +1,16 @@
-name: SDK Release
+name: SDK Release - manual
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      version_bump:
+        type: choice
+        description: Version to bump
+        options:
+          - patch
+          - minor
+          - major
+        default: patch
 
 jobs:
   release:
@@ -34,7 +41,7 @@ jobs:
           path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+            ${{ runner.os }}-pnpm-store-
 
       - uses: actions/setup-node@v3
         with:

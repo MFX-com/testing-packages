@@ -21,6 +21,8 @@ jobs:
           GH_TEAM: ${{ github.event.pull_request.base.ref == 'main' && 'mfx_prod' || 'mfx_staging' }}
         shell: bash
         run: |
+          echo ${{ github.event.pull_request.base.ref }}
+          
           function exists_in_list() {
               LIST=$1
               DELIMITER=$2

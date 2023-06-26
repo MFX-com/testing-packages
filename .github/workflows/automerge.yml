@@ -22,9 +22,6 @@ on:
     types:
       - completed
 
-env:
-  GH_TEAM: ${{ github.base_ref == 'main' == 'main' && 'mfx_prod' || 'mfx_staging' }}
-
 jobs:
   automerge:
     runs-on: ubuntu-latest
@@ -42,6 +39,8 @@ jobs:
       # Check for all current approvals if they match with appropriate GH team
       - name: Checking for PR permissions
         if: ${{ steps.extract_branch.outputs.branch == 'main' || steps.extract_branch.outputs.branch == 'staging' }}
+        env:
+          GH_TEAM: ${{ steps.extract_branch.outputs.branch == 'main' && 'mfx_prod' || 'mfx_staging' }}
         shell: bash
         run: |
           function exists_in_list() {

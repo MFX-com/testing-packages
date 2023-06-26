@@ -27,7 +27,7 @@ env:
 
 jobs:
   automerge:
-    if: ${{ github.base_ref == 'main' || github.base_ref == 'staging' }}
+    if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging' }}
     runs-on: ubuntu-latest
     steps:
       - name: Find Current Pull Request

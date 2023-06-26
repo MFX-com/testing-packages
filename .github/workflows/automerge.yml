@@ -23,7 +23,7 @@ on:
       - completed
 
 env:
-  GH_TEAM: ${{ steps.extract_branch.outputs.branch == 'main' && 'mfx_prod' || 'mfx_staging' }}
+  GH_TEAM: ${{ github.base_ref == 'main' == 'main' && 'mfx_prod' || 'mfx_staging' }}
 
 jobs:
   automerge:

@@ -19,7 +19,9 @@
     "version:minor": "standard-version --release-as minor",
     "version:patch": "standard-version --release-as patch",
     "version": "changeset version",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "build:@marefx/first": "turbo run build --filter @marefx/first",
+    "build:@marefx/second": "turbo run build --filter @marefx/second"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",

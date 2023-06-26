@@ -1,0 +1,67 @@
+name: SDK Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 18.16 ]
+        pnpm-version: [ 8.5.1 ]
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+
+      - uses: pnpm/action-setup@v2.0.1
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: ${{ matrix.pnpm-version }}
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'pnpm'
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        run: |
+          pnpm install --no-frozen-lockfile
+
+      - name: Bump versions
+        run: |
+          echo "Bumping"
+
+      - name: Build
+        run: |
+          pnpm run build:@marefx/first
+          pnpm run build:@marefx/second
+
+#      - name: Publish to public npm
+#        env:
+#          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
+#        run: |
+#          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
+#          pnpm --filter "@marefx/first" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
+#          pnpm --filter "@marefx/second" publish --access=public --no-git-checks --registry https://registry.npmjs.org/

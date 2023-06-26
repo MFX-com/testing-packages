@@ -1,5 +1,5 @@
 ---
-"second": patch
+"@marefx/second": patch
 ---
 
 AAA

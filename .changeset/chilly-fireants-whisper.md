@@ -1,5 +1,5 @@
 ---
-"priv": patch
+"@marefx/priv": patch
 ---
 
 TEsting

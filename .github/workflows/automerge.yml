@@ -15,24 +15,19 @@ on:
       - reopened
       - unlocked
   pull_request_review:
-    branches:
-      - main
-      - staging
     types:
       - submitted
+      - edited
   check_suite:
-    branches:
-      - main
-      - staging
     types:
       - completed
-  status: {}
 
 env:
   GH_TEAM: ${{ github.base_ref == 'main' && 'mfx_prod' || 'mfx_staging' }}
 
 jobs:
   automerge:
+    if: ${{ github.base_ref == 'main' || github.base_ref == 'staging' }}
     runs-on: ubuntu-latest
     steps:
       - name: Find Current Pull Request

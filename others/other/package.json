@@ -4,7 +4,7 @@
   "description": "Testing other",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo \"building other\""
+    "build": "echo \"building other!\""
   },
   "author": "",
   "license": "MIT"

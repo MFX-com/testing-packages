@@ -1,48 +1,28 @@
 name: Auto Merge
 
 on:
-  pull_request:
-    branches:
-      - main
-      - staging
-    types:
-      - labeled
-      - unlabeled
-      - synchronize
-      - opened
-      - edited
-      - ready_for_review
-      - reopened
-      - unlocked
   pull_request_review:
     types:
       - submitted
       - edited
-  check_suite:
-    types:
-      - completed
 
 jobs:
   automerge:
+    if: ${{ github.event.pull_request.base.ref == 'main' || github.event.pull_request.base.ref == 'staging' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Extract branch name
-        shell: bash
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-        id: extract_branch
-
       - name: Find Current Pull Request
-        if: ${{ steps.extract_branch.outputs.branch == 'main' || steps.extract_branch.outputs.branch == 'staging' }}
         uses: jwalton/gh-find-current-pr@v1.3.2
         id: findPr
 
       # Check for all current approvals if they match with appropriate GH team
       - name: Checking for PR permissions
-        if: ${{ steps.extract_branch.outputs.branch == 'main' || steps.extract_branch.outputs.branch == 'staging' }}
         env:
-          GH_TEAM: ${{ steps.extract_branch.outputs.branch == 'main' && 'mfx_prod' || 'mfx_staging' }}
+          GH_TEAM: ${{ github.event.pull_request.base.ref == 'main' && 'mfx_prod' || 'mfx_staging' }}
         shell: bash
         run: |
+          echo ${{ github.event.pull_request.base.ref }}
+          
           function exists_in_list() {
               LIST=$1
               DELIMITER=$2
@@ -87,7 +67,6 @@ jobs:
           fi
 
       - name: Generate token
-        if: ${{ steps.extract_branch.outputs.branch == 'main' || steps.extract_branch.outputs.branch == 'staging' }}
         id: generate_token
         uses: tibdex/github-app-token@v1
         with:
@@ -95,7 +74,6 @@ jobs:
           private_key: ${{ secrets.PRIVATE_KEY }}
 
       - name: Enable merge commits
-        if: ${{ steps.extract_branch.outputs.branch == 'main' || steps.extract_branch.outputs.branch == 'staging' }}
         run: |
           curl -L \
             -H "Accept: application/vnd.github+json" \
@@ -106,7 +84,6 @@ jobs:
             --output /dev/null
 
       - name: Automatic merge
-        if: ${{ steps.extract_branch.outputs.branch == 'main' || steps.extract_branch.outputs.branch == 'staging' }}
         id: auto-merge
         uses: pascalgn/automerge-action@v0.15.6
         env:
@@ -115,7 +92,6 @@ jobs:
           LOG: DEBUG
 
       - name: Disable merge commits
-        if: ${{ steps.extract_branch.outputs.branch == 'main' || steps.extract_branch.outputs.branch == 'staging' }}
         run: |
           curl -L \
             -H "Accept: application/vnd.github+json" \

@@ -25,9 +25,12 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
+    "lerna": "^7.0.2",
     "semver": "^7.3.7",
-    "turbo": "^1.10.3",
     "standard-version": "^9.5.0",
-    "lerna": "^7.0.2"
+    "turbo": "^1.10.3"
+  },
+  "dependencies": {
+    "ethers": "^6.6.1"
   }
 }

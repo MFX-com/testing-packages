@@ -52,6 +52,8 @@ jobs:
       - name: Create changeset file
         shell: bash
         run: |
+          ls -al
+          touch $HOME/.changeset/my-commit-message.md
           cat <<EOF > $HOME/.changeset/my-commit-message.md
             ---
             "@marefx/second": patch

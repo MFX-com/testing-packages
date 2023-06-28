@@ -52,6 +52,8 @@ jobs:
 #          lerna version --conventional-commits --no-git-tag-version --yes
 
       - name: Bump versions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           lerna version --yes --conventional-commits --create-release github --message 'chore(release): publish'
 

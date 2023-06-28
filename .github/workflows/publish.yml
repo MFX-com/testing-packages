@@ -2,7 +2,8 @@ name: SDK Release - publish
 
 on:
   pull_request:
-    types: [ closed ]
+    types:
+      - closed
     branches:
       - development
       - main

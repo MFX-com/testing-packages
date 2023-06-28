@@ -45,9 +45,9 @@ jobs:
         run: |
           pnpm install --no-frozen-lockfile
 
-      - name: Bump versions
-        run: |
-          lerna version --conventional-commits --no-git-tag-version --yes
+#      - name: Bump versions
+#        run: |
+#          lerna version --conventional-commits --no-git-tag-version --yes
 
       # People can bump manually a package in their merge request
       # Once merged to development, it will automatically take it in consideration
@@ -72,10 +72,10 @@ jobs:
 #          echo "Bumping"
 #          npx changeset version
 #
-      - name: Commit & Push changes
-        uses: actions-js/push@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Commit & Push changes
+#        uses: actions-js/push@master
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
         run: |

@@ -10,7 +10,7 @@ on:
 
 jobs:
   publish:
-    if: github.event.pull_request.merged == true && "asd" === "false" # Condition
+    if: github.event.pull_request.merged == true && 'asd' === 'false' # Condition
     runs-on: ubuntu-latest
     strategy:
       matrix:

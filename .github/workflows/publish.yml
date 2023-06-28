@@ -21,6 +21,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Config git user
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
       - uses: pnpm/action-setup@v2.0.1
         name: Install pnpm
         id: pnpm-install
@@ -50,15 +55,8 @@ jobs:
         run: |
           pnpm install --no-frozen-lockfile
 
-      - name: Bump versions
-        run: |
-          lerna version --conventional-commits --no-git-tag-version --yes
-
-      - name: Version and publish
+      - name: Version packages
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
-          
-          lerna version --conventional-commits --conventional-graduate --yes
+          lerna version --yes --conventional-commits --create-release github --message 'chore(release): publish'

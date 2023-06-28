@@ -49,7 +49,18 @@ jobs:
       # Once merged to development, it will automatically take it in consideration
       #
       # Otherwise, it will create a patch version
+      - name: Create changeset file
+        shell: bash
+        run: |
+          echo "
+            ---
+            @marefx/second": patch
+            ---
+            
+              AAA" > ~/.changeset/my-commit-message.md
+
       - name: Bump versions
+        shell: bash
         run: |
           echo "Bumping"
           npx changeset version

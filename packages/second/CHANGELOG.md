@@ -1,5 +1,11 @@
 # second
 
+## 0.0.2
+
+### Patch Changes
+
+- c45798a: AAA
+
 ## 2.2.4
 
 ### Patch Changes

@@ -52,12 +52,13 @@ jobs:
       - name: Create changeset file
         shell: bash
         run: |
-          echo "
+          cat <<EOF > $HOME/.changeset/my-commit-message.md
             ---
-            @marefx/second": patch
+            "@marefx/second": patch
             ---
-            
-              AAA" > ~/.changeset/my-commit-message.md
+              
+            AAA
+          EOF
 
       - name: Bump versions
         shell: bash

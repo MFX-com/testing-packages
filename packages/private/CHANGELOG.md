@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0 (2023-06-28)
+
+
+### Features
+
+* **test:** test ([4594663](https://github.com/MFX-com/testing-packages/commit/45946636673884a211bb2e568153a3d47d4f0f9b))
+
+
+
+
+
 ## 0.0.12 (2023-06-28)
 
 **Note:** Version bump only for package @marefx/priv

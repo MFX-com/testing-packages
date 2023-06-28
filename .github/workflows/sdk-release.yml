@@ -45,6 +45,10 @@ jobs:
         run: |
           pnpm install --no-frozen-lockfile
 
+      # People can bump manually a package in their merge request
+      # Once merged to development, it will automatically take it in consideration
+      #
+      # Otherwise, it will create a patch version
       - name: Bump versions
         run: |
           echo "Bumping"

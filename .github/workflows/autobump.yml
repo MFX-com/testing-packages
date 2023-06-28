@@ -1,0 +1,32 @@
+name: autobump
+
+on:
+  push:
+    branches:
+      - mainz
+  pull_request:
+    types: [ opened, labeled ]
+    branches:
+      - mainz
+
+jobs:
+  autobump:
+    name: autobump
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto Bump Check
+        id: autobump-check
+        uses: docker://francescoferraioli/autobump-action:v1
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          PACKAGES_IN_REPO: "domain|packages/domain;contracts|packages/contracts"
+
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Auto Bump Run
+        uses: francescoferraioli/autobump@v4.0.2
+        with:

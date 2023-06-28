@@ -1,7 +1,7 @@
 {
   "name": "@marefx/priv",
   "private": true,
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Testing patch private",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

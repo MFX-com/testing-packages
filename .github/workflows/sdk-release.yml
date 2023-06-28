@@ -53,8 +53,8 @@ jobs:
         shell: bash
         run: |
           ls -al
-          touch $HOME/.changeset/my-commit-message.md
-          cat <<EOF > $HOME/.changeset/my-commit-message.md
+          touch .changeset/my-commit-message.md
+          cat <<EOF > .changeset/my-commit-message.md
             ---
             "@marefx/second": patch
             ---

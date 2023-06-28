@@ -15,6 +15,8 @@ jobs:
         pnpm-version: [ 8.5.1 ]
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - uses: pnpm/action-setup@v2.0.1
         name: Install pnpm
@@ -48,6 +50,10 @@ jobs:
 #      - name: Bump versions
 #        run: |
 #          lerna version --conventional-commits --no-git-tag-version --yes
+
+      - name: Bump versions
+        run: |
+          lerna version --yes --conventional-commits --create-release github --message 'chore(release): publish'
 
       # People can bump manually a package in their merge request
       # Once merged to development, it will automatically take it in consideration

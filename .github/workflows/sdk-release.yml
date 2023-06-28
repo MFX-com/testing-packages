@@ -49,24 +49,24 @@ jobs:
       # Once merged to development, it will automatically take it in consideration
       #
       # Otherwise, it will create a patch version
-      - name: Create changeset file
-        shell: bash
-        run: |
-          ls -al
-          touch .changeset/my-commit-message.md
-          cat <<EOF > .changeset/my-commit-message.md
-            ---
-            "@marefx/second": patch
-            ---
-              
-            AAA
-          EOF
-
-      - name: Bump versions
-        shell: bash
-        run: |
-          echo "Bumping"
-          npx changeset version
+#      - name: Create changeset file
+#        shell: bash
+#        run: |
+#          ls -al
+#          touch .changeset/my-commit-message.md
+#          cat <<EOF > .changeset/my-commit-message.md
+#            ---
+#            "@marefx/second": patch
+#            ---
+#
+#            AAA
+#          EOF
+#
+#      - name: Bump versions
+#        shell: bash
+#        run: |
+#          echo "Bumping"
+#          npx changeset version
 
       - name: Commit & Push changes
         uses: actions-js/push@master

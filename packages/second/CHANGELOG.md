@@ -1,13 +1,16 @@
 # Change Log
 
-## 0.0.5
-
-### Patch Changes
-
-- AAA
-
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.0.6](https://github.com/MFX-com/testing-packages/compare/@marefx/second@0.0.4...@marefx/second@0.0.6) (2023-06-28)
+
+**Note:** Version bump only for package @marefx/second
+
+
+
+
+
 
 ## 0.0.4 (2023-06-28)
 

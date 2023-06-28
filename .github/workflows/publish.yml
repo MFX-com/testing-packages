@@ -60,4 +60,4 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
           
-          lerna version --conventional-commits --no-git-tag-version --conventional-graduate --yes
+          lerna version --conventional-commits --conventional-graduate --yes

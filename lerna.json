@@ -3,5 +3,11 @@
   "version": "independent",
   "packages": [
     "packages/*"
-  ]
+  ],
+  "command": {
+    "version": {
+      "allowBranch": "main",
+      "ignoreChanges": ["**/*.md"]
+    }
+  }
 }

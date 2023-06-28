@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/MFX-com/testing-packages/compare/@marefx/first@0.5.0...@marefx/first@0.6.0) (2023-06-28)
+
+
+### Features
+
+* **test:** lol ([ba8c0ee](https://github.com/MFX-com/testing-packages/commit/ba8c0ee82d6c45718b318aa0bd062a6cd461bbf4))
+
+
+
+
+
 # [0.5.0](https://github.com/MFX-com/testing-packages/compare/@marefx/first@0.0.3...@marefx/first@0.5.0) (2023-06-28)
 
 

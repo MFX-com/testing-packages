@@ -14,6 +14,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+## [0.0.13](https://github.com/MFX-com/testing-packages/compare/@marefx/priv@0.0.10...@marefx/priv@0.0.13) (2023-06-28)
+
+**Note:** Version bump only for package @marefx/priv
+
+
+
+
+
+
 ## 0.0.12 (2023-06-28)
 
 **Note:** Version bump only for package @marefx/priv

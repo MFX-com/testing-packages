@@ -14,6 +14,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+## [0.0.10](https://github.com/MFX-com/testing-packages/compare/@marefx/second@0.0.7...@marefx/second@0.0.10) (2023-06-28)
+
+**Note:** Version bump only for package @marefx/second
+
+
+
+
+
+
 ## 0.0.9 (2023-06-28)
 
 **Note:** Version bump only for package @marefx/second

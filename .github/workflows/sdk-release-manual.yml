@@ -1,16 +1,9 @@
 name: SDK Release - manual
 
 on:
-  workflow_dispatch:
-    inputs:
-      version_bump:
-        type: choice
-        description: Version to bump
-        options:
-          - patch
-          - minor
-          - major
-        default: patch
+  push:
+    branches:
+      - main
 
 jobs:
   release:
@@ -22,6 +15,8 @@ jobs:
         pnpm-version: [ 8.5.1 ]
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - uses: pnpm/action-setup@v2.0.1
         name: Install pnpm
@@ -41,7 +36,7 @@ jobs:
           path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+            ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - uses: actions/setup-node@v3
         with:
@@ -53,18 +48,7 @@ jobs:
           pnpm install --no-frozen-lockfile
 
       - name: Bump versions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "Bumping"
-
-      - name: Build
-        run: |
-          pnpm run build:@marefx/first
-          pnpm run build:@marefx/second
-
-#      - name: Publish to public npm
-#        env:
-#          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
-#        run: |
-#          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
-#          pnpm --filter "@marefx/first" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
-#          pnpm --filter "@marefx/second" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
+          lerna version --yes --conventional-commits --create-release github --message 'chore(release): publish'

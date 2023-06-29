@@ -56,11 +56,11 @@ jobs:
 #        run: |
 #          lerna version --conventional-commits --no-git-tag-version --yes
 
-      - name: Bump versions
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          lerna version --yes --conventional-commits --create-release github --message 'chore(release): publish'
+#      - name: Bump versions
+#        env:
+#          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          lerna version --yes --conventional-commits --create-release github --message 'chore(release): publish'
 
       # People can bump manually a package in their merge request
       # Once merged to development, it will automatically take it in consideration

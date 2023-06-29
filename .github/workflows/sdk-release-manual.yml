@@ -63,4 +63,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          lerna version --yes --conventional-commits --no-tag --message 'chore(release): publish'
+          lerna version --yes --conventional-commits --no-git-tag --message 'chore(release): publish'

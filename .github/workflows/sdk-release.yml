@@ -18,10 +18,15 @@ jobs:
         with:
           fetch-depth: 0
 
+#      - name: Config git user
+#        run: |
+#          git config --global user.name "${{ github.actor }}"
+#          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
       - name: Config git user
         run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - uses: pnpm/action-setup@v2.0.1
         name: Install pnpm
@@ -56,11 +61,11 @@ jobs:
 #        run: |
 #          lerna version --conventional-commits --no-git-tag-version --yes
 
-#      - name: Bump versions
-#        env:
-#          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        run: |
-#          lerna version --yes --conventional-commits --create-release github --message 'chore(release): publish'
+      - name: Bump versions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          lerna version --yes --conventional-commits --message 'chore(release): version and release commit'
 
       # People can bump manually a package in their merge request
       # Once merged to development, it will automatically take it in consideration

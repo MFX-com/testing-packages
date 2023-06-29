@@ -3,6 +3,101 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/MFX-com/testing-packages/compare/@marefx/first@3.0.1...@marefx/first@4.0.0) (2023-06-29)
+
+
+### Bug Fixes
+
+* **first:** this is a test pr ([#29](https://github.com/MFX-com/testing-packages/issues/29)) ([9559dbb](https://github.com/MFX-com/testing-packages/commit/9559dbbe107106879af4bee74150428ab655488a))
+
+
+### Features
+
+* **first:** test pr ([#31](https://github.com/MFX-com/testing-packages/issues/31)) ([30ab954](https://github.com/MFX-com/testing-packages/commit/30ab954bbb37504b7c41bc4ff8d5532c6eb7b5b7))
+* **test:** 213123123 ([78aac0b](https://github.com/MFX-com/testing-packages/commit/78aac0b2f3e2b380dc8ec62bcbc5099a479cb3c9))
+
+
+### BREAKING CHANGES
+
+* **first:** testing major
+
+* chore(release): version and release commit
+
+ - @marefx/first@0.13.0
+
+* chore(release): version and release commit
+
+ - @marefx/first@0.13.1
+
+* build: testing build
+
+* chore(release): version and release commit
+
+ - @marefx/first@0.13.2
+
+* refactor: testing refactor
+
+* chore(release): version and release commit
+
+ - @marefx/first@0.13.3
+
+* refactor: testing refactor
+
+* refactor!: testing refactor
+
+* test
+
+* chore(release): version and release commit
+
+ - @marefx/first@0.13.4
+
+* remove preset
+
+* feat(test): testing
+* **first:** moved
+
+* chore(release): version and release commit
+
+ - @marefx/first@0.14.0
+
+* feat(test): testing
+* **first:** movedddd
+
+* tests
+
+* fix(nexera-id): updated dependencies
+* **first:** new version has dropped support for xx
+
+* chore(release): version and release commit
+
+ - @marefx/first@2.0.0
+ - @marefx/priv@1.1.6
+ - @marefx/second@1.5.2
+
+* chore(release): version and release commit
+
+ - @marefx/first@3.0.0
+ - @marefx/priv@1.1.7
+ - @marefx/second@1.5.3
+
+* ass
+
+* fix(test): 1
+
+* asdasd
+
+* reve
+
+* chore(release): version and release commit
+
+ - @marefx/first@3.0.1
+
+* 12312312
+
+
+
+
+
 ## [3.0.1](https://github.com/MFX-com/testing-packages/compare/@marefx/first@3.0.0...@marefx/first@3.0.1) (2023-06-29)
 
 

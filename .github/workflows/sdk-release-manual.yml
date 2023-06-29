@@ -59,13 +59,19 @@ jobs:
         run: |
           pnpm install --no-frozen-lockfile
 
+#      - name: Bump versions
+#        env:
+#          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          lerna version --yes --conventional-commits --no-git-tag-version --message 'chore(release): publish'
+
       - name: Bump versions
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          lerna version --yes --conventional-commits --conventional-graduate --no-git-tag-version --message 'chore(release): publish'
+          lerna version --yes --conventional-commits --message 'chore(release): publish'
 
-      - name: Commit & Push changes
-        uses: actions-js/push@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Commit & Push changes
+#        uses: actions-js/push@master
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}

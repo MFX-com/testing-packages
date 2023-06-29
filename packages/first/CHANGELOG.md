@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/MFX-com/testing-packages/compare/@marefx/first@2.0.0...@marefx/first@3.0.0) (2023-06-29)
+
+
+### Bug Fixes
+
+* **nexera-id:** updated dependencies ([af345bf](https://github.com/MFX-com/testing-packages/commit/af345bf34bbdb274fa1806809d6e34b2bac455ee))
+
+
+### BREAKING CHANGES
+
+* **nexera-id:** new version has dropped support for xx
+
+
+
+
+
 # [2.0.0](https://github.com/MFX-com/testing-packages/compare/@marefx/first@0.14.0...@marefx/first@2.0.0) (2023-06-29)
 
 

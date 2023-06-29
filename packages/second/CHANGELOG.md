@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.3](https://github.com/MFX-com/testing-packages/compare/@marefx/second@1.5.2...@marefx/second@1.5.3) (2023-06-29)
+
+**Note:** Version bump only for package @marefx/second
+
+
+
+
+
 ## [1.5.2](https://github.com/MFX-com/testing-packages/compare/@marefx/second@0.5.1...@marefx/second@1.5.2) (2023-06-29)
 
 **Note:** Version bump only for package @marefx/second

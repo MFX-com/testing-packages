@@ -100,6 +100,10 @@ jobs:
           pnpm run build:@marefx/first
           pnpm run build:@marefx/second
 
+      - name: Check version
+        run: |
+          cat packages/first/package.json
+
 #      - name: Publish to public npm
 #        env:
 #          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.3.0 (2023-06-29)
+
+
+### Features
+
+* **testing:** bump version ([#28](https://github.com/MFX-com/testing-packages/issues/28)) ([95d13ae](https://github.com/MFX-com/testing-packages/commit/95d13ae75037675af2054be485f3e12b815c0dff))
+
+
+
+
+
 # [0.2.0](https://github.com/MFX-com/testing-packages/compare/@marefx/second@0.1.4...@marefx/second@0.2.0) (2023-06-28)
 
 

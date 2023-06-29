@@ -63,19 +63,19 @@ jobs:
 #        env:
 #          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #        run: |
-#          lerna version --yes --conventional-commits --no-git-tag-version --message 'chore(release): publish'#
+#          lerna version --yes --conventional-commits --no-git-tag-version --message 'chore(release): version and release commit'
 
 #      - name: Bump versions
 #        env:
 #          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #        run: |
-#          lerna version --yes --conventional-commits --create-release github --message 'chore(release): publish'
+#          lerna version --yes --conventional-commits --create-release github --message 'chore(release): version and release commit'
 
       - name: Bump versions
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          lerna version --yes --conventional-commits --message 'chore(release): publish'
+          lerna version --yes --conventional-commits --message 'chore(release): version and release commit'
 
 #      - name: Commit & Push changes
 #        uses: actions-js/push@master

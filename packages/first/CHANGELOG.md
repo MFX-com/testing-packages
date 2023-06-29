@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/MFX-com/testing-packages/compare/@marefx/first@0.8.4...@marefx/first@0.9.0) (2023-06-29)
+
+
+### Features
+
+* **lol:** asasasas ([8930722](https://github.com/MFX-com/testing-packages/commit/8930722daa84448a01613135f568ca24d880fa69))
+
+
+
+
+
 ## [0.8.4](https://github.com/MFX-com/testing-packages/compare/@marefx/first@0.8.0...@marefx/first@0.8.4) (2023-06-29)
 
 **Note:** Version bump only for package @marefx/first

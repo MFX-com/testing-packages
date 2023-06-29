@@ -4,7 +4,6 @@
   "packages": [
     "packages/*"
   ],
-  "changelogPreset": "./changelog-preset.config.json",
   "command": {
     "version": {
       "allowBranch": "main",

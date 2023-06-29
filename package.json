@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
+    "conventional-changelog-conventionalcommits": "^6.1.0",
     "lerna": "^7.0.2",
     "semver": "^7.3.7",
     "standard-version": "^9.5.0",

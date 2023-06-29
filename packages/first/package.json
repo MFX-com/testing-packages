@@ -4,7 +4,11 @@
   "description": "Testing patch 1",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo \"building first\""
+    "build": "echo \"building first\"",
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   },
   "author": "",
   "license": "MIT"

@@ -24,11 +24,11 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - name: Config git user
-        run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+#
+#      - name: Config git user
+#        run: |
+#          git config --global user.name "${{ github.actor }}"
+#          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
       - uses: pnpm/action-setup@v2.0.1
         name: Install pnpm
@@ -63,4 +63,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          lerna version --yes --conventional-commits --no-git-tag --message 'chore(release): publish'
+          lerna version --yes --conventional-commits --conventional-graduate --no-git-tag-version --message 'chore(release): publish'
+
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

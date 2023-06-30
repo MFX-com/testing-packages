@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>4.4.11 (2023-06-30)</small>
+
+* perf(test): testing ([095c71f](https://github.com/MFX-com/testing-packages/commit/095c71f))
+* chore(test): testing ([c028ff5](https://github.com/MFX-com/testing-packages/commit/c028ff5))
+
+
+
+
+
 ## [4.4.10](https://github.com/MFX-com/testing-packages/compare/@marefx/first@4.4.9...@marefx/first@4.4.10) (2023-06-30)
 
 **Note:** Version bump only for package @marefx/first

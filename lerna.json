@@ -4,6 +4,47 @@
   "packages": [
     "packages/*"
   ],
+  "changelogPreset": {
+    "name": "angular",
+    "types": [
+      {
+        "type": "feat",
+        "section": "🚀 Features"
+      },
+      {
+        "type": "fix",
+        "section": "🐛 Bug Fixes"
+      },
+      {
+        "type": "chore",
+        "hidden": false,
+        "section": "🛠 Maintenance"
+      },
+      {
+        "type": "docs",
+        "hidden": false,
+        "section": "📃 Documentation"
+      },
+      {
+        "type": "style",
+        "hidden": true
+      },
+      {
+        "type": "refactor",
+        "hidden": false,
+        "section": "🔄 Refactors"
+      },
+      {
+        "type": "perf",
+        "hidden": false,
+        "section": "🏎 Performance"
+      },
+      {
+        "type": "test",
+        "hidden": true
+      }
+    ]
+  },
   "command": {
     "version": {
       "allowBranch": "main",

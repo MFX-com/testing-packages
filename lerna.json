@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "changelogPreset": {
-    "name": "angular",
+    "name": "./changelog-preset.config.json",
     "types": [
       {"type": "feat", "section": "Features"},
       {"type": "fix", "section": "Bug Fixes"},

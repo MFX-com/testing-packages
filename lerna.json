@@ -10,7 +10,7 @@
   "command": {
     "version": {
       "conventionalCommits": true,
-      "message": "chore(release): version and release commit",
+      "message": "chore(release): version and release commit [skip actions]",
       "allowBranch": ["main"],
       "ignoreChanges": [
         "**/*.md",

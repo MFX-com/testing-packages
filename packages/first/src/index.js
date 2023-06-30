@@ -1,5 +1,5 @@
 function hello() {
-    return "worddd";
+    return "wordd";
 }
 
 console.log(hello());

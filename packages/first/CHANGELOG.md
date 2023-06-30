@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.4.0](https://github.com/MFX-com/testing-packages/compare/@marefx/first@4.3.2...@marefx/first@4.4.0) (2023-06-30)
+
+
+### Features
+
+* 23123123 ([cc946df](https://github.com/MFX-com/testing-packages/commit/cc946df02679a20291226c3b5fded087d881f51a))
+
+
+
+
+
 ## [4.3.2](https://github.com/MFX-com/testing-packages/compare/@marefx/first@4.3.1...@marefx/first@4.3.2) (2023-06-30)
 
 **Note:** Version bump only for package @marefx/first

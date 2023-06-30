@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>4.4.13 (2023-06-30)</small>
+
+* refactor(test): testing ([a4efc2c](https://github.com/MFX-com/testing-packages/commit/a4efc2c))
+* chore(test): testing ([016adb0](https://github.com/MFX-com/testing-packages/commit/016adb0))
+* chore(test): testing ([2fb3124](https://github.com/MFX-com/testing-packages/commit/2fb3124))
+
+
+
+
+
 ## <small>4.4.12 (2023-06-30)</small>
 
 * docs(test): testing ([5c78916](https://github.com/MFX-com/testing-packages/commit/5c78916))

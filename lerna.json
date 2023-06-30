@@ -4,12 +4,24 @@
   "packages": [
     "packages/*"
   ],
-  "changelogPreset": "angular",
+  "changelogPreset": {
+    "name": "angular",
+    "types": [
+      {"type": "feat", "section": "Features"},
+      {"type": "fix", "section": "Bug Fixes"},
+      {"type": "chore", "hidden": true},
+      {"type": "docs", "hidden": true},
+      {"type": "style", "hidden": true},
+      {"type": "refactor", "hidden": true},
+      {"type": "perf", "hidden": true},
+      {"type": "test", "hidden": true}
+    ]
+  },
   "command": {
     "version": {
       "conventionalCommits": true,
       "message": "chore(release): version and release commit",
-      "allowBranch": "main",
+      "allowBranch": ["main"],
       "ignoreChanges": [
         "**/*.md",
         "**/*(\\.|-)test.ts"

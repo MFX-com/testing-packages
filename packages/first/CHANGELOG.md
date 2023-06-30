@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>4.4.12 (2023-06-30)</small>
+
+* docs(test): testing ([5c78916](https://github.com/MFX-com/testing-packages/commit/5c78916))
+
+
+
+
+
 ## <small>4.4.11 (2023-06-30)</small>
 
 * perf(test): testing ([095c71f](https://github.com/MFX-com/testing-packages/commit/095c71f))

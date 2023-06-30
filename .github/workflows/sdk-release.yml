@@ -28,6 +28,13 @@ jobs:
 #          git config --global user.name "github-actions[bot]"
 #          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+
       - name: Config git user
         run: |
           git config --global user.name "nexera-release[bot]"
@@ -74,7 +81,7 @@ jobs:
 
       - name: Bump versions
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
           lerna version --yes
 

@@ -9,6 +9,8 @@
   },
   "command": {
     "version": {
+      "conventionalCommits": true,
+      "message": "chore(release): version and release commit",
       "allowBranch": "main",
       "ignoreChanges": [
         "**/*.md",

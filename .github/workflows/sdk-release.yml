@@ -81,7 +81,7 @@ jobs:
 
       - name: Bump versions
         env:
-          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+          GH_TOKEN: ${{ secrets.FULL_ACCESS_TOKEN }}
         run: |
           lerna version --yes
 

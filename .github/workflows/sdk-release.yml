@@ -84,7 +84,7 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
-          lerna version --yes
+          lerna version --yes --no-commit-hooks
 
       # People can bump manually a package in their merge request
       # Once merged to development, it will automatically take it in consideration

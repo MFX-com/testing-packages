@@ -1,6 +1,6 @@
 {
   "name": "@marefx/first",
-  "version": "4.9.0",
+  "version": "4.10.0",
   "description": "Testing patch 1",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

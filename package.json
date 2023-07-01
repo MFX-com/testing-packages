@@ -24,14 +24,15 @@
     "build:@marefx/second": "turbo run build --filter @marefx/second"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.26.1",
+    "@changesets/cli": "^2.26.2",
+    "@lerna-lite/cli": "^2.4.2",
+    "@lerna-lite/version": "^2.4.2",
     "conventional-changelog-conventionalcommits": "^6.1.0",
-    "lerna": "^7.1.1",
-    "semver": "^7.3.7",
+    "semver": "^7.5.3",
     "standard-version": "^9.5.0",
-    "turbo": "^1.10.3"
+    "turbo": "^1.10.7"
   },
   "dependencies": {
-    "ethers": "^6.6.1"
+    "ethers": "^6.6.2"
   }
 }

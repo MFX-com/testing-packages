@@ -88,9 +88,9 @@ jobs:
 
       - name: Bump versions
         run: |
-          pnpm run bump:@marefx/first
-          pnpm run bump:@marefx/private
-          pnpm run bump:@marefx/second
+          pnpm run --filter "@marefx/first" bump
+          pnpm run --filter "@marefx/private" bump
+          pnpm run --filter "@marefx/second" bump
 
       # People can bump manually a package in their merge request
       # Once merged to development, it will automatically take it in consideration

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.1](https://github.com/MFX-com/testing-packages/compare/v5.1.0...v5.1.1) (2023-07-02)
+
+**Note:** Version bump only for package @marefx/first
+
+
+
+
+
+## [5.1.1](https://github.com/MFX-com/testing-packages/compare/v5.1.0...v5.1.1) (2023-07-02)
+
+**Note:** Version bump only for package @marefx/first
+
+
+
+
+
 # [5.1.0](https://github.com/MFX-com/testing-packages/compare/v5.0.0...v5.1.0) (2023-07-02)
 
 

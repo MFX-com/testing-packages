@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.3](https://github.com/MFX-com/testing-packages/compare/v5.1.2...v5.1.3) (2023-07-02)
+
+
+### Bug Fixes
+
+* **first:** 23123e12e ([2defd29](https://github.com/MFX-com/testing-packages/commit/2defd29b17a9dfc927708b2bb7d53b09a4e8ade0))
+
+
+
+
+
+## [5.1.3](https://github.com/MFX-com/testing-packages/compare/v5.1.2...v5.1.3) (2023-07-02)
+
+
+### Bug Fixes
+
+* **first:** 23123e12e ([2defd29](https://github.com/MFX-com/testing-packages/commit/2defd29b17a9dfc927708b2bb7d53b09a4e8ade0))
+
+
+
+
+
 ## [5.1.2](https://github.com/MFX-com/testing-packages/compare/v5.1.1...v5.1.2) (2023-07-02)
 
 

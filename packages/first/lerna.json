@@ -16,7 +16,9 @@
       ],
       "ignoreChanges": [
         "**/*.md",
-        "**/*(\\.|-)test.ts"
+        "**/*(\\.|-)test.ts",
+        "lerna.json",
+        "package.json"
       ]
     }
   }

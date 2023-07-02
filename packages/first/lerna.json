@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "version": "1.0.0",
+  "version": "5.0.0",
   "packages": [
     "."
   ],
@@ -11,7 +11,9 @@
     "version": {
       "conventionalCommits": true,
       "message": "chore(release): version and release commit [skip actions]",
-      "allowBranch": ["main"],
+      "allowBranch": [
+        "main"
+      ],
       "ignoreChanges": [
         "**/*.md",
         "**/*(\\.|-)test.ts"

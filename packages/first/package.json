@@ -1,6 +1,6 @@
 {
   "name": "@marefx/first",
-  "version": "4.11.1",
+  "version": "5.0.0",
   "description": "Testing patch 1",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,8 +9,8 @@
     "bump": "lerna version --yes"
   },
   "dependencies": {
-    "express": "^4.18.2",
     "@changesets/cli": "^2.26.1",
+    "express": "^4.18.2",
     "lerna": "^7.1.1",
     "semver": "^7.3.7",
     "standard-version": "^9.5.0"

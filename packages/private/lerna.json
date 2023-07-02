@@ -1,16 +1,13 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "version": "independent",
-  "packages": [
-    "packages/*"
-  ],
+  "version": "1.5.0",
   "changelogPreset": {
     "name": "angular"
   },
   "command": {
     "version": {
       "conventionalCommits": true,
-      "message": "chore(release): version and release commit [skip actions]",
+      "message": "chore(release): version and release commit",
       "allowBranch": ["main"],
       "ignoreChanges": [
         "**/*.md",

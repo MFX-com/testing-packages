@@ -5,7 +5,15 @@
   "description": "Testing patch private",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo \"building private\""
+    "build": "echo \"building private\"",
+    "bump": "lerna version --yes"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "@changesets/cli": "^2.26.1",
+    "lerna": "^7.1.1",
+    "semver": "^7.3.7",
+    "standard-version": "^9.5.0"
   },
   "author": "",
   "license": "MIT"

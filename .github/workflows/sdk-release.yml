@@ -6,27 +6,40 @@ on:
       - main
 
 jobs:
-  release:
-    name: Release
+  versions:
+    name: Versions
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [ 18.16 ]
         pnpm-version: [ 8.5.1 ]
     steps:
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          token: ${{ steps.generate_token.outputs.token }}
 
 #      - name: Config git user
 #        run: |
 #          git config --global user.name "${{ github.actor }}"
 #          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
+#      - name: Config git user
+#        run: |
+#          git config --global user.name "github-actions[bot]"
+#          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Config git user
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "nexera-release[bot]"
+          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
 
       - uses: pnpm/action-setup@v2.0.1
         name: Install pnpm
@@ -61,11 +74,23 @@ jobs:
 #        run: |
 #          lerna version --conventional-commits --no-git-tag-version --yes
 
+#      - name: Bump versions
+#        env:
+#          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          lerna version --yes --changelog-preset=angular --conventional-commits --message 'chore(release): version and release commit'
+
+#      - name: Bump versions
+#        env:
+#          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+#        run: |
+#          lerna version --yes --no-commit-hooks
+
       - name: Bump versions
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          lerna version --yes --changelog-preset=angular --conventional-commits --message 'chore(release): version and release commit'
+          pnpm run --filter "@marefx/first" bump
+          pnpm run --filter "@marefx/private" bump
+          pnpm run --filter "@marefx/second" bump
 
       # People can bump manually a package in their merge request
       # Once merged to development, it will automatically take it in consideration
@@ -95,14 +120,30 @@ jobs:
 #        with:
 #          github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build
-        run: |
-          pnpm run build:@marefx/first
-          pnpm run build:@marefx/second
-
       - name: Check version
         run: |
           cat packages/first/package.json
+
+#      - uses: actions/checkout@v3
+#        with:
+#          fetch-depth: 0
+#          token: ${{ secrets.GITHUB_TOKEN }}
+
+#      - name: Build
+#        run: |
+#          pnpm run build:@marefx/first
+#          pnpm run build:@marefx/second
+
+#      - name: Check version again
+#        run: |
+#          cat packages/first/package.json
+
+#      - name: Publish to npm
+#        env:
+#          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          pnpm --filter "@marefx/first" publish --no-git-checks --registry https://npm.pkg.github.com/
+#          pnpm --filter "@marefx/second" publish --no-git-checks --registry https://npm.pkg.github.com/
 
 #      - name: Publish to public npm
 #        env:
@@ -111,3 +152,51 @@ jobs:
 #          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
 #          pnpm --filter "@marefx/first" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
 #          pnpm --filter "@marefx/second" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
+
+
+#  release:
+#    name: Release
+#    runs-on: ubuntu-latest
+#    needs:
+#      - versions
+#    strategy:
+#      matrix:
+#        node-version: [ 18.16 ]
+#        pnpm-version: [ 8.5.1 ]
+#    steps:
+#      - uses: actions/checkout@v3
+#        with:
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#
+#      - uses: pnpm/action-setup@v2.0.1
+#        name: Install pnpm
+#        id: pnpm-install
+#        with:
+#          version: ${{ matrix.pnpm-version }}
+#          run_install: false
+#
+#      - name: Get pnpm store directory
+#        id: pnpm-cache
+#        run: |
+#          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+#
+#      - uses: actions/cache@v3
+#        name: Setup pnpm cache
+#        with:
+#          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+#          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+#          restore-keys: |
+#            ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+#
+#      - uses: actions/setup-node@v3
+#        with:
+#          cache: 'pnpm'
+#          node-version: ${{ matrix.node-version }}
+#
+#      - name: Install Dependencies
+#        run: |
+#          pnpm install --no-frozen-lockfile
+#
+#      - name: Check version yet again
+#        run: |
+#          cat packages/first/package.json

@@ -1,14 +1,19 @@
 {
   "name": "@marefx/first",
-  "version": "4.3.0",
+  "version": "5.1.4",
   "description": "Testing patch 1",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "echo \"building first\"",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "bump": "lerna version --yes"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "@changesets/cli": "^2.26.1",
+    "express": "^4.18.2",
+    "lerna": "^7.1.1",
+    "semver": "^7.3.7",
+    "standard-version": "^9.5.0"
   },
   "author": "",
   "license": "MIT"

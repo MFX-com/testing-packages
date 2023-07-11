@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .:
@@ -18,8 +14,8 @@ importers:
   packages/first:
     dependencies:
       '@changesets/cli':
-        specifier: ^2.26.1
-        version: 2.26.1
+        specifier: ^2.26.2
+        version: 2.26.2
       express:
         specifier: ^4.18.2
         version: 4.18.2
@@ -27,8 +23,8 @@ importers:
         specifier: ^7.1.1
         version: 7.1.1
       semver:
-        specifier: ^7.3.7
-        version: 7.3.7
+        specifier: ^7.5.3
+        version: 7.5.3
       standard-version:
         specifier: ^9.5.0
         version: 9.5.0
@@ -36,17 +32,17 @@ importers:
   packages/private:
     dependencies:
       '@changesets/cli':
-        specifier: ^2.26.1
-        version: 2.26.1
+        specifier: ^2.26.2
+        version: 2.26.2
       express:
         specifier: ^4.18.2
         version: 4.18.2
       lerna:
-        specifier: ^7.0.0
+        specifier: ^7.1.1
         version: 7.1.1
       semver:
-        specifier: ^7.3.7
-        version: 7.3.7
+        specifier: ^7.5.3
+        version: 7.5.3
       standard-version:
         specifier: ^9.5.0
         version: 9.5.0
@@ -54,17 +50,17 @@ importers:
   packages/second:
     dependencies:
       '@changesets/cli':
-        specifier: ^2.26.1
-        version: 2.26.1
+        specifier: ^2.26.2
+        version: 2.26.2
       express:
         specifier: ^4.18.2
         version: 4.18.2
       lerna:
-        specifier: ^7.1.0
+        specifier: ^7.1.1
         version: 7.1.1
       semver:
-        specifier: ^7.3.7
-        version: 7.3.7
+        specifier: ^7.5.3
+        version: 7.5.3
       standard-version:
         specifier: ^9.5.0
         version: 9.5.0
@@ -138,8 +134,8 @@ packages:
       '@changesets/types': 5.2.1
     dev: false
 
-  /@changesets/cli@2.26.1:
-    resolution: {integrity: sha512-XnTa+b51vt057fyAudvDKGB0Sh72xutQZNAdXkCqPBKO2zvs2yYZx5hFZj1u9cbtpwM6Sxtcr02/FQJfZOzemQ==}
+  /@changesets/cli@2.26.2:
+    resolution: {integrity: sha512-dnWrJTmRR8bCHikJHl9b9HW3gXACCehz4OasrXpMp7sx97ECuBGGNjJhjPhdZNCvMy9mn4BWdplI323IbqsRig==}
     hasBin: true
     dependencies:
       '@babel/runtime': 7.22.5
@@ -158,7 +154,7 @@ packages:
       '@changesets/write': 0.2.3
       '@manypkg/get-packages': 1.1.3
       '@types/is-ci': 3.0.0
-      '@types/semver': 6.2.3
+      '@types/semver': 7.5.0
       ansi-colors: 4.1.3
       chalk: 2.4.2
       enquirer: 2.3.6
@@ -171,7 +167,7 @@ packages:
       p-limit: 2.3.0
       preferred-pm: 3.0.3
       resolve-from: 5.0.0
-      semver: 5.7.1
+      semver: 7.5.3
       spawndamnit: 2.0.0
       term-size: 2.2.1
       tty-table: 4.2.1
@@ -395,7 +391,7 @@ packages:
     resolution: {integrity: sha512-7kZUAaLscfgbwBQRbvdMYaZOWyMEcPTH/tJjnyAWJ/dvvs9Ef+CERx/qJb9GExJpl1qipaDGn7KqHnFGGixd0w==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
-      semver: 7.3.7
+      semver: 7.5.3
     dev: false
 
   /@npmcli/git@4.1.0:
@@ -408,7 +404,7 @@ packages:
       proc-log: 3.0.0
       promise-inflight: 1.0.1
       promise-retry: 2.0.1
-      semver: 7.3.7
+      semver: 7.5.3
       which: 3.0.1
     transitivePeerDependencies:
       - bluebird
@@ -778,8 +774,8 @@ packages:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
     dev: false
 
-  /@types/semver@6.2.3:
-    resolution: {integrity: sha512-KQf+QAMWKMrtBMsB8/24w53tEsxllMj6TuA80TT/5igJalLI/zm0L3oXRbIAl4Ohfc85gyHX/jhMwsVkmhLU4A==}
+  /@types/semver@7.5.0:
+    resolution: {integrity: sha512-G8hZ6XJiHnuhQKR7ZmysCeJWE08o8T0AXtk5darsCaTVsYZhhgUrq53jizaR2FvsoeCwJhlmwTjkXBY5Pn/ZHw==}
     dev: false
 
   /@yarnpkg/lockfile@1.1.0:
@@ -1084,7 +1080,7 @@ packages:
   /builtins@5.0.1:
     resolution: {integrity: sha512-qwVpFEHNfhYJIzNRBvd2C1kyo6jz3ZSMPyyuR47OPdiKWlbYnZNyDWuyR175qDnAJLiCo5fBBqPb3RiXgWlkOQ==}
     dependencies:
-      semver: 7.3.7
+      semver: 7.5.3
     dev: false
 
   /byte-size@8.1.1:
@@ -2389,7 +2385,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.5
+      minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
     dev: false
@@ -3646,7 +3642,7 @@ packages:
       nopt: 6.0.0
       npmlog: 6.0.2
       rimraf: 3.0.2
-      semver: 7.3.7
+      semver: 7.5.3
       tar: 6.1.11
       which: 2.0.2
     transitivePeerDependencies:
@@ -3676,7 +3672,7 @@ packages:
     dependencies:
       hosted-git-info: 4.1.0
       is-core-module: 2.12.1
-      semver: 7.3.7
+      semver: 7.5.3
       validate-npm-package-license: 3.0.4
     dev: false
 
@@ -3686,7 +3682,7 @@ packages:
     dependencies:
       hosted-git-info: 6.1.1
       is-core-module: 2.12.1
-      semver: 7.3.7
+      semver: 7.5.3
       validate-npm-package-license: 3.0.4
     dev: false
 
@@ -3707,7 +3703,7 @@ packages:
     resolution: {integrity: sha512-dH3GmQL4vsPtld59cOn8uY0iOqRmqKvV+DLGwNXV/Q7MDgD2QfOADWd/mFXcIE5LVhYYGjA3baz6W9JneqnuCw==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
-      semver: 7.3.7
+      semver: 7.5.3
     dev: false
 
   /npm-normalize-package-bin@1.0.1:
@@ -3725,7 +3721,7 @@ packages:
     dependencies:
       hosted-git-info: 6.1.1
       proc-log: 3.0.0
-      semver: 7.3.7
+      semver: 7.5.3
       validate-npm-package-name: 5.0.0
     dev: false
 
@@ -3763,7 +3759,7 @@ packages:
       npm-install-checks: 6.1.1
       npm-normalize-package-bin: 3.0.1
       npm-package-arg: 10.1.0
-      semver: 7.3.7
+      semver: 7.5.3
     dev: false
 
   /npm-registry-fetch@14.0.5:
@@ -4553,14 +4549,6 @@ packages:
     hasBin: true
     dev: false
 
-  /semver@7.3.7:
-    resolution: {integrity: sha512-QlYTucUYOews+WeEujDoEGziz4K6c47V/Bd+LjSSYcA94p+DmINdf7ncaUinThfvZyu13lN9OY1XDxt8C0Tw0g==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      lru-cache: 6.0.0
-    dev: false
-
   /semver@7.5.3:
     resolution: {integrity: sha512-QBlUtyVk/5EeHbi7X0fw6liDZc7BBmEaSYn01fMU1OUYbf6GPsbTtd8WmnqbI20SeycoHSeiybkE/q1Q+qlThQ==}
     engines: {node: '>=10'}
@@ -4799,7 +4787,7 @@ packages:
       figures: 3.2.0
       find-up: 5.0.0
       git-semver-tags: 4.1.1
-      semver: 7.3.7
+      semver: 7.5.3
       stringify-package: 1.0.1
       yargs: 16.2.0
     dev: false
@@ -5539,3 +5527,7 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

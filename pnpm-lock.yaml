@@ -42,7 +42,7 @@ importers:
         specifier: ^4.18.2
         version: 4.18.2
       lerna:
-        specifier: ^7.1.1
+        specifier: ^7.0.0
         version: 7.1.1
       semver:
         specifier: ^7.3.7
@@ -60,7 +60,7 @@ importers:
         specifier: ^4.18.2
         version: 4.18.2
       lerna:
-        specifier: ^7.1.1
+        specifier: ^7.1.0
         version: 7.1.1
       semver:
         specifier: ^7.3.7
@@ -315,7 +315,7 @@ packages:
     resolution: {integrity: sha512-mR8PaTkckYPLmEBG2VsVsJq2UuzEvjXevOB1rKLKUZ/dPCGcottVhbiEzTxickc+s7Y/1dTTLn/1BKj3B1a5BA==}
     engines: {node: ^14.17.0 || >=16.0.0}
     dependencies:
-      chalk: 4.1.0
+      chalk: 4.1.2
       execa: 5.0.0
       strong-log-transformer: 2.1.0
     dev: false
@@ -332,7 +332,7 @@ packages:
       p-reduce: 2.1.0
       pacote: 15.2.0
       pify: 5.0.0
-      semver: 7.3.7
+      semver: 7.5.3
       slash: 3.0.0
       validate-npm-package-license: 3.0.4
       validate-npm-package-name: 5.0.0
@@ -2689,7 +2689,7 @@ packages:
       promzard: 1.0.0
       read: 2.1.0
       read-package-json: 6.0.4
-      semver: 7.3.7
+      semver: 7.5.3
       validate-npm-package-license: 3.0.4
       validate-npm-package-name: 5.0.0
     dev: false
@@ -2979,7 +2979,7 @@ packages:
     resolution: {integrity: sha512-LtxijLLZBduXnHSniy0WMdaHjmQnt3g5sa16W4p0HqukYTTsyTW3GD1q41TyGl5YFXj/5B2U6dlh5FM1LIMgxw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
-      chalk: 4.1.0
+      chalk: 4.1.2
       diff-sequences: 29.4.3
       jest-get-type: 29.4.3
       pretty-format: 29.5.0
@@ -3172,7 +3172,7 @@ packages:
       npm-package-arg: 10.1.0
       npm-registry-fetch: 14.0.5
       proc-log: 3.0.0
-      semver: 7.3.7
+      semver: 7.5.3
       sigstore: 1.7.0
       ssri: 10.0.4
     transitivePeerDependencies:
@@ -3591,7 +3591,7 @@ packages:
       array-differ: 3.0.0
       array-union: 2.1.0
       arrify: 2.0.1
-      minimatch: 3.0.5
+      minimatch: 3.1.2
     dev: false
 
   /mute-stream@0.0.8:
@@ -3734,7 +3734,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       hosted-git-info: 3.0.8
-      semver: 7.3.7
+      semver: 7.5.3
       validate-npm-package-name: 3.0.0
     dev: false
 

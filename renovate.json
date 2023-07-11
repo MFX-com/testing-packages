@@ -17,7 +17,7 @@
   "lockFileMaintenance": {"enabled": true},
   "ignorePaths": [],
   "ignoreDeps": [
-    "@types/node"
+    "pnpm"
   ],
   "packageRules": [
     {
@@ -31,13 +31,6 @@
         "docker"
       ],
       "matchPackagePatterns": ["node"],
-      "enabled": false
-    },
-    {
-      "matchDatasources": [
-        "npm"
-      ],
-      "matchPackagePatterns": ["pnpm"],
       "enabled": false
     }
   ],

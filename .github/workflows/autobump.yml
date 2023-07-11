@@ -16,17 +16,17 @@ jobs:
     steps:
       - name: Auto Bump Check
         id: autobump-check
-        uses: docker://francescoferraioli/autobump-action:v1
+        uses: docker://francescoferraioli/autobump-action:v1@sha256:a74354c88b6e5389a240b468c8e7cd0a89037f45c4cdb96155e518bb6b2afb2e
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           PACKAGES_IN_REPO: "domain|packages/domain;contracts|packages/contracts"
 
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3
         with:
           fetch-depth: 0
           token: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Auto Bump Run
-        uses: francescoferraioli/autobump@v4.0.2
+        uses: francescoferraioli/autobump@3c9375d5410418745c4012f7d57a2029bfe55c16 # v4.0.2
         with:

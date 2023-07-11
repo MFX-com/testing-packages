@@ -76,7 +76,7 @@ jobs:
 
       - name: Generate token
         id: generate_token
-        uses: tibdex/github-app-token@v1
+        uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92 # v1
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.PRIVATE_KEY }}
@@ -93,7 +93,7 @@ jobs:
 
       - name: Automatic merge
         id: auto-merge
-        uses: pascalgn/automerge-action@v0.15.6
+        uses: pascalgn/automerge-action@22948e0bc22f0aa673800da838595a3e7347e584 # v0.15.6
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           MERGE_METHOD: merge

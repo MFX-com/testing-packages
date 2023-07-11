@@ -33,12 +33,12 @@ jobs:
           fi
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3
         with:
           fetch-depth: 0
 
       - name: Run the Action
-        uses: devops-infra/action-pull-request@v0.5.5
+        uses: devops-infra/action-pull-request@e66e2ba93519dc63b9884a26e620e2fd0cffab2c # v0.5.5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           source_branch: ${{ inputs.source_branch }}

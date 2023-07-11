@@ -13,7 +13,7 @@
   "dependencyDashboard": true,
   "commitBody": "See associated pull request for more information.",
   "separateMajorMinor": false,
-  "prHourlyLimit": 20,
+  "prHourlyLimit": 2000,
   "lockFileMaintenance": {"enabled": true},
   "ignorePaths": [],
   "ignoreDeps": [

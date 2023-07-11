@@ -1,11 +1,17 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    "group:monorepos",
+    ":dependencyDashboard"
   ],
   "baseBranches": ["main"],
-  "enabledManagers": ["npm", "dockerfile", "github-actions"],
-  "rangeStrategy": "replace",
+  "enabledManagers": [
+    "npm",
+    "dockerfile",
+    "github-actions"
+  ],
+  "rangeStrategy": "bump",
   "pinDigests": false,
   "semanticCommits": "enabled",
   "semanticCommitScope": "",
@@ -14,7 +20,10 @@
   "commitBody": "See associated pull request for more information.",
   "separateMajorMinor": false,
   "prHourlyLimit": 2000,
-  "lockFileMaintenance": {"enabled": true},
+  "updateInternalDeps": true,
+  "lockFileMaintenance": {
+    "enabled": false
+  },
   "ignorePaths": [],
   "ignoreDeps": [
     "pnpm"

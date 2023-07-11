@@ -32,6 +32,13 @@
       ],
       "matchPackagePatterns": ["node"],
       "enabled": false
+    },
+    {
+      "matchDatasources": [
+        "npm"
+      ],
+      "matchPackagePatterns": ["pnpm"],
+      "enabled": false
     }
   ],
   "ignoreUnstable": true,

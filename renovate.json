@@ -25,6 +25,15 @@
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "all non-major dependencies",
       "schedule": ["at any time"]
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackagePatterns": ["node"],
+      "enabled": false
     }
-  ]
+  ],
+  "ignoreUnstable": true,
+  "stabilityDays": 7
 }

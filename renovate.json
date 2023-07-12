@@ -40,9 +40,18 @@
         "docker"
       ],
       "matchPackagePatterns": ["node"],
-      "enabled": true
+      "enabled": false
     }
   ],
   "ignoreUnstable": true,
-  "stabilityDays": 7
+  "stabilityDays": 7,
+  "addLabels": ["renovate-bot"],
+  "hostRules": [
+    {
+      "hostType": "npm",
+      "matchHost": "https://npm.pkg.github.com/",
+      "token": "{{ secrets.NPM_TOKEN }}"
+    }
+  ],
+  "npmrc": "@nexeraprotocol:registry=https://npm.pkg.github.com\\n//npm.pkg.github.com/:_authToken={{ secrets.NPM_TOKEN }}\\nstrict-peer-dependencies=false\\nauto-install-peers=true\\ndedupe-peer-dependents=true"
 }

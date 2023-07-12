@@ -24,7 +24,7 @@
   "lockFileMaintenance": {
     "enabled": false
   },
-  "ignorePaths": [],
+  "ignorePaths": [".nvmrc"],
   "ignoreDeps": [
     "pnpm"
   ],
@@ -40,7 +40,7 @@
         "docker"
       ],
       "matchPackagePatterns": ["node"],
-      "enabled": false
+      "enabled": true
     }
   ],
   "ignoreUnstable": true,

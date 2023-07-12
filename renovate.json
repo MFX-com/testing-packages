@@ -50,8 +50,10 @@
     {
       "hostType": "npm",
       "matchHost": "https://npm.pkg.github.com/",
-      "token": "{{ secrets.NPM_TOKEN }}"
+      "encrypted": {
+        "token": "wcFMA/xDdHCJBTolAQ//dZ8Su+Dt4l89J/p1FiXnhsxHQto93/lOSTG47fNZdxwP01NUZR4fhMqPBX1HqK4ootVKJZnICF/leqJ+W68fw6LO9tN1ZgGxvJ+R4vcN96aazHc8pBPcqQRe9gErndBeq5A1j8jo8CLkKDQfIBm8JRaccK1+T2Q3tTZU9c4tcNwngkmodoqq6+3r+Ug80is2Yd002NmNANh660FN3GhRVgv3sjKByAcGvXykKDQMB6eIOebmi+SJMlK1L0nV+le+5bBFZ4IKD+kGuAjMWgsJN43+If2sfAERP3XKnTo7Lt46On+TjWz2LCLz0XPzAoLecpAm07OkPwwjCx1HcHi2kW5ISXZd5cQyzutw9gCDBXkvuaDrOUi61nS2na09p8QyLPSebijgyhYrDETUNtLGEckOnZCUPWY26f3INgSzLSxDE7tYBHobNd1RMS73G+Jz/nucEnD9HnA6u/l7bIfqBH2FMfq2ByktZ3MzVrqRSppFPRwDwDNgHQ6vn5fSOx69p/ND6sT39MsPrz7eim7JoEj8GzISsMTCto9OQ2xTZB0lt+l7meny8Aey3ewVkrN+T2eJyuctaNiLygXH7oBVMnoMpKr4GlXDrKZnLdkTE+63rgu/nPKWKCAvlEZADL23pb4XY4v25ACc3jFafUKVdA3eJCyJLV0JS6v0cwmpJ5/SfQG6syyUEEdsH0sK243Rirpe8yj9AqAPdMo045rHue203SUdz29LJBh4r4Rby3qfwNKKWBMB7SWKxYG9Vy7xssQOUfyJ1X5zwBMQAsh7bA80ExYMAc/YQM+ZIIA0kActFycAAyPtXdJzkGlfwcHsdbqzL4qvvySv6zE7j4pN"
+      }
     }
   ],
-  "npmrc": "@nexeraprotocol:registry=https://npm.pkg.github.com\\n//npm.pkg.github.com/:_authToken={{ secrets.NPM_TOKEN }}\\nstrict-peer-dependencies=false\\nauto-install-peers=true\\ndedupe-peer-dependents=true"
+  "npmrc": "wcFMA/xDdHCJBTolAQ/+P6FY1+BKiSkM+oZOO8+C/QjV+MbfrFWZdixdmorMWNvr2ZdYlLp/CQqQDJxfU1gLWN7Qrs1o0hbXafsFJxkwqdQT98P2Zt/JrzKw7VkV2P2TBmMAbRiIyktR8gRU1/VGS+8u1OXRWpMkRPQi9CgBVJJTd/S6JSEQlSKXPy313O8TDoB9mekkV2H1OqstKmD/yUQr5RVraLWGrghyCabT52IKDhGV1bRPt169gda41340N3zG2dSqTVbi9YZ8v/0dThUUvptF+uXkWt8sHXQCxQ+ehcSBxUXipwWSJngrmwH2Ac6sZ81+0s+mqDCXIOABIrQfbKVMqiVvXZstp3AkVUZ0T+KhA9X6t46uhHkuwWXnuM1VAdut15JI3sBpIUCepSagqeq8h0gZbLrA8Je3CJ4SZifn7fXxOj02VJtqVjC+arauQbTRgEQSGRqWoAtOoXuRbKY1OvXLv1ZSgSNtZMHigo2vlwTG9ELa9w21v0AeXLvJysMvZx75MR4IMcMjUZf/ob6veGKhHZxHhyWNGbkHqF4xdXHjKLH7Fhm9SwiBfLqnoqbo05MTicoWNDEl8xlaIlL+7cs9X9OlFurCwDXXCkoGkyFbq+jOwFqyYHQLFFfrd/BLFHRAHZlE5veSbJHpHnywHYhurfFTcUjO44V03SIX5q9IGuW0gl+wG5rSwHEBDhIluyf6RTUNyQ9Qxxyy9jTBEh+OcEvMkKxaCsTahL2fRc+fbB581U53DtUCjtZfmUJc1Zcdt615+aIutmftCoqlEMOwKs/eobtIPqagP6cU87AuF24t0YoUmHFJbTVGf+2/kDrGGXJ8b0GyGvnjwJBve2z3jMggjLjaaplD6BCpxBGYKF6R14K9kNChtcitGNdeG09O7xwuVH0PUQCggCo2kIeD6PBpKvoS9irLDcs286O78GvkuyCT5CQCr1YBJXjt9mdVefkPuPszDsecZNeiie9mf7dyDM0Pz8skYet+z7t27dlKqnkp6PATrNimctyaqhP3UZ9GMnjjMjDTo4OmjenH1gDMZorFml6mvyrJnVXlj/gBYxiaPdnHDFgp20zdOhL8VrextLuyS2Xb2g"
 }

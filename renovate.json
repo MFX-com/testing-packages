@@ -98,7 +98,7 @@
   "hostRules": [
     {
       "hostType": "npm",
-      "matchHost": "https://npm.pkg.github.com",
+      "matchHost": "https://npm.pkg.github.com/",
       "encrypted": {
         "token": "wcFMA/xDdHCJBTolAQ/+O++vlH2omQ+5scG5qr8N2PyTtAiMQ2xWSQt6USN5oTefYvDyWZ1fkGMVBZEfYme5d29TGMRYdzg+4d3cIPZ55O4bwJWoKx5t9qt8t0AXkW9y9VTul8RsDAfH8VFTBGJbFP/BDIM6LB/saZ1ElRp8/OjtzOQii42PbENtrLl2nm0lJXei1aNXugO/Sq8Ym6sWGRY9rv8kThdr5Hx93NPZMMnkoyqg4nxqla4k/HwRLU93VJ808irDyymXUgjGUdk+vfHLW6GlG9CPWJMM7Pdwb2cFFXXa5lrR/Zwqay+lPGn3nkhhRHKGaYk6kjb8c07oCZAgp8K8RZLS2VtJBOdEzjax/YPZ2YL4mrBgL8lTC5kd/RlUWlcfxaXE6ux7fwz2lgXLwgK/r8PpBzdb/IzS3oaSztk8KDPgpbeKRQUrEtCFQXdpvVhtHYj9xCG/W1TuBNdefXk2uVx6n71iDXe6rALZZq9HabO6B9gdyBfPzv40Sn3JSg2qzJysMrUbCFhRDUNtXmZVx04VQf0fa9fHjLeYl53srcE16gWux704UPraa7PTnlFpSoVlIazHYf+JgeqKAwxf53OWVvblgj8BDl93DU96tK0GHUYWg3uEJziQObXZJp8IuxHWcvBVDLhVKcv2nrm/ag3CElZMIehgHqkoSOyh0dBo6MxGV3L001nSdgFiO1TutoB8fdccFw337tJmbvBkxQUeqPX5kBiZ31EuVmTztMJTdyIfzItB9T8iREQ7lluXKNaBqWD8QGatuM8XsVkCMvb0/9M+FFawQlDDHNzGJcBATWURkbmx5UiHifllbiU4wpsq0caJQQQyZavZ8wr23Ng"
       }

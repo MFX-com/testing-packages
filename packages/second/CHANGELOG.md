@@ -3,31 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.5.3](https://github.com/MFX-com/testing-packages/compare/@marefx/second@1.5.2...@marefx/second@1.5.3) (2023-06-29)
+## [1.5.3](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@1.5.2...@MFX-org/second@1.5.3) (2023-06-29)
 
-**Note:** Version bump only for package @marefx/second
-
-
-
-
-
-## [1.5.2](https://github.com/MFX-com/testing-packages/compare/@marefx/second@0.5.1...@marefx/second@1.5.2) (2023-06-29)
-
-**Note:** Version bump only for package @marefx/second
+**Note:** Version bump only for package @MFX-org/second
 
 
 
 
 
-## [0.5.1](https://github.com/MFX-com/testing-packages/compare/@marefx/second@0.5.0...@marefx/second@0.5.1) (2023-06-29)
+## [1.5.2](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.5.1...@MFX-org/second@1.5.2) (2023-06-29)
 
-**Note:** Version bump only for package @marefx/second
-
-
+**Note:** Version bump only for package @MFX-org/second
 
 
 
-# [0.5.0](https://github.com/MFX-com/testing-packages/compare/@marefx/second@0.4.0...@marefx/second@0.5.0) (2023-06-29)
+
+
+## [0.5.1](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.5.0...@MFX-org/second@0.5.1) (2023-06-29)
+
+**Note:** Version bump only for package @MFX-org/second
+
+
+
+
+
+# [0.5.0](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.4.0...@MFX-org/second@0.5.0) (2023-06-29)
 
 
 ### Features
@@ -60,7 +60,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [0.2.0](https://github.com/MFX-com/testing-packages/compare/@marefx/second@0.1.4...@marefx/second@0.2.0) (2023-06-28)
+# [0.2.0](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.1.4...@MFX-org/second@0.2.0) (2023-06-28)
 
 
 ### Features
@@ -71,25 +71,25 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.1.4](https://github.com/MFX-com/testing-packages/compare/@marefx/second@0.1.3...@marefx/second@0.1.4) (2023-06-28)
+## [0.1.4](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.1.3...@MFX-org/second@0.1.4) (2023-06-28)
 
-**Note:** Version bump only for package @marefx/second
-
-
-
-
-
-## [0.1.3](https://github.com/MFX-com/testing-packages/compare/@marefx/second@0.0.7...@marefx/second@0.1.3) (2023-06-28)
-
-**Note:** Version bump only for package @marefx/second
+**Note:** Version bump only for package @MFX-org/second
 
 
 
 
 
-## [0.1.2](https://github.com/MFX-com/testing-packages/compare/@marefx/second@0.0.7...@marefx/second@0.1.2) (2023-06-28)
+## [0.1.3](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.0.7...@MFX-org/second@0.1.3) (2023-06-28)
 
-**Note:** Version bump only for package @marefx/second
+**Note:** Version bump only for package @MFX-org/second
+
+
+
+
+
+## [0.1.2](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.0.7...@MFX-org/second@0.1.2) (2023-06-28)
+
+**Note:** Version bump only for package @MFX-org/second
 
 
 
@@ -97,7 +97,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.1.1 (2023-06-28)
 
-**Note:** Version bump only for package @marefx/second
+**Note:** Version bump only for package @MFX-org/second
 
 
 
@@ -114,9 +114,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.0.10](https://github.com/MFX-com/testing-packages/compare/@marefx/second@0.0.7...@marefx/second@0.0.10) (2023-06-28)
+## [0.0.10](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.0.7...@MFX-org/second@0.0.10) (2023-06-28)
 
-**Note:** Version bump only for package @marefx/second
+**Note:** Version bump only for package @MFX-org/second
 
 
 
@@ -125,7 +125,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.0.9 (2023-06-28)
 
-**Note:** Version bump only for package @marefx/second
+**Note:** Version bump only for package @MFX-org/second
 
 
 
@@ -133,23 +133,23 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.0.8 (2023-06-28)
 
-**Note:** Version bump only for package @marefx/second
+**Note:** Version bump only for package @MFX-org/second
 
 
 
 
 
-## [0.0.7](https://github.com/MFX-com/testing-packages/compare/@marefx/second@0.0.6...@marefx/second@0.0.7) (2023-06-28)
+## [0.0.7](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.0.6...@MFX-org/second@0.0.7) (2023-06-28)
 
-**Note:** Version bump only for package @marefx/second
-
-
+**Note:** Version bump only for package @MFX-org/second
 
 
 
-## [0.0.6](https://github.com/MFX-com/testing-packages/compare/@marefx/second@0.0.4...@marefx/second@0.0.6) (2023-06-28)
 
-**Note:** Version bump only for package @marefx/second
+
+## [0.0.6](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.0.4...@MFX-org/second@0.0.6) (2023-06-28)
+
+**Note:** Version bump only for package @MFX-org/second
 
 
 
@@ -160,7 +160,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.0.1 (2023-06-21)
 
-**Note:** Version bump only for package @marefx/second
+**Note:** Version bump only for package @MFX-org/second
 
 # second
 

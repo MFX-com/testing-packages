@@ -20,12 +20,12 @@
     "version:patch": "standard-version --release-as patch",
     "version": "changeset version",
     "release": "changeset publish",
-    "build:@marefx/first": "turbo run build --filter @marefx/first",
-    "bump:@marefx/first": "turbo run bump --filter @marefx/first",
-    "build:@marefx/second": "turbo run build --filter @marefx/second",
-    "bump:@marefx/second": "turbo run bump --filter @marefx/second",
-    "build:@marefx/private": "turbo run build --filter @marefx/private",
-    "bump:@marefx/private": "turbo run bump --filter @marefx/private"
+    "build:@MFX-org/first": "turbo run build --filter @MFX-org/first",
+    "bump:@MFX-org/first": "turbo run bump --filter @MFX-org/first",
+    "build:@MFX-org/second": "turbo run build --filter @MFX-org/second",
+    "bump:@MFX-org/second": "turbo run bump --filter @MFX-org/second",
+    "build:@MFX-org/private": "turbo run build --filter @MFX-org/private",
+    "bump:@MFX-org/private": "turbo run bump --filter @MFX-org/private"
   },
   "devDependencies": {
     "ethers": "^6.6.2",

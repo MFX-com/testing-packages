@@ -3,54 +3,102 @@
   "extends": [
     "config:recommended",
     "group:monorepos",
-    ":dependencyDashboard"
+    ":dependencyDashboard",
+    ":rebaseStalePrs"
   ],
-  "baseBranches": ["main"],
+  "compatibility": { "pnpm": "^8.5.1" },
+  "constraints": { "pnpm": "^8.5.1" },
+  "baseBranches": [
+    "development"
+  ],
   "enabledManagers": [
     "npm",
     "dockerfile",
-    "github-actions"
+    "github-actions",
+    "kubernetes"
   ],
-  "compatibility": { "pnpm": "^8.5.1" },
+  "stopUpdatingLabel": "stop-updating",
   "rangeStrategy": "bump",
   "pinDigests": false,
   "semanticCommits": "enabled",
-  "semanticCommitScope": "",
-  "semanticCommitType": "build",
+  "semanticCommitScope": "dependencies",
+  "semanticCommitType": "chore",
   "dependencyDashboard": true,
   "commitBody": "See associated pull request for more information.",
   "separateMajorMinor": false,
-  "prHourlyLimit": 2000,
+  "prHourlyLimit": 100,
   "updateInternalDeps": true,
   "lockFileMaintenance": {
-    "enabled": false
+    "enabled": true
   },
-  "ignorePaths": [".nvmrc"],
+  "vulnerabilityAlerts": {
+    "commitMessagePrefix": "chore(renovate): Security update"
+  },
+  "ignorePaths": [
+    ".nvmrc",
+    "**/node_modules/**"
+  ],
   "ignoreDeps": [
     "pnpm"
   ],
   "packageRules": [
     {
-      "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "all non-major dependencies",
-      "schedule": ["at any time"]
+      "description": "Link private dependencies to different registry",
+      "matchDatasources": [
+        "npm"
+      ],
+      "matchPackagePatterns": [
+        "@nexeraprotocol/*",
+        "@stichting-allianceblock-foundation/*"
+      ],
+      "registryUrls": [
+        "https://npm.pkg.github.com"
+      ]
     },
     {
+      "description": "Updates all minor and patch versions",
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "all non-major dependencies",
+      "schedule": [
+        "at any time"
+      ]
+    },
+    {
+      "description": "Prevent updating node in Dockerfiles",
       "matchDatasources": [
         "docker"
       ],
-      "matchPackagePatterns": ["node"],
+      "matchPackagePatterns": [
+        "node"
+      ],
       "enabled": false
+    },
+    {
+      "description": "List of disabled dependencies",
+      "groupName": "bot: disabled dependencies",
+      "matchPackageNames": [],
+      "enabled": false
+    },
+    {
+      "description": "Automerge non-major updates",
+      "matchUpdateTypes": ["minor", "patch", "digest", "lockFileMaintenance"],
+      "automerge": false
     }
   ],
   "ignoreUnstable": true,
-  "stabilityDays": 7,
-  "addLabels": ["renovate-bot"],
+  "labels": [
+    "renovate-bot"
+  ],
   "hostRules": [
     {
       "hostType": "npm",
-      "matchHost": "https://npm.pkg.github.com/",
+      "matchHost": "https://npm.pkg.github.com",
       "encrypted": {
         "token": "wcFMA/xDdHCJBTolAQ/+O++vlH2omQ+5scG5qr8N2PyTtAiMQ2xWSQt6USN5oTefYvDyWZ1fkGMVBZEfYme5d29TGMRYdzg+4d3cIPZ55O4bwJWoKx5t9qt8t0AXkW9y9VTul8RsDAfH8VFTBGJbFP/BDIM6LB/saZ1ElRp8/OjtzOQii42PbENtrLl2nm0lJXei1aNXugO/Sq8Ym6sWGRY9rv8kThdr5Hx93NPZMMnkoyqg4nxqla4k/HwRLU93VJ808irDyymXUgjGUdk+vfHLW6GlG9CPWJMM7Pdwb2cFFXXa5lrR/Zwqay+lPGn3nkhhRHKGaYk6kjb8c07oCZAgp8K8RZLS2VtJBOdEzjax/YPZ2YL4mrBgL8lTC5kd/RlUWlcfxaXE6ux7fwz2lgXLwgK/r8PpBzdb/IzS3oaSztk8KDPgpbeKRQUrEtCFQXdpvVhtHYj9xCG/W1TuBNdefXk2uVx6n71iDXe6rALZZq9HabO6B9gdyBfPzv40Sn3JSg2qzJysMrUbCFhRDUNtXmZVx04VQf0fa9fHjLeYl53srcE16gWux704UPraa7PTnlFpSoVlIazHYf+JgeqKAwxf53OWVvblgj8BDl93DU96tK0GHUYWg3uEJziQObXZJp8IuxHWcvBVDLhVKcv2nrm/ag3CElZMIehgHqkoSOyh0dBo6MxGV3L001nSdgFiO1TutoB8fdccFw337tJmbvBkxQUeqPX5kBiZ31EuVmTztMJTdyIfzItB9T8iREQ7lluXKNaBqWD8QGatuM8XsVkCMvb0/9M+FFawQlDDHNzGJcBATWURkbmx5UiHifllbiU4wpsq0caJQQQyZavZ8wr23Ng"
       }

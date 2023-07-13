@@ -11,6 +11,7 @@
     "dockerfile",
     "github-actions"
   ],
+  "compatibility": { "pnpm": "^8.5.1" },
   "rangeStrategy": "bump",
   "pinDigests": false,
   "semanticCommits": "enabled",

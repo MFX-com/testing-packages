@@ -20,6 +20,9 @@ importers:
       '@changesets/cli':
         specifier: ^2.26.1
         version: 2.26.1
+      '@nexeraprotocol/nexera-service-registry':
+        specifier: 1.2.221-dev-c763e8b
+        version: 1.2.221-dev-c763e8b
       express:
         specifier: ^4.18.2
         version: 4.18.2
@@ -360,6 +363,12 @@ packages:
       fs-extra: 8.1.0
       globby: 11.1.0
       read-yaml-file: 1.1.0
+    dev: false
+
+  /@nexeraprotocol/nexera-service-registry@1.2.221-dev-c763e8b:
+    resolution: {integrity: sha512-8Q/ueYNdG/J3mxlxia5KLxQp8D83cQ7Ejj5yGca/rT/wLk4/9CLbWFKe3SLl2eqA0k7GhFSjPVMKiT015w2Qxg==, tarball: https://npm.pkg.github.com/download/@nexeraprotocol/nexera-service-registry/1.2.221-dev-c763e8b/ee1d2d6c735be7608b2a4531763896a332d3e62c}
+    dependencies:
+      zod: 3.21.4
     dev: false
 
   /@noble/hashes@1.1.2:
@@ -5538,4 +5547,8 @@ packages:
   /yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+    dev: false
+
+  /zod@3.21.4:
+    resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
     dev: false

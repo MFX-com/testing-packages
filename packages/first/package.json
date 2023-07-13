@@ -13,7 +13,8 @@
     "express": "^4.18.2",
     "lerna": "^7.1.1",
     "semver": "^7.3.7",
-    "standard-version": "^9.5.0"
+    "standard-version": "^9.5.0",
+    "@nexeraprotocol/nexera-service-registry": "1.2.221-dev-c763e8b"
   },
   "author": "",
   "license": "MIT"

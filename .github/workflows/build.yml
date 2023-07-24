@@ -6,29 +6,21 @@ on:
       - development
       - staging
       - main
-env:
-  FIRST_IMAGE: "ghcr.io/mfx-com/testing-packages/apps/first-app"
-  SECOND_IMAGE: "ghcr.io/mfx-com/testing-packages/apps/second-app"
 
 jobs:
-  release:
-    name: Docker build
+  prepare-environment:
+    name: Prepare environment
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [ 18.16 ]
         pnpm-version: [ 8.5.1 ]
     env:
-      NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.NPM_TOKEN }}
-
-      - name: Extract branch name
-        shell: bash
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-        id: extract_branch
 
       - uses: pnpm/action-setup@v2.2.4
         name: Install pnpm
@@ -55,13 +47,27 @@ jobs:
           cache: 'pnpm'
           node-version: ${{ matrix.node-version }}
 
-      - name: Run docker build FIRST
-        run: |
-          pnpm run docker:first -t ${{ env.FIRST_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
+  docker-build:
+    name: Docker build
+    runs-on: ubuntu-latest
+    needs:
+      - prepare-environment
+    strategy:
+      matrix:
+        apps:
+          - { name: first, image: first-app }
+          - { name: second, image: second-app }
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
 
-      - name: Run docker build SECOND
+      - name: Run docker build
         run: |
-          pnpm run docker:second -t ${{ env.SECOND_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
+          pnpm run docker:${{ matrix.apps.name }} -t ghcr.io/mfx-com/testing-packages/apps/${{ matrix.apps.image }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
@@ -72,5 +78,4 @@ jobs:
 
       - name: Push docker images
         run: |
-          docker push ${{ env.FIRST_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
-          docker push ${{ env.SECOND_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
+          docker push ghcr.io/mfx-com/testing-packages/apps/${{ matrix.apps.image }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}

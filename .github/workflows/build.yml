@@ -1,0 +1,76 @@
+name: Build docker images
+
+on:
+  push:
+    branches:
+      - development
+      - staging
+      - main
+env:
+  FIRST_IMAGE: "ghcr.io/mfx-com/testing-packages/apps/first-app"
+  THIRD_IMAGE: "ghcr.io/mfx-com/testing-packages/apps/third-app"
+
+jobs:
+  release:
+    name: Docker build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 18.16 ]
+        pnpm-version: [ 8.5.1 ]
+    env:
+      NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
+      - uses: pnpm/action-setup@v2.2.4
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: ${{ matrix.pnpm-version }}
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'pnpm'
+          node-version: ${{ matrix.node-version }}
+
+      - name: Run docker build FIRST
+        run: |
+          pnpm run docker:first -t ${{ env.FIRST_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
+
+      - name: Run docker build THIRD
+        run: |
+          pnpm run docker:third -t ${{ env.THIRD_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push docker images
+        run: |
+          docker push ${{ env.FIRST_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
+          docker push ${{ env.THIRD_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}

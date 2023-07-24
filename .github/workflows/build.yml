@@ -84,7 +84,6 @@ jobs:
         run: |
           pnpm run docker:second -t ${{ env.SECOND_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
 
-
 #      - name: Run docker build
 #        run: |
 #          pnpm run docker:${{ matrix.apps.name }} -t ghcr.io/mfx-com/testing-packages/apps/${{ matrix.apps.image }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}

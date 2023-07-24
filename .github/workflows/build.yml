@@ -59,7 +59,7 @@ jobs:
         run: |
           pnpm run docker:first -t ${{ env.FIRST_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
 
-      - name: Run docker build THIRD
+      - name: Run docker build SECOND
         run: |
           pnpm run docker:second -t ${{ env.SECOND_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
 

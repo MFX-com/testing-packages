@@ -21,7 +21,7 @@
     "version": "changeset version",
     "release": "changeset publish",
     "docker:first": "docker build -f packages/first/Dockerfile -t first-app .",
-    "docker:third": "docker build -f packages/third/Dockerfile -t third-app .",
+    "docker:second": "docker build -f packages/second/Dockerfile -t second-app .",
     "build:@MFX-org/first": "turbo run build --filter @MFX-org/first",
     "bump:@MFX-org/first": "turbo run bump --filter @MFX-org/first",
     "build:@MFX-org/second": "turbo run build --filter @MFX-org/second",

@@ -17,4 +17,4 @@ COPY . .
 RUN pnpm install
 
 EXPOSE 8080
-CMD [ "node", "packages/third/src/server.js" ]
+CMD [ "node", "packages/second/src/server.js" ]

@@ -8,7 +8,7 @@ on:
       - main
 env:
   FIRST_IMAGE: "ghcr.io/mfx-com/testing-packages/apps/first-app"
-  THIRD_IMAGE: "ghcr.io/mfx-com/testing-packages/apps/third-app"
+  SECOND_IMAGE: "ghcr.io/mfx-com/testing-packages/apps/second-app"
 
 jobs:
   release:
@@ -61,7 +61,7 @@ jobs:
 
       - name: Run docker build THIRD
         run: |
-          pnpm run docker:third -t ${{ env.THIRD_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
+          pnpm run docker:second -t ${{ env.SECOND_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
@@ -73,4 +73,4 @@ jobs:
       - name: Push docker images
         run: |
           docker push ${{ env.FIRST_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
-          docker push ${{ env.THIRD_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
+          docker push ${{ env.SECOND_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}

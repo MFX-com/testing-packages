@@ -43,7 +43,7 @@ jobs:
           git config --global user.name "nexera-release[bot]"
           git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
 
-      - uses: pnpm/action-setup@v2.2.4
+      - uses: pnpm/action-setup@v2.3.0
         name: Install pnpm
         id: pnpm-install
         with:

@@ -30,7 +30,7 @@
     "bump:@MFX-org/private": "turbo run bump --filter @MFX-org/private"
   },
   "devDependencies": {
-    "ethers": "^6.6.5",
-    "turbo": "^1.10.11"
+    "ethers": "^6.7.0",
+    "turbo": "^1.10.12"
   }
 }

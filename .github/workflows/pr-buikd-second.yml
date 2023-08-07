@@ -1,4 +1,4 @@
-name: Build docker images
+name: Build SECOND docker image
 
 on:
   pull_request:

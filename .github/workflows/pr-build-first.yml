@@ -2,7 +2,10 @@ name: Build FIRST docker images
 
 on:
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+      - staging
+      - development
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}-first

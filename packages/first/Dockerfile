@@ -7,7 +7,7 @@ RUN npm install -g pnpm@8.5.1
 # Create app directory
 WORKDIR /usr/src/app
 
-RUN sleep 60
+#RUN sleep 60
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied

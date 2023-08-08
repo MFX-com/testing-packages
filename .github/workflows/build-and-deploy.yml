@@ -17,4 +17,4 @@ jobs:
     steps:
       - name: Get pull request number
         run: |
-          echo The PR was merged
+          echo The PR was merged!

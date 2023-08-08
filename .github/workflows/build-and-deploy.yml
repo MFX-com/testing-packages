@@ -15,6 +15,10 @@ jobs:
         run: |
           echo The PR ${{ github.event.pull_request.number }} was merged!
 
+      - name: Get SHA
+        run: |
+          echo GitHub SHA: ${{ github.sha }}
+
       - name: Show target branch name
         run: |
           echo Base branch name: ${{ github.event.pull_request.base.ref }}

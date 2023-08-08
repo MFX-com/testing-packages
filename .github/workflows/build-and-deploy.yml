@@ -17,5 +17,5 @@ jobs:
 
       - name: Show target branch name
         run: |
-          echo Branch name: ${{ github.event.pull_request.base.ref }}
-          echo Branch name: ${{ github.event.pull_request.head.ref }}
+          echo Base branch name: ${{ github.event.pull_request.base.ref }}
+          echo Head branch name: ${{ github.event.pull_request.head.ref }}

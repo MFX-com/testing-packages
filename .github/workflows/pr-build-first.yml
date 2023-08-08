@@ -16,7 +16,7 @@ env:
 
 jobs:
   prepare-environment:
-    name: Prepare environment
+    name: Prepare environment for first image
     runs-on: ubuntu-latest
     strategy:
       matrix:

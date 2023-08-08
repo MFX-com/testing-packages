@@ -3,9 +3,9 @@ name: Build docker images
 on:
   push:
     branches:
-      - development
-      - staging
-      - main
+      - developmentz
+      - stagingz
+      - mainz
 
 env:
   FIRST_IMAGE: "ghcr.io/mfx-com/testing-packages/apps/first-app"
@@ -35,17 +35,17 @@ jobs:
 #          remove-haskell: 'true'
 #          remove-codeql: 'true'
 
-      - name: Free Up GitHub Actions Ubuntu Runner Disk Space 🔧
-        uses: jlumbroso/free-disk-space@main
-        with:
-          # This might remove tools that are actually needed, if set to "true" but frees about 6 GB
-          tool-cache: false
-          # All of these default to true, but feel free to set to "false" if necessary for your workflow
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: false
-          swap-storage: true
+#      - name: Free Up GitHub Actions Ubuntu Runner Disk Space 🔧
+#        uses: jlumbroso/free-disk-space@main
+#        with:
+#          # This might remove tools that are actually needed, if set to "true" but frees about 6 GB
+#          tool-cache: false
+#          # All of these default to true, but feel free to set to "false" if necessary for your workflow
+#          android: true
+#          dotnet: true
+#          haskell: true
+#          large-packages: false
+#          swap-storage: true
 
       - uses: actions/checkout@v3
         with:
@@ -97,6 +97,14 @@ jobs:
       - uses: jpribyl/action-docker-layer-caching@v0.1.1
         # Ignore the failure of a step and avoid terminating the job.
         continue-on-error: true
+
+      - name: Check if first image exists
+        run: |
+          echo "YEP 1"
+
+      - name: Check if second image exists
+        run: |
+          echo "YEP 2"
 
       - name: Run docker build FIRST
         run: |

@@ -15,6 +15,15 @@ jobs:
     if: github.event.pull_request.merged
     runs-on: ubuntu-latest
     steps:
+      - name: Extract target branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
       - name: Get pull request number
         run: |
-          echo The PR was merged
+          echo The PR ${{ github.event.pull_request.number }} was merged!
+
+      - name: Show target branch name
+        run: |
+          echo Branch name: ${{ steps.extract_branch.outputs.branch }}

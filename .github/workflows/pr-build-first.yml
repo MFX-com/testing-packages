@@ -1,8 +1,11 @@
-name: Build FIRST docker images
+name: Build FIRST docker image
 
 on:
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+      - staging
+      - development
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}-first
@@ -13,7 +16,7 @@ env:
 
 jobs:
   prepare-environment:
-    name: Prepare environment
+    name: Prepare environment for first image
     runs-on: ubuntu-latest
     strategy:
       matrix:

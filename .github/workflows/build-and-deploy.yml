@@ -1,0 +1,20 @@
+name: Build and deploy docker images
+
+on:
+  pull_request:
+    branches:
+      - main
+      - staging
+      - development
+    types:
+      - closed
+
+jobs:
+  if_merged:
+    name: Deploy the docker images
+    if: github.event.pull_request.merged
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get pull request number
+        run: |
+          echo The PR was merged

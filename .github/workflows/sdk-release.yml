@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 18.16 ]
+        node-version: [ 18.17 ]
         pnpm-version: [ 8.5.1 ]
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -163,7 +163,7 @@ jobs:
 #      - versions
 #    strategy:
 #      matrix:
-#        node-version: [ 18.16 ]
+#        node-version: [ 18.17 ]
 #        pnpm-version: [ 8.5.1 ]
 #    steps:
 #      - uses: actions/checkout@v3

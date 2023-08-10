@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         node-version: [ 18.17 ]
-        pnpm-version: [ 8.5.1 ]
+        pnpm-version: [ 8.6.10 ]
 #        apps:
 #          - { name: first, image: first-app }
 #          - { name: second, image: second-app }

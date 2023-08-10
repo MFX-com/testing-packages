@@ -6,8 +6,8 @@
     ":dependencyDashboard",
     ":rebaseStalePrs"
   ],
-  "compatibility": { "pnpm": "^8.5.1" },
-  "constraints": { "pnpm": "^8.5.1" },
+  "compatibility": { "pnpm": "^8.6.10" },
+  "constraints": { "pnpm": "^8.6.10" },
   "baseBranches": [
     "main"
   ],

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.7.0 (2023-08-11)
+
+
+### Bug Fixes
+
+* **dependencies:** update all non-major dependencies ([#56](https://github.com/MFX-com/testing-packages/issues/56)) ([2a4dd9d](https://github.com/MFX-com/testing-packages/commit/2a4dd9dfaeb51305235c1f7c19d2d7e5d6f217c3))
+
+
+### Features
+
+* **@MFX-org/first:** new version ([025d03f](https://github.com/MFX-com/testing-packages/commit/025d03fc6dc92608fcb44c2abe9d9f0b7916e034))
+* **@MFX-org/first:** new version! ([d048687](https://github.com/MFX-com/testing-packages/commit/d04868769bdc97420b74113cd07055872eef69b4))
+* **testing:** bump version ([#28](https://github.com/MFX-com/testing-packages/issues/28)) ([95d13ae](https://github.com/MFX-com/testing-packages/commit/95d13ae75037675af2054be485f3e12b815c0dff))
+* **test:** update ([10da64d](https://github.com/MFX-com/testing-packages/commit/10da64dc8397d97ebee6a27bf86e6561b36b5fe0))
+
+
+
+
+
 # 1.6.0 (2023-08-11)
 
 

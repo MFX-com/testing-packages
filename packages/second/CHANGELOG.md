@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@1.7.0...@MFX-org/second@1.8.0) (2023-08-11)
+
+
+### Features
+
+* **@MFX-com/first:** testing ([3e6d491](https://github.com/MFX-com/testing-packages/commit/3e6d491f11ce0de106fe8dd233bfaa7539288f75))
+
+
+
+
+
 # 1.7.0 (2023-08-11)
 
 

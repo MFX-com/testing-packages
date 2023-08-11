@@ -76,17 +76,23 @@ jobs:
 #        run: |
 #          lerna version --conventional-commits --no-git-tag-version --yes
 
-      - name: Bump versions
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          lerna version --yes --changelog-preset=angular --conventional-commits --message 'chore(release): version and release commit'
+#      - name: Bump versions
+#        env:
+#          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          lerna version --yes --changelog-preset=angular --conventional-commits --message 'chore(release): version and release commit'
 
 #      - name: Bump versions
 #        env:
 #          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
 #        run: |
 #          lerna version --yes --no-commit-hooks
+
+      - name: Bump versions
+        env:
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+        run: |
+          lerna version --yes
 
 #      - name: Bump versions
 #        run: |

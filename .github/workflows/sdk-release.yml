@@ -76,11 +76,11 @@ jobs:
 #        run: |
 #          lerna version --conventional-commits --no-git-tag-version --yes
 
-#      - name: Bump versions
-#        env:
-#          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        run: |
-#          lerna version --yes --changelog-preset=angular --conventional-commits --message 'chore(release): version and release commit'
+      - name: Bump versions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          lerna version --yes --changelog-preset=angular --conventional-commits --message 'chore(release): version and release commit'
 
 #      - name: Bump versions
 #        env:
@@ -88,11 +88,11 @@ jobs:
 #        run: |
 #          lerna version --yes --no-commit-hooks
 
-      - name: Bump versions
-        run: |
-          pnpm run --filter "@MFX-org/first" bump
-          pnpm run --filter "@MFX-org/private" bump
-          pnpm run --filter "@MFX-org/second" bump
+#      - name: Bump versions
+#        run: |
+#          pnpm run --filter "@MFX-org/first" bump
+#          pnpm run --filter "@MFX-org/private" bump
+#          pnpm run --filter "@MFX-org/second" bump
 
       # People can bump manually a package in their merge request
       # Once merged to development, it will automatically take it in consideration

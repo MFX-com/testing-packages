@@ -56,20 +56,6 @@
       ]
     },
     {
-      "description": "Updates all minor and patch versions",
-      "matchPackagePatterns": [
-        "*"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "groupName": "all non-major dependencies",
-      "schedule": [
-        "at any time"
-      ]
-    },
-    {
       "description": "Prevent updating node in Dockerfiles",
       "matchDatasources": [
         "docker"

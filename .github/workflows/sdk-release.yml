@@ -164,12 +164,13 @@ jobs:
 
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
+        if: success()
         env:
           SLACK_CHANNEL: nexera-alerts
           SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: 'Post Content :rocket:'
-          SLACK_TITLE: My Title
+          SLACK_ICON: https://avatars.githubusercontent.com/in/351476?s=48
+          SLACK_TITLE: My Title ${{ secrets.APP_ID }}
+          SLACK_MESSAGE: 'Post Content :rocket: ${{ secrets.APP_ID }}'
           SLACK_USERNAME: nexera-bot
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 

@@ -162,6 +162,17 @@ jobs:
 #          pnpm --filter "@MFX-org/second" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
 
 
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: nexera-alerts
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: 'Post Content :rocket:'
+          SLACK_TITLE: My Title
+          SLACK_USERNAME: nexera-bot
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
 #  release:
 #    name: Release
 #    runs-on: ubuntu-latest

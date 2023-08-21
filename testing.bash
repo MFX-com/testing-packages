@@ -41,6 +41,6 @@ while [ $attempts -lt $total_attempts ]; do
     sleep 3
   else
     printf "The application has issues starting up, check the logs!"
-    break
+    exit 1
   fi
 done

@@ -11,8 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 18.17 ]
-        pnpm-version: [ 8.6.10 ]
+#        node-version: [ 18.17 ]
+#        pnpm-version: [ 8.6.10 ]
+        apps:
+          - api
+          - cms
+    environment:
+      name: ${{ matrix.apps }}-dev
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
@@ -128,9 +133,9 @@ jobs:
 #        with:
 #          github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check version
-        run: |
-          cat packages/first/package.json
+#      - name: Check version
+#        run: |
+#          cat packages/first/package.json
 
 #      - uses: actions/checkout@v3
 #        with:
@@ -185,11 +190,10 @@ jobs:
           echo ${{ steps.rollout.outputs.rollout_time }}
           # Initial sleep to make sure they are running
           sleep 10
-          app_url="https://flask-news.marefx.com/test-status"
           attempts=0
           max_attempts=5
           while [ $attempts -lt $max_attempts ]; do
-            status_code=$(curl -s -o /dev/null -w '%{http_code}' $app_url)
+            status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ env.HEALTHCHECK_URL }})
             printf "The response code is: %d\n" "$status_code"
           
             if [ "$status_code" -eq 200 ]; then

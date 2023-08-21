@@ -29,6 +29,9 @@ my_timer=$(date +%s)
 
 printf "Date: %s\n" "$my_timer"
 
+testing="hellO"
+echo "${testing^^}"
+
 app_url="https://flask-news.marefx.com/test-status"
 attempts=0
 total_attempts=5

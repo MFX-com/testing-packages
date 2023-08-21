@@ -173,17 +173,22 @@ jobs:
 #          SLACK_MESSAGE: 'Post Content :rocket: ${{ secrets.APP_ID }}'
 #          SLACK_USERNAME: nexera-bot
 #          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Export timer variable
+        id: rollout
+        shell: bash
+        run: |
+          echo "rollout_time=$(date +%s)" >> $GITHUB_OUTPUT
 
       - name: Check service status
         shell: bash
         run: |
-          my_timer=$(date +%s)
+          echo ${{ steps.rollout.outputs.rollout_time }}
           # Initial sleep to make sure they are running
-          sleep 30
+          sleep 10
           app_url="https://flask-news.marefx.com/test-status"
           attempts=0
-          total_attempts=5
-          while [ $attempts -lt $total_attempts ]; do
+          max_attempts=5
+          while [ $attempts -lt $max_attempts ]; do
             status_code=$(curl -s -o /dev/null -w '%{http_code}' $app_url)
             printf "The response code is: %d\n" "$status_code"
           

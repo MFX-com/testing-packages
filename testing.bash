@@ -2,7 +2,9 @@
 
 loki_ds="CkxljTP4z"
 
-if [ "$1" == 'staging' ] || [ "$1" == 'prod' ]; then
+if [ "$1" == 'staging' ]; then
+  loki_ds="P8E80F9AEF21F6940"
+elif [ "$1" == 'prod' ]; then
   loki_ds="P8E80F9AEF21F6940"
 fi
 

@@ -178,7 +178,8 @@ jobs:
         shell: bash
         run: |
           my_timer=$(date +%s)
-          
+          # Initial sleep to make sure they are running
+          sleep 30
           app_url="https://flask-news.marefx.com/test-status"
           attempts=0
           total_attempts=5

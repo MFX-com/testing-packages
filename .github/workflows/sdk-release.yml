@@ -162,33 +162,38 @@ jobs:
 #          pnpm --filter "@MFX-org/second" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
 
 
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        if: success()
-        env:
-          SLACK_CHANNEL: nexera-alerts
-          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-          SLACK_ICON: https://avatars.githubusercontent.com/in/351476?s=48
-          SLACK_TITLE: My Title ${{ secrets.APP_ID }}
-          SLACK_MESSAGE: 'Post Content :rocket: ${{ secrets.APP_ID }}'
-          SLACK_USERNAME: nexera-bot
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+#      - name: Slack Notification
+#        uses: rtCamp/action-slack-notify@v2
+#        if: success()
+#        env:
+#          SLACK_CHANNEL: nexera-alerts
+#          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+#          SLACK_ICON: https://avatars.githubusercontent.com/in/351476?s=48
+#          SLACK_TITLE: My Title ${{ secrets.APP_ID }}
+#          SLACK_MESSAGE: 'Post Content :rocket: ${{ secrets.APP_ID }}'
+#          SLACK_USERNAME: nexera-bot
+#          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
-      - name: Apply manifests
-        continue-on-error: true
+      - name: Check service status
         shell: bash
         run: |
-          loki_ds="${{ secrets.APP_ID }}"
-
-          if [ ${{ inputs.environment }} == 'staging' ]; then
-            loki_ds="${{ secrets.APP_ID }}"
-          elif [ ${{ inputs.environment }} == 'prod' ]; then
-            loki_ds="${{ secrets.APP_ID }}"
-          fi
-
-          find deploy/*.json -type f -exec sed -i -e "s/\${DS_LOKI}/$loki_ds/g" {} +
-          cat deploy/api.json
-#          kubectl kustomize | kubectl apply -f deploy/grafana/env-${{ inputs.environment }}
+          my_timer=$(date +%s)
+          
+          app_url="https://flask-news.marefx.com/test-status"
+          attempts=0
+          total_attempts=5
+          while [ $attempts -lt $total_attempts ]; do
+            status_code=$(curl -s -o /dev/null -w '%{http_code}' $app_url)
+            printf "The response code is: %d\n" "$status_code"
+          
+            if [ "$status_code" -eq 200 ]; then
+              attempts=$((attempts+1))
+              sleep 3
+            else
+              printf "The application has issues starting up, check the logs!"
+              break
+            fi
+          done
 
 #  release:
 #    name: Release

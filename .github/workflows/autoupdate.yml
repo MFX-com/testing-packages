@@ -1,13 +1,16 @@
 name: autoupdate
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
 
 jobs:
   autoupdate:
-    name: autoupdate
+    name: Update with base branch
     runs-on: ubuntu-latest
     steps:
       - name: Generate token
@@ -17,7 +20,8 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.PRIVATE_KEY }}
 
-      - uses: docker://chinthakagodawita/autoupdate-action:v1
+      - name: Merge base branch
+        uses: docker://chinthakagodawita/autoupdate-action:v1
         env:
           GITHUB_TOKEN: '${{ steps.generate_token.outputs.token }}'
           DRY_RUN: "false"

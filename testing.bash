@@ -12,10 +12,6 @@
 #
 #find deploy/*.json -type f -exec sed -i -e "s/\${DS_LOKI}/$loki_ds/g" {} +
 
-
-# !
-
-
 response_code=$(curl -s -o /dev/null -w "%{http_code}" https://flask-news.marefx.com/test-status)
 response_code_api=$(curl -s -o /dev/null -w "%{http_code}" https://api-dev-k8s.nexera.id)
 response_code_cms=$(curl -s -o /dev/null -w "%{http_code}" https://cms-dev.nexera.id/healthcheck)

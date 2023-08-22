@@ -62,7 +62,7 @@ jobs:
         id: extract_branch
 
       - uses: jpribyl/action-docker-layer-caching@v0.1.1
-        # Ignore the failure of a step and avoid terminating the job.
+        # Ignore the failure of a step and avoid terminating the job.!
         continue-on-error: true
         with:
           key: first-docker-cache-${{ github.event.pull_request.number }}

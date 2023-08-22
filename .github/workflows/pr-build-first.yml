@@ -61,13 +61,13 @@ jobs:
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
         id: extract_branch
 
-      - uses: jpribyl/action-docker-layer-caching@v0.1.1
-        # Ignore the failure of a step and avoid terminating the job.!
-        continue-on-error: true
-        with:
-          key: first-docker-cache-${{ github.event.pull_request.number }}
-          restore-keys: |
-            first-docker-cache-
+#      - uses: jpribyl/action-docker-layer-caching@v0.1.1
+#        # Ignore the failure of a step and avoid terminating the job.!
+#        continue-on-error: true
+#        with:
+#          key: first-docker-cache-${{ github.event.pull_request.number }}
+#          restore-keys: |
+#            first-docker-cache-
 
       - name: Run docker build FIRST
         run: |

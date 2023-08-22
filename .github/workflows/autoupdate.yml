@@ -1,9 +1,9 @@
 name: autoupdate
 
 on:
-  push:
+  pull_request:
     branches:
-      - mainz
+      - main
 
 jobs:
   autoupdate:
@@ -14,10 +14,10 @@ jobs:
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           DRY_RUN: "false"
-          PR_FILTER: "labelled"
-          PR_LABELS: "autoupdate,keep up-to-date,integration"
-          EXCLUDED_LABELS: "dependencies,wontfix"
+          PR_FILTER: "all"
+          EXCLUDED_LABELS: "dependencies,wontfix,renovate-bot"
           MERGE_MSG: "Branch was auto-updated."
+          PR_READY_STATE: "ready_for_review"
           RETRY_COUNT: "5"
           RETRY_SLEEP: "300"
           MERGE_CONFLICT_ACTION: "fail"

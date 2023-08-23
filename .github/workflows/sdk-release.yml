@@ -205,12 +205,12 @@ jobs:
             fi
           done
 
-      - name: Fail the job
-        shell: bash
-        run: |
-          exit 1
+#      - name: Fail the job
+#        shell: bash
+#        run: |
+#          exit 1
 
-      - name: Send notifications
+      - name: Notify
         uses: ravsamhq/notify-slack-action@v2
         if: always()
         with:

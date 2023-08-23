@@ -216,8 +216,8 @@ jobs:
         with:
           status: ${{ job.status }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          notification_title: "{workflow} has {status_message}"
-          message_format: "{emoji} *{workflow}* {status_message}\n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}"
+          notification_title: ""
+          message_format: "{emoji} *${{ matrix.apps }}* deployment to DEV {status_message}\n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}"
           footer: "Linked Repo <{repo_url}|{repo}> | <{workflow_url}|View Workflow> | <{run_url}|View runs>"
           notify_when: "success,failure"
         env:

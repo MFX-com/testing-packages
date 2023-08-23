@@ -205,6 +205,19 @@ jobs:
             fi
           done
 
+      - name: Send notifications
+        uses: ravsamhq/notify-slack-action@v2
+        if: always()
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: "{workflow} has {status_message}"
+          message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
+          footer: "Linked Repo <{repo_url}|{repo}> | <{workflow_url}|View Workflow>"
+          notify_when: "success,failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
 #  release:
 #    name: Release
 #    runs-on: ubuntu-latest

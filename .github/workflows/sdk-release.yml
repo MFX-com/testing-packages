@@ -217,11 +217,11 @@ jobs:
         run: |
           pretty_app="UNKNOWN"
 
-          if [ "${{ matrix.apps }}" -eq "cms" ]; then
+          if [ ${{ matrix.apps }} -eq "cms" ]; then
             pretty_app="CMS"
-          elif [ "${{ matrix.apps }}" -eq "api" ]; then
+          elif [ ${{ matrix.apps }} -eq "api" ]; then
             pretty_app="API"
-          elif [ "${{ matrix.apps }}" -eq "data-storage" ]; then
+          elif [ ${{ matrix.apps }} -eq "data-storage" ]; then
             pretty_app="Data-storage"
           fi
           

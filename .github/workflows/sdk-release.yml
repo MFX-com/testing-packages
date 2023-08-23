@@ -182,7 +182,7 @@ jobs:
         id: rollout
         shell: bash
         run: |
-          echo "rollout_time=$(date +%s)" >> $GITHUB_OUTPUT
+          echo "rollout_time=$(date +%s%3N)" >> $GITHUB_OUTPUT
 
       - name: Check service status
         shell: bash

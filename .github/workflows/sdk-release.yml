@@ -216,9 +216,9 @@ jobs:
         run: |
           echo ${{ steps.rollout.outputs.rollout_time }}
           # Initial sleep to make sure they are running
-          sleep 10
+          sleep 5
           attempts=0
-          max_attempts=5
+          max_attempts=2
           while [ $attempts -lt $max_attempts ]; do
             status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL }})
             printf "The response code is: %d\n" "$status_code"
@@ -281,7 +281,10 @@ jobs:
           status: ${{ job.status }}
           token: ${{ secrets.GITHUB_TOKEN }}
           notification_title: ""
-          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message}\n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}"
+          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message}
+          \n\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
+          \n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}\n
+          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
           footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
           notify_when: "success,failure"
         env:

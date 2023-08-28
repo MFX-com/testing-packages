@@ -52,7 +52,7 @@ jobs:
           notification_title: ""
           message_format: "{emoji} *TESTING* deployment to TESTING has {status_message}
           \n\nApplication\n ${{ vars.APP_URL }}\n
-          \n\nChanges\n${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }}>)"
+          \n\nChanges\n${{ github.event.pull_request.title }} - (<${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }}>)"
           footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
           notify_when: "success,failure"
         env:

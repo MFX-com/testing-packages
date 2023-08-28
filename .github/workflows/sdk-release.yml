@@ -267,7 +267,7 @@ jobs:
         run: |
           changes="Manual deploy"
 
-          if [ "${{ github.event.pull_request.title }}" != "" ]; then
+          if [ "${{ github.event.pull_request }}" != "" ]; then
             changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.number }}>)"
           fi
 
@@ -282,7 +282,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           notification_title: ""
           message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message}
-          \n\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
+          \n\n ${{ vars.APP_URL }}>\n
           \n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}\n
           \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
           footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"

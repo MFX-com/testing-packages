@@ -271,7 +271,7 @@ jobs:
             changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.number }}>)"
           else
             commit_message="$(git log --pretty=%B -1 ${{ github.sha }} | cat - | head -n1)"
-            changes="Manual deploy: <${{ github.event.repository.html_url }}/commit/${{ github.sha }}|${{ github.sha }}> $commit_message"
+            changes="Manual deploy: $commit_message - <${{ github.event.repository.html_url }}/commit/${{ github.sha }}|${{ github.sha }}>"
           fi
 
           echo $changes

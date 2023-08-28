@@ -43,6 +43,20 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
 
+      - name: Set changes
+        if: always()
+        id: changes_output
+        shell: bash
+        run: |
+          changes="Manual deploy"
+
+          if [ "${{ github.event.pull_request.title }}" != "" ]; then
+            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }}>)"
+          fi
+
+          echo $changes
+          echo "changes=$changes" >> $GITHUB_OUTPUT
+
       - name: Notify
         uses: ravsamhq/notify-slack-action@v2
         if: always()
@@ -51,8 +65,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           notification_title: ""
           message_format: "{emoji} *TESTING* deployment to TESTING has {status_message}
-          \n\nApplication\n ${{ vars.APP_URL }}\n
-          \n\nChanges\n${{ github.event.pull_request.title }} - (<${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }}>)"
+          \n\nApplication\n <${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.html_url }}>\n
+          \n\nGrafana\n <${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.html_url }}>\n
+          \n\nChanges\n - ${{ steps.changes_output.outputs.changes }}"
           footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
           notify_when: "success,failure"
         env:

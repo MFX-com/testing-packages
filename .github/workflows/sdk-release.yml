@@ -210,6 +210,11 @@ jobs:
 #        run: |
 #          exit 1
 
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
       - name: Prettify output
         if: always()
         id: pretty_output
@@ -236,7 +241,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           notification_title: ""
           message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message}\n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}"
-          footer: "Linked Repo <{repo_url}|{repo}> | <{workflow_url}|View Workflow> | <{run_url}|View runs>"
+          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
           notify_when: "success,failure"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}

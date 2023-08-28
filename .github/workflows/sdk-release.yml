@@ -260,6 +260,20 @@ jobs:
           echo $pretty_app
           echo "app_name=$pretty_app" >> $GITHUB_OUTPUT
 
+      - name: Set changes
+        if: always()
+        id: changes_output
+        shell: bash
+        run: |
+          changes="Manual deploy"
+
+          if [ "${{ github.event.pull_request.title }}" != "" ]; then
+            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.number }}>)"
+          fi
+
+          echo $changes
+          echo "changes=$changes" >> $GITHUB_OUTPUT
+
       - name: Notify
         uses: ravsamhq/notify-slack-action@v2
         if: always()

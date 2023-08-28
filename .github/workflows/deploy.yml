@@ -51,7 +51,7 @@ jobs:
           changes="Manual deploy"
 
           if [ "${{ github.event.pull_request.title }}" != "" ]; then
-            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }}>)"
+            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.number }}>)"
           fi
 
           echo $changes
@@ -65,9 +65,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           notification_title: ""
           message_format: "{emoji} *TESTING* deployment to TESTING has {status_message}
-          \n\nApplication\n <${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.html_url }}>\n
+          \n\n <${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.html_url }}>\n
           \n\nGrafana\n <${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.html_url }}>\n
-          \n\nChanges\n - ${{ steps.changes_output.outputs.changes }}"
+          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
           footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
           notify_when: "success,failure"
         env:

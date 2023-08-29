@@ -47,6 +47,15 @@
 #done
 
 
-changes="$(git log --pretty=oneline 71bcdec22ff0c63384e2a36a5be72a6cf8faf4cc -n 1 | cat -)"
+#changes="$(git log --pretty=oneline 71bcdec22ff0c63384e2a36a5be72a6cf8faf4cc -n 1 | cat -)"
+#
+#echo "$changes"
 
-echo "$changes"
+
+curl -L \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: token xxx"\
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          -X PUT \
+          https://api.github.com/repos/MFX-com/testing-packages/branches/main/protection \
+          -d '{"enforce_admins":false, "required_pull_request_reviews":null, "required_status_checks":null, "restrictions":null}'

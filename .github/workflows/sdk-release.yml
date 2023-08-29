@@ -104,10 +104,11 @@ jobs:
       - name: Bump versions
         shell: bash
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "nexera-release[bot]"
+          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/$GITHUB_REPOSITORY
 
           lerna version --yes
 

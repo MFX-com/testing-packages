@@ -226,7 +226,7 @@ jobs:
 #          while [ $attempts -lt $max_attempts ]; do
 #            status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL }})
 #            printf "The response code is: %d\n" "$status_code"
-#          
+#
 #            if [ "$status_code" -eq 200 ]; then
 #              attempts=$((attempts+1))
 #              sleep 3
@@ -234,7 +234,7 @@ jobs:
 #              printf "The application has issues starting up, check the logs!"
 #              exit 1
 #            fi
-          done
+#          done
 
 #      - name: Fail the job
 #        shell: bash

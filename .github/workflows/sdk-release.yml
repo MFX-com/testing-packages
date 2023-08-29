@@ -20,6 +20,8 @@ jobs:
 #      name: ${{ matrix.apps }}-dev
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NODE_VERSION: 18.17.1
+      PNPM_VERSION: 8.6.12
     steps:
       - name: Generate token
         id: generate_token
@@ -53,7 +55,8 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: ${{ matrix.pnpm-version }}
+#          version: ${{ matrix.pnpm-version }}
+          version: ${{ env.PNPM_VERSION }}
           run_install: false
 
       - name: Get pnpm store directory
@@ -72,7 +75,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: 'pnpm'
-          node-version: ${{ matrix.node-version }}
+#          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.PNPM_VERSION }}
 
       - name: Install Dependencies
         run: |
@@ -116,11 +120,10 @@ jobs:
         env:
           STRATEGY_CONTEXT: ${{ toJson(strategy) }}
         run: echo "$STRATEGY_CONTEXT"
-      - name: Dump matrix context
-        env:
-          MATRIX_CONTEXT: ${{ toJson(matrix) }}
-        run: echo "$MATRIX_CONTEXT"
-
+#      - name: Dump matrix context
+#        env:
+#          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+#        run: echo "$MATRIX_CONTEXT"
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -223,7 +226,7 @@ jobs:
 #          while [ $attempts -lt $max_attempts ]; do
 #            status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL }})
 #            printf "The response code is: %d\n" "$status_code"
-#          
+#
 #            if [ "$status_code" -eq 200 ]; then
 #              attempts=$((attempts+1))
 #              sleep 3
@@ -231,7 +234,7 @@ jobs:
 #              printf "The application has issues starting up, check the logs!"
 #              exit 1
 #            fi
-          done
+#          done
 
 #      - name: Fail the job
 #        shell: bash

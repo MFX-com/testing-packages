@@ -49,3 +49,8 @@ jobs:
           label: automerge,${{ inputs.target_branch == 'staging' && 'STAGING' || 'PRODUCTION' }}
           draft: false
           ignore_users: "dependabot"
+
+      - name: Update branch
+        shell: bash
+        run: |
+          echo "Update"

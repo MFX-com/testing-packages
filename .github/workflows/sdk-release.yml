@@ -46,12 +46,12 @@ jobs:
 #          git config --global user.name "github-actions[bot]"
 #          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Config git user
-        shell: bash
-        run: |
-          git config --global user.name "nexera-release[bot]"
-          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/$GITHUB_REPOSITORY
+#      - name: Config git user
+#        shell: bash
+#        run: |
+#          git config --global user.name "nexera-release[bot]"
+#          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
+#          git remote set-url origin https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/$GITHUB_REPOSITORY
 
       - uses: pnpm/action-setup@v2.4.0
         name: Install pnpm
@@ -101,9 +101,12 @@ jobs:
 #          lerna version --yes --no-commit-hooks
 
       - name: Bump versions
+        shell: bash
         env:
           GH_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
+          git config --global user.name "nexera-release[bot]"
+          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
           lerna version --yes
 
       - name: Dump job context

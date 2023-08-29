@@ -9,15 +9,15 @@ jobs:
   versions:
     name: Versions
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
+#    strategy:
+#      matrix:
 #        node-version: [ 18.17 ]
 #        pnpm-version: [ 8.6.10 ]
-        apps:
-          - api
-          - cms
-    environment:
-      name: ${{ matrix.apps }}-dev
+#        apps:
+#          - api
+#          - cms
+#    environment:
+#      name: ${{ matrix.apps }}-dev
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
@@ -61,13 +61,13 @@ jobs:
         run: |
           echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
 
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+#      - uses: actions/cache@v3
+#        name: Setup pnpm cache
+#        with:
+#          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+#          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+#          restore-keys: |
+#            ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - uses: actions/setup-node@v3
         with:
@@ -206,31 +206,31 @@ jobs:
 #          SLACK_MESSAGE: 'Post Content :rocket: ${{ secrets.APP_ID }}'
 #          SLACK_USERNAME: nexera-bot
 #          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      - name: Export timer variable
-        id: rollout
-        shell: bash
-        run: |
-          echo "rollout_time=$(date +%s%3N)" >> $GITHUB_OUTPUT
-
-      - name: Check service status
-        shell: bash
-        run: |
-          echo ${{ steps.rollout.outputs.rollout_time }}
-          # Initial sleep to make sure they are running
-          sleep 5
-          attempts=0
-          max_attempts=2
-          while [ $attempts -lt $max_attempts ]; do
-            status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL }})
-            printf "The response code is: %d\n" "$status_code"
-          
-            if [ "$status_code" -eq 200 ]; then
-              attempts=$((attempts+1))
-              sleep 3
-            else
-              printf "The application has issues starting up, check the logs!"
-              exit 1
-            fi
+#      - name: Export timer variable
+#        id: rollout
+#        shell: bash
+#        run: |
+#          echo "rollout_time=$(date +%s%3N)" >> $GITHUB_OUTPUT
+#
+#      - name: Check service status
+#        shell: bash
+#        run: |
+#          echo ${{ steps.rollout.outputs.rollout_time }}
+#          # Initial sleep to make sure they are running
+#          sleep 5
+#          attempts=0
+#          max_attempts=2
+#          while [ $attempts -lt $max_attempts ]; do
+#            status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL }})
+#            printf "The response code is: %d\n" "$status_code"
+#          
+#            if [ "$status_code" -eq 200 ]; then
+#              attempts=$((attempts+1))
+#              sleep 3
+#            else
+#              printf "The application has issues starting up, check the logs!"
+#              exit 1
+#            fi
           done
 
 #      - name: Fail the job
@@ -238,61 +238,61 @@ jobs:
 #        run: |
 #          exit 1
 
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
-      - name: Prettify output
-        if: always()
-        id: pretty_output
-        shell: bash
-        run: |
-          pretty_app="UNKNOWN"
-
-          if [ "${{ matrix.apps }}" == "cms" ]; then
-            pretty_app="CMS"
-          elif [ "${{ matrix.apps }}" == "api" ]; then
-            pretty_app="API"
-          elif [ "${{ matrix.apps }}" == "data-storage" ]; then
-            pretty_app="Data-storage"
-          fi
-          
-          echo $pretty_app
-          echo "app_name=$pretty_app" >> $GITHUB_OUTPUT
-
-      - name: Set changes
-        if: always()
-        id: changes_output
-        shell: bash
-        run: |
-          changes="Manual deploy"
-
-          if [ "${{ github.event.pull_request }}" != "" ]; then
-            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.number }}>)"
-          else
-            commit_message="$(git log --pretty=%B -1 ${{ github.sha }} | cat - | head -n1)"
-            changes="Manual deploy: $commit_message - <${{ github.event.repository.html_url }}/commit/${{ github.sha }}|${{ github.sha }}>"
-          fi
-
-          echo $changes
-          echo "changes=$changes" >> $GITHUB_OUTPUT
-
-      - name: Notify
-        uses: ravsamhq/notify-slack-action@v2
-        if: always()
-        with:
-          status: ${{ job.status }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          notification_title: ""
-          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message}
-          \n\n ${{ vars.APP_URL }}\n
-          \n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}\n
-          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
-          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
-          notify_when: "success,failure"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+#      - name: Dump GitHub context
+#        env:
+#          GITHUB_CONTEXT: ${{ toJson(github) }}
+#        run: echo "$GITHUB_CONTEXT"
+#
+#      - name: Prettify output
+#        if: always()
+#        id: pretty_output
+#        shell: bash
+#        run: |
+#          pretty_app="UNKNOWN"
+#
+#          if [ "${{ matrix.apps }}" == "cms" ]; then
+#            pretty_app="CMS"
+#          elif [ "${{ matrix.apps }}" == "api" ]; then
+#            pretty_app="API"
+#          elif [ "${{ matrix.apps }}" == "data-storage" ]; then
+#            pretty_app="Data-storage"
+#          fi
+#
+#          echo $pretty_app
+#          echo "app_name=$pretty_app" >> $GITHUB_OUTPUT
+#
+#      - name: Set changes
+#        if: always()
+#        id: changes_output
+#        shell: bash
+#        run: |
+#          changes="Manual deploy"
+#
+#          if [ "${{ github.event.pull_request }}" != "" ]; then
+#            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.number }}>)"
+#          else
+#            commit_message="$(git log --pretty=%B -1 ${{ github.sha }} | cat - | head -n1)"
+#            changes="Manual deploy: $commit_message - <${{ github.event.repository.html_url }}/commit/${{ github.sha }}|${{ github.sha }}>"
+#          fi
+#
+#          echo $changes
+#          echo "changes=$changes" >> $GITHUB_OUTPUT
+#
+#      - name: Notify
+#        uses: ravsamhq/notify-slack-action@v2
+#        if: always()
+#        with:
+#          status: ${{ job.status }}
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          notification_title: ""
+#          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message}
+#          \n\n ${{ vars.APP_URL }}\n
+#          \n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}\n
+#          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
+#          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
+#          notify_when: "success,failure"
+#        env:
+#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
 #  release:
 #    name: Release

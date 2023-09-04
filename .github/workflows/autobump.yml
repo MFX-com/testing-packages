@@ -22,7 +22,7 @@ jobs:
           PACKAGES_IN_REPO: "domain|packages/domain;contracts|packages/contracts"
 
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: "${{ secrets.GITHUB_TOKEN }}"

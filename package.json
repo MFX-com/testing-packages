@@ -34,8 +34,5 @@
     "ethers": "^6.7.0",
     "lerna": "^7.1.5",
     "turbo": "^1.10.12"
-  },
-  "dependencies": {
-    "drizzle-orm": "^0.28.5"
   }
 }

@@ -32,3 +32,9 @@ jobs:
           RETRY_COUNT: "5"
           RETRY_SLEEP: "300"
           MERGE_CONFLICT_ACTION: "ignore"
+
+      - name: Merge conflicts found
+        if: ${{ steps.autoupdate.outputs.conflicted }}
+        shell: bash
+        run: |
+          echo "test"

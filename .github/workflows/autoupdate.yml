@@ -37,4 +37,10 @@ jobs:
         if: ${{ steps.autoupdate.outputs.conflicted }}
         shell: bash
         run: |
-          echo "test"
+          echo "test 1"
+
+      - name: No merge conflicts found
+        if: ${{ !steps.autoupdate.outputs.conflicted }}
+        shell: bash
+        run: |
+          echo "test 2"

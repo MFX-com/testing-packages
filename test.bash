@@ -11,7 +11,7 @@ function exists_in_list() {
     return 1
 }
 
-
+#
 # Get all PR reviews, filter out only the ones with "APPROVED",
 approvedUsers=($(curl -L \
   -H "Accept: application/vnd.github+json" \

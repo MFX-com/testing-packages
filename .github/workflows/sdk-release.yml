@@ -9,15 +9,15 @@ jobs:
   versions:
     name: Versions
     runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        node-version: [ 18.17 ]
-#        pnpm-version: [ 8.6.10 ]
-#        apps:
-#          - api
-#          - cms
-#    environment:
-#      name: ${{ matrix.apps }}-dev
+    strategy:
+      matrix:
+        node-version: [ 18.17 ]
+        pnpm-version: [ 8.6.10 ]
+        apps:
+          - api
+          - cms
+    environment:
+      name: ${{ matrix.apps }}-dev
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       NODE_VERSION: 18.17.1
@@ -275,56 +275,56 @@ jobs:
 #          GITHUB_CONTEXT: ${{ toJson(github) }}
 #        run: echo "$GITHUB_CONTEXT"
 #
-#      - name: Prettify output
-#        if: always()
-#        id: pretty_output
-#        shell: bash
-#        run: |
-#          pretty_app="UNKNOWN"
-#
-#          if [ "${{ matrix.apps }}" == "cms" ]; then
-#            pretty_app="CMS"
-#          elif [ "${{ matrix.apps }}" == "api" ]; then
-#            pretty_app="API"
-#          elif [ "${{ matrix.apps }}" == "data-storage" ]; then
-#            pretty_app="Data-storage"
-#          fi
-#
-#          echo $pretty_app
-#          echo "app_name=$pretty_app" >> $GITHUB_OUTPUT
-#
-#      - name: Set changes
-#        if: always()
-#        id: changes_output
-#        shell: bash
-#        run: |
-#          changes="Manual deploy"
-#
-#          if [ "${{ github.event.pull_request }}" != "" ]; then
-#            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.number }}>)"
-#          else
-#            commit_message="$(git log --pretty=%B -1 ${{ github.sha }} | cat - | head -n1)"
-#            changes="Manual deploy: $commit_message - <${{ github.event.repository.html_url }}/commit/${{ github.sha }}|${{ github.sha }}>"
-#          fi
-#
-#          echo $changes
-#          echo "changes=$changes" >> $GITHUB_OUTPUT
-#
-#      - name: Notify
-#        uses: ravsamhq/notify-slack-action@v2
-#        if: always()
-#        with:
-#          status: ${{ job.status }}
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          notification_title: ""
-#          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message}
-#          \n\n ${{ vars.APP_URL }}\n
-#          \n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}\n
-#          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
-#          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
-#          notify_when: "success,failure"
-#        env:
-#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Prettify output
+        if: always()
+        id: pretty_output
+        shell: bash
+        run: |
+          pretty_app="UNKNOWN"
+
+          if [ "${{ matrix.apps }}" == "cms" ]; then
+            pretty_app="CMS"
+          elif [ "${{ matrix.apps }}" == "api" ]; then
+            pretty_app="API"
+          elif [ "${{ matrix.apps }}" == "data-storage" ]; then
+            pretty_app="Data-storage"
+          fi
+
+          echo $pretty_app
+          echo "app_name=$pretty_app" >> $GITHUB_OUTPUT
+
+      - name: Set changes
+        if: always()
+        id: changes_output
+        shell: bash
+        run: |
+          changes="Manual deploy"
+
+          if [ "${{ github.event.pull_request }}" != "" ]; then
+            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.number }}>)"
+          else
+            commit_message="$(git log --pretty=%B -1 ${{ github.sha }} | cat - | head -n1)"
+            changes="Manual deploy: $commit_message - <${{ github.event.repository.html_url }}/commit/${{ github.sha }}|${{ github.sha }}>"
+          fi
+
+          echo $changes
+          echo "changes=$changes" >> $GITHUB_OUTPUT
+
+      - name: Notify
+        uses: ravsamhq/notify-slack-action@v2
+        if: always()
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: ""
+          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message}
+          \n\n ${{ vars.APP_URL }}\n
+          \n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}\n
+          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
+          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
+          notify_when: "success,failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
 #  release:
 #    name: Release

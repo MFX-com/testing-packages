@@ -314,6 +314,12 @@ jobs:
           echo $changes
           echo "changes=$changes" >> $GITHUB_OUTPUT
 
+      - name: Check output
+        shell: bash
+        run: |
+          echo ${{ steps.service_status.outcome }}
+          echo ${{ steps.service_status }}
+
       - name: Notify
         uses: ravsamhq/notify-slack-action@v2
         if: always()

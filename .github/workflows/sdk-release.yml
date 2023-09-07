@@ -270,7 +270,7 @@ jobs:
         shell: bash
         id: service_status
         run: |
-          exit 0
+          exit 1
 
 #      - name: Dump GitHub context
 #        env:

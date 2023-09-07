@@ -321,7 +321,7 @@ jobs:
           status: ${{ job.status }}
           token: ${{ secrets.GITHUB_TOKEN }}
           notification_title: ""
-          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.hello.outcome != 'success' && '@here' || '' }}
+          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.hello.outcome != 'success' && '<!here>' || '' }}
           \n\n ${{ vars.APP_URL }}\n
           \n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}\n
           \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"

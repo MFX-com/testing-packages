@@ -238,11 +238,12 @@ jobs:
 #          SLACK_MESSAGE: 'Post Content :rocket: ${{ secrets.APP_ID }}'
 #          SLACK_USERNAME: nexera-bot
 #          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-#      - name: Export timer variable
-#        id: rollout
-#        shell: bash
-#        run: |
-#          echo "rollout_time=$(date +%s%3N)" >> $GITHUB_OUTPUT
+
+      - name: Export timer variable
+        id: rollout
+        shell: bash
+        run: |
+          echo "rollout_time=$(date +%s%3N)" >> $GITHUB_OUTPUT
 #
 #      - name: Check service status
 #        shell: bash
@@ -265,10 +266,10 @@ jobs:
 #            fi
 #          done
 
-#      - name: Fail the job
-#        shell: bash
-#        run: |
-#          exit 1
+      - name: Fail the job
+        shell: bash
+        run: |
+          exit 1
 
 #      - name: Dump GitHub context
 #        env:
@@ -287,7 +288,9 @@ jobs:
           elif [ "${{ matrix.apps }}" == "api" ]; then
             pretty_app="API"
           elif [ "${{ matrix.apps }}" == "data-storage" ]; then
-            pretty_app="Data-storage"
+            pretty_app="Data Storage"
+          elif [ "${{ matrix.apps }}" == "zk-verifier" ]; then
+            pretty_app="ZK Verifier"
           fi
 
           echo $pretty_app
@@ -317,7 +320,7 @@ jobs:
           status: ${{ job.status }}
           token: ${{ secrets.GITHUB_TOKEN }}
           notification_title: ""
-          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message}
+          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ {status_message} == 'failed' && '@here' || '' }}
           \n\n ${{ vars.APP_URL }}\n
           \n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}\n
           \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"

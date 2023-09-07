@@ -266,11 +266,11 @@ jobs:
 #            fi
 #          done
 
-      - name: Fail the job
-        shell: bash
-        id: hello
-        run: |
-          exit 1
+#      - name: Fail the job
+#        shell: bash
+#        id: service_status
+#        run: |
+#          exit 1
 
 #      - name: Dump GitHub context
 #        env:
@@ -321,7 +321,7 @@ jobs:
           status: ${{ job.status }}
           token: ${{ secrets.GITHUB_TOKEN }}
           notification_title: ""
-          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.hello.outcome != 'success' && '<!here>' || '' }}
+          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.service_status.outcome != 'success' && '<!here>' || '' }}
           \n\n ${{ vars.APP_URL }}\n
           \n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}\n
           \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"

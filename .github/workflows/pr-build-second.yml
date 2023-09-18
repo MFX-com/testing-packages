@@ -79,10 +79,10 @@ jobs:
       - name: Expose GitHub Runtime
         uses: crazy-max/ghaction-github-runtime@v2
 
-#      - name: Pull docker layers
-#        continue-on-error: true
-#        run: |
-#          docker pull ${{ env.SECOND_IMAGE }}:${{ github.event.pull_request.number }}-${{ steps.extract_branch.outputs.branch }}
+      - name: Pull docker layers
+        continue-on-error: true
+        run: |
+          docker pull ${{ env.SECOND_IMAGE }}:${{ github.event.pull_request.number }}-${{ steps.extract_branch.outputs.branch }}
 
       - name: Run docker build SECOND
         run: |

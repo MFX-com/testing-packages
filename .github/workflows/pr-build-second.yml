@@ -14,7 +14,7 @@ concurrency:
 env:
   SECOND_IMAGE: "ghcr.io/mfx-com/testing-packages/apps/second-app"
   NODE_VERSION: 18.17.0
-  PNPM_VERSION: 8.6.10
+  PNPM_VERSION: 8.7.5
 
 jobs:
   prepare-environment:
@@ -68,6 +68,10 @@ jobs:
 #          key: second-docker-cache-${{ github.event.pull_request.number }}
 #          restore-keys: |
 #            second-docker-cache-
+
+      - name: Pull docker layers
+        run: |
+          docker pull ${{ env.FIRST_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
 
       - name: Run docker build SECOND
         run: |

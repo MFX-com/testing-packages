@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         node-version: [ 18.17 ]
-        pnpm-version: [ 8.6.10 ]
+        pnpm-version: [ 8.7.5 ]
         apps:
           - api
           - cms
@@ -21,7 +21,7 @@ jobs:
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       NODE_VERSION: 18.17.1
-      PNPM_VERSION: 8.6.12
+      PNPM_VERSION: 8.7.5
     steps:
       - name: Generate token
         id: generate_token
@@ -344,7 +344,7 @@ jobs:
 #    strategy:
 #      matrix:
 #        node-version: [ 18.17 ]
-#        pnpm-version: [ 8.6.10 ]
+#        pnpm-version: [ 8.7.5 ]
 #    steps:
 #      - uses: actions/checkout@v3
 #        with:

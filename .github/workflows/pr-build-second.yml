@@ -70,6 +70,7 @@ jobs:
 #            second-docker-cache-
 
       - name: Pull docker layers
+        continue-on-error: true
         run: |
           docker pull ${{ env.FIRST_IMAGE }}:${{ github.sha }}-${{ steps.extract_branch.outputs.branch }}
 

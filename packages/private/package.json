@@ -15,6 +15,9 @@
     "semver": "^7.5.4",
     "standard-version": "^9.5.0"
   },
+  "devDependencies": {
+    "@MFX-org/second": "workspace:*"
+  },
   "author": "",
   "license": "MIT"
 }

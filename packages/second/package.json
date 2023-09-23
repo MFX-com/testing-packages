@@ -1,6 +1,6 @@
 {
   "name": "@MFX-org/second",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Testing patch 2",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

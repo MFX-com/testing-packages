@@ -76,12 +76,27 @@ jobs:
           cache: 'pnpm'
           node-version: ${{ matrix.node-version }}
 
-      - name: Replace data sources
+#      - name: Replace data sources
+#        shell: bash
+#        run: |
+#          loki_ds="${{ secrets.GRAFANA_LOKI_DEV }}"
+#
+#          find deploy/grafana/**/*.json -type f -exec sed -i -e "s/\${DS_LOKI}/$loki_ds/g" {} +
+
+      - name: Set Loki data source
+        id: datasource
         shell: bash
         run: |
           loki_ds="${{ secrets.GRAFANA_LOKI_DEV }}"
+          echo $loki_ds
+          echo "loki_ds=$loki_ds" >> $GITHUB_OUTPUT
 
-          find deploy/grafana/**/*.json -type f -exec sed -i -e "s/\${DS_LOKI}/$loki_ds/g" {} +
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: ${DS_LOKI}
+          replace: ${{ steps.datasource.outputs.loki_ds }}
+          regex: false
 
       - name: Check normal json
         shell: bash

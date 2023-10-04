@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zk-verifier
+spec:
+  replicas: 1
+  template:
+    spec:
+      serviceAccountName: zk-verifier
+      containers:
+        - image: ghcr.io/nexeraprotocol/nexeraid/apps/zk-verifier:placeholder
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /api/healthcheck
+              port: 3013
+              scheme: HTTP
+            initialDelaySeconds: 3
+            periodSeconds: 3
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: zk-verifier
+          envFrom:
+            - secretRef:
+                name: zk-verifier
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1Gi
+            requests:
+              cpu: 300m
+              memory: 384Mi

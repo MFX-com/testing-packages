@@ -1,0 +1,6 @@
+- op: replace
+  path: /spec/rules/0/host
+  value: data-analytics.prod.nexera.id
+- op: replace
+  path: /spec/tls/0/hosts/0
+  value: data-analytics.prod.nexera.id

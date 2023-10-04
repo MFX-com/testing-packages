@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-analytics
+spec:
+  template:
+    spec:
+      containers:
+        - name: data-analytics
+          envFrom:
+            - configMapRef:
+                name: data-analytics
+            - secretRef:
+                name: data-analytics

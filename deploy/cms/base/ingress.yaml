@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns: public
+  name: cms
+  namespace: cms
+spec:
+  ingressClassName: nginx-public
+  rules:
+  - host: example.dev
+    http:
+      paths:
+      - backend:
+          service:
+            name: cms
+            port:
+              number: 3004
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - example.dev
+    secretName: cms-tls

@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cms
+spec:
+  template:
+    spec:
+      containers:
+      - name: cms
+        envFrom:
+          - configMapRef:
+              name: cms
+          - secretRef:
+              name: cms

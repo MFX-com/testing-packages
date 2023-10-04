@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zk-verifier
+spec:
+  template:
+    spec:
+      containers:
+      - name: zk-verifier
+        envFrom:
+          - configMapRef:
+              name: zk-verifier
+          - secretRef:
+              name: zk-verifier

@@ -1,0 +1,29 @@
+resources:
+  - ./../base
+namespace: playwright-ui
+
+patchesStrategicMerge:
+  - deploy.yaml
+
+commonLabels:
+  app: playwright-ui
+
+configMapGenerator:
+  - name: playwright-ui
+    literals:
+      - APP_ENV=staging
+
+secretGenerator:
+  - name: playwright-ui
+    envs:
+      - .env
+
+patches:
+  - target:
+      kind: Ingress
+      name: playwright-ui
+    path: ./ingress-json-patch.yaml
+  - target:
+      kind: Certificate
+      name: playwright-ui
+    path: ./cert-json-patch.yaml

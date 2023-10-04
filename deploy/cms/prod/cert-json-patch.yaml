@@ -1,0 +1,6 @@
+- op: replace
+  path: /spec/dnsNames/0
+  value: cms-prod.nexera.id
+- op: add
+  path: /spec/dnsNames/1
+  value: cms.nexera.id

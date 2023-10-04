@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns: private
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+  name: playwright-ui
+  namespace: playwright-ui
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: example.dev
+      http:
+        paths:
+          - backend:
+              service:
+                name: playwright-ui
+                port:
+                  number: 8080
+            path: /
+            pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - example.dev
+      secretName: playwright-ui-tls

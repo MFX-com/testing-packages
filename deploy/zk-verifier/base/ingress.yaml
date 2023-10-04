@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns: private
+  name: zk-verifier
+  namespace: zk-verifier
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: example.dev
+      http:
+        paths:
+          - backend:
+              service:
+                name: zk-verifier
+                port:
+                  number: 3013
+            path: /
+            pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - example.dev
+      secretName: zk-verifier-tls

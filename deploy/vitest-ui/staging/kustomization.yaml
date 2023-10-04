@@ -1,0 +1,29 @@
+resources:
+  - ./../base
+namespace: vitest-ui
+
+patchesStrategicMerge:
+  - deploy.yaml
+
+commonLabels:
+  app: vitest-ui
+
+configMapGenerator:
+  - name: vitest-ui
+    literals:
+      - APP_ENV=staging
+
+secretGenerator:
+  - name: vitest-ui
+    envs:
+      - .env
+
+patches:
+  - target:
+      kind: Ingress
+      name: vitest-ui
+    path: ./ingress-json-patch.yaml
+  - target:
+      kind: Certificate
+      name: vitest-ui
+    path: ./cert-json-patch.yaml

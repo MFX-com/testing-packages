@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: vitest-ui
+spec:
+  dnsNames:
+    - example.dev
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  secretName: vitest-ui-tls

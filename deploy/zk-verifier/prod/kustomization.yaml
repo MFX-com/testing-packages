@@ -1,0 +1,29 @@
+resources:
+- ./../base
+namespace: zk-verifier
+
+patchesStrategicMerge:
+- deploy.yaml
+
+commonLabels:
+  app: zk-verifier
+
+configMapGenerator:
+  - name: zk-verifier
+    literals:
+      - APP_ENV=prod
+
+secretGenerator:
+  - name: zk-verifier
+    envs:
+      - .env
+
+patches:
+- target:
+    kind: Ingress
+    name: zk-verifier
+  path: ./ingress-json-patch.yaml
+- target:
+    kind: Certificate
+    name: zk-verifier
+  path: ./cert-json-patch.yaml

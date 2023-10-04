@@ -76,7 +76,24 @@ jobs:
           cache: 'pnpm'
           node-version: ${{ matrix.node-version }}
 
-#  docker-build:
+      - name: Replace data sources
+        shell: bash
+        run: |
+          loki_ds="${{ secrets.GRAFANA_LOKI_DEV }}"
+
+          find deploy/grafana/**/*.json -type f -exec sed -i -e "s/\${DS_LOKI}/$loki_ds/g" {} +
+
+      - name: Check normal json
+        shell: bash
+        run: |
+          cat deploy/grafana/dashboards/api.json
+
+      - name: Check DEV json
+        shell: bash
+        run: |
+          cat deploy/grafana/env-dev/dashboards/vitest-ui.json
+
+      #  docker-build:
 #    name: Docker build
 #    runs-on: ubuntu-latest
 #    needs:

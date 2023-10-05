@@ -88,11 +88,9 @@ jobs:
         shell: bash
         run: |
           loki_ds="${{ secrets.GRAFANA_LOKI_DEV }}"
-          version=$(date +"%d.%m.%Y-%H-%M-%S)
-
+          version=$(date +%d.%m.%Y-%H-%M-%S)
           echo $version
           echo $loki_ds
-
           echo "loki_ds=$loki_ds" >> $GITHUB_OUTPUT
 
       - name: Find and Replace

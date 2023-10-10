@@ -1,0 +1,38 @@
+{
+  "@context": [
+    {
+      "@version": 1.1,
+      "@protected": true,
+      "id": "@id",
+      "type": "@type",
+      "IDScanSelfie": {
+        "@id": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/development/examples/idScanSelfie/idScanSelfie.jsonld#IDScanSelfie",
+        "@context": {
+          "@version": 1.1,
+          "@protected": true,
+          "id": "@id",
+          "type": "@type",
+          "vocab": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/development/examples/idScanSelfie/idScanSelfie.md#",
+          "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+          "journeyId": {
+            "@id": "vocab:journeyId",
+            "@type": "xsd:string"
+          },
+          "base64": {
+            "@id": "vocab:base64",
+            "@type": "xsd:string"
+          },
+          "name": {
+            "@id": "vocab:name",
+            "@type": "xsd:string"
+          },
+          "documentType": {
+            "@id": "vocab:type",
+            "@type": "xsd:string"
+          }
+        }
+      }
+    }
+  ]
+}

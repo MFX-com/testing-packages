@@ -81,6 +81,7 @@ jobs:
           find ipfs/ -mindepth 1 -type d -exec rm -rf {} \;
           cp -r polygon-id/* ipfs/
           ls -al ipfs/
+          ls -R ipfs/
 
       - name: Upload jsonID to IPFS and replace uris with hash in json schemas
         shell: bash

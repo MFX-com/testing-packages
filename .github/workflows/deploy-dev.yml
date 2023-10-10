@@ -1,0 +1,109 @@
+name: Deploy Dev
+
+#on:
+#  workflow_call:
+#    inputs:
+#      commit-sha:
+#        required: true
+#        type: string
+#        description: Commit SHA
+#      branch:
+#        required: true
+#        type: string
+#        description: Branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Apply schemas
+    runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      ENV: dev
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+#          ref: ${{ inputs.commit-sha }}
+
+      - name: Check for schema changes
+        id: checking
+        shell: bash
+        run: |
+          echo "Test"
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          wget -O /usr/local/bin/semver https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver
+          chmod +x /usr/local/bin/semver
+          semver --version
+
+      - name: Get current version
+        id: versions
+        shell: bash
+        run: |
+          current=$(cat polygon-id/id3/id3.json | jq -r '.["$metadata"].version')
+          target=$(semver bump patch $current)
+          echo "current=$current" >> $GITHUB_OUTPUT
+          echo "target=$target" >> $GITHUB_OUTPUT
+
+      - name: Update version
+        shell: bash
+        run: |
+          find examples/**/*.json -type f -exec sed -i -e 's/\/${{ steps.versions.outputs.current }}\//\/${{ steps.versions.outputs.target }}\//g' {} +
+          
+          find polygon-id/**/*.json -type f -exec sed -i -e 's/\/${{ steps.versions.outputs.current }}\//\/${{ steps.versions.outputs.target }}\//g' {} +
+
+      - name: Commit version
+        shell: bash
+        run: |
+          echo "Test"
+
+      - name: Upload jsonID to IPFS and replace uris with hash in json schemas
+        shell: bash
+        run: |
+          echo "Test"
+
+      - name: Upload json schemas to IPFS
+        shell: bash
+        run: |
+          echo "Test"
+
+      - name: Send schemas to issuer
+        shell: bash
+        run: |
+          echo "Test"
+
+
+#  version-bump:
+#    needs: release
+#    name: Bump version only
+#    runs-on: ubuntu-latest
+#    env:
+#      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+#      ENV: dev
+#    steps:
+#      - uses: actions/checkout@v4
+#        with:
+#          token: ${{ secrets.NPM_TOKEN }}
+##          ref: ${{ inputs.branch }}
+#
+#      - name: Get current version
+#        id: current_version
+#        shell: bash
+#        run: |
+#          echo "Test"
+#          version="2.5.6"
+#          echo "version=$version" >> $GITHUB_OUTPUT
+#
+#      - name: Update version
+#        shell: bash
+#        run: |
+#          find examples/**/*.json -type f -exec sed -i -e 's/\/development\//\/staging\//g' {} +
+#
+#          find polygon-id/**/*.json -type f -exec sed -i -e 's/\/development\//\/staging\//g' {} +

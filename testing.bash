@@ -52,11 +52,16 @@
 #echo "$changes"
 #
 
+current="2.4.5"
+target=$(semver bump patch $current)
 
-curl -L \
-          -H "Accept: application/vnd.github+json" \
-          -H "Authorization: token xxx"\
-          -H "X-GitHub-Api-Version: 2022-11-28" \
-          -X PUT \
-          https://api.github.com/repos/MFX-com/testing-packages/branches/main/protection \
-          -d '{"enforce_admins":false, "required_pull_request_reviews":null, "required_status_checks":null, "restrictions":null}'
+echo "$target"
+
+#
+#curl -L \
+#          -H "Accept: application/vnd.github+json" \
+#          -H "Authorization: token xxx"\
+#          -H "X-GitHub-Api-Version: 2022-11-28" \
+#          -X PUT \
+#          https://api.github.com/repos/MFX-com/testing-packages/branches/main/protection \
+#          -d '{"enforce_admins":false, "required_pull_request_reviews":null, "required_status_checks":null, "restrictions":null}'

@@ -1,0 +1,94 @@
+name: Deploy Dev
+
+on:
+  workflow_call:
+    inputs:
+      commit-sha:
+        required: true
+        type: string
+        description: Commit SHA
+      pull-request-number:
+        required: true
+        type: string
+        description: Pull request number
+      branch:
+        required: true
+        type: string
+        description: Branch
+
+jobs:
+  release:
+    name: Apply schemas
+    runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      ENV: dev
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          ref: ${{ inputs.commit-sha }}
+
+      - name: Check for schema changes
+        id: checking
+        shell: bash
+        run: |
+          echo "Test"
+
+      - name: Upload jsonID to IPFS and replace uris with hash in json schemas
+        shell: bash
+        run: |
+          echo "Test"
+
+      - name: Get current version
+        id: current_version
+        shell: bash
+        run: |
+          echo "Test"
+          version="2.5.6"
+          echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: Update version
+        shell: bash
+        run: |
+          find examples/**/*.json -type f -exec sed -i -e 's/\/development\//\/staging\//g' {} +
+          
+          find polygon-id/**/*.json -type f -exec sed -i -e 's/\/development\//\/staging\//g' {} +
+
+      - name: Upload json schemas to IPFS
+        shell: bash
+        run: |
+          echo "Test"
+
+      - name: Send schemas to issuer
+        shell: bash
+        run: |
+          echo "Test"
+
+  version-bump:
+    needs: release
+    name: Bump version only
+    runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      ENV: dev
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          ref: ${{ inputs.branch }}
+
+      - name: Get current version
+        id: current_version
+        shell: bash
+        run: |
+          echo "Test"
+          version="2.5.6"
+          echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: Update version
+        shell: bash
+        run: |
+          find examples/**/*.json -type f -exec sed -i -e 's/\/development\//\/staging\//g' {} +
+
+          find polygon-id/**/*.json -type f -exec sed -i -e 's/\/development\//\/staging\//g' {} +

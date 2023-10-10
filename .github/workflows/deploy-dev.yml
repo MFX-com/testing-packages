@@ -87,7 +87,7 @@ jobs:
         shell: bash
         run: |
           # Find all jsonLD files in the ipfs/ folder
-          for file in $(find ipfs/ -type f -name "*.jsonId"); do
+          for file in $(find ipfs/ -type f -name "*.jsonld"); do
             echo "JsonLD file: $file"
 
             # Upload json

@@ -54,15 +54,26 @@ jobs:
         run: |
           current=$(cat polygon-id/id3/id3.json | jq -r '.["$metadata"].version')
           target=$(semver bump patch $current)
+          
+          echo "$current"
+          echo "$target"
+          
           echo "current=$current" >> $GITHUB_OUTPUT
           echo "target=$target" >> $GITHUB_OUTPUT
 
-      - name: Update version
-        shell: bash
-        run: |
-          find examples/**/*.json -type f -exec sed -i -e 's/\/${{ steps.versions.outputs.current }}\//\/${{ steps.versions.outputs.target }}\//g' {} +
-          
-          find polygon-id/**/*.json -type f -exec sed -i -e 's/\/${{ steps.versions.outputs.current }}\//\/${{ steps.versions.outputs.target }}\//g' {} +
+      - name: Find and replace
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: ${{ steps.versions.outputs.current }}
+          replace: ${{ steps.versions.outputs.target }}
+          regex: false
+
+#      - name: Update version
+#        shell: bash
+#        run: |
+#          find examples/**/*.json -type f -exec sed -i -e 's/\/${{ steps.versions.outputs.current }}\//\/${{ steps.versions.outputs.target }}\//g' {} +
+#
+#          find polygon-id/**/*.json -type f -exec sed -i -e 's/\/${{ steps.versions.outputs.current }}\//\/${{ steps.versions.outputs.target }}\//g' {} +
 
       - name: Copy schemas to IPFS directory
         shell: bash

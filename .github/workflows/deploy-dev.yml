@@ -64,10 +64,10 @@ jobs:
           
           find polygon-id/**/*.json -type f -exec sed -i -e 's/\/${{ steps.versions.outputs.current }}\//\/${{ steps.versions.outputs.target }}\//g' {} +
 
-      - name: Copy over to IPFS directory
+      - name: Copy schemas to IPFS directory
         shell: bash
         run: |
-          rm -rf ipfs/*
+          find ipfs/ -mindepth 1 -type d -exec rm -rf {} \;
           cp -r polygon-id/* ipfs/
           ls -al ipfs/
 
@@ -100,6 +100,7 @@ jobs:
         run: |
           for file in $(find ipfs/ -type f -name "*.json"); do
             echo "JSON file: $file"
+            cat "$file"
           done
 
       - name: Commit changes

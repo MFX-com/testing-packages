@@ -36,7 +36,7 @@ jobs:
         run: |
           echo "Test"
 
-      - name: Initialize mandatory git config
+      - name: Initialize git config
         run: |
           git config --global user.name "nexera-release[bot]"
           git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
@@ -64,17 +64,23 @@ jobs:
           
           find polygon-id/**/*.json -type f -exec sed -i -e 's/\/${{ steps.versions.outputs.current }}\//\/${{ steps.versions.outputs.target }}\//g' {} +
 
-      - name: Commit version
+      - name: Copy over to IPFS directory
         shell: bash
         run: |
-          echo "Test"
+          cp -r polygon-id/* ipfs/
+          ls -al ipfs/
 
       - name: Upload jsonID to IPFS and replace uris with hash in json schemas
         shell: bash
         run: |
-          echo "Test"
+          jq '.["$metadata"].uris.jsonLdContext = "new_value"' polygon-id/id3/id3.json > temp.json && mv temp.json polygon-id/id3/id3.json
 
       - name: Upload json schemas to IPFS
+        shell: bash
+        run: |
+          echo "Test"
+
+      - name: Commit changes
         shell: bash
         run: |
           echo "Test"

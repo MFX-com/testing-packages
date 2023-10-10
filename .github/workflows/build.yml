@@ -3,9 +3,9 @@ name: Build docker images
 on:
   push:
     branches:
-      - development
-      - staging
-      - main
+      - developmentuz
+      - staginz
+      - mainz
 
 env:
   FIRST_IMAGE: "ghcr.io/mfx-com/testing-packages/apps/first-app"

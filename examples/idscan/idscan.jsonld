@@ -1,0 +1,113 @@
+{
+  "@context": [
+    {
+      "@version": 1.1,
+      "@protected": true,
+      "id": "@id",
+      "type": "@type",
+      "IDScan": {
+        "@id": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/development/examples/idscan/idscan.jsonld#IDScan",
+        "@context": {
+          "@version": 1.1,
+          "@protected": true,
+          "id": "@id",
+          "type": "@type",
+          "vocab": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/development/examples/idscan/idscan-vocab.md#",
+          "xsd": "http://www.w3.org/2001/XMLSchema#",
+          "journeyId": {
+            "@id": "vocab:journeyId",
+            "@type": "xsd:string"
+          },
+          "highLevelResult": {
+            "@id": "vocab:highLevelResult",
+            "@type": "xsd:string"
+          },
+          "firstName": {
+            "@id": "vocab:firstName",
+            "@type": "xsd:string"
+          },
+          "middleName": {
+            "@id": "vocab:middleName",
+            "@type": "xsd:string"
+          },
+          "lastName": {
+            "@id": "vocab:lastName",
+            "@type": "xsd:string"
+          },
+          "gender": {
+            "@id": "vocab:gender",
+            "@type": "xsd:string"
+          },
+          "age": {
+            "@id": "vocab:age",
+            "@type": "xsd:integer"
+          },
+          "citizenship": {
+            "@id": "vocab:citizenship",
+            "@type": "xsd:string"
+          },
+          "documentCategory": {
+            "@id": "vocab:documentCategory",
+            "@type": "xsd:string"
+          },
+          "documentName": {
+            "@id": "vocab:documentName",
+            "@type": "xsd:string"
+          },
+          "documentSide": {
+            "@id": "vocab:documentSide",
+            "@type": "xsd:string"
+          },
+          "documentType": {
+            "@id": "vocab:documentType",
+            "@type": "xsd:string"
+          },
+          "entryDate": {
+            "@id": "vocab:entryDate",
+            "@type": "xsd:date"
+          },
+          "entryTime": {
+            "@id": "vocab:entryTime",
+            "@type": "xsd:time"
+          },
+          "fullName": {
+            "@id": "vocab:fullName",
+            "@type": "xsd:string"
+          },
+          "addressLine1": {
+            "@id": "vocab:addressLine1",
+            "@type": "xsd:string"
+          },
+          "addressLine2": {
+            "@id": "vocab:addressLine2",
+            "@type": "xsd:string"
+          },
+          "birthDate": {
+            "@id": "vocab:birthDate",
+            "@type": "xsd:date"
+          },
+          "birthPlace": {
+            "@id": "vocab:birthPlace",
+            "@type": "xsd:string"
+          },
+          "highLevelResultDetails": {
+            "@id": "vocab:highLevelResultDetails",
+            "@type": "@json"
+          },
+          "faceMatchScore": {
+            "@id": "vocab:faceMatchScore",
+            "@type": "xsd:float"
+          },
+          "qualityCheckDetails": {
+            "@id": "vocab:qualityCheckDetails",
+            "@type": "@json"
+          },
+          "validationDetails": {
+            "@id": "vocab:validationDetails",
+            "@type": "@json"
+          }
+        }
+      }
+    }
+  ]
+}

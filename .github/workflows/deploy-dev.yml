@@ -36,6 +36,11 @@ jobs:
         run: |
           echo "Test"
 
+      - name: Initialize mandatory git config
+        run: |
+          git config --global user.name "nexera-release[bot]"
+          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
+
       - name: Install dependencies
         shell: bash
         run: |

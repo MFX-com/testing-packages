@@ -67,6 +67,7 @@ jobs:
           find: ${{ steps.versions.outputs.current }}
           replace: ${{ steps.versions.outputs.target }}
           regex: false
+          include: "ipfs/**"
 
 #      - name: Update version
 #        shell: bash

@@ -67,25 +67,42 @@ jobs:
       - name: Copy over to IPFS directory
         shell: bash
         run: |
+          rm -rf ipfs/*
           cp -r polygon-id/* ipfs/
           ls -al ipfs/
 
       - name: Upload jsonID to IPFS and replace uris with hash in json schemas
         shell: bash
         run: |
-          jq '.["$metadata"].uris.jsonLdContext = "new_value"' polygon-id/id3/id3.json > temp.json && mv temp.json polygon-id/id3/id3.json
+          # Find all jsonLD files in the ipfs/ folder
+          for file in $(find ipfs/ -type f -name "*.jsonId"); do
+            echo "JsonLD file: $file"
 
-      - name: Upload json schemas to IPFS
+            # Upload json
+            response=$(curl "https://ipfs.infura.io:5001/api/v0/add" -X POST -F file=@"$file" -u "${{ secrets.INFURA_IPFS_API_KEY }}:${{ sec  ipfs_hash=$(echo "$response" | jq -r '.Hash')
+            echo "$response"
+          
+            # Parse HASH from uploaded file
+            ipfs_hash=$(echo "$response" | jq -r '.Hash')
+            echo "$ipfs_hash"
+
+            # Set the json file path
+            replacement=".json"
+            json_file_path="${file/.jsonld/$replacement}"
+            echo "JSON file: $json_file_path"
+
+            # Perform update
+            jq '.["$metadata"].uris.jsonLdContext = "ipfs://'"$ipfs_hash"'"' "$json_file_path" > temp.json && mv temp.json "$json_file_path"
+          done
+
+      - name: Upload schemas to issuer
         shell: bash
         run: |
-          echo "Test"
+          for file in $(find ipfs/ -type f -name "*.json"); do
+            echo "JSON file: $file"
+          done
 
       - name: Commit changes
-        shell: bash
-        run: |
-          echo "Test"
-
-      - name: Send schemas to issuer
         shell: bash
         run: |
           echo "Test"

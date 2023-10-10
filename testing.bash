@@ -51,11 +51,45 @@
 #
 #echo "$changes"
 #
+#
+#current="2.4.5"
+#target=$(semver bump patch $current)
+#
+#echo "$target"
 
-current="2.4.5"
-target=$(semver bump patch $current)
+#original_string="This is the original string"
+#replacement="replacement_string"
+#new_string="${original_string/original/$replacement}"
+#echo "$new_string"
+#
+#
+#for file in $(find polygon-id/ -type f -name "*.jsonld"); do
+#    echo "Found JSON file: $file"
+#    # You can perform actions on each file here
+#    replacement=".json"
+#    new_string="${file/.jsonld/$replacement}"
+#    echo "$new_string"
+#done
 
-echo "$target"
+#ipfs_hash="123"
+#json_file_path="polygon-id/id3/id3.json"
+#jq '.["$metadata"].uris.jsonLdContext = "'$ipfs_hash'"' $json_file_path > temp.json
+
+
+for file in $(find polygon-id -type f -name "*.jsonld"); do
+  echo "Found jsonLD file: $file"
+  # Upload json
+  response=$(curl "https://ipfs.infura.io:5001/api/v0/add" -X POST -F file=@"$file" -u "xxx:xxx")
+  echo "$response"
+  ipfs_hash=$(echo "$response" | jq -r '.Hash')
+  echo "$ipfs_hash"
+  # Set the json file path
+  replacement=".json"
+  json_file_path="${file/.jsonld/$replacement}"
+  echo "JSON file: $json_file_path"
+  # Perform update
+  jq '.["$metadata"].uris.jsonLdContext = "ipfs://'"$ipfs_hash"'"' "$json_file_path" > temp.json && mv temp.json "$json_file_path"
+done
 
 #
 #curl -L \

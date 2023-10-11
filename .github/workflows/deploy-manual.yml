@@ -5,7 +5,7 @@ on:
     inputs:
       issuer:
         required: true
-        type: string
+        type: choice
         options:
           - dev
           - staging

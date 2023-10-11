@@ -118,9 +118,9 @@ jobs:
         shell: bash
         run: |
           issuer="https://mumbai-issuer-node-dev.nexera.id/v1/schemas"
-          if [ ${{ inputs.branch }} == 'staging' ]; then
+          if [ ${{ inputs.issuer }} == 'staging' ]; then
             issuer="https://mumbai-issuer-node-staging.nexera.id/v1/schemas"
-          elif [ ${{ inputs.branch }} == 'main' ]; then
+          elif [ ${{ inputs.issuer }} == 'main' ]; then
             issuer="https://mumbai-issuer-node-prod.nexera.id/v1/schemas"
           fi
           

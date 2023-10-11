@@ -95,11 +95,12 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          find ipfs/ -mindepth 1 -type d -exec rm -rf {} \;
+          rm -rf ipfs/
+          mkdir ipfs
+          touch ipfs/.gitkeep
           cp -r polygon-id/* ipfs/
           ls -al ipfs/
           ls -R ipfs/
-          git add .
 
       - name: Upload jsonID to IPFS and replace uris with hash in json schemas
         shell: bash

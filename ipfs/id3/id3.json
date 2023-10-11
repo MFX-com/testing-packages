@@ -4,7 +4,7 @@
       "jsonLdContext": "ipfs://QmX6wTAP6Lk7bGzinFvcsHoUH5AeQkWcT16htoSxDSRDgr"
     },
     "type": "ID3",
-    "version": "2.0.9"
+    "version": "2.0.10"
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
   "description": "ID3 Schema",

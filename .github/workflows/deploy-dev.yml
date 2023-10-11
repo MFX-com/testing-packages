@@ -1,21 +1,25 @@
 name: Deploy Dev
 
-#on:
-#  workflow_call:
-#    inputs:
-#      commit-sha:
-#        required: true
-#        type: string
-#        description: Commit SHA
-#      branch:
-#        required: true
-#        type: string
-#        description: Branch
-
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
+    inputs:
+      commit-sha:
+        required: true
+        type: string
+        description: Commit SHA
+      pull-request-number:
+        required: true
+        type: string
+        description: Pull request number
+      branch:
+        required: true
+        type: string
+        description: Branch
+
+#on:
+#  push:
+#    branches:
+#      - main
 
 jobs:
   release:

@@ -17,6 +17,14 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.NPM_TOKEN }}
 
+      - name: Check for changes in polygon-id directory
+        uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            polygon-id:
+              - 'polygon-id/**'
+
 #      - name: Dump job context
 #        env:
 #          JOB_CONTEXT: ${{ toJson(job) }}
@@ -74,32 +82,36 @@ jobs:
 #          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
 
-#  deploy-dev:
-#    name: Deploy to Dev
-#    needs: setup-job
-#    secrets: inherit
-#    if: github.event.pull_request.merged && github.event.pull_request.base.ref == 'development'
-#    uses: ./.github/workflows/deploy-dev.yml
-#    with:
-#      commit-sha: ${{ github.sha }}
-#      branch: ${{ github.event.pull_request.base.ref }}
-#
-#  deploy-staging:
-#    name: Deploy to Staging
-#    needs: setup-job
-#    secrets: inherit
-#    if: github.event.pull_request.merged && github.event.pull_request.base.ref == 'staging'
-#    uses: ./.github/workflows/deploy-staging.yml
-#    with:
-#      commit-sha: ${{ github.sha }}
-#      branch: ${{ github.event.pull_request.base.ref }}
-#
-#  deploy-production:
-#    name: Deploy to Production
-#    needs: setup-job
-#    secrets: inherit
-#    if: github.event.pull_request.merged && github.event.pull_request.base.ref == 'main'
-#    uses: ./.github/workflows/deploy-prod.yml
-#    with:
-#      commit-sha: ${{ github.sha }}
-#      branch: ${{ github.event.pull_request.base.ref }}
+  deploy-dev:
+    name: Deploy to Dev
+    needs: setup-job
+    secrets: inherit
+    if: setup-job.steps.changes.outputs.polygon-id == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'development'
+    uses: ./.github/workflows/deploy-dev.yml
+    with:
+      commit-sha: ${{ github.sha }}
+      pull-request-number: ${{ github.event.pull_request.number }}
+      branch: ${{ github.event.pull_request.base.ref }}
+
+  deploy-staging:
+    name: Deploy to Staging
+    needs: setup-job
+    secrets: inherit
+    if: setup-job.steps.changes.outputs.polygon-id == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'staging'
+    uses: ./.github/workflows/deploy-staging.yml
+    with:
+      commit-sha: ${{ github.sha }}
+      pull-request-number: ${{ github.event.pull_request.number }}
+      branch: ${{ github.event.pull_request.base.ref }}
+
+  deploy-production:
+    name: Deploy to Production
+    needs: setup-job
+    secrets: inherit
+    if: setup-job.steps.changes.outputs.polygon-id == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'main'
+    uses: ./.github/workflows/deploy-prod.yml
+    with:
+      commit-sha: ${{ github.sha }}
+      pull-request-number: ${{ github.event.pull_request.number }}
+      branch: ${{ github.event.pull_request.base.ref }}
+

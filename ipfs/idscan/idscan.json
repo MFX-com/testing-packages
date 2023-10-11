@@ -4,7 +4,7 @@
       "jsonLdContext": "ipfs://QmSeGHmgKzZBNRu5vQFvPfTs62pXsdvT8cdBokC41aHmAA"
     },
     "type": "IDScan",
-    "version": "2.0.6"
+    "version": "2.0.7"
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "description": "IDscan schema",

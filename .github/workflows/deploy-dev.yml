@@ -44,26 +44,16 @@ jobs:
           git config --global user.name "nexera-release[bot]"
           git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
 
-      - name: Check for schema changes
+      - uses: dorny/paths-filter@v2
         id: changes
-        run: |
-          # Set the folder you want to check
-          folder_to_check="polygon-id"
-          
-          # Check for changes between the base and head branches
-          if git diff --name-only ${{ github.base_ref }}...${{ github.ref }} -- $folder_to_check | grep -qE '.'; then
-            echo "Changes detected in $folder_to_check."
-            echo "::set-output name=changes::true"
-          else
-            echo "No changes detected in $folder_to_check."
-            echo "::set-output name=changes::false"
-          fi
+        with:
+          filters: |
+            polygon-id:
+              - 'polygon-id/**'
 
-      - name: Do Something Based on Changes
-        if: steps.changes.outputs.changes == 'true'
+      - if: steps.changes.outputs.polygon-id == 'true'
         run: |
-          # Run your desired actions when changes are detected
-          echo "Changes were detected, so you can run further steps here."
+          echo "YEP"
 
 #      - name: Install dependencies
 #        shell: bash

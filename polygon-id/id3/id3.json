@@ -11,7 +11,7 @@
   "title": "ID3",
   "properties": {
     "credentialSubject": {
-      "description": "Stores the data of the credential",
+      "description": "Stores the data of the credential!",
       "title": "Credential subject",
       "type": "object",
       "required": [

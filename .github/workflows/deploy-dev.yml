@@ -70,12 +70,19 @@ jobs:
           echo "current=$current" >> $GITHUB_OUTPUT
           echo "target=$target" >> $GITHUB_OUTPUT
 
-      - name: Find and replace
+      - name: Find and replace Polygon ID
         uses: jacobtomlinson/gha-find-replace@v3
         with:
           find: ${{ steps.versions.outputs.current }}
           replace: ${{ steps.versions.outputs.target }}
-          regex: false
+          include: "polygon-id/**"
+
+      - name: Find and replace Examples
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: ${{ steps.versions.outputs.current }}
+          replace: ${{ steps.versions.outputs.target }}
+          include: "examples/**"
 
 #      - name: Update version
 #        shell: bash

@@ -1,7 +1,7 @@
 {
   "$metadata": {
     "uris": {
-      "jsonLdContext": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/development/polygon-id/idscan/idscan.jsonld"
+      "jsonLdContext": "ipfs://QmSeGHmgKzZBNRu5vQFvPfTs62pXsdvT8cdBokC41aHmAA"
     },
     "type": "IDScan",
     "version": "2.0.4"
@@ -14,7 +14,10 @@
       "description": "Stores the data of the credential",
       "title": "Credential subject",
       "type": "object",
-      "required": ["journeyId", "id"],
+      "required": [
+        "journeyId",
+        "id"
+      ],
       "properties": {
         "highLevelResult": {
           "description": "High level result of the kyc check",
@@ -478,7 +481,11 @@
       }
     },
     "@context": {
-      "type": ["string", "array", "object"]
+      "type": [
+        "string",
+        "array",
+        "object"
+      ]
     },
     "expirationDate": {
       "format": "date-time",
@@ -492,7 +499,10 @@
       "type": "string"
     },
     "issuer": {
-      "type": ["string", "object"],
+      "type": [
+        "string",
+        "object"
+      ],
       "format": "uri",
       "properties": {
         "id": {
@@ -500,10 +510,15 @@
           "type": "string"
         }
       },
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "type": {
-      "type": ["string", "array"],
+      "type": [
+        "string",
+        "array"
+      ],
       "items": {
         "type": "string"
       }
@@ -518,7 +533,10 @@
           "type": "string"
         }
       },
-      "required": ["id", "type"],
+      "required": [
+        "id",
+        "type"
+      ],
       "type": "object"
     }
   },

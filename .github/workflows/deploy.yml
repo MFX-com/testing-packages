@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    outputs:
+      output1: ${{ steps.changes.outputs.polygon-id }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,10 +26,6 @@ jobs:
           filters: |
             polygon-id:
               - 'polygon-id/**'
-
-      - if: steps.changes.outputs.polygon-id == 'true'
-        run: |
-          echo "some_value=true" >> $GITHUB_OUTPUT
 
 #      - name: Dump job context
 #        env:
@@ -90,7 +88,7 @@ jobs:
     name: Deploy to Dev
     needs: setup-job
     secrets: inherit
-    if: needs.setup-job.outputs.my_output == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'development'
+    if: needs.setup-job.outputs.output1 == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'development'
     uses: ./.github/workflows/deploy-dev.yml
     with:
       commit-sha: ${{ github.sha }}
@@ -101,7 +99,7 @@ jobs:
     name: Deploy to Staging
     needs: setup-job
     secrets: inherit
-    if: needs.setup-job.outputs.my_output == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'staging'
+    if: needs.setup-job.outputs.output1 == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'staging'
     uses: ./.github/workflows/deploy-staging.yml
     with:
       commit-sha: ${{ github.sha }}
@@ -112,7 +110,7 @@ jobs:
     name: Deploy to Production
     needs: setup-job
     secrets: inherit
-    if: needs.setup-job.outputs.my_output == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'main'
+    if: needs.setup-job.outputs.output1 == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'main'
     uses: ./.github/workflows/deploy-prod.yml
     with:
       commit-sha: ${{ github.sha }}

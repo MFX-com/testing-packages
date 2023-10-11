@@ -86,7 +86,7 @@ jobs:
     name: Deploy to Dev
     needs: setup-job
     secrets: inherit
-    if: setup-job.steps.changes.outputs.polygon-id == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'development'
+    if: needs.setup-job.steps.changes.outputs.polygon-id == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'development'
     uses: ./.github/workflows/deploy-dev.yml
     with:
       commit-sha: ${{ github.sha }}
@@ -97,7 +97,7 @@ jobs:
     name: Deploy to Staging
     needs: setup-job
     secrets: inherit
-    if: setup-job.steps.changes.outputs.polygon-id == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'staging'
+    if: needs.setup-job.steps.changes.outputs.polygon-id == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'staging'
     uses: ./.github/workflows/deploy-staging.yml
     with:
       commit-sha: ${{ github.sha }}
@@ -108,7 +108,7 @@ jobs:
     name: Deploy to Production
     needs: setup-job
     secrets: inherit
-    if: setup-job.steps.changes.outputs.polygon-id == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'main'
+    if: needs.setup-job.steps.changes.outputs.polygon-id == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'main'
     uses: ./.github/workflows/deploy-prod.yml
     with:
       commit-sha: ${{ github.sha }}

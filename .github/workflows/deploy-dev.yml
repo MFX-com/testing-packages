@@ -75,8 +75,7 @@ jobs:
         with:
           find: ${{ steps.versions.outputs.current }}
           replace: ${{ steps.versions.outputs.target }}
-          regex: true
-          include: "examples/**,polygon-id/**"
+          regex: false
 
 #      - name: Update version
 #        shell: bash

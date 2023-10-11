@@ -4,14 +4,14 @@
       "jsonLdContext": "ipfs://QmX6wTAP6Lk7bGzinFvcsHoUH5AeQkWcT16htoSxDSRDgr"
     },
     "type": "ID3",
-    "version": "2.0.7"
+    "version": "2.0.8"
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
   "description": "ID3 Schema",
   "title": "ID3",
   "properties": {
     "credentialSubject": {
-      "description": "Stores the data of the credential",
+      "description": "Stores the data of the credential!!!!",
       "title": "Credential subject",
       "type": "object",
       "required": [

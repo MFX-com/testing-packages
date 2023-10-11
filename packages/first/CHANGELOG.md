@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.1.160](https://github.com/MFX-com/testing-packages/compare/@MFX-org/first@7.1.159...@MFX-org/first@7.1.160) (2023-10-11)
+
+**Note:** Version bump only for package @MFX-org/first
+
+
+
+
+
 ## [7.1.159](https://github.com/MFX-com/testing-packages/compare/@MFX-org/first@7.1.158...@MFX-org/first@7.1.159) (2023-09-05)
 
 **Note:** Version bump only for package @MFX-org/first

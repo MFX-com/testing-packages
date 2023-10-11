@@ -1,7 +1,7 @@
 {
   "$metadata": {
     "uris": {
-      "jsonLdContext": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/development/polygon-id/id3/id3.jsonld"
+      "jsonLdContext": "ipfs://QmX6wTAP6Lk7bGzinFvcsHoUH5AeQkWcT16htoSxDSRDgr"
     },
     "type": "ID3",
     "version": "2.0.2"
@@ -1033,7 +1033,10 @@
                                   "type": "object",
                                   "properties": {
                                     "SanctionID": {
-                                      "type": ["integer", "string"]
+                                      "type": [
+                                        "integer",
+                                        "string"
+                                      ]
                                     },
                                     "Url": {
                                       "type": "string"
@@ -1646,7 +1649,10 @@
                             "type": "string"
                           },
                           "SanctionsMatches": {
-                            "type": ["object", "string"]
+                            "type": [
+                              "object",
+                              "string"
+                            ]
                           }
                         }
                       }
@@ -2414,7 +2420,11 @@
       }
     },
     "@context": {
-      "type": ["string", "array", "object"]
+      "type": [
+        "string",
+        "array",
+        "object"
+      ]
     },
     "expirationDate": {
       "format": "date-time",
@@ -2428,7 +2438,10 @@
       "type": "string"
     },
     "issuer": {
-      "type": ["string", "object"],
+      "type": [
+        "string",
+        "object"
+      ],
       "format": "uri",
       "properties": {
         "id": {
@@ -2436,10 +2449,15 @@
           "type": "string"
         }
       },
-      "required": ["id"]
+      "required": [
+        "id"
+      ]
     },
     "type": {
-      "type": ["string", "array"],
+      "type": [
+        "string",
+        "array"
+      ],
       "items": {
         "type": "string"
       }
@@ -2454,7 +2472,10 @@
           "type": "string"
         }
       },
-      "required": ["id", "type"],
+      "required": [
+        "id",
+        "type"
+      ],
       "type": "object"
     }
   },

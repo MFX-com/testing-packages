@@ -45,106 +45,121 @@ jobs:
           git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
 
       - name: Check for schema changes
-        id: checking
-        shell: bash
+        id: changes
         run: |
-          echo "Test"
-
-      - name: Install dependencies
-        shell: bash
-        run: |
-          wget -O /usr/local/bin/semver https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver
-          chmod +x /usr/local/bin/semver
-          semver --version
-
-      - name: Get current version
-        id: versions
-        shell: bash
-        run: |
-          current=$(cat polygon-id/id3/id3.json | jq -r '.["$metadata"].version')
-          target=$(semver bump patch $current)
+          # Set the folder you want to check
+          folder_to_check="polygon-id"
           
-          echo "$current"
-          echo "$target"
-          
-          echo "current=$current" >> $GITHUB_OUTPUT
-          echo "target=$target" >> $GITHUB_OUTPUT
+          # Check for changes between the base and head branches
+          if git diff --name-only ${{ github.base_ref }}...${{ github.ref }} -- $folder_to_check | grep -qE '.'; then
+            echo "Changes detected in $folder_to_check."
+            echo "::set-output name=changes::true"
+          else
+            echo "No changes detected in $folder_to_check."
+            echo "::set-output name=changes::false"
+          fi
 
-      - name: Find and replace Polygon ID versions
-        uses: jacobtomlinson/gha-find-replace@v3
-        with:
-          find: ${{ steps.versions.outputs.current }}
-          replace: ${{ steps.versions.outputs.target }}
-          include: "polygon-id/**"
+      - name: Do Something Based on Changes
+        if: steps.changes.outputs.changes == 'true'
+        run: |
+          # Run your desired actions when changes are detected
+          echo "Changes were detected, so you can run further steps here."
 
-#      - name: Update version
+#      - name: Install dependencies
 #        shell: bash
 #        run: |
-#          find examples/**/*.json -type f -exec sed -i -e 's/\/${{ steps.versions.outputs.current }}\//\/${{ steps.versions.outputs.target }}\//g' {} +
+#          wget -O /usr/local/bin/semver https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver
+#          chmod +x /usr/local/bin/semver
+#          semver --version
 #
-#          find polygon-id/**/*.json -type f -exec sed -i -e 's/\/${{ steps.versions.outputs.current }}\//\/${{ steps.versions.outputs.target }}\//g' {} +
+#      - name: Get current version
+#        id: versions
+#        shell: bash
+#        run: |
+#          current=$(cat polygon-id/id3/id3.json | jq -r '.["$metadata"].version')
+#          target=$(semver bump patch $current)
+#
+#          echo "$current"
+#          echo "$target"
+#
+#          echo "current=$current" >> $GITHUB_OUTPUT
+#          echo "target=$target" >> $GITHUB_OUTPUT
+#
+#      - name: Find and replace Polygon ID versions
+#        uses: jacobtomlinson/gha-find-replace@v3
+#        with:
+#          find: ${{ steps.versions.outputs.current }}
+#          replace: ${{ steps.versions.outputs.target }}
+#          include: "polygon-id/**"
+#
+##      - name: Update version
+##        shell: bash
+##        run: |
+##          find examples/**/*.json -type f -exec sed -i -e 's/\/${{ steps.versions.outputs.current }}\//\/${{ steps.versions.outputs.target }}\//g' {} +
+##
+##          find polygon-id/**/*.json -type f -exec sed -i -e 's/\/${{ steps.versions.outputs.current }}\//\/${{ steps.versions.outputs.target }}\//g' {} +
+#
+#      - name: Copy schemas to IPFS directory
+#        continue-on-error: true
+#        shell: bash
+#        run: |
+#          rm -rf ipfs/
+#          mkdir ipfs
+#          touch ipfs/.gitkeep
+#          cp -r polygon-id/* ipfs/
+#          ls -al ipfs/
+#          ls -R ipfs/
+#
+#      - name: Upload jsonID to IPFS and replace uris with hash in json schemas
+#        shell: bash
+#        run: |
+#          # Find all jsonLD files in the ipfs/ folder
+#          for file in $(find ipfs/ -type f -name "*.jsonld"); do
+#            echo "JsonLD file: $file"
+#
+#            # Upload json
+#            response=$(curl "https://ipfs.infura.io:5001/api/v0/add" -X POST -F file=@"$file" -u "${{ secrets.INFURA_IPFS_API_KEY }}:${{ secrets.INFURA_IPFS_API_KEY_SECRET }}")
+#            echo "$response"
+#
+#            # Parse HASH from uploaded file
+#            ipfs_hash=$(echo "$response" | jq -r '.Hash')
+#            echo "$ipfs_hash"
+#
+#            # Set the json file path
+#            replacement=".json"
+#            json_file_path="${file/.jsonld/$replacement}"
+#            echo "JSON file: $json_file_path"
+#
+#            # Perform update
+#            jq '.["$metadata"].uris.jsonLdContext = "ipfs://'"$ipfs_hash"'"' "$json_file_path" > temp.json && mv temp.json "$json_file_path"
+#          done
+#
+#      - name: Commit & Push changes
+#        uses: actions-js/push@master
+#        with:
+#          github_token: ${{ steps.generate_token.outputs.token }}
+#          branch: 'main'
+#          message: 'chore: Update IPFS schemas [skip ci]'
+#          author_name: 'nexera-release[bot]'
+#          author_email: '137495321+nexera-release[bot]@users.noreply.github.com'
 
-      - name: Copy schemas to IPFS directory
-        continue-on-error: true
-        shell: bash
-        run: |
-          rm -rf ipfs/
-          mkdir ipfs
-          touch ipfs/.gitkeep
-          cp -r polygon-id/* ipfs/
-          ls -al ipfs/
-          ls -R ipfs/
-
-      - name: Upload jsonID to IPFS and replace uris with hash in json schemas
-        shell: bash
-        run: |
-          # Find all jsonLD files in the ipfs/ folder
-          for file in $(find ipfs/ -type f -name "*.jsonld"); do
-            echo "JsonLD file: $file"
-
-            # Upload json
-            response=$(curl "https://ipfs.infura.io:5001/api/v0/add" -X POST -F file=@"$file" -u "${{ secrets.INFURA_IPFS_API_KEY }}:${{ secrets.INFURA_IPFS_API_KEY_SECRET }}")
-            echo "$response"
-          
-            # Parse HASH from uploaded file
-            ipfs_hash=$(echo "$response" | jq -r '.Hash')
-            echo "$ipfs_hash"
-
-            # Set the json file path
-            replacement=".json"
-            json_file_path="${file/.jsonld/$replacement}"
-            echo "JSON file: $json_file_path"
-
-            # Perform update
-            jq '.["$metadata"].uris.jsonLdContext = "ipfs://'"$ipfs_hash"'"' "$json_file_path" > temp.json && mv temp.json "$json_file_path"
-          done
-
-      - name: Commit & Push changes
-        uses: actions-js/push@master
-        with:
-          github_token: ${{ steps.generate_token.outputs.token }}
-          branch: 'main'
-          message: 'chore: Update IPFS schemas [skip ci]'
-          author_name: 'nexera-release[bot]'
-          author_email: '137495321+nexera-release[bot]@users.noreply.github.com'
-
-      - name: Upload schemas to issuer
-        shell: bash
-        run: |
-          for file in $(find ipfs/ -type f -name "*.json"); do
-            echo "JSON file: $file"
-            version=$(cat "$file" | jq -r '.["$metadata"].version')
-            echo "$version"
-
-            schema=$(cat "$file" | jq -r '.["$metadata"].type')
-            echo "$schema"
-
-            curl -X POST "https://mumbai-issuer-node-dev.nexera.id/v1/schemas" \
-              -H "accept: application/json" \
-              -H "content-type: application/json" \
-              -u "admin:FPSllsker" \
-              -d "{\"url\":\"https://raw.githubusercontent.com/MFX-com/testing-packages/main/${file}\",\"schemaType\":\"${schema}\",\"version\":\"${version}\"}"
-          done
+#      - name: Upload schemas to issuer
+#        shell: bash
+#        run: |
+#          for file in $(find ipfs/ -type f -name "*.json"); do
+#            echo "JSON file: $file"
+#            version=$(cat "$file" | jq -r '.["$metadata"].version')
+#            echo "$version"
+#
+#            schema=$(cat "$file" | jq -r '.["$metadata"].type')
+#            echo "$schema"
+#
+#            curl -X POST "https://mumbai-issuer-node-dev.nexera.id/v1/schemas" \
+#              -H "accept: application/json" \
+#              -H "content-type: application/json" \
+#              -u "admin:FPSllsker" \
+#              -d "{\"url\":\"https://raw.githubusercontent.com/MFX-com/testing-packages/main/${file}\",\"schemaType\":\"${schema}\",\"version\":\"${version}\"}"
+#          done
 
 
 #  version-bump:

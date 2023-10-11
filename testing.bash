@@ -76,20 +76,36 @@
 #jq '.["$metadata"].uris.jsonLdContext = "'$ipfs_hash'"' $json_file_path > temp.json
 
 
-for file in $(find polygon-id -type f -name "*.jsonld"); do
-  echo "Found jsonLD file: $file"
-  # Upload json
-  response=$(curl "https://ipfs.infura.io:5001/api/v0/add" -X POST -F file=@"$file" -u "xxx:xxx")
-  echo "$response"
-  ipfs_hash=$(echo "$response" | jq -r '.Hash')
-  echo "$ipfs_hash"
-  # Set the json file path
-  replacement=".json"
-  json_file_path="${file/.jsonld/$replacement}"
-  echo "JSON file: $json_file_path"
-  # Perform update
-  jq '.["$metadata"].uris.jsonLdContext = "ipfs://'"$ipfs_hash"'"' "$json_file_path" > temp.json && mv temp.json "$json_file_path"
+
+for file in $(find ipfs/ -type f -name "*.json"); do
+  echo "JSON file: $file"
+  version=$(cat "$file" | jq -r '.["$metadata"].version')
+  echo "$version"
+
+  schema=$(cat "$file" | jq -r '.["$metadata"].type')
+  echo "$schema"
+
+  curl -X POST "https://mumbai-issuer-node-dev.nexera.id/v1/schemas" \
+    -H "accept: application/json" \
+    -H "content-type: application/json" \
+    -u "admin:FPSllsker" \
+    -d "{\"url\":\"https://raw.githubusercontent.com/MFX-com/testing-packages/main/${file}\",\"schemaType\":\"${schema}\",\"version\":\"${version}\"}"
 done
+
+#for file in $(find polygon-id -type f -name "*.jsonld"); do
+#  echo "Found jsonLD file: $file"
+#  # Upload json
+#  response=$(curl "https://ipfs.infura.io:5001/api/v0/add" -X POST -F file=@"$file" -u "xxx:xxx")
+#  echo "$response"
+#  ipfs_hash=$(echo "$response" | jq -r '.Hash')
+#  echo "$ipfs_hash"
+#  # Set the json file path
+#  replacement=".json"
+#  json_file_path="${file/.jsonld/$replacement}"
+#  echo "JSON file: $json_file_path"
+#  # Perform update
+#  jq '.["$metadata"].uris.jsonLdContext = "ipfs://'"$ipfs_hash"'"' "$json_file_path" > temp.json && mv temp.json "$json_file_path"
+#done
 
 #
 #curl -L \

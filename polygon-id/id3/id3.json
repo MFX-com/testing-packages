@@ -4,7 +4,7 @@
       "jsonLdContext": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/development/polygon-id/id3/id3.jsonld"
     },
     "type": "ID3",
-    "version": "2.0.8"
+    "version": "2.0.9"
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
   "description": "ID3 Schema",

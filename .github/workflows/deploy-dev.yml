@@ -142,7 +142,7 @@ jobs:
             #  -H "accept: application/json" \
             #  -H "content-type: application/json" \
             #  -u "admin:FPSllsker" \
-            #  -d '{"url":"https://raw.githubusercontent.com/MFX-com/testing-packages/main/ipfs/$file","schemaType":"ProofOfResidence","version":"1.0.0"}
+            #  -d '{"url":"https://raw.githubusercontent.com/MFX-com/testing-packages/main/ipfs/$file","schemaType":"$schema","version":"$version"}
           done
 
 

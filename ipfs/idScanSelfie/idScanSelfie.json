@@ -1,0 +1,122 @@
+{
+  "$metadata": {
+    "uris": {
+      "jsonLdContext": "ipfs://QmYoDQKUHSMEZk2ZwaXWvdHbYoLXShVWxRdsu1jsXxhN6F"
+    },
+    "type": "IDScanSelfie",
+    "version": "2.0.0"
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "IDScanSelfie schema",
+  "title": "IDScanSelfie",
+  "properties": {
+    "credentialSubject": {
+      "description": "Stores the data of the credential",
+      "title": "Credential subject",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "journeyId": {
+          "title": "Journey ID",
+          "description": "The ID of the journey that this credential is associated with",
+          "type": "string"
+        },
+        "base64": {
+          "title": "Base64",
+          "description": "Base64 encoded image of the selfie image",
+          "type": "string",
+          "format": "base64"
+        },
+        "name": {
+          "title": "Name",
+          "description": "Name of the docuemnt (e.g. selfie.jpg)",
+          "type": "string"
+        },
+        "documentType": {
+          "title": "Type",
+          "description": "Type of the document (e.g. image/jpeg, image/png)",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "journeyId",
+        "base64",
+        "name",
+        "documentType"
+      ]
+    },
+    "@context": {
+      "type": [
+        "string",
+        "array",
+        "object"
+      ]
+    },
+    "expirationDate": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "issuanceDate": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "issuer": {
+      "type": [
+        "string",
+        "object"
+      ],
+      "format": "uri",
+      "properties": {
+        "id": {
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "type": {
+      "type": [
+        "string",
+        "array"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "credentialSchema": {
+      "properties": {
+        "id": {
+          "format": "uri",
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "@context",
+    "id",
+    "type",
+    "issuanceDate",
+    "credentialSubject",
+    "credentialSchema",
+    "credentialStatus",
+    "issuer"
+  ],
+  "type": "object"
+}

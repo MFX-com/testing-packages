@@ -28,6 +28,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.NPM_TOKEN }}
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
 #          ref: ${{ inputs.commit-sha }}
 
       - name: Check for schema changes
@@ -36,10 +38,10 @@ jobs:
         run: |
           echo "Test"
 
-      - name: Initialize git config
-        run: |
-          git config --global user.name "nexera-release[bot]"
-          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
+#      - name: Initialize git config
+#        run: |
+#          git config --global user.name "nexera-release[bot]"
+#          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
 
       - name: Install dependencies
         shell: bash
@@ -108,18 +110,30 @@ jobs:
             jq '.["$metadata"].uris.jsonLdContext = "ipfs://'"$ipfs_hash"'"' "$json_file_path" > temp.json && mv temp.json "$json_file_path"
           done
 
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: 'main'
+          message: 'chore: Update IPFS schemas'
+
       - name: Upload schemas to issuer
         shell: bash
         run: |
           for file in $(find ipfs/ -type f -name "*.json"); do
             echo "JSON file: $file"
-            cat "$file"
+            version=$(cat $file | jq -r '.["$metadata"].version')
+            echo "$version" 
+          
+            schema=$(cat $file | jq -r '.["$metadata"].type')
+            echo "$schema" 
+          
+            #curl -X POST "https://mumbai-issuer-node-dev.nexera.id/v1/schemas" \
+            #  -H "accept: application/json" \
+            #  -H "content-type: application/json" \
+            #  -u "admin:FPSllsker" \
+            #  -d '{"url":"https://raw.githubusercontent.com/MFX-com/testing-packages/main/ipfs/$file","schemaType":"ProofOfResidence","version":"1.0.0"}
           done
-
-      - name: Commit changes
-        shell: bash
-        run: |
-          echo "Test"
 
 
 #  version-bump:

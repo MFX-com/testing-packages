@@ -92,6 +92,7 @@ jobs:
           cp -r polygon-id/* ipfs/
           ls -al ipfs/
           ls -R ipfs/
+          git add .
 
       - name: Upload jsonID to IPFS and replace uris with hash in json schemas
         shell: bash

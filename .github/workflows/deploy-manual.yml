@@ -120,7 +120,7 @@ jobs:
           issuer="https://mumbai-issuer-node-dev.nexera.id/v1/schemas"
           if [ ${{ inputs.issuer }} == 'staging' ]; then
             issuer="https://mumbai-issuer-node-staging.nexera.id/v1/schemas"
-          elif [ ${{ inputs.issuer }} == 'main' ]; then
+          elif [ ${{ inputs.issuer }} == 'prod' ]; then
             issuer="https://mumbai-issuer-node-prod.nexera.id/v1/schemas"
           fi
           
@@ -140,7 +140,7 @@ jobs:
           done
 
       - name: Upload schemas to issuer (mainnet)
-        if: ${{ inputs.branch == 'main' }}
+        if: ${{ inputs.issuer == 'prod' }}
         shell: bash
         run: |
           for file in $(find ipfs/ -type f -name "*.json"); do

@@ -350,7 +350,7 @@ jobs:
 #        with:
 #          token: ${{ secrets.GITHUB_TOKEN }}
 #
-#      - uses: pnpm/action-setup@v2.0.2
+#      - uses: pnpm/action-setup@v2.0.3
 #        name: Install pnpm
 #        id: pnpm-install
 #        with:

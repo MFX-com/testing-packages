@@ -52,7 +52,7 @@
 #echo "$changes"
 #
 #
-#current="2.0.2"
+#current="2.0.3"
 #target=$(semver bump patch $current)
 #
 #echo "$target"

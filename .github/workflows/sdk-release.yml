@@ -252,6 +252,7 @@ jobs:
         env:
           SECONDARY_HEALTHCHECK_URL: ${{ vars.HEALTHCHECK_URL_SECONDARY || 'error' }}
         run: |
+          echo "${{ env.SECONDARY_HEALTHCHECK_URL }}"
           echo "url=${{ env.SECONDARY_HEALTHCHECK_URL }}" >> $GITHUB_OUTPUT
 
       - name: Check service status

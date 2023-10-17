@@ -248,7 +248,7 @@ jobs:
       - name: Check service status
         shell: bash
         env:
-          SECONDARY_HEALTHCHECK_URL: ${{ vars.HEALTHCHECK_URL_SECONDARY }}
+          SECONDARY_HEALTHCHECK_URL: ${{ vars.HEALTHCHECK_URL_SECONDARY }} || ""
         run: |
           echo ${{ steps.rollout.outputs.rollout_time }}
           # Initial sleep to make sure they are running

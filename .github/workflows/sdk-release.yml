@@ -247,6 +247,8 @@ jobs:
 
       - name: Check service status
         shell: bash
+        env:
+          SECONDARY_HEALTHCHECK_URL: ${{ vars.HEALTHCHECK_URL_SECONDARY || "" }}
         run: |
           echo ${{ steps.rollout.outputs.rollout_time }}
           # Initial sleep to make sure they are running
@@ -257,8 +259,8 @@ jobs:
             status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL }})
             secondary_status_code=200
             printf "The response code is: %d\n" "$status_code"
-            if [ -n "${{ vars.HEALTHCHECK_URL_SECONDARY }}" ]; then
-              secondary_status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL_SECONDARY }})
+            if [ "${{ env.SECONDARY_HEALTHCHECK_URL }}" != "" ]; then
+              secondary_status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ env.SECONDARY_HEALTHCHECK_URL }})
               printf "The secondary response code is: %d\n" "$secondary_status_code"
             fi
 

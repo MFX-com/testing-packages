@@ -245,15 +245,15 @@ jobs:
         run: |
           echo "rollout_time=$(date +%s%3N)" >> $GITHUB_OUTPUT
 
-      - name: Set secondary healthcheck URL
-        continue-on-error: true
-        shell: bash
-        id: healthcheck
-        env:
-          SECONDARY_HEALTHCHECK_URL: ${{ vars.HEALTHCHECK_URL_SECONDARY || 'error' }}
-        run: |
-          echo "${{ env.SECONDARY_HEALTHCHECK_URL }}"
-          echo "url=${{ env.SECONDARY_HEALTHCHECK_URL }}" >> $GITHUB_OUTPUT
+#      - name: Set secondary healthcheck URL
+#        continue-on-error: true
+#        shell: bash
+#        id: healthcheck
+#        env:
+#          SECONDARY_HEALTHCHECK_URL: ${{ vars.HEALTHCHECK_URL_SECONDARY || 'error' }}
+#        run: |
+#          echo "${{ env.SECONDARY_HEALTHCHECK_URL }}"
+#          echo "url=${{ env.SECONDARY_HEALTHCHECK_URL }}" >> $GITHUB_OUTPUT
 
       - name: Check service status
         shell: bash
@@ -265,13 +265,9 @@ jobs:
           max_attempts=2
           while [ $attempts -lt $max_attempts ]; do
             status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL }})
-            secondary_status_code=200
+            secondary_status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL_SECONDARY }})
             printf "The response code is: %d\n" "$status_code"
-            if [ "${{ steps.healthcheck.outputs.url }}" != "error" ]; then
-              echo "Test"
-              secondary_status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ steps.healthcheck.outputs.url }})
-              printf "The secondary response code is: %d\n" "$secondary_status_code"
-            fi
+            printf "The secondary response code is: %d\n" "$secondary_status_code"
 
             if [ "$status_code" -eq 200 ] && [ "$secondary_status_code" -eq 200 ]; then
               attempts=$((attempts+1))

@@ -259,7 +259,7 @@ jobs:
             status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL }})
             secondary_status_code=200
             printf "The response code is: %d\n" "$status_code"
-            if [ "${{ env.SECONDARY_HEALTHCHECK_URL }}" != '' ]; then
+            if [ "${{ env.SECONDARY_HEALTHCHECK_URL }}" != "" ]; then
               secondary_status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ env.SECONDARY_HEALTHCHECK_URL }})
               printf "The secondary response code is: %d\n" "$secondary_status_code"
             fi

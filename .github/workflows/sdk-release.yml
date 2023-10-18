@@ -262,7 +262,7 @@ jobs:
           echo ${{ steps.rollout.outputs.rollout_time }}
           # Initial sleep to make sure they are running
           sleep 5
-          response=""
+
           attempts=0
           max_attempts=2
           while [ $attempts -lt $max_attempts ]; do
@@ -275,22 +275,10 @@ jobs:
 
             if [ "$status_code" -eq 200 ] && [ "$secondary_status_code" -eq 200 ]; then
               attempts=$((attempts+1))
+              echo "health_code=$status_code" >> $GITHUB_OUTPUT
+              echo "health_code_secondary=$secondary_status_code" >> $GITHUB_OUTPUT
               sleep 3
             else
-              if [ "$status_code" -gt 200 ]; then
-                response="\n\nHealthcheck\n ${{ vars.HEALTHCHECK_URL }}) :arrow-right: $status_code"
-              fi
-          
-              if [ "$secondary_status_code" -gt 200 ]; then
-                if [ "$response" == "" ]; then
-                  response="\n\nHealthcheck\n ${{ vars.HEALTHCHECK_URL_SECONDARY }}) :arrow-right: $secondary_status_code"
-                else
-                  response="$response\n ${{ vars.HEALTHCHECK_URL_SECONDARY }}) :arrow-right: $secondary_status_code"
-                fi
-              fi
-          
-              echo "$response"
-              echo "health_errors=$response" >> $GITHUB_OUTPUT
               echo "health_code=$status_code" >> $GITHUB_OUTPUT
               echo "health_code_secondary=$secondary_status_code" >> $GITHUB_OUTPUT
               printf "The application has issues starting up, check the logs!"

@@ -291,6 +291,8 @@ jobs:
           
               echo "$response"
               echo "health_errors=$response" >> $GITHUB_OUTPUT
+              echo "health_code=$status_code" >> $GITHUB_OUTPUT
+              echo "health_code_secondary=$secondary_status_code" >> $GITHUB_OUTPUT
               printf "The application has issues starting up, check the logs!"
               exit 1
             fi
@@ -352,7 +354,7 @@ jobs:
 
       - name: Notify
         uses: ravsamhq/notify-slack-action@v2
-        if: always()
+        if: always() && ${{ steps.health_status.outputs.health_code > 200 || steps.health_status.outputs.health_code_secondary > 200 }}
         with:
           status: ${{ job.status }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -360,12 +362,28 @@ jobs:
           message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.service_status.outcome != 'success' && '<!here>' || '' }}
           \n\n ${{ vars.APP_URL }}\n
           \n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}\n
-          \n\nChanges\n ${{ steps.changes_output.outputs.changes }} ${{ env.HEALTH_MSG }}"
+          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
           footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
           notify_when: "success,failure"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-          HEALTH_MSG: ${{ steps.health_status.outputs.health_errors || '' }}
+
+      - name: Notify
+        uses: ravsamhq/notify-slack-action@v2
+        if: always() && ${{ steps.health_status.outputs.health_code == 200 || steps.health_status.outputs.health_code_secondary == 200 }}
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: ""
+          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.service_status.outcome != 'success' && '<!here>' || '' }}
+          \n\n ${{ vars.APP_URL }}\n
+          \n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}\n
+          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}\n
+          \n\nHealthcheck status\n ${{ vars.HEALTHCHECK_URL }} -> ${{ steps.health_status.outputs.health_code }}\n ${{ vars.HEALTHCHECK_URL_SECONDARY }} -> ${{ steps.health_status.outputs.health_code_secondary }}"
+          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
+          notify_when: "success,failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
 #  release:
 #    name: Release

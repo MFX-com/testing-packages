@@ -257,6 +257,7 @@ jobs:
 
       - name: Check service status
         shell: bash
+        id: service_status
         run: |
           echo ${{ steps.rollout.outputs.rollout_time }}
           # Initial sleep to make sure they are running
@@ -286,9 +287,9 @@ jobs:
                 else
                   response="$response\n ${{ steps.changes_output.outputs.changes }} :arrow-right: $secondary_status_code"
                 fi
-          
               fi
           
+              echo "health_errors=$response" >> $GITHUB_OUTPUT
               printf "The application has issues starting up, check the logs!"
               exit 1
             fi
@@ -358,7 +359,7 @@ jobs:
           message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.service_status.outcome != 'success' && '<!here>' || '' }}
           \n\n ${{ vars.APP_URL }}\n
           \n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}\n
-          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
+          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}${{ steps.service_status.outputs.health_errors }}"
           footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
           notify_when: "success,failure"
         env:

@@ -361,7 +361,7 @@ jobs:
           notification_title: ""
           message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.service_status.outcome != 'success' && '<!here>' || '' }}
           \n\n<${{ vars.APP_URL }}|View URL> | <${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}|View Grafana>
-          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
+          \n\n*Changes*\n ${{ steps.changes_output.outputs.changes }}"
           footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
           notify_when: "success,failure"
         env:
@@ -376,8 +376,8 @@ jobs:
           notification_title: ""
           message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.service_status.outcome != 'success' && '<!here>' || '' }}
           \n\n<${{ vars.APP_URL }}|View URL> | <${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}|View Grafana>
-          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}
-          \n\nHealthcheck status\n ${{ vars.HEALTHCHECK_URL }} -> ${{ steps.health_status.outputs.health_code }}\n ${{ vars.HEALTHCHECK_URL_SECONDARY }} -> ${{ steps.health_status.outputs.health_code_secondary }}"
+          \n\n*Healthcheck status*\n ${{ vars.HEALTHCHECK_URL }} -> ${{ steps.health_status.outputs.health_code }}\n ${{ vars.HEALTHCHECK_URL_SECONDARY }} -> ${{ steps.health_status.outputs.health_code_secondary }}
+          \n\n*Changes*\n ${{ steps.changes_output.outputs.changes }}"
           footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
           notify_when: "success,failure"
         env:

@@ -11,6 +11,7 @@ on:
           - staging
           - prod
         default: dev
+        description: Polygon environment
       branch:
         required: true
         type: string

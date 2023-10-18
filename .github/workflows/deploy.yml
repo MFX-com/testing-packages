@@ -27,93 +27,93 @@ jobs:
             polygon-id:
               - 'polygon-id/**'
 
-#      - name: Dump job context
-#        env:
-#          JOB_CONTEXT: ${{ toJson(job) }}
-#        run: echo "$JOB_CONTEXT"
-#      - name: Dump steps context
-#        env:
-#          STEPS_CONTEXT: ${{ toJson(steps) }}
-#        run: echo "$STEPS_CONTEXT"
-#      - name: Dump runner context
-#        env:
-#          RUNNER_CONTEXT: ${{ toJson(runner) }}
-#        run: echo "$RUNNER_CONTEXT"
-#      - name: Dump strategy context
-#        env:
-#          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-#        run: echo "$STRATEGY_CONTEXT"
-#      - name: Dump matrix context
-#        env:
-#          MATRIX_CONTEXT: ${{ toJson(matrix) }}
-#        run: echo "$MATRIX_CONTEXT"
-#
-#      - name: Dump GitHub context
-#        env:
-#          GITHUB_CONTEXT: ${{ toJson(github) }}
-#        run: echo "$GITHUB_CONTEXT"
-#
-#      - name: Set changes
-#        if: always()
-#        id: changes_output
-#        shell: bash
-#        run: |
-#          changes="Manual deploy"
-#
-#          if [ "${{ github.event.pull_request.title }}" != "" ]; then
-#            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }}>)"
-#          fi
-#
-#          echo $changes
-#          echo "changes=$changes" >> $GITHUB_OUTPUT
-#
-#      - name: Notify
-#        uses: ravsamhq/notify-slack-action@v2
-#        if: always()
-#        with:
-#          status: ${{ job.status }}
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          notification_title: ""
-#          message_format: "{emoji} *TESTING* deployment to TESTING has {status_message}
-#          \n\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
-#          \n\nGrafana\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
-#          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
-#          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
-#          notify_when: "success,failure"
-#        env:
-#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: Set changes
+        if: always()
+        id: changes_output
+        shell: bash
+        run: |
+          changes="Manual deploy"
+
+          if [ "${{ github.event.pull_request.title }}" != "" ]; then
+            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }}>)"
+          fi
+
+          echo $changes
+          echo "changes=$changes" >> $GITHUB_OUTPUT
+
+      - name: Notify
+        uses: ravsamhq/notify-slack-action@v2
+        if: always()
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: ""
+          message_format: "{emoji} *TESTING* deployment to TESTING has {status_message}
+          \n\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
+          \n\nGrafana\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
+          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
+          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
+          notify_when: "success,failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
 
-  deploy-dev:
-    name: Deploy to Dev
-    needs: setup-job
-    secrets: inherit
-    if: needs.setup-job.outputs.output1 == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'development'
-    uses: ./.github/workflows/deploy-dev.yml
-    with:
-      commit-sha: ${{ github.sha }}
-      pull-request-number: ${{ github.event.pull_request.number }}
-      branch: ${{ github.event.pull_request.base.ref }}
-
-  deploy-staging:
-    name: Deploy to Staging
-    needs: setup-job
-    secrets: inherit
-    if: needs.setup-job.outputs.output1 == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'staging'
-    uses: ./.github/workflows/deploy-staging.yml
-    with:
-      commit-sha: ${{ github.sha }}
-      pull-request-number: ${{ github.event.pull_request.number }}
-      branch: ${{ github.event.pull_request.base.ref }}
-
-  deploy-production:
-    name: Deploy to Production
-    needs: setup-job
-    secrets: inherit
-    if: needs.setup-job.outputs.output1 == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'main'
-    uses: ./.github/workflows/deploy-prod.yml
-    with:
-      commit-sha: ${{ github.sha }}
-      pull-request-number: ${{ github.event.pull_request.number }}
-      branch: ${{ github.event.pull_request.base.ref }}
+#  deploy-dev:
+#    name: Deploy to Dev
+#    needs: setup-job
+#    secrets: inherit
+#    if: needs.setup-job.outputs.output1 == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'development'
+#    uses: ./.github/workflows/deploy-dev.yml
+#    with:
+#      commit-sha: ${{ github.sha }}
+#      pull-request-number: ${{ github.event.pull_request.number }}
+#      branch: ${{ github.event.pull_request.base.ref }}
+#
+#  deploy-staging:
+#    name: Deploy to Staging
+#    needs: setup-job
+#    secrets: inherit
+#    if: needs.setup-job.outputs.output1 == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'staging'
+#    uses: ./.github/workflows/deploy-staging.yml
+#    with:
+#      commit-sha: ${{ github.sha }}
+#      pull-request-number: ${{ github.event.pull_request.number }}
+#      branch: ${{ github.event.pull_request.base.ref }}
+#
+#  deploy-production:
+#    name: Deploy to Production
+#    needs: setup-job
+#    secrets: inherit
+#    if: needs.setup-job.outputs.output1 == 'true' && github.event.pull_request.merged && github.event.pull_request.base.ref == 'main'
+#    uses: ./.github/workflows/deploy-prod.yml
+#    with:
+#      commit-sha: ${{ github.sha }}
+#      pull-request-number: ${{ github.event.pull_request.number }}
+#      branch: ${{ github.event.pull_request.base.ref }}
 

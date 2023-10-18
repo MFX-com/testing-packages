@@ -277,11 +277,11 @@ jobs:
               attempts=$((attempts+1))
               sleep 3
             else
-              if [ "$status_code" -eq 200 ]; then
+              if [ "$status_code" -gt 200 ]; then
                 response="\n\Healthcheck\n ${{ steps.changes_output.outputs.changes }} :arrow-right: $status_code"
               fi
           
-              if [ "$secondary_status_code" -eq 200 ]; then
+              if [ "$secondary_status_code" -gt 200 ]; then
                 if [ "$response" == "" ]; then
                   response="\n\Healthcheck\n ${{ steps.changes_output.outputs.changes }} :arrow-right: $secondary_status_code"
                 else

@@ -268,8 +268,8 @@ jobs:
           while [ $attempts -lt $max_attempts ]; do
             #status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL }})
             #secondary_status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL_SECONDARY }})
-            status_code=200
-            secondary_status_code=200
+            status_code=500
+            secondary_status_code=404
             printf "The response code is: %d\n" "$status_code"
             printf "The secondary response code is: %d\n" "$secondary_status_code"
 

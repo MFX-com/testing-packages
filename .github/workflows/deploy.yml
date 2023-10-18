@@ -70,7 +70,6 @@ jobs:
           done
           
           echo -e "$changes"
-
           echo $changes
           echo "changes=$changes" >> $GITHUB_OUTPUT
 

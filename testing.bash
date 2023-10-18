@@ -76,21 +76,21 @@
 #jq '.["$metadata"].uris.jsonLdContext = "'$ipfs_hash'"' $json_file_path > temp.json
 
 
-
-for file in $(find ipfs/ -type f -name "*.json"); do
-  echo "JSON file: $file"
-  version=$(cat "$file" | jq -r '.["$metadata"].version')
-  echo "$version"
-
-  schema=$(cat "$file" | jq -r '.["$metadata"].type')
-  echo "$schema"
-
-  curl -X POST "https://mumbai-issuer-node-dev.nexera.id/v1/schemas" \
-    -H "accept: application/json" \
-    -H "content-type: application/json" \
-    -u "admin:FPSllsker" \
-    -d "{\"url\":\"https://raw.githubusercontent.com/MFX-com/testing-packages/main/${file}\",\"schemaType\":\"${schema}\",\"version\":\"${version}\"}"
-done
+#
+#for file in $(find ipfs/ -type f -name "*.json"); do
+#  echo "JSON file: $file"
+#  version=$(cat "$file" | jq -r '.["$metadata"].version')
+#  echo "$version"
+#
+#  schema=$(cat "$file" | jq -r '.["$metadata"].type')
+#  echo "$schema"
+#
+#  curl -X POST "https://mumbai-issuer-node-dev.nexera.id/v1/schemas" \
+#    -H "accept: application/json" \
+#    -H "content-type: application/json" \
+#    -u "admin:FPSllsker" \
+#    -d "{\"url\":\"https://raw.githubusercontent.com/MFX-com/testing-packages/main/${file}\",\"schemaType\":\"${schema}\",\"version\":\"${version}\"}"
+#done
 
 #for file in $(find polygon-id -type f -name "*.jsonld"); do
 #  echo "Found jsonLD file: $file"
@@ -115,3 +115,12 @@ done
 #          -X PUT \
 #          https://api.github.com/repos/MFX-com/testing-packages/branches/main/protection \
 #          -d '{"enforce_admins":false, "required_pull_request_reviews":null, "required_status_checks":null, "restrictions":null}'
+
+changes="PR Message"
+
+for commit_hash in $(git rev-list --ancestry-path 98548050ccc8f6dfeea21e32e7f10edd9d422bf8..0121168c7cd3adb2086e3776d0128e44acca9d01); do
+    message=$(git log -n 1 --pretty=format:"%s %H" "$commit_hash" | cat)
+    changes="$changes\n$message"
+done
+
+echo -e "$changes"

@@ -63,6 +63,13 @@ jobs:
           if [ "${{ github.event.pull_request.title }}" != "" ]; then
             changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }}>)"
           fi
+          
+          for commit_hash in $(git rev-list --ancestry-path ${{ github.event.before }}..${{ github.event.after }}); do
+            message=$(git log -n 1 --pretty=format:"%s %H" "$commit_hash" | cat)
+            changes="$changes\n$message"
+          done
+          
+          echo -e "$changes"
 
           echo $changes
           echo "changes=$changes" >> $GITHUB_OUTPUT
@@ -116,4 +123,4 @@ jobs:
 #      commit-sha: ${{ github.sha }}
 #      pull-request-number: ${{ github.event.pull_request.number }}
 #      branch: ${{ github.event.pull_request.base.ref }}
-
+#

@@ -360,11 +360,12 @@ jobs:
           message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.service_status.outcome != 'success' && '<!here>' || '' }}
           \n\n ${{ vars.APP_URL }}\n
           \n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}\n
-          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}" "${{ steps.health_status.outputs.health_errors }}"
+          \n\nChanges\n ${{ steps.changes_output.outputs.changes }} ${{ env.HEALTH_MSG }}"
           footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
           notify_when: "success,failure"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          HEALTH_MSG: ${{ steps.health_status.outputs.health_errors || '' }}
 
 #  release:
 #    name: Release

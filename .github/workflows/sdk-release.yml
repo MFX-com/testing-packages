@@ -261,11 +261,14 @@ jobs:
           echo ${{ steps.rollout.outputs.rollout_time }}
           # Initial sleep to make sure they are running
           sleep 5
+          response=""
           attempts=0
           max_attempts=2
           while [ $attempts -lt $max_attempts ]; do
-            status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL }})
-            secondary_status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL_SECONDARY }})
+            #status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL }})
+            #secondary_status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL_SECONDARY }})
+            status_code=401
+            secondary_status_code=405
             printf "The response code is: %d\n" "$status_code"
             printf "The secondary response code is: %d\n" "$secondary_status_code"
 
@@ -273,6 +276,19 @@ jobs:
               attempts=$((attempts+1))
               sleep 3
             else
+              if [ "$status_code" -eq 200 ]; then
+                response="\n\Healthcheck\n ${{ steps.changes_output.outputs.changes }} :arrow-right: $status_code"
+              fi
+          
+              if [ "$secondary_status_code" -eq 200 ]; then
+                if [ "$response" == "" ]; then
+                  response="\n\Healthcheck\n ${{ steps.changes_output.outputs.changes }} :arrow-right: $secondary_status_code"
+                else
+                  response="$response\n ${{ steps.changes_output.outputs.changes }} :arrow-right: $secondary_status_code"
+                fi
+          
+              fi
+          
               printf "The application has issues starting up, check the logs!"
               exit 1
             fi

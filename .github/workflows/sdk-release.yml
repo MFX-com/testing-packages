@@ -354,7 +354,7 @@ jobs:
 
       - name: Notify
         uses: ravsamhq/notify-slack-action@v2
-        if: always() && ${{ steps.health_status.outputs.health_code == '200' || steps.health_status.outputs.health_code_secondary == '200' }}
+        if: always() && steps.health_status.outputs.health_code == '200' && steps.health_status.outputs.health_code_secondary == '200'
         with:
           status: ${{ job.status }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -370,7 +370,7 @@ jobs:
 
       - name: Notify
         uses: ravsamhq/notify-slack-action@v2
-        if: always() && ${{ steps.health_status.outputs.health_code != '200' || steps.health_status.outputs.health_code_secondary != '200' }}
+        if: always() && (steps.health_status.outputs.health_code != '200' || steps.health_status.outputs.health_code_secondary != '200'
         with:
           status: ${{ job.status }}
           token: ${{ secrets.GITHUB_TOKEN }}

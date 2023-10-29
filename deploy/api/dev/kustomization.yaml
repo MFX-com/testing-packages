@@ -1,0 +1,33 @@
+resources:
+- ./../base
+namespace: api
+
+patchesStrategicMerge:
+- deploy.yaml
+
+commonLabels:
+  app: api
+
+configMapGenerator:
+  - name: api
+    literals:
+      - APP_ENV=dev
+      - NODE_ENV=development
+      - API_PORT=3000
+      - API_HOST=https://api-dev.nexera.id
+      - CMS_PUBLIC_URL=https://cms-dev.nexera.id
+
+secretGenerator:
+  - name: api
+    envs:
+      - .env
+
+patches:
+- target:
+    kind: Ingress
+    name: api
+  path: ./ingress-json-patch.yaml
+- target:
+    kind: Certificate
+    name: api
+  path: ./cert-json-patch.yaml

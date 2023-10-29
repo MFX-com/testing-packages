@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.1.160](https://github.com/MFX-com/testing-packages/compare/@MFX-org/first@7.1.159...@MFX-org/first@7.1.160) (2023-10-11)
+
+**Note:** Version bump only for package @MFX-org/first
+
+
+
+
+
+## [7.1.159](https://github.com/MFX-com/testing-packages/compare/@MFX-org/first@7.1.158...@MFX-org/first@7.1.159) (2023-09-05)
+
+**Note:** Version bump only for package @MFX-org/first
+
+
+
+
+
 ## [7.1.158](https://github.com/MFX-com/testing-packages/compare/@MFX-org/first@7.1.157...@MFX-org/first@7.1.158) (2023-08-29)
 
 **Note:** Version bump only for package @MFX-org/first
@@ -196,7 +212,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * chore(release): version and release commit
 
- - @marefx/first@2.0.0
+ - @marefx/first@2.0.3
  - @marefx/priv@1.1.6
  - @marefx/second@1.5.2
 
@@ -385,7 +401,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * chore(release): version and release commit
 
- - @marefx/first@2.0.0
+ - @marefx/first@2.0.3
  - @marefx/priv@1.1.6
  - @marefx/second@1.5.2
 
@@ -735,7 +751,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * chore(release): version and release commit
 
- - @MFX-org/first@2.0.0
+ - @MFX-org/first@2.0.3
  - @MFX-org/priv@1.1.6
  - @MFX-org/second@1.5.2
 
@@ -809,7 +825,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * chore(release): version and release commit
 
- - @MFX-org/first@2.0.0
+ - @MFX-org/first@2.0.3
  - @MFX-org/priv@1.1.6
  - @MFX-org/second@1.5.2
 
@@ -943,7 +959,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * chore(release): version and release commit
 
- - @MFX-org/first@2.0.0
+ - @MFX-org/first@2.0.3
  - @MFX-org/priv@1.1.6
  - @MFX-org/second@1.5.2
 
@@ -1194,7 +1210,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * chore(release): version and release commit
 
- - @MFX-org/first@2.0.0
+ - @MFX-org/first@2.0.3
  - @MFX-org/priv@1.1.6
  - @MFX-org/second@1.5.2
 
@@ -1224,7 +1240,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * **test:** 1 ([8377124](https://github.com/MFX-com/testing-packages/commit/8377124244e5360e51f257a92878d2c178d449e2))
 
-# [3.0.0](https://github.com/MFX-com/testing-packages/compare/@MFX-org/first@2.0.0...@MFX-org/first@3.0.0) (2023-06-29)
+# [3.0.0](https://github.com/MFX-com/testing-packages/compare/@MFX-org/first@2.0.3...@MFX-org/first@3.0.0) (2023-06-29)
 
 ### Bug Fixes
 
@@ -1234,7 +1250,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * **nexera-id:** new version has dropped support for xx
 
-# [2.0.0](https://github.com/MFX-com/testing-packages/compare/@MFX-org/first@0.14.0...@MFX-org/first@2.0.0) (2023-06-29)
+# [2.0.3](https://github.com/MFX-com/testing-packages/compare/@MFX-org/first@0.14.0...@MFX-org/first@2.0.3) (2023-06-29)
 
 ### Features
 

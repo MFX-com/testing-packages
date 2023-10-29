@@ -1,0 +1,29 @@
+resources:
+  - ./../base
+namespace: data-analytics
+
+patchesStrategicMerge:
+  - deploy.yaml
+
+commonLabels:
+  app: data-analytics
+
+configMapGenerator:
+  - name: data-analytics
+    literals:
+      - APP_ENV=staging
+
+secretGenerator:
+  - name: data-analytics
+    envs:
+      - .env
+
+patches:
+  - target:
+      kind: Ingress
+      name: data-analytics
+    path: ./ingress-json-patch.yaml
+  - target:
+      kind: Certificate
+      name: data-analytics
+    path: ./cert-json-patch.yaml

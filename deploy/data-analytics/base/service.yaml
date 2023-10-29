@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: data-analytics
+  namespace: data-analytics
+spec:
+  ports:
+    - name: backend
+      port: 3012
+      protocol: TCP
+      targetPort: 3012
+  selector:
+    app: data-analytics
+  type: ClusterIP

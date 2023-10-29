@@ -1,0 +1,20 @@
+resources:
+  - ../dashboards
+
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    grafana_dashboard: "1"
+
+namespace: monitoring
+
+commonAnnotations:
+  grafana_folder: Logging
+
+configMapGenerator:
+  - files:
+      - dashboards/issuer-mainnet-api.json
+      - dashboards/issuer-mainnet-api-ui.json
+      - dashboards/issuer-mainnet-publisher.json
+      - dashboards/issuer-mainnet-notifications.json
+    name: dashboards-k8s-mainnet-issuer

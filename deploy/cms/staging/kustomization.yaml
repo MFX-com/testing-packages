@@ -1,0 +1,32 @@
+resources:
+- ./../base
+namespace: cms
+
+patchesStrategicMerge:
+- ./deploy.yaml
+
+commonLabels:
+  app: cms
+
+configMapGenerator:
+- literals:
+  - APP_ENV=stage
+  - PAYLOAD_PUBLIC_APP_ENV=stage
+  - PAYLOAD_PUBLIC_URL=https://cms-staging.nexera.id
+  - PORT=3004
+  name: cms
+
+secretGenerator:
+- envs:
+  - .env
+  name: cms
+
+patches:
+- path: ./ingress-json-patch.yaml
+  target:
+    kind: Ingress
+    name: cms
+- path: ./cert-json-patch.yaml
+  target:
+    kind: Certificate
+    name: cms

@@ -6,8 +6,8 @@
     ":dependencyDashboard",
     ":rebaseStalePrs"
   ],
-  "compatibility": { "pnpm": "^8.6.10" },
-  "constraints": { "pnpm": "^8.6.10" },
+  "compatibility": { "pnpm": "^8.7.5" },
+  "constraints": { "pnpm": "^8.7.5" },
   "baseBranches": [
     "main"
   ],
@@ -53,6 +53,20 @@
       ],
       "registryUrls": [
         "https://npm.pkg.github.com"
+      ]
+    },
+    {
+      "description": "Updates all minor and patch versions",
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "all non-major dependencies",
+      "schedule": [
+        "before 4am"
       ]
     },
     {

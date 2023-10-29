@@ -9,28 +9,28 @@ jobs:
   versions:
     name: Versions
     runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        node-version: [ 18.17 ]
-#        pnpm-version: [ 8.6.10 ]
-#        apps:
-#          - api
-#          - cms
-#    environment:
-#      name: ${{ matrix.apps }}-dev
+    strategy:
+      matrix:
+        node-version: [ 18.17 ]
+        pnpm-version: [ 8.7.5 ]
+        apps:
+          - api
+          - cms
+    environment:
+      name: ${{ matrix.apps }}-dev
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       NODE_VERSION: 18.17.1
-      PNPM_VERSION: 8.6.12
+      PNPM_VERSION: 8.7.5
     steps:
       - name: Generate token
         id: generate_token
-        uses: tibdex/github-app-token@v1
+        uses: tibdex/github-app-token@v2
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.PRIVATE_KEY }}
 
-      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4
+      - uses: actions/checkout@v4 # v4
         with:
           fetch-depth: 0
           token: ${{ steps.generate_token.outputs.token }}
@@ -62,10 +62,10 @@ jobs:
           version: ${{ env.PNPM_VERSION }}
           run_install: false
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: |
-          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+#      - name: Get pnpm store directory
+#        id: pnpm-cache
+#        run: |
+#          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
 
 #      - uses: actions/cache@v3
 #        name: Setup pnpm cache
@@ -238,93 +238,141 @@ jobs:
 #          SLACK_MESSAGE: 'Post Content :rocket: ${{ secrets.APP_ID }}'
 #          SLACK_USERNAME: nexera-bot
 #          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-#      - name: Export timer variable
-#        id: rollout
-#        shell: bash
-#        run: |
-#          echo "rollout_time=$(date +%s%3N)" >> $GITHUB_OUTPUT
-#
-#      - name: Check service status
-#        shell: bash
-#        run: |
-#          echo ${{ steps.rollout.outputs.rollout_time }}
-#          # Initial sleep to make sure they are running
-#          sleep 5
-#          attempts=0
-#          max_attempts=2
-#          while [ $attempts -lt $max_attempts ]; do
-#            status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL }})
-#            printf "The response code is: %d\n" "$status_code"
-#
-#            if [ "$status_code" -eq 200 ]; then
-#              attempts=$((attempts+1))
-#              sleep 3
-#            else
-#              printf "The application has issues starting up, check the logs!"
-#              exit 1
-#            fi
-#          done
 
-#      - name: Fail the job
+      - name: Export timer variable
+        id: rollout
+        shell: bash
+        run: |
+          echo "rollout_time=$(date +%s%3N)" >> $GITHUB_OUTPUT
+
+#      - name: Set secondary healthcheck URL
+#        continue-on-error: true
 #        shell: bash
+#        id: healthcheck
+#        env:
+#          SECONDARY_HEALTHCHECK_URL: ${{ vars.HEALTHCHECK_URL_SECONDARY || 'error' }}
 #        run: |
-#          exit 1
+#          echo "${{ env.SECONDARY_HEALTHCHECK_URL }}"
+#          echo "url=${{ env.SECONDARY_HEALTHCHECK_URL }}" >> $GITHUB_OUTPUT
+
+      - name: Check service status
+        shell: bash
+        id: health_status
+        run: |
+          echo ${{ steps.rollout.outputs.rollout_time }}
+          # Initial sleep to make sure they are running
+          sleep 5
+
+          attempts=0
+          max_attempts=2
+          while [ $attempts -lt $max_attempts ]; do
+            status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL }})
+            secondary_status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL_SECONDARY }})
+            #status_code=500
+            #secondary_status_code=404
+            printf "The response code is: %d\n" "$status_code"
+            printf "The secondary response code is: %d\n" "$secondary_status_code"
+
+            if [ "$status_code" -eq 200 ] && [ "$secondary_status_code" -eq 200 ]; then
+              attempts=$((attempts+1))
+              echo "health_code=$status_code" >> $GITHUB_OUTPUT
+              echo "health_code_secondary=$secondary_status_code" >> $GITHUB_OUTPUT
+              sleep 3
+            else
+              echo "health_code=$status_code" >> $GITHUB_OUTPUT
+              echo "health_code_secondary=$secondary_status_code" >> $GITHUB_OUTPUT
+              printf "The application has issues starting up, check the logs!"
+              exit 1
+            fi
+          done
+
+      - name: Fail the job
+        shell: bash
+        id: service_status
+        run: |
+          exit 0
 
 #      - name: Dump GitHub context
 #        env:
 #          GITHUB_CONTEXT: ${{ toJson(github) }}
 #        run: echo "$GITHUB_CONTEXT"
 #
-#      - name: Prettify output
-#        if: always()
-#        id: pretty_output
-#        shell: bash
-#        run: |
-#          pretty_app="UNKNOWN"
-#
-#          if [ "${{ matrix.apps }}" == "cms" ]; then
-#            pretty_app="CMS"
-#          elif [ "${{ matrix.apps }}" == "api" ]; then
-#            pretty_app="API"
-#          elif [ "${{ matrix.apps }}" == "data-storage" ]; then
-#            pretty_app="Data-storage"
-#          fi
-#
-#          echo $pretty_app
-#          echo "app_name=$pretty_app" >> $GITHUB_OUTPUT
-#
-#      - name: Set changes
-#        if: always()
-#        id: changes_output
-#        shell: bash
-#        run: |
-#          changes="Manual deploy"
-#
-#          if [ "${{ github.event.pull_request }}" != "" ]; then
-#            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.number }}>)"
-#          else
-#            commit_message="$(git log --pretty=%B -1 ${{ github.sha }} | cat - | head -n1)"
-#            changes="Manual deploy: $commit_message - <${{ github.event.repository.html_url }}/commit/${{ github.sha }}|${{ github.sha }}>"
-#          fi
-#
-#          echo $changes
-#          echo "changes=$changes" >> $GITHUB_OUTPUT
-#
-#      - name: Notify
-#        uses: ravsamhq/notify-slack-action@v2
-#        if: always()
-#        with:
-#          status: ${{ job.status }}
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          notification_title: ""
-#          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message}
-#          \n\n ${{ vars.APP_URL }}\n
-#          \n\nGrafana\n ${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}\n
-#          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
-#          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
-#          notify_when: "success,failure"
-#        env:
-#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Prettify output
+        if: always()
+        id: pretty_output
+        shell: bash
+        run: |
+          pretty_app="UNKNOWN"
+
+          if [ "${{ matrix.apps }}" == "cms" ]; then
+            pretty_app="CMS"
+          elif [ "${{ matrix.apps }}" == "api" ]; then
+            pretty_app="API"
+          elif [ "${{ matrix.apps }}" == "data-storage" ]; then
+            pretty_app="Data Storage"
+          elif [ "${{ matrix.apps }}" == "zk-verifier" ]; then
+            pretty_app="ZK Verifier"
+          fi
+
+          echo $pretty_app
+          echo "app_name=$pretty_app" >> $GITHUB_OUTPUT
+
+      - name: Set changes
+        if: always()
+        id: changes_output
+        shell: bash
+        run: |
+          changes="Manual deploy"
+
+          if [ "${{ github.event.pull_request }}" != "" ]; then
+            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.number }}>)"
+          else
+            commit_message="$(git log --pretty=%B -1 ${{ github.sha }} | cat - | head -n1)"
+            changes="Manual deploy: $commit_message - <${{ github.event.repository.html_url }}/commit/${{ github.sha }}|${{ github.sha }}>"
+          fi
+
+          echo $changes
+          echo "changes=$changes" >> $GITHUB_OUTPUT
+
+      - name: Check output
+        if: always()
+        shell: bash
+        run: |
+          echo ${{ steps.service_status.outcome }}
+          echo ${{ steps.service_status }}
+          echo ${{ steps.health_status.outputs.health_code }}
+          echo ${{ steps.health_status.outputs.health_code_secondary }}
+
+      - name: Notify
+        uses: ravsamhq/notify-slack-action@v2
+        if: always() && steps.health_status.outputs.health_code == 200 && steps.health_status.outputs.health_code_secondary == 200
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: ""
+          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.service_status.outcome != 'success' && '<!here>' || '' }}
+          \n\n<${{ vars.APP_URL }}|View URL> | <${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}|View Grafana>
+          \n\n*Changes*\n ${{ steps.changes_output.outputs.changes }}"
+          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
+          notify_when: "success,failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: Notify
+        uses: ravsamhq/notify-slack-action@v2
+        if: always() && (steps.health_status.outputs.health_code != 200 || steps.health_status.outputs.health_code_secondary != 200)
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          notification_title: ""
+          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.service_status.outcome != 'success' && '<!here>' || '' }}
+          \n\n<${{ vars.APP_URL }}|View URL> | <${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}|View Grafana>
+          \n\n*Healthcheck status*\n ${{ vars.HEALTHCHECK_URL }} :arrow_right: *${{ steps.health_status.outputs.health_code }}*\n ${{ vars.HEALTHCHECK_URL_SECONDARY }} :arrow_right: *${{ steps.health_status.outputs.health_code_secondary }}*
+          \n\n*Changes*\n ${{ steps.changes_output.outputs.changes }}"
+          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
+          notify_when: "success,failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
 #  release:
 #    name: Release
@@ -334,13 +382,13 @@ jobs:
 #    strategy:
 #      matrix:
 #        node-version: [ 18.17 ]
-#        pnpm-version: [ 8.6.10 ]
+#        pnpm-version: [ 8.7.5 ]
 #    steps:
 #      - uses: actions/checkout@v3
 #        with:
 #          token: ${{ secrets.GITHUB_TOKEN }}
 #
-#      - uses: pnpm/action-setup@v2.0.1
+#      - uses: pnpm/action-setup@v2.4.0
 #        name: Install pnpm
 #        id: pnpm-install
 #        with:

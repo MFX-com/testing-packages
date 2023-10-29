@@ -3,8 +3,8 @@
   "type": "object",
   "$metadata": {
     "uris": {
-      "jsonLdContext": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/staging/examples/idscan/idscan.jsonld",
-      "jsonSchema": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/staging/examples/idscan/idscan.json"
+      "jsonLdContext": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/main/examples/idscan/idscan.jsonld",
+      "jsonSchema": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/main/examples/idscan/idscan.json"
     },
     "type": "IDScan",
     "version": "1.1"

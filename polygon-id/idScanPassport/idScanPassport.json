@@ -1,7 +1,7 @@
 {
   "$metadata": {
     "uris": {
-      "jsonLdContext": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/main/polygon-id/idScanPassport/idScanPassport.jsonld"
+      "jsonLdContext": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/staging/polygon-id/idScanPassport/idScanPassport.jsonld"
     },
     "type": "IDScanPassport",
     "version": "2.0.10"

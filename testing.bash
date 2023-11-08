@@ -116,11 +116,35 @@
 #          https://api.github.com/repos/MFX-com/testing-packages/branches/main/protection \
 #          -d '{"enforce_admins":false, "required_pull_request_reviews":null, "required_status_checks":null, "restrictions":null}'
 
-changes="PR Message"
+#changes="PR Message"
+#
+#for commit_hash in $(git rev-list --ancestry-path 98548050ccc8f6dfeea21e32e7f10edd9d422bf8..0121168c7cd3adb2086e3776d0128e44acca9d01); do
+#    message=$(git log -n 1 --pretty=format:"%s %H" "$commit_hash" | cat)
+#    changes="$changes\n$message"
+#done
+#
+#echo -e "$changes"
 
-for commit_hash in $(git rev-list --ancestry-path 98548050ccc8f6dfeea21e32e7f10edd9d422bf8..0121168c7cd3adb2086e3776d0128e44acca9d01); do
-    message=$(git log -n 1 --pretty=format:"%s %H" "$commit_hash" | cat)
-    changes="$changes\n$message"
-done
-
-echo -e "$changes"
+# Check if yq is installed
+#if ! command -v yq &>/dev/null; then
+#    echo "Please install 'yq' (https://github.com/mikefarah/yq) to process YAML files."
+#    exit 1
+#fi
+#
+#
+## Make the curl request and store the JSON response in a variable
+#json_response=$(curl -s -X GET 'http://localhost:8888/api/v1/meters')
+#
+## Use jq to extract all eventType values and store them in an array
+#event_types=($(echo "$json_response" | jq -r '.[].eventType'))
+#
+## Define the YAML file
+#YAML_FILE="openmeter/config.yaml"
+#
+## Loop through the meters
+#while IFS=$'\t' read -r slug description eventType aggregation windowSize _; do
+#  if [[ " ${event_types[*]} " != *" $eventType "* ]]; then
+#    json_data="{\"slug\": \"$slug\", \"description\": \"$description\", \"eventType\": \"$eventType\", \"aggregation\": \"$aggregation\", \"windowSize\": \"$windowSize\"}"
+#    curl -X POST -H "Content-Type: application/json" -d "$json_data" http://localhost:8888/api/v1/meters
+#  fi
+#done < <(yq e '.meters[] | [.slug, .description, .eventType, .aggregation, .windowSize] | @tsv' $YAML_FILE)

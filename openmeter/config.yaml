@@ -1,0 +1,72 @@
+ingest:
+  kafka:
+    broker: kafka:29092
+
+aggregation:
+  clickhouse:
+    address: clickhouse:9000
+
+sink:
+  minCommitCount: 1
+  namespaceRefetch: 1s
+
+meters:
+  - slug: kyc_journey_data_submitted_slug
+    description: Collection of KYC_JOURNEY_DATA_SUBMITTED events
+    eventType: KYC_JOURNEY_DATA_SUBMITTED
+    aggregation: COUNT
+    windowSize: DAY
+
+  - slug: kyc_auth_access_token_slug
+    description: Collection of KYC_AUTH_ACCESS_TOKEN events
+    eventType: KYC_AUTH_ACCESS_TOKEN
+    aggregation: COUNT
+    windowSize: DAY
+
+  - slug: kyc_auth_access_token_slugsss
+    description: Collection of KYC_AUTH_ACCESS_TOKEN events
+    eventType: KYC_AUTH_ACCESS_TOKEN_LOL
+    aggregation: COUNT
+    windowSize: DAY
+
+  - slug: kyc_journey_ip_check_request_slug
+    description: Collection of KYC_JOURNEY_IP_CHECK_REQUEST events
+    eventType: KYC_JOURNEY_IP_CHECK_REQUEST
+    aggregation: COUNT
+    windowSize: DAY
+
+  - slug: kyc_journey_big_bitrank_requests_slug
+    description: Collection of KYC_JOURNEY_BIG_BITRANK_REQUEST events
+    eventType: KYC_JOURNEY_BIG_BITRANK_REQUEST
+    aggregation: COUNT
+    windowSize: DAY
+
+  - slug: kyc_journey_scorechain_requests_slug
+    description: Collection of KYC_JOURNEY_SCORECHAIN_REQUEST events
+    eventType: KYC_JOURNEY_SCORECHAIN_REQUEST
+    aggregation: COUNT
+    windowSize: DAY
+
+  - slug: kyc_journey_gbg_id3_completed_slug
+    description: Collection of KYC_JOURNEY_GBG_ID3_COMPLETED events
+    eventType: KYC_JOURNEY_GBG_ID3_COMPLETED
+    aggregation: COUNT
+    windowSize: DAY
+
+  - slug: kyc_journey_gbg_started_slug
+    description: Collection of KYC_JOURNEY_GBG_STARTED events
+    eventType: KYC_JOURNEY_GBG_STARTED
+    aggregation: COUNT
+    windowSize: DAY
+
+  - slug: kyc_journey_gbg_end_slug
+    description: Collection of KYC_JOURNEY_GBG_END events
+    eventType: KYC_JOURNEY_GBG_END
+    aggregation: COUNT
+    windowSize: DAY
+
+  - slug: kyc_journey_gbg_idscan_completed_slug
+    description: Collection of KYC_JOURNEY_GBG_IDSCAN_COMPLETED events
+    eventType: KYC_JOURNEY_GBG_IDSCAN_COMPLETED
+    aggregation: COUNT
+    windowSize: DAY

@@ -1,0 +1,68 @@
+name: Deploy OpenMeter config to K8s
+on:
+  workflow_call:
+    inputs:
+      commit-sha:
+        required: true
+        type: string
+        description: Commit SHA
+      branch:
+        required: true
+        type: string
+        description: Branch
+      environment:
+        required: true
+        type: string
+        description: Environment
+
+jobs:
+  deploy:
+    name: Apply OpenMeter config
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          ref: ${{ inputs.commit-sha }}
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
+          chmod +x /usr/bin/yq
+
+      - name: Tailscale
+        uses: tailscale/github-action@main
+        with:
+          oauth-client-id: ${{ secrets.TAILSCALE_OAUTH_CLIENT }}
+          oauth-secret: ${{ secrets.TAILSCALE_OAUTH_SECRET }}
+          tags: tag:ci
+
+      - name: Set OpenMeter URL
+        id: url
+        shell: bash
+        run: |
+          meter_url="https://openmeter.dev.nexera.id"
+
+          if [ ${{ inputs.environment }} == 'staging' ]; then
+            meter_url="https://openmeter.staging.nexera.id"
+          elif [ ${{ inputs.environment }} == 'prod' ]; then
+            meter_url="https://openmeter.prod.nexera.id"
+          fi
+
+          echo "meter_url=$meter_url" >> $GITHUB_OUTPUT
+
+      - name: Update config
+        shell: bash
+        run: |
+          YAML_FILE="services/openmeter/config.yaml"
+          
+          while IFS=$'\t' read -r slug description eventType aggregation _; do
+            status_code=$(curl -s -o /dev/null -w "%{http_code}" https://openmeter.dev.nexera.id/api/v1/meters/"$slug")
+            echo "Response code: $status_code"
+            if [ "$status_code" -gt 200 ]; then
+              echo "Creating meter: $eventType - $slug"
+              json_data="{\"slug\": \"$slug\", \"description\": \"$description\", \"eventType\": \"$eventType\", \"aggregation\": \"$aggregation\"}"
+              curl -X POST -H "Content-Type: application/json" -d "$json_data" https://openmeter.dev.nexera.id/api/v1/meters
+            fi
+          done < <(yq e '.meters[] | [.slug, .description, .eventType, .aggregation] | @tsv' $YAML_FILE)

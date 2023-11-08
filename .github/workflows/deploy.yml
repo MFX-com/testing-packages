@@ -75,11 +75,11 @@ jobs:
           echo $changes
           echo "--------------------"
 
-          changes="${changes//'%'/'%25'}"
-          changes="${changes//$'\n'/'%0A'}"
-          changes="${changes//$'\r'/'%0D'}"
-
           echo "changes=$changes" >> $GITHUB_OUTPUT
+
+          echo 'slack-message<<EOF' >> $GITHUB_OUTPUT
+          echo "$changes" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
 
 #      - name: Set Slack message
 #        id: slack_output
@@ -118,7 +118,7 @@ jobs:
           message_format: "{emoji} *TESTING* deployment to TESTING has {status_message}
           \n\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
           \n\nGrafana\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
-          \n\nChanges\n ${{ steps.summary.outputs.slack-message }}"
+          \n\nChanges\n ${{ steps.summary.changes_output.slack-message }}"
           footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
           notify_when: "success,failure"
         env:

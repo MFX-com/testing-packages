@@ -67,10 +67,14 @@ jobs:
           echo 'slack-message<<EOF' >> $GITHUB_OUTPUT
           echo "$changes" >> $GITHUB_OUTPUT
 
-          for commit_hash in $(git rev-list --ancestry-path ${{ github.event.pull_request.base.sha }}..${{ github.sha }}); do
-            message=$(git log -n 1 --pretty=format:"%s %H" "$commit_hash" | cat)
+          while IFS= read -r line; do
+            message=$(echo -e "$line" | cut -d $'\n' -f1 | cut -c 2-)
             echo "$message" >> $GITHUB_OUTPUT
-          done
+          done < <(curl -s -L \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.BOT_ACCESS_TOKEN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+              https://api.github.com/repos/NexeraProtocol/NexeraID/pulls/2162/commits | jq '.[].commit.message')
 
           echo 'EOF' >> $GITHUB_OUTPUT
 

@@ -96,11 +96,6 @@ jobs:
 #          echo "$slack_message" >> $GITHUB_OUTPUT
 #          echo 'EOF' >> $GITHUB_OUTPUT
 
-#      - uses: mkungla/actions-set-text-output@v1
-#        id: content
-#        with:
-#          text: ${{ steps.changes_output.outputs.changes }}
-
       - name: Notify
         uses: ravsamhq/notify-slack-action@v2
         if: always()

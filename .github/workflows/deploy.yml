@@ -64,21 +64,14 @@ jobs:
             changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }}>)"
           fi
           
-          for commit_hash in $(git rev-list --ancestry-path ${{ github.event.pull_request.base.sha }}..${{ github.sha }}); do
-            message=$(git log -n 1 --pretty=format:"%s %H" "$commit_hash" | cat)
-            changes="$changes\n$message"
-          done
-          
-          echo -e "$changes"
-          echo "-----"
-        
-          echo $changes
-          echo "--------------------"
-
-          echo "changes=$changes" >> $GITHUB_OUTPUT
-
           echo 'slack-message<<EOF' >> $GITHUB_OUTPUT
           echo "$changes" >> $GITHUB_OUTPUT
+
+          for commit_hash in $(git rev-list --ancestry-path ${{ github.event.pull_request.base.sha }}..${{ github.sha }}); do
+            message=$(git log -n 1 --pretty=format:"%s %H" "$commit_hash" | cat)
+            echo "$message" >> $GITHUB_OUTPUT
+          done
+
           echo 'EOF' >> $GITHUB_OUTPUT
 
 #      - name: Set Slack message

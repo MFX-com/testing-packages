@@ -74,16 +74,6 @@ jobs:
 
           echo 'EOF' >> $GITHUB_OUTPUT
 
-#      - name: Set Slack message
-#        id: slack_output
-#        run: |
-#          slack_changes="{emoji} *TESTING* deployment to TESTING has {status_message}
-#          \n\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
-#          \n\nGrafana\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
-#          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
-#
-#          echo "slack_changes=$slack_changes" >> $GITHUB_OUTPUT
-
       - name: Set Slack message
         id: summary
         run: |

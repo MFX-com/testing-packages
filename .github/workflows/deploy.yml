@@ -81,6 +81,16 @@ jobs:
 
           echo "changes=$changes" >> $GITHUB_OUTPUT
 
+      - name: Set Slack message
+        id: slack_output
+        run: |
+          slack_changes="{emoji} *TESTING* deployment to TESTING has {status_message}
+          \n\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
+          \n\nGrafana\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
+          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
+          
+          echo "slack_changes=$slack_changes" >> $GITHUB_OUTPUT
+
       - name: Notify
         uses: ravsamhq/notify-slack-action@v2
         if: always()
@@ -88,10 +98,7 @@ jobs:
           status: ${{ job.status }}
           token: ${{ secrets.GITHUB_TOKEN }}
           notification_title: ""
-          message_format: "{emoji} *TESTING* deployment to TESTING has {status_message}
-          \n\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
-          \n\nGrafana\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
-          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
+          message_format: ${{ steps.slack_output.outputs.slack_changes }}
           footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
           notify_when: "success,failure"
         env:

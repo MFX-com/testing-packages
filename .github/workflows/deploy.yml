@@ -75,11 +75,11 @@ jobs:
           echo $changes
           echo "--------------------"
 
-          changes="${changes//'%'/'%25'}"
-          changes="${changes//$'\n'/'%0A'}"
-          changes="${changes//$'\r'/'%0D'}"
-
           echo "changes=$changes" >> $GITHUB_OUTPUT
+
+          echo 'slack-message<<EOF' >> $GITHUB_OUTPUT
+          echo "$changes" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
 
 #      - name: Set Slack message
 #        id: slack_output

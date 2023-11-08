@@ -67,9 +67,15 @@ jobs:
           echo 'slack-message<<EOF' >> $GITHUB_OUTPUT
           echo "$changes" >> $GITHUB_OUTPUT
 
+          current_sha=""
           while IFS= read -r line; do
-            message=$(echo -e "$line" | cut -d $'\n' -f1 | cut -c 2-)
-            echo "$message" >> $GITHUB_OUTPUT
+            if [ "$current_sha" == "" ]; then
+              current_sha=$(echo -e "$line" | cut -c 2- | rev | cut -c 2- | rev)
+            else
+              message=$(echo -e "$line" | cut -d $'\n' -f1 | cut -c 2-)
+              echo "<${{ github.event.repository.html_url }}/commit/$current_sha|$message>" >> $GITHUB_OUTPUT
+              current_sha=""
+            fi
           done < <(curl -s -L \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.BOT_ACCESS_TOKEN }}" \
@@ -89,11 +95,6 @@ jobs:
 #          echo 'slack-message<<EOF' >> $GITHUB_OUTPUT
 #          echo "$slack_message" >> $GITHUB_OUTPUT
 #          echo 'EOF' >> $GITHUB_OUTPUT
-
-#      - uses: mkungla/actions-set-text-output@v1
-#        id: content
-#        with:
-#          text: ${{ steps.changes_output.outputs.changes }}
 
       - name: Notify
         uses: ravsamhq/notify-slack-action@v2

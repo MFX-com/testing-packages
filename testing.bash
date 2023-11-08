@@ -148,3 +148,18 @@
 #    curl -X POST -H "Content-Type: application/json" -d "$json_data" http://localhost:8888/api/v1/meters
 #  fi
 #done < <(yq e '.meters[] | [.slug, .description, .eventType, .aggregation, .windowSize] | @tsv' $YAML_FILE)
+
+#current_sha=""
+#while IFS= read -r line; do
+#  if [ "$current_sha" == "" ]; then
+#    current_sha=$(echo -e "$line" | cut -c 2- | rev | cut -c 2- | rev)
+#  else
+#    message=$(echo -e "$line" | cut -d $'\n' -f1 | cut -c 2-)
+#    echo "<https://github.com/NexeraProtocol/NexeraID/commit/$current_sha|$message>"
+#    current_sha=""
+#  fi
+#done < <(curl -s -L \
+#  -H "Accept: application/vnd.github+json" \
+#  -H "Authorization: Bearer xxxxx" \
+#  -H "X-GitHub-Api-Version: 2022-11-28" \
+#  https://api.github.com/repos/NexeraProtocol/NexeraID/pulls/2162/commits | jq '.[]' | jq '.sha, .commit.message')

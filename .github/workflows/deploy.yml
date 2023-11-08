@@ -71,8 +71,10 @@ jobs:
           
           echo -e "$changes"
         
+          my_test=$(echo -e $changes)
+        
           echo $changes
-          echo -e "changes=$changes" >> $GITHUB_OUTPUT
+          echo "changes=$my_test" >> $GITHUB_OUTPUT
 
       - name: Notify
         uses: ravsamhq/notify-slack-action@v2

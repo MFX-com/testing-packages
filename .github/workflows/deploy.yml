@@ -72,16 +72,13 @@ jobs:
           echo -e "$changes"
           echo "-----"
         
-#          my_test=$(echo -e $changes)
-        
-          echo "----------"
-        
           echo $changes
           echo "--------------------"
 
           changes="${changes//'%'/'%25'}"
           changes="${changes//$'\n'/'%0A'}"
           changes="${changes//$'\r'/'%0D'}"
+
           echo "changes=$changes" >> $GITHUB_OUTPUT
 
       - name: Notify

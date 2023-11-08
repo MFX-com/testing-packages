@@ -66,13 +66,13 @@ jobs:
           
           for commit_hash in $(git rev-list --ancestry-path ${{ github.event.pull_request.base.sha }}..${{ github.sha }}); do
             message=$(git log -n 1 --pretty=format:"%s %H" "$commit_hash" | cat)
-            changes="$changes\\n$message"
+            changes="$changes\n$message"
           done
           
           echo -e "$changes"
         
           echo $changes
-          echo "changes=$changes" >> $GITHUB_OUTPUT
+          echo -e "changes=$changes" >> $GITHUB_OUTPUT
 
       - name: Notify
         uses: ravsamhq/notify-slack-action@v2

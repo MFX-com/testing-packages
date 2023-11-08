@@ -91,17 +91,22 @@ jobs:
 #
 #          echo "slack_changes=$slack_changes" >> $GITHUB_OUTPUT
 
-      - name: Set Slack message
-        id: summary
-        run: |
-          slack_message="*  Total tests:* 1
-          *  Passes:* 2
-          *  Failed:* 3
-          *  Gist report: 4"
+#      - name: Set Slack message
+#        id: summary
+#        run: |
+#          slack_message="*  Total tests:* 1
+#          *  Passes:* 2
+#          *  Failed:* 3
+#          *  Gist report*: 4"
+#
+#          echo 'slack-message<<EOF' >> $GITHUB_OUTPUT
+#          echo "$slack_message" >> $GITHUB_OUTPUT
+#          echo 'EOF' >> $GITHUB_OUTPUT
 
-          echo 'slack-message<<EOF' >> $GITHUB_OUTPUT
-          echo "$slack_message" >> $GITHUB_OUTPUT
-          echo 'EOF' >> $GITHUB_OUTPUT
+      - uses: mkungla/actions-set-text-output@v1
+        id: content
+        with:
+          text: ${{ steps.changes_output.outputs.changes }}
 
       - name: Notify
         uses: ravsamhq/notify-slack-action@v2
@@ -110,7 +115,7 @@ jobs:
           status: ${{ job.status }}
           token: ${{ secrets.GITHUB_TOKEN }}
           notification_title: ""
-          message_format: ${{ steps.summary.outputs.slack-message }}
+          message_format: ${{ steps.content.outputs.value }}
           footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
           notify_when: "success,failure"
         env:

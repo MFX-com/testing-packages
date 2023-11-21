@@ -1,0 +1,23 @@
+name: PR Agent
+
+on:
+  pull_request:
+  issue_comment:
+jobs:
+  pr_agent_job:
+    name: Run PR agent on every pull request, respond to user comments
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: write
+
+    steps:
+      - name: PR Agent action step
+        id: pragent
+        uses: Codium-ai/pr-agent@main
+        # Additional options https://github.com/Codium-ai/pr-agent/blob/main/pr_agent/settings/configuration.toml
+        env:
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_CODE_SUGGESTIONS.NUM_CODE_SUGGESTIONS: 10 # Increase number of code suggestions

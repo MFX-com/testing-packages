@@ -40,7 +40,7 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
 
   pr_agent_manual_job:
-    if: github.event.issue.pull_request && contains(github.event.comment.body, 'run agent')
+    if: contains(github.event.comment.body, 'run agent')
     name: Run PR agent on user comment
     runs-on: ubuntu-latest
     permissions:

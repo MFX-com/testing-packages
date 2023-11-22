@@ -26,6 +26,7 @@ jobs:
           PR_CODE_SUGGESTIONS.NUM_CODE_SUGGESTIONS: 10 # Increase number of code suggestions
 
   testing:
+    if: always()
     name: Test comment
     runs-on: ubuntu-latest
     permissions:

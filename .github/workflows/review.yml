@@ -22,7 +22,6 @@ jobs:
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENAI.ORG: "MareFX"
           PR_CODE_SUGGESTIONS.NUM_CODE_SUGGESTIONS: 20 # Increase number of code suggestions, default: 5
 
   pr_agent_comment_job:
@@ -49,5 +48,4 @@ jobs:
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENAI.ORG: "MareFX"
           PR_CODE_SUGGESTIONS.NUM_CODE_SUGGESTIONS: 20 # Increase number of code suggestions, default: 5

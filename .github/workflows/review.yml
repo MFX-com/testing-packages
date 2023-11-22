@@ -27,7 +27,7 @@ jobs:
           PR_CODE_SUGGESTIONS.NUM_CODE_SUGGESTIONS: 10 # Increase number of code suggestions
 
   pr_agent_manual_job:
-    if: contains(github.event.comment.body, '/agent')
+    if: contains(github.event.comment.html_url, '/pull/') && contains(github.event.comment.body, '/agent')
     name: Run PR agent on user comment
     runs-on: ubuntu-latest
     permissions:

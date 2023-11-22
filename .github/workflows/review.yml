@@ -3,7 +3,6 @@ name: PR Agent
 on:
   pull_request:
   issue_comment:
-  discussion_comment:
 
 jobs:
   pr_agent_job:

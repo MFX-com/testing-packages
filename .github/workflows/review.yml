@@ -24,3 +24,29 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI.ORG: "MareFX"
           PR_CODE_SUGGESTIONS.NUM_CODE_SUGGESTIONS: 20 # Increase number of code suggestions, default: 5
+
+  pr_agent_comment_job:
+    if: contains(github.event.comment.body, 'run agent')
+    name: Run PR agent on every pull request, respond to user comments
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        run: |
+          gh pr checkout ${{ github.event.issue.number }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required for gh
+
+      - name: PR Agent action step (label)
+        id: pragent
+        uses: Codium-ai/pr-agent@main
+        # Additional options https://github.com/Codium-ai/pr-agent/blob/main/pr_agent/settings/configuration.toml
+        env:
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI.ORG: "MareFX"
+          PR_CODE_SUGGESTIONS.NUM_CODE_SUGGESTIONS: 20 # Increase number of code suggestions, default: 5

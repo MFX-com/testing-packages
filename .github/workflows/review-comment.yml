@@ -14,6 +14,12 @@ jobs:
       contents: write
 
     steps:
+      - uses: actions/checkout@v4
+        run: |
+          gh pr checkout ${{ github.event.issue.number }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required for gh
+
       - name: PR Agent action step (label)
         id: pragent
         uses: Codium-ai/pr-agent@main

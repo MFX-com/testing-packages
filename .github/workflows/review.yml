@@ -3,12 +3,10 @@ name: PR Agent
 on:
   pull_request:
   issue_comment:
-  discussion_comment:
 
 jobs:
   pr_agent_job:
-    if: contains(github.event.pull_request.labels.*.name, 'ready for review')
-    name: Run PR agent on pull request, respond to user comments
+    name: Run PR agent on every pull request, respond to user comments
     runs-on: ubuntu-latest
     permissions:
       issues: write
@@ -16,7 +14,8 @@ jobs:
       contents: write
 
     steps:
-      - name: PR Agent action step
+      - name: PR Agent action step (label)
+        if: ${{ github.event.pull_request.base.ref == 'main' && contains(github.event.pull_request.labels.*.name, 'ready for review') }}
         id: pragent
         uses: Codium-ai/pr-agent@main
         # Additional options https://github.com/Codium-ai/pr-agent/blob/main/pr_agent/settings/configuration.toml
@@ -24,24 +23,15 @@ jobs:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI.ORG: "MareFX"
-          PR_CODE_SUGGESTIONS.NUM_CODE_SUGGESTIONS: 10 # Increase number of code suggestions
+          PR_CODE_SUGGESTIONS.NUM_CODE_SUGGESTIONS: 20 # Increase number of code suggestions, default: 5
 
-  pr_agent_manual_job:
-    if: contains(github.event.comment.html_url, '/pull/') && contains(github.event.comment.body, '/agent')
-    name: Run PR agent on user comment
-    runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      pull-requests: write
-      contents: write
-
-    steps:
-      - name: PR Agent action
-        id: pragent
+      - name: PR Agent action step (comment)
+        if: ${{ github.event.pull_request.base.ref == 'main' && contains(github.event.comment.body, 'run agent') }}
+        id: pragent_comment
         uses: Codium-ai/pr-agent@main
         # Additional options https://github.com/Codium-ai/pr-agent/blob/main/pr_agent/settings/configuration.toml
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI.ORG: "MareFX"
-          PR_CODE_SUGGESTIONS.NUM_CODE_SUGGESTIONS: 10 # Increase number of code suggestions
+          PR_CODE_SUGGESTIONS.NUM_CODE_SUGGESTIONS: 20 # Increase number of code suggestions, default: 5

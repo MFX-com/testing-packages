@@ -1,7 +1,6 @@
 name: PR Agent via comments
 
 on:
-  pull_request:
   issue_comment:
 
 jobs:

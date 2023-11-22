@@ -27,7 +27,7 @@ jobs:
 
   pr_agent_comment_job:
     if: contains(github.event.comment.body, 'run agent')
-    name: Run PR agent on every pull request, respond to user comments
+    name: Run PR agent on commits
     runs-on: ubuntu-latest
     permissions:
       issues: write

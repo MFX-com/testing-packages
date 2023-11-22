@@ -1,12 +1,11 @@
 name: PR Agent
 
 on:
-  pull_request:
   issue_comment:
 
 jobs:
   pr_agent_job:
-    if: ${{ github.event.pull_request.base.ref == 'main' && contains(github.event.pull_request.labels.*.name, 'ready for review') }}
+    if: ${{ github.event.pull_request.base.ref == 'main' && contains(github.event.comment.body, 'run agent') }}
     name: Run PR agent on every pull request, respond to user comments
     runs-on: ubuntu-latest
     permissions:

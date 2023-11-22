@@ -14,6 +14,7 @@ jobs:
 
     steps:
       - name: PR Agent action step
+        if: ${{ github.event.pull_request.base.ref == 'main' }} && contains(github.event.pull_request.labels.*.name, 'ready for review')
         id: pragent
         uses: Codium-ai/pr-agent@main
         # Additional options https://github.com/Codium-ai/pr-agent/blob/main/pr_agent/settings/configuration.toml

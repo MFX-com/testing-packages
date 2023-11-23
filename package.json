@@ -32,7 +32,7 @@
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
     "ethers": "^6.8.0",
-    "lerna": "^7.3.1",
+    "lerna": "^8.0.0",
     "turbo": "^1.10.15"
   },
   "dependencies": {

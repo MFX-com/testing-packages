@@ -108,7 +108,6 @@ jobs:
           echo $changes
           echo "changes=$changes" >> $GITHUB_OUTPUT
 
-
 #      - name: Set Slack message
 #        id: summary
 #        run: |

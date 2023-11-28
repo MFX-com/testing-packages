@@ -97,7 +97,7 @@ jobs:
           changes="Manual deploy"
 
           if [ "${{ github.event.head_commit.message }}" != "" ]; then
-            changes="${{ github.event.head_commit.message }} (<${{ github.event.head_commit.message }}|#0>)"
+            changes="${{ github.event.head_commit.message }}"
           else
             commit_message="$(git log --pretty=%B -1 ${{ inputs.commit-sha }} | cat - | head -n1 | tr -d '"')"
             changes="Manual deploy: $commit_message - <${{ github.event.repository.html_url }}/commit/${{ inputs.commit-sha }}|${{ inputs.commit-sha }}>"

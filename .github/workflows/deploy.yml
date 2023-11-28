@@ -58,6 +58,37 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
 
+#      - name: Set changes
+#        if: always()
+#        id: changes_output
+#        shell: bash
+#        run: |
+#          changes="Manual deploy"
+#
+#          if [ "${{ github.event.pull_request.title }}" != "" ]; then
+#            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }}>)"
+#          fi
+#
+#          echo 'slack-message<<EOF' >> $GITHUB_OUTPUT
+#          echo "$changes" >> $GITHUB_OUTPUT
+#
+#          current_sha=""
+#          while IFS= read -r line; do
+#            if [ "$current_sha" == "" ]; then
+#              current_sha=$(echo -e "$line" | cut -c 2- | rev | cut -c 2- | rev)
+#            else
+#              message=$(echo -e "$line" | cut -d $'\n' -f1 | cut -c 2-)
+#              echo "<${{ github.event.repository.html_url }}/commit/$current_sha|$message>" >> $GITHUB_OUTPUT
+#              current_sha=""
+#            fi
+#          done < <(curl -s -L \
+#            -H "Accept: application/vnd.github+json" \
+#            -H "Authorization: Bearer ${{ secrets.BOT_ACCESS_TOKEN }}" \
+#            -H "X-GitHub-Api-Version: 2022-11-28" \
+#              https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.number }}/commits | jq '.[]' | jq '.sha, .commit.message')
+#
+#          echo 'EOF' >> $GITHUB_OUTPUT
+
       - name: Set changes
         if: always()
         id: changes_output
@@ -65,29 +96,15 @@ jobs:
         run: |
           changes="Manual deploy"
 
-          if [ "${{ github.event.pull_request.title }}" != "" ]; then
-            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }}>)"
+          if [ "${{ github.head_commit.message }}" != "" ]; then
+            changes="${{ github.head_commit.message }} (<${{ github.head_commit.message }}|#0>)"
+          else
+            commit_message="$(git log --pretty=%B -1 ${{ inputs.commit-sha }} | cat - | head -n1 | tr -d '"')"
+            changes="Manual deploy: $commit_message - <${{ github.event.repository.html_url }}/commit/${{ inputs.commit-sha }}|${{ inputs.commit-sha }}>"
           fi
-          
-          echo 'slack-message<<EOF' >> $GITHUB_OUTPUT
-          echo "$changes" >> $GITHUB_OUTPUT
 
-          current_sha=""
-          while IFS= read -r line; do
-            if [ "$current_sha" == "" ]; then
-              current_sha=$(echo -e "$line" | cut -c 2- | rev | cut -c 2- | rev)
-            else
-              message=$(echo -e "$line" | cut -d $'\n' -f1 | cut -c 2-)
-              echo "<${{ github.event.repository.html_url }}/commit/$current_sha|$message>" >> $GITHUB_OUTPUT
-              current_sha=""
-            fi
-          done < <(curl -s -L \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.BOT_ACCESS_TOKEN }}" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-              https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.number }}/commits | jq '.[]' | jq '.sha, .commit.message')
-
-          echo 'EOF' >> $GITHUB_OUTPUT
+          echo $changes
+          echo "changes=$changes" >> $GITHUB_OUTPUT
 
 #      - name: Set Slack message
 #        id: summary
@@ -101,6 +118,22 @@ jobs:
 #          echo "$slack_message" >> $GITHUB_OUTPUT
 #          echo 'EOF' >> $GITHUB_OUTPUT
 
+#      - name: Notify
+#        uses: ravsamhq/notify-slack-action@v2
+#        if: always()
+#        with:
+#          status: ${{ job.status }}
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          notification_title: ""
+#          message_format: "{emoji} *TESTING* deployment to TESTING has {status_message}
+#          \n\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
+#          \n\nGrafana\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
+#          \n\nChanges\n ${{ steps.changes_output.outputs.slack-message }}"
+#          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
+#          notify_when: "success,failure"
+#        env:
+#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
       - name: Notify
         uses: ravsamhq/notify-slack-action@v2
         if: always()
@@ -111,7 +144,7 @@ jobs:
           message_format: "{emoji} *TESTING* deployment to TESTING has {status_message}
           \n\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
           \n\nGrafana\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
-          \n\nChanges\n ${{ steps.changes_output.outputs.slack-message }}"
+          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
           footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
           notify_when: "success,failure"
         env:

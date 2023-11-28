@@ -1,9 +1,14 @@
 name: Deploy docker images
 
+#on:
+#  pull_request:
+#    types:
+#      - closed
+
 on:
-  pull_request:
-    types:
-      - closed
+  push:
+    branches:
+      - staging
 
 jobs:
   setup-job:

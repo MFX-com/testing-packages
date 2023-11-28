@@ -94,12 +94,12 @@ jobs:
         id: changes_output
         shell: bash
         env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
+          GITHUB_CONTEXT: ${{ github.event.head_commit.message }}
         run: |
           changes="Manual deploy"
 
-          if [ "${{ env.GITHUB_CONTEXT.event.head_commit.message }}" != "" ]; then
-            changes="${{ env.GITHUB_CONTEXT.event.head_commit.message }}"
+          if [ "${{ env.GITHUB_CONTEXT }}" != "" ]; then
+            changes="${{ env.GITHUB_CONTEXT }}"
           else
             commit_message="$(git log --pretty=%B -1 ${{ inputs.commit-sha }} | cat - | head -n1 | tr -d '"')"
             changes="Manual deploy: $commit_message - <${{ github.event.repository.html_url }}/commit/${{ inputs.commit-sha }}|${{ inputs.commit-sha }}>"

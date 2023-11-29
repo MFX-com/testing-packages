@@ -58,6 +58,25 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
 
+      - name: Set OpenMeter URL
+        id: open_meter
+        shell: bash
+        run: |
+          meter_url="https://openmeter.internal.nexera.id"
+
+          echo "meter_url=$meter_url" >> $GITHUB_OUTPUT
+
+      - name: Find and replace
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: ${OPEN_METER_URL}
+          replace: ${{ steps.open_meter.outputs.meter_url }}
+          regex: false
+
+      - name: Check file
+        run: |
+          cat openmeter/values.yaml
+
 #      - name: Set changes
 #        if: always()
 #        id: changes_output
@@ -136,21 +155,21 @@ jobs:
 #        env:
 #          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
-      - name: Notify
-        uses: ravsamhq/notify-slack-action@v2
-        if: always()
-        with:
-          status: ${{ job.status }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          notification_title: ""
-          message_format: "{emoji} *TESTING* deployment to TESTING has {status_message}
-          \n\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
-          \n\nGrafana\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
-          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
-          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
-          notify_when: "success,failure"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+#      - name: Notify
+#        uses: ravsamhq/notify-slack-action@v2
+#        if: always()
+#        with:
+#          status: ${{ job.status }}
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          notification_title: ""
+#          message_format: "{emoji} *TESTING* deployment to TESTING has {status_message}
+#          \n\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
+#          \n\nGrafana\n <${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.html_url }}>\n
+#          \n\nChanges\n ${{ steps.changes_output.outputs.changes }}"
+#          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
+#          notify_when: "success,failure"
+#        env:
+#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
 #  deploy-dev:
 #    name: Deploy to Dev

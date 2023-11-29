@@ -66,11 +66,26 @@ jobs:
 
           echo "meter_url=$meter_url" >> $GITHUB_OUTPUT
 
-      - name: Find and replace
+      - name: Set OpenMeter Meters
+        id: open_meter_meters
+        shell: bash
+        run: |
+          meters=$(yq -r '.meters' config.yaml)
+
+          echo "meters=$meters" >> $GITHUB_OUTPUT
+
+      - name: Find and replace URL
         uses: jacobtomlinson/gha-find-replace@v3
         with:
           find: ${OPEN_METER_URL}
           replace: ${{ steps.open_meter.outputs.meter_url }}
+          regex: false
+
+      - name: Find and replace meters
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: ${OPEN_METER_METERS}
+          replace: ${{ steps.open_meter_meters.outputs.meters }}
           regex: false
 
       - name: Check file

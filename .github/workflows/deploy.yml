@@ -80,6 +80,10 @@ jobs:
           echo "$(yq -r '.meters' config.yaml)" >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT
 
+      - name: Check output
+        run: |
+          echo ${{ steps.open_meter_meters.outputs.meters }}
+
       - name: Find and replace URL
         uses: jacobtomlinson/gha-find-replace@v3
         with:

@@ -7,7 +7,6 @@ replicaCount: 1
 image:
   repository: ghcr.io/openmeterio/openmeter
   pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
 imagePullSecrets: []
@@ -15,28 +14,17 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  # Specifies whether a service account should be created
   create: false
-  # Annotations to add to the service account
   annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
   name: ""
 
 podAnnotations: {}
 
 podSecurityContext:
   {}
-  # fsGroup: 2000
 
 securityContext:
   {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
 
 service:
   type: ClusterIP
@@ -44,20 +32,18 @@ service:
 
 ingress:
   enabled: true
-  className: "nginx" # Used for private one
-#  className: "nginx-public"
+  className: "nginx"
   annotations:
     external-dns: private
-#    external-dns: public
     nginx.ingress.kubernetes.io/proxy-body-size: "10m"
   hosts:
-    - host: ${OPENMETER_URL}
+    - host: ${OPEN_METER_URL}
       paths:
         - path: /
           pathType: Prefix
   tls:
     - hosts:
-        - ${OPENMETER_URL}
+        - ${OPEN_METER_URL}
       secretName: openmeter-tls
 
 cert:
@@ -66,27 +52,16 @@ cert:
   issuer: letsencrypt-prod
   secretName: openmeter-tls
   dnsNames:
-    - ${OPENMETER_URL}
+    - ${OPEN_METER_URL}
 
 resources:
   {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
 
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 
@@ -94,66 +69,6 @@ tolerations: []
 
 affinity: {}
 
-# config is a subset of OpenMeter's config.yaml file
 config:
   meters:
-    - slug: m1
-      description: API calls
-      eventType: api-calls
-      valueProperty: $.duration_ms
-      aggregation: SUM
-      groupBy:
-        method: $.method
-        path: $.path
-    - slug: m2
-      description: Open AI Tokens
-      eventType: openai
-      valueProperty: $.total_tokens
-      aggregation: SUM
-      groupBy:
-        model: $.model
-
-    - slug: kyc_journey_data_submitted_slug
-      description: Collection of KYC_JOURNEY_DATA_SUBMITTED events
-      eventType: KYC_JOURNEY_DATA_SUBMITTED
-      aggregation: COUNT
-
-    - slug: kyc_auth_access_token_slug
-      description: Collection of KYC_AUTH_ACCESS_TOKEN events
-      eventType: KYC_AUTH_ACCESS_TOKEN
-      aggregation: COUNT
-
-    - slug: kyc_journey_ip_check_request_slug
-      description: Collection of KYC_JOURNEY_IP_CHECK_REQUEST events
-      eventType: KYC_JOURNEY_IP_CHECK_REQUEST
-      aggregation: COUNT
-
-    - slug: kyc_journey_big_bitrank_requests_slug
-      description: Collection of KYC_JOURNEY_BIG_BITRANK_REQUEST events
-      eventType: KYC_JOURNEY_BIG_BITRANK_REQUEST
-      aggregation: COUNT
-
-    - slug: kyc_journey_scorechain_requests_slug
-      description: Collection of KYC_JOURNEY_SCORECHAIN_REQUEST events
-      eventType: KYC_JOURNEY_SCORECHAIN_REQUEST
-      aggregation: COUNT
-
-    - slug: kyc_journey_gbg_id3_completed_slug
-      description: Collection of KYC_JOURNEY_GBG_ID3_COMPLETED events
-      eventType: KYC_JOURNEY_GBG_ID3_COMPLETED
-      aggregation: COUNT
-
-    - slug: kyc_journey_gbg_started_slug
-      description: Collection of KYC_JOURNEY_GBG_STARTED events
-      eventType: KYC_JOURNEY_GBG_STARTED
-      aggregation: COUNT
-
-    - slug: kyc_journey_gbg_end_slug
-      description: Collection of KYC_JOURNEY_GBG_END events
-      eventType: KYC_JOURNEY_GBG_END
-      aggregation: COUNT
-
-    - slug: kyc_journey_gbg_idscan_completed_slug
-      description: Collection of KYC_JOURNEY_GBG_IDSCAN_COMPLETED events
-      eventType: KYC_JOURNEY_GBG_IDSCAN_COMPLETED
-      aggregation: COUNT
+    []

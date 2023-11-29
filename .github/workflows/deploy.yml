@@ -82,7 +82,12 @@ jobs:
 #
 #      - name: Check output
 #        run: |
-#          echo ${{ steps.open_meter_meters.outputs.meters }}
+#          echo ${{ steps.open_meter_meters.outputs.meters }}#
+
+      - name: Update config values
+        run: |
+          yq '.config.meters += load("config.yaml").meters' values.yaml >> tmp.yaml
+          mv tmp.yaml values.yaml
 
       - name: Find and replace URL
         uses: jacobtomlinson/gha-find-replace@v3

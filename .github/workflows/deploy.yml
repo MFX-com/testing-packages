@@ -85,9 +85,9 @@ jobs:
 #          echo ${{ steps.open_meter_meters.outputs.meters }}#
 
       - name: Update config values
-        working-directory: ./openmeter
+        working-directory: ./deploy/openmeter
         run: |
-          yq '.config.meters += load("config.yaml").meters' values.yaml >> tmp.yaml
+          yq '.config.meters += load("../../openmeter/config.yaml").meters' values.yaml >> tmp.yaml
           mv tmp.yaml values.yaml
 
       - name: Find and replace URL
@@ -105,7 +105,7 @@ jobs:
 #          regex: false
 
       - name: Check file
-        working-directory: ./openmeter
+        working-directory: ./deploy/openmeter
         run: |
           cat values.yaml
 

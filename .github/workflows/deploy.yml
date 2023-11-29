@@ -76,9 +76,7 @@ jobs:
         shell: bash
         working-directory: ./openmeter
         run: |
-          meters=$(yq -r '.meters' config.yaml)
-
-          echo "meters=$meters" >> $GITHUB_OUTPUT
+          echo "meters=$(yq -r '.meters' config.yaml)" >> $GITHUB_OUTPUT
 
       - name: Find and replace URL
         uses: jacobtomlinson/gha-find-replace@v3

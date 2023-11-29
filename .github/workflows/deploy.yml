@@ -71,18 +71,18 @@ jobs:
 
           echo "meter_url=$meter_url" >> $GITHUB_OUTPUT
 
-      - name: Set OpenMeter Meters
-        id: open_meter_meters
-        shell: bash
-        working-directory: ./openmeter
-        run: |
-          echo "stdout<<EOF" >> $GITHUB_OUTPUT
-          echo "$(yq -r '.meters' config.yaml)" >> $GITHUB_OUTPUT
-          echo 'EOF' >> $GITHUB_OUTPUT
-
-      - name: Check output
-        run: |
-          echo ${{ steps.open_meter_meters.outputs.meters }}
+#      - name: Set OpenMeter Meters
+#        id: open_meter_meters
+#        shell: bash
+#        working-directory: ./openmeter
+#        run: |
+#          echo "stdout<<EOF" >> $GITHUB_OUTPUT
+#          echo "$(yq -r '.meters' config.yaml)" >> $GITHUB_OUTPUT
+#          echo 'EOF' >> $GITHUB_OUTPUT
+#
+#      - name: Check output
+#        run: |
+#          echo ${{ steps.open_meter_meters.outputs.meters }}
 
       - name: Find and replace URL
         uses: jacobtomlinson/gha-find-replace@v3
@@ -90,13 +90,13 @@ jobs:
           find: ${OPEN_METER_URL}
           replace: ${{ steps.open_meter.outputs.meter_url }}
           regex: false
-
-      - name: Find and replace meters
-        uses: jacobtomlinson/gha-find-replace@v3
-        with:
-          find: ${OPEN_METER_METERS}
-          replace: ${{ steps.open_meter_meters.outputs.meters }}
-          regex: false
+#
+#      - name: Find and replace meters
+#        uses: jacobtomlinson/gha-find-replace@v3
+#        with:
+#          find: ${OPEN_METER_METERS}
+#          replace: ${{ steps.open_meter_meters.outputs.meters }}
+#          regex: false
 
       - name: Check file
         working-directory: ./openmeter

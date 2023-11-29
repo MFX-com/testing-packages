@@ -97,4 +97,4 @@ affinity: {}
 # config is a subset of OpenMeter's config.yaml file
 config:
   meters:
-    ${OPEN_METER_METERS}
+    []

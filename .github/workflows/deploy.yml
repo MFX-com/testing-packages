@@ -58,6 +58,11 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
 
+      - name: Check version
+        shell: bash
+        run: |
+          yq --version
+
       - name: Set OpenMeter URL
         id: open_meter
         shell: bash
@@ -69,6 +74,7 @@ jobs:
       - name: Set OpenMeter Meters
         id: open_meter_meters
         shell: bash
+        working-directory: ./openmeter
         run: |
           meters=$(yq -r '.meters' config.yaml)
 
@@ -89,8 +95,9 @@ jobs:
           regex: false
 
       - name: Check file
+        working-directory: ./openmeter
         run: |
-          cat openmeter/values.yaml
+          cat values.yaml
 
 #      - name: Set changes
 #        if: always()

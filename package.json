@@ -30,13 +30,13 @@
     "bump:@MFX-com/private": "turbo run bump --filter @MFX-com/private"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.26.2",
-    "ethers": "^6.8.0",
-    "lerna": "^8.0.0",
-    "turbo": "^1.10.15"
+    "@changesets/cli": "^2.27.1",
+    "ethers": "^6.9.0",
+    "lerna": "^8.0.1",
+    "turbo": "^1.11.2"
   },
   "dependencies": {
-    "@aws-sdk/client-rds-data": "^3.427.0",
+    "@aws-sdk/client-rds-data": "^3.474.0",
     "drizzle-orm": "^0.28.6"
   }
 }

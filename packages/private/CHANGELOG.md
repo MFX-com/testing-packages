@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.11](https://github.com/MFX-com/testing-packages/compare/@MFX-org/priv@1.1.10...@MFX-org/priv@1.1.11) (2023-12-15)
+
+**Note:** Version bump only for package @MFX-org/priv
+
+
+
+
+
 ## [1.1.10](https://github.com/MFX-com/testing-packages/compare/@MFX-org/priv@1.1.9...@MFX-org/priv@1.1.10) (2023-12-15)
 
 **Note:** Version bump only for package @MFX-org/priv

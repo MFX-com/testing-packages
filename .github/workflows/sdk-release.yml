@@ -217,8 +217,8 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pnpm --filter "@MFX-org/first" publish --no-git-checks --registry https://npm.pkg.github.com/
-          pnpm --filter "@MFX-org/second" publish --no-git-checks --registry https://npm.pkg.github.com/
+          pnpm --filter "@MFX-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/
+          pnpm --filter "@MFX-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/
 
 #      - name: Publish to public npm
 #        env:

@@ -115,6 +115,7 @@ jobs:
 #          --output /dev/null
 
       - name: Bump versions
+        if: ${{ github.ref == 'refs/heads/development' }}
         shell: bash
         env:
           GH_TOKEN: ${{ steps.generate_token.outputs.token }}

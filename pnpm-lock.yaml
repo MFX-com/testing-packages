@@ -64,7 +64,7 @@ importers:
         specifier: ^9.5.0
         version: 9.5.0
     devDependencies:
-      '@MFX-org/second':
+      '@MFX-com/second':
         specifier: workspace:*
         version: link:../second
 

@@ -163,9 +163,9 @@ jobs:
 
 #      - name: Bump versions
 #        run: |
-#          pnpm run --filter "@MFX-org/first" bump
-#          pnpm run --filter "@MFX-org/private" bump
-#          pnpm run --filter "@MFX-org/second" bump
+#          pnpm run --filter "@MFX-com/first" bump
+#          pnpm run --filter "@MFX-com/private" bump
+#          pnpm run --filter "@MFX-com/second" bump
 
       # People can bump manually a package in their merge request
       # Once merged to development, it will automatically take it in consideration
@@ -178,7 +178,7 @@ jobs:
 #          touch .changeset/my-commit-message.md
 #          cat <<EOF > .changeset/my-commit-message.md
 #            ---
-#            "@MFX-org/second": patch
+#            "@MFX-com/second": patch
 #            ---
 #
 #            AAA
@@ -206,8 +206,8 @@ jobs:
 
 #      - name: Build
 #        run: |
-#          pnpm run build:@MFX-org/first
-#          pnpm run build:@MFX-org/second
+#          pnpm run build:@MFX-com/first
+#          pnpm run build:@MFX-com/second
 
 #      - name: Check version again
 #        run: |
@@ -225,8 +225,8 @@ jobs:
 #          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
 #        run: |
 #          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
-#          pnpm --filter "@MFX-org/first" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
-#          pnpm --filter "@MFX-org/second" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
+#          pnpm --filter "@MFX-com/first" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
+#          pnpm --filter "@MFX-com/second" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
 
 
 #      - name: Slack Notification

@@ -3,15 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.1.10](https://github.com/MFX-com/testing-packages/compare/@MFX-org/priv@1.1.9...@MFX-org/priv@1.1.10) (2023-12-15)
+## [1.1.10](https://github.com/MFX-com/testing-packages/compare/@MFX-com/priv@1.1.9...@MFX-com/priv@1.1.10) (2023-12-15)
 
-**Note:** Version bump only for package @MFX-org/priv
-
-
+**Note:** Version bump only for package @MFX-com/priv
 
 
 
-## [1.1.9](https://github.com/MFX-com/testing-packages/compare/@MFX-org/priv@1.1.8...@MFX-org/priv@1.1.9) (2023-11-23)
+
+
+## [1.1.9](https://github.com/MFX-com/testing-packages/compare/@MFX-com/priv@1.1.8...@MFX-com/priv@1.1.9) (2023-11-23)
 
 
 ### Bug Fixes
@@ -33,17 +33,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.1.7](https://github.com/MFX-com/testing-packages/compare/@MFX-org/priv@1.1.6...@MFX-org/priv@1.1.7) (2023-06-29)
+## [1.1.7](https://github.com/MFX-com/testing-packages/compare/@MFX-com/priv@1.1.6...@MFX-com/priv@1.1.7) (2023-06-29)
 
-**Note:** Version bump only for package @MFX-org/priv
-
-
+**Note:** Version bump only for package @MFX-com/priv
 
 
 
-## [1.1.6](https://github.com/MFX-com/testing-packages/compare/@MFX-org/priv@0.1.5...@MFX-org/priv@1.1.6) (2023-06-29)
 
-**Note:** Version bump only for package @MFX-org/priv
+
+## [1.1.6](https://github.com/MFX-com/testing-packages/compare/@MFX-com/priv@0.1.5...@MFX-com/priv@1.1.6) (2023-06-29)
+
+**Note:** Version bump only for package @MFX-com/priv
 
 
 
@@ -51,7 +51,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.1.5 (2023-06-29)
 
-**Note:** Version bump only for package @MFX-org/priv
+**Note:** Version bump only for package @MFX-com/priv
 
 
 
@@ -59,23 +59,23 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.1.4 (2023-06-29)
 
-**Note:** Version bump only for package @MFX-org/priv
+**Note:** Version bump only for package @MFX-com/priv
 
 
 
 
 
-## [0.1.3](https://github.com/MFX-com/testing-packages/compare/@MFX-org/priv@0.0.10...@MFX-org/priv@0.1.3) (2023-06-28)
+## [0.1.3](https://github.com/MFX-com/testing-packages/compare/@MFX-com/priv@0.0.10...@MFX-com/priv@0.1.3) (2023-06-28)
 
-**Note:** Version bump only for package @MFX-org/priv
-
-
+**Note:** Version bump only for package @MFX-com/priv
 
 
 
-## [0.1.2](https://github.com/MFX-com/testing-packages/compare/@MFX-org/priv@0.0.10...@MFX-org/priv@0.1.2) (2023-06-28)
 
-**Note:** Version bump only for package @MFX-org/priv
+
+## [0.1.2](https://github.com/MFX-com/testing-packages/compare/@MFX-com/priv@0.0.10...@MFX-com/priv@0.1.2) (2023-06-28)
+
+**Note:** Version bump only for package @MFX-com/priv
 
 
 
@@ -83,7 +83,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.1.1 (2023-06-28)
 
-**Note:** Version bump only for package @MFX-org/priv
+**Note:** Version bump only for package @MFX-com/priv
 
 
 
@@ -100,9 +100,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.0.13](https://github.com/MFX-com/testing-packages/compare/@MFX-org/priv@0.0.10...@MFX-org/priv@0.0.13) (2023-06-28)
+## [0.0.13](https://github.com/MFX-com/testing-packages/compare/@MFX-com/priv@0.0.10...@MFX-com/priv@0.0.13) (2023-06-28)
 
-**Note:** Version bump only for package @MFX-org/priv
+**Note:** Version bump only for package @MFX-com/priv
 
 
 
@@ -111,7 +111,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.0.12 (2023-06-28)
 
-**Note:** Version bump only for package @MFX-org/priv
+**Note:** Version bump only for package @MFX-com/priv
 
 
 
@@ -119,7 +119,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.0.11 (2023-06-28)
 
-**Note:** Version bump only for package @MFX-org/priv
+**Note:** Version bump only for package @MFX-com/priv
 
 
 
@@ -127,7 +127,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.0.10 (2023-06-28)
 
-**Note:** Version bump only for package @MFX-org/priv
+**Note:** Version bump only for package @MFX-com/priv
 
 
 

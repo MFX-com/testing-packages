@@ -3,15 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.8.4](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@1.8.3...@MFX-org/second@1.8.4) (2023-12-15)
+## [1.8.4](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@1.8.3...@MFX-com/second@1.8.4) (2023-12-15)
 
-**Note:** Version bump only for package @MFX-org/second
-
-
+**Note:** Version bump only for package @MFX-com/second
 
 
 
-## [1.8.3](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@1.8.2...@MFX-org/second@1.8.3) (2023-11-23)
+
+
+## [1.8.3](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@1.8.2...@MFX-com/second@1.8.3) (2023-11-23)
 
 
 ### Bug Fixes
@@ -22,23 +22,23 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.8.2](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@1.8.1...@MFX-org/second@1.8.2) (2023-09-23)
+## [1.8.2](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@1.8.1...@MFX-com/second@1.8.2) (2023-09-23)
 
-**Note:** Version bump only for package @MFX-org/second
-
-
-
-
-
-## [1.8.1](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@1.8.0...@MFX-org/second@1.8.1) (2023-08-29)
-
-**Note:** Version bump only for package @MFX-org/second
+**Note:** Version bump only for package @MFX-com/second
 
 
 
 
 
-# [1.8.0](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@1.7.0...@MFX-org/second@1.8.0) (2023-08-11)
+## [1.8.1](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@1.8.0...@MFX-com/second@1.8.1) (2023-08-29)
+
+**Note:** Version bump only for package @MFX-com/second
+
+
+
+
+
+# [1.8.0](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@1.7.0...@MFX-com/second@1.8.0) (2023-08-11)
 
 
 ### Features
@@ -59,8 +59,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **@MFX-org/first:** new version ([025d03f](https://github.com/MFX-com/testing-packages/commit/025d03fc6dc92608fcb44c2abe9d9f0b7916e034))
-* **@MFX-org/first:** new version! ([d048687](https://github.com/MFX-com/testing-packages/commit/d04868769bdc97420b74113cd07055872eef69b4))
+* **@MFX-com/first:** new version ([025d03f](https://github.com/MFX-com/testing-packages/commit/025d03fc6dc92608fcb44c2abe9d9f0b7916e034))
+* **@MFX-com/first:** new version! ([d048687](https://github.com/MFX-com/testing-packages/commit/d04868769bdc97420b74113cd07055872eef69b4))
 * **testing:** bump version ([#28](https://github.com/MFX-com/testing-packages/issues/28)) ([95d13ae](https://github.com/MFX-com/testing-packages/commit/95d13ae75037675af2054be485f3e12b815c0dff))
 * **test:** update ([10da64d](https://github.com/MFX-com/testing-packages/commit/10da64dc8397d97ebee6a27bf86e6561b36b5fe0))
 
@@ -78,8 +78,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **@MFX-org/first:** new version ([025d03f](https://github.com/MFX-com/testing-packages/commit/025d03fc6dc92608fcb44c2abe9d9f0b7916e034))
-* **@MFX-org/first:** new version! ([d048687](https://github.com/MFX-com/testing-packages/commit/d04868769bdc97420b74113cd07055872eef69b4))
+* **@MFX-com/first:** new version ([025d03f](https://github.com/MFX-com/testing-packages/commit/025d03fc6dc92608fcb44c2abe9d9f0b7916e034))
+* **@MFX-com/first:** new version! ([d048687](https://github.com/MFX-com/testing-packages/commit/d04868769bdc97420b74113cd07055872eef69b4))
 * **testing:** bump version ([#28](https://github.com/MFX-com/testing-packages/issues/28)) ([95d13ae](https://github.com/MFX-com/testing-packages/commit/95d13ae75037675af2054be485f3e12b815c0dff))
 * **test:** update ([10da64d](https://github.com/MFX-com/testing-packages/commit/10da64dc8397d97ebee6a27bf86e6561b36b5fe0))
 
@@ -88,31 +88,31 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [1.5.3](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@1.5.2...@MFX-org/second@1.5.3) (2023-06-29)
+## [1.5.3](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@1.5.2...@MFX-com/second@1.5.3) (2023-06-29)
 
-**Note:** Version bump only for package @MFX-org/second
-
-
-
-
-
-## [1.5.2](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.5.1...@MFX-org/second@1.5.2) (2023-06-29)
-
-**Note:** Version bump only for package @MFX-org/second
+**Note:** Version bump only for package @MFX-com/second
 
 
 
 
 
-## [0.5.1](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.5.0...@MFX-org/second@0.5.1) (2023-06-29)
+## [1.5.2](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@0.5.1...@MFX-com/second@1.5.2) (2023-06-29)
 
-**Note:** Version bump only for package @MFX-org/second
-
-
+**Note:** Version bump only for package @MFX-com/second
 
 
 
-# [0.5.0](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.4.0...@MFX-org/second@0.5.0) (2023-06-29)
+
+
+## [0.5.1](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@0.5.0...@MFX-com/second@0.5.1) (2023-06-29)
+
+**Note:** Version bump only for package @MFX-com/second
+
+
+
+
+
+# [0.5.0](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@0.4.0...@MFX-com/second@0.5.0) (2023-06-29)
 
 
 ### Features
@@ -145,7 +145,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-# [0.2.0](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.1.4...@MFX-org/second@0.2.0) (2023-06-28)
+# [0.2.0](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@0.1.4...@MFX-com/second@0.2.0) (2023-06-28)
 
 
 ### Features
@@ -156,25 +156,25 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.1.4](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.1.3...@MFX-org/second@0.1.4) (2023-06-28)
+## [0.1.4](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@0.1.3...@MFX-com/second@0.1.4) (2023-06-28)
 
-**Note:** Version bump only for package @MFX-org/second
-
-
-
-
-
-## [0.1.3](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.0.7...@MFX-org/second@0.1.3) (2023-06-28)
-
-**Note:** Version bump only for package @MFX-org/second
+**Note:** Version bump only for package @MFX-com/second
 
 
 
 
 
-## [0.1.2](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.0.7...@MFX-org/second@0.1.2) (2023-06-28)
+## [0.1.3](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@0.0.7...@MFX-com/second@0.1.3) (2023-06-28)
 
-**Note:** Version bump only for package @MFX-org/second
+**Note:** Version bump only for package @MFX-com/second
+
+
+
+
+
+## [0.1.2](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@0.0.7...@MFX-com/second@0.1.2) (2023-06-28)
+
+**Note:** Version bump only for package @MFX-com/second
 
 
 
@@ -182,7 +182,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.1.1 (2023-06-28)
 
-**Note:** Version bump only for package @MFX-org/second
+**Note:** Version bump only for package @MFX-com/second
 
 
 
@@ -199,9 +199,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.0.10](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.0.7...@MFX-org/second@0.0.10) (2023-06-28)
+## [0.0.10](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@0.0.7...@MFX-com/second@0.0.10) (2023-06-28)
 
-**Note:** Version bump only for package @MFX-org/second
+**Note:** Version bump only for package @MFX-com/second
 
 
 
@@ -210,7 +210,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.0.9 (2023-06-28)
 
-**Note:** Version bump only for package @MFX-org/second
+**Note:** Version bump only for package @MFX-com/second
 
 
 
@@ -218,23 +218,23 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.0.8 (2023-06-28)
 
-**Note:** Version bump only for package @MFX-org/second
+**Note:** Version bump only for package @MFX-com/second
 
 
 
 
 
-## [0.0.7](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.0.6...@MFX-org/second@0.0.7) (2023-06-28)
+## [0.0.7](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@0.0.6...@MFX-com/second@0.0.7) (2023-06-28)
 
-**Note:** Version bump only for package @MFX-org/second
-
-
+**Note:** Version bump only for package @MFX-com/second
 
 
 
-## [0.0.6](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@0.0.4...@MFX-org/second@0.0.6) (2023-06-28)
 
-**Note:** Version bump only for package @MFX-org/second
+
+## [0.0.6](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@0.0.4...@MFX-com/second@0.0.6) (2023-06-28)
+
+**Note:** Version bump only for package @MFX-com/second
 
 
 
@@ -245,7 +245,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.0.1 (2023-06-21)
 
-**Note:** Version bump only for package @MFX-org/second
+**Note:** Version bump only for package @MFX-com/second
 
 # second
 

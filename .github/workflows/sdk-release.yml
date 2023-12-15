@@ -213,7 +213,24 @@ jobs:
 #        run: |
 #          cat packages/first/package.json
 
-      - name: Publish to npm
+      - name: Publish to npm (dev)
+        if: ${{ github.ref == 'refs/heads/development' }}
+        env:
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pnpm --filter "@MFX-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag dev
+          pnpm --filter "@MFX-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag dev
+
+      - name: Publish to npm (staging)
+        if: ${{ github.ref == 'refs/heads/staging' }}
+        env:
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pnpm --filter "@MFX-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag staging
+          pnpm --filter "@MFX-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag staging
+
+      - name: Publish to npm (prod)
+        if: ${{ github.ref == 'refs/heads/main' }}
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

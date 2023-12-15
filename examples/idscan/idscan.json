@@ -1,0 +1,246 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "$metadata": {
+    "uris": {
+      "jsonLdContext": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/main/examples/idscan/idscan.jsonld",
+      "jsonSchema": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/main/examples/idscan/idscan.json"
+    },
+    "type": "IDScan",
+    "version": "1.1"
+  },
+  "required": [
+    "@context",
+    "id",
+    "type",
+    "issuanceDate",
+    "credentialSubject",
+    "credentialSchema",
+    "credentialStatus",
+    "issuer"
+  ],
+  "properties": {
+    "@context": {
+      "type": ["string", "array", "object"]
+    },
+    "id": {
+      "type": "string"
+    },
+    "type": {
+      "type": ["string", "array"],
+      "items": {
+        "type": "string"
+      }
+    },
+    "issuer": {
+      "type": ["string", "object"],
+      "format": "uri",
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "issuanceDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expirationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "credentialSchema": {
+      "type": "object",
+      "required": ["id", "type"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uri"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "subjectPosition": {
+      "type": "string",
+      "enum": ["none", "index", "value"]
+    },
+    "merklizationRootPosition": {
+      "type": "string",
+      "enum": ["none", "index", "value"]
+    },
+    "revNonce": {
+      "type": "integer"
+    },
+    "version": {
+      "type": "integer"
+    },
+    "updatable": {
+      "type": "boolean"
+    },
+    "credentialSubject": {
+      "type": "object",
+      "properties": {
+        "journeyId": {
+          "type": "string",
+          "nullable": true
+        },
+        "highLevelResult": {
+          "type": "string",
+          "nullable": true
+        },
+        "firstName": {
+          "type": "string",
+          "nullable": true
+        },
+        "middleName": {
+          "type": "string",
+          "nullable": true
+        },
+        "lastName": {
+          "type": "string",
+          "nullable": true
+        },
+        "gender": {
+          "type": "string",
+          "nullable": true
+        },
+        "age": {
+          "type": "number",
+          "nullable": true
+        },
+        "citizenship": {
+          "type": "string",
+          "nullable": true
+        },
+        "documentCategory": {
+          "type": "string",
+          "nullable": true
+        },
+        "documentName": {
+          "type": "string",
+          "nullable": true
+        },
+        "documentSide": {
+          "type": "string",
+          "nullable": true
+        },
+        "documentType": {
+          "type": "string",
+          "nullable": true
+        },
+        "entryDate": {
+          "type": "string",
+          "format": "date",
+          "nullable": true
+        },
+        "entryTime": {
+          "type": "string",
+          "nullable": true
+        },
+        "fullName": {
+          "type": "string",
+          "nullable": true
+        },
+        "addressLine1": {
+          "type": "string",
+          "nullable": true
+        },
+        "addressLine2": {
+          "type": "string",
+          "nullable": true
+        },
+        "birthDate": {
+          "type": "string",
+          "format": "date",
+          "nullable": true
+        },
+        "birthPlace": {
+          "type": "string",
+          "nullable": true
+        },
+        "highLevelResultDetails": {
+          "type": "object",
+          "nullable": true,
+          "properties": {
+            "documentOverallValidation": {
+              "type": "string"
+            },
+            "documentBlockingPolicy": {
+              "type": "string"
+            },
+            "documentExpiry": {
+              "type": "string"
+            },
+            "documentSupport": {
+              "type": "string"
+            },
+            "documentValidation": {
+              "type": "string"
+            },
+            "faceMatchValidation": {
+              "type": "string"
+            },
+            "accumulativeLivenessResult": {
+              "type": "string"
+            }
+          }
+        },
+        "faceMatchScore": {
+          "type": "string",
+          "nullable": true
+        },
+        "qualityCheckDetails": {
+          "type": "array",
+          "nullable": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "state": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "validationDetails": {
+          "type": "array",
+          "nullable": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "result": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "journeyId",
+        "id"
+      ]
+    }
+  }
+}

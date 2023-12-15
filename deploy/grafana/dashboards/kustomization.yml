@@ -1,0 +1,34 @@
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    grafana_dashboard: "1"
+
+namespace: monitoring
+
+commonAnnotations:
+  grafana_folder: Logging
+
+configMapGenerator:
+  - name: dashboards-k8s-api
+    files: [api.json]
+
+  - name: dashboards-k8s-cms
+    files: [cms.json]
+
+  - name: dashboards-k8s-data-analytics
+    files: [data-analytics.json]
+
+  - name: dashboards-k8s-issuer
+    files:
+      [
+        issuer-api.json,
+        issuer-api-ui.json,
+        issuer-publisher.json,
+        issuer-notifications.json,
+      ]
+
+  - name: dashboards-k8s-opal
+    files: [opal-client.json, opal-server.json]
+
+  - name: dashboards-k8s-zk-verifier
+    files: [zk-verifier.json]

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.3](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@1.8.2...@MFX-org/second@1.8.3) (2023-11-23)
+
+
+### Bug Fixes
+
+* **dependencies:** update dependency lerna to v8 ([9d3181c](https://github.com/MFX-com/testing-packages/commit/9d3181cbbf32dda008cf2b2cd5366daf072dc749))
+
+
+
+
+
+## [1.8.2](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@1.8.1...@MFX-org/second@1.8.2) (2023-09-23)
+
+**Note:** Version bump only for package @MFX-org/second
+
+
+
+
+
 ## [1.8.1](https://github.com/MFX-com/testing-packages/compare/@MFX-org/second@1.8.0...@MFX-org/second@1.8.1) (2023-08-29)
 
 **Note:** Version bump only for package @MFX-org/second

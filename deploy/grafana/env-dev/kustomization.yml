@@ -1,0 +1,18 @@
+resources:
+  - ../dashboards
+
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    grafana_dashboard: "1"
+
+namespace: monitoring
+
+commonAnnotations:
+  grafana_folder: Logging
+
+configMapGenerator:
+  - files:
+      - dashboards/playwright-ui.json
+      - dashboards/vitest-ui.json
+    name: dashboards-ui-tests

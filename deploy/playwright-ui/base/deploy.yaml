@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: playwright-ui
+spec:
+  replicas: 1
+  template:
+    spec:
+      serviceAccountName: playwright-ui
+      containers:
+        - image: ghcr.io/nexeraprotocol/nexeraid/apps/playwright-ui:placeholder
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 3
+            periodSeconds: 3
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: playwright-ui
+          envFrom:
+            - secretRef:
+                name: playwright-ui
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1Gi
+            requests:
+              cpu: 300m
+              memory: 384Mi

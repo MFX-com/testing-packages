@@ -1,0 +1,717 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "$metadata": {
+    "uris": {
+      "jsonLdContext": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/main/examples/id3/id3.jsonld",
+      "jsonSchema": "https://raw.githubusercontent.com/NexeraProtocol/vc-schemas/main/examples/id3/id3.json"
+    },
+    "type": "ID3",
+    "version": "1.0"
+  },
+  "required": [
+    "@context",
+    "id",
+    "type",
+    "issuanceDate",
+    "credentialSubject",
+    "credentialSchema",
+    "credentialStatus",
+    "issuer"
+  ],
+  "properties": {
+    "@context": {
+      "type": ["string", "array", "object"]
+    },
+    "id": {
+      "type": "string"
+    },
+    "type": {
+      "type": ["string", "array"],
+      "items": {
+        "type": "string"
+      }
+    },
+    "issuer": {
+      "type": ["string", "object"],
+      "format": "uri",
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "issuanceDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expirationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "credentialSchema": {
+      "type": "object",
+      "required": ["id", "type"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uri"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "subjectPosition": {
+      "type": "string",
+      "enum": ["none", "index", "value"]
+    },
+    "merklizationRootPosition": {
+      "type": "string",
+      "enum": ["none", "index", "value"]
+    },
+    "revNonce": {
+      "type": "integer"
+    },
+    "version": {
+      "type": "integer"
+    },
+    "updatable": {
+      "type": "boolean"
+    },
+    "credentialSubject": {
+      "type": "object",
+      "properties": {
+        "journeyId": {
+          "type": "string"
+        },
+        "amendmentsData": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "citizenship": {
+                  "type": "string"
+                },
+                "documentType": {
+                  "type": "string"
+                },
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "gender": {
+                  "type": "string"
+                },
+                "addressLine1": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "addressLine2": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "birthday": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "placeOfBirth": {
+                  "type": "string"
+                },
+                "countryOfResidence": {
+                  "type": "string"
+                },
+                "age": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "province": {
+                  "type": "string"
+                },
+                "postalCode": {
+                  "type": "string"
+                },
+                "emailAddress": {
+                  "type": "string"
+                },
+                "phoneNumber": {
+                  "type": "string"
+                },
+                "countryOfBirth": {
+                  "type": "string"
+                },
+                "middleName": {
+                  "type": "string"
+                }
+              }
+            },
+            "authenticateSPResult": {
+              "type": "object",
+              "properties": {
+                "AuthenticationID": { "type": "string" },
+                "Timestamp": { "type": "string", "format": "date-time" },
+                "CustomerRef": { "type": "string" },
+                "ProfileID": { "type": "string" },
+                "ProfileName": { "type": "string" },
+                "ProfileVersion": { "type": "integer" },
+                "ProfileRevision": { "type": "integer" },
+                "ProfileState": { "type": "string" },
+                "ResultCodes": {
+                  "type": "object",
+                  "properties": {
+                    "GlobalItemCheckResultCodes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Name": { "type": "string" },
+                          "Description": { "type": "string" },
+                          "Comment": {
+                            "type": "object",
+                            "properties": {
+                              "GlobalItemCheckResultCode": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "Description": { "type": "string" },
+                                    "Code": { "type": "integer" }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "Match": {
+                            "type": "object",
+                            "properties": {
+                              "GlobalItemCheckResultCode": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "Description": { "type": "string" },
+                                    "Code": { "type": "integer" }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "Warning": {
+                            "type": "object",
+                            "properties": {
+                              "GlobalItemCheckResultCode": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "Description": { "type": "string" },
+                                    "Code": { "type": "integer" }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "Mismatch": {
+                            "type": "object",
+                            "properties": {
+                              "GlobalItemCheckResultCode": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "Description": { "type": "string" },
+                                    "Code": { "type": "integer" }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "ID": { "type": "integer" },
+                          "Pass": { "type": "string" },
+                          "Address": { "type": "string" },
+                          "Forename": { "type": "string" },
+                          "Surname": { "type": "string" },
+                          "DOB": { "type": "string" },
+                          "Alert": { "type": "string" },
+                          "SanctionsMatches": {
+                            "type": "object",
+                            "properties": {
+                              "GlobalSanctionsMatch": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "SanctionID": {
+                                      "type": [ "integer", "string" ]
+                                    },
+                                    "Url": { "type": "string" },
+                                    "Rank": { "type": "integer" },
+                                    "CaseID": { "type": "string" },
+                                    "SearchID": { "type": "string" }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "Score": { "type": "integer" },
+                "BandText": { "type": "string" },
+                "Country": { "type": "string" },
+                "ItemCheckDecisionBands": {
+                  "type": "object",
+                  "properties": {
+                    "GlobalItemCheckDecisionBands": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ID": { "type": "integer" },
+                          "BandScore": { "type": "integer" },
+                          "BandText": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "pepIntelligenceResult": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Fullname": { "type": "string" },
+                  "Aliases": {
+                    "type": "object",
+                    "properties": {
+                      "a:string": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                      }
+                    }
+                  },
+                  "SanctionsAddresses": {
+                    "type": "object",
+                    "properties": {
+                      "GlobalSanctionsAddress": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "AddressLine": { "type": "string" },
+                            "City": { "type": "string" },
+                            "Country": { "type": "string" },
+                            "Region": { "type": "string" }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "SanctionsDates": {
+                    "type": "object",
+                    "properties": {
+                      "GlobalSanctionsDate": {
+                        "type": "object",
+                        "properties": {
+                          "DateType": { "type": "string" },
+                          "Day": { "type": "integer" },
+                          "Month": { "type": "integer" },
+                          "Year": { "type": "integer" }
+                        }
+                      }
+                    }
+                  },
+                  "IdentityInformation": { "type": "string" },
+                  "SanctionsPositions": {
+                    "type": "object",
+                    "properties": {
+                      "GlobalSanctionsPosition": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "Position": {
+                              "type": "string"
+                            },
+                            "Country": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "sanctionsEnforcementsResult": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Fullname": { "type": "string" },
+                  "SanctionsBodies": {
+                    "type": "object",
+                    "properties": {
+                      "a:string": {
+                        "type": "array",
+                        "items": { "type": "integer" }
+                      }
+                    }
+                  },
+                  "Aliases": {
+                    "type": "object",
+                    "properties": {
+                      "a:string": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                      }
+                    }
+                  },
+                  "SanctionsAddresses": {
+                    "type": "object",
+                    "properties": {
+                      "GlobalSanctionsAddress": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "AddressLine": { "type": "string" },
+                            "City": { "type": "string" },
+                            "Country": { "type": "string" },
+                            "Region": { "type": "string" }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "SanctionsDates": {
+                    "type": "object",
+                    "properties": {
+                      "GlobalSanctionsDate": {
+                        "type": "object",
+                        "properties": {
+                          "DateType": { "type": "string" },
+                          "Day": { "type": "integer" },
+                          "Month": { "type": "integer" },
+                          "Year": { "type": "integer" }
+                        }
+                      }
+                    }
+                  },
+                  "IdentityInformation": { "type": "string" }
+                }
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "originalData": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "citizenship": {
+                  "type": "string"
+                },
+                "documentType": {
+                  "type": "string"
+                },
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "gender": {
+                  "type": "string"
+                },
+                "addressLine1": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "addressLine2": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "birthday": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "age": {
+                  "type": "string"
+                }
+              }
+            },
+            "authenticateSPResult": {
+              "type": "object",
+              "properties": {
+                "AuthenticationID": { "type": "string" },
+                "Timestamp": { "type": "string", "format": "date-time" },
+                "CustomerRef": { "type": "string" },
+                "ProfileID": { "type": "string" },
+                "ProfileName": { "type": "string" },
+                "ProfileVersion": { "type": "integer" },
+                "ProfileRevision": { "type": "integer" },
+                "ProfileState": { "type": "string" },
+                "ResultCodes": {
+                  "type": "object",
+                  "properties": {
+                    "GlobalItemCheckResultCodes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Name": { "type": "string" },
+                          "Description": { "type": "string" },
+                          "Comment": {
+                            "type": "object"
+                          },
+                          "Match": {
+                            "type": "object"
+                          },
+                          "Warning": {
+                            "type": "object"
+                          },
+                          "ID": { "type": "integer" },
+                          "Pass": { "type": "string" },
+                          "Address": { "type": "string" },
+                          "Forename": { "type": "string" },
+                          "Surname": { "type": "string" },
+                          "DOB": { "type": "string" },
+                          "Alert": { "type": "string" },
+                          "SanctionsMatches": {
+                            "type": ["object", "string"]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "Score": { "type": "integer" },
+                "BandText": { "type": "string" },
+                "Country": { "type": "string" }
+              }
+            },
+            "pepIntelligenceResult": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Fullname": { "type": "string" },
+                  "Aliases": {
+                    "type": "object",
+                    "properties": {
+                      "a:string": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                      }
+                    }
+                  },
+                  "SanctionsAddresses": {
+                    "type": "object",
+                    "properties": {
+                      "GlobalSanctionsAddress": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "AddressLine": { "type": "string" },
+                            "City": { "type": "string" },
+                            "Country": { "type": "string" },
+                            "Region": { "type": "string" }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "SanctionsDates": {
+                    "type": "object",
+                    "properties": {
+                      "GlobalSanctionsDate": {
+                        "type": "object",
+                        "properties": {
+                          "DateType": { "type": "string" },
+                          "Day": { "type": "integer" },
+                          "Month": { "type": "integer" },
+                          "Year": { "type": "integer" }
+                        }
+                      }
+                    }
+                  },
+                  "IdentityInformation": { "type": "string" },
+                  "SanctionsPositions": {
+                    "type": "object",
+                    "properties": {
+                      "GlobalSanctionsPosition": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "Position": {
+                              "type": "string"
+                            },
+                            "Country": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "sanctionsEnforcementsResult": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Fullname": { "type": "string" },
+                  "SanctionsBodies": {
+                    "type": "object",
+                    "properties": {
+                      "a:string": {
+                        "type": "array",
+                        "items": { "type": "integer" }
+                      }
+                    }
+                  },
+                  "Aliases": {
+                    "type": "object",
+                    "properties": {
+                      "a:string": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                      }
+                    }
+                  },
+                  "SanctionsAddresses": {
+                    "type": "object",
+                    "properties": {
+                      "GlobalSanctionsAddress": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "AddressLine": { "type": "string" },
+                            "City": { "type": "string" },
+                            "Country": { "type": "string" },
+                            "Region": { "type": "string" }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "SanctionsDates": {
+                    "type": "object",
+                    "properties": {
+                      "GlobalSanctionsDate": {
+                        "type": "object",
+                        "properties": {
+                          "DateType": { "type": "string" },
+                          "Day": { "type": "integer" },
+                          "Month": { "type": "integer" },
+                          "Year": { "type": "integer" }
+                        }
+                      }
+                    }
+                  },
+                  "IdentityInformation": { "type": "string" }
+                }
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "personalDetails": {
+          "type": "object",
+          "properties": {
+            "citizenship": {
+              "type": "string"
+            },
+            "documentType": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "addressLine1": {
+              "type": "string",
+              "nullable": true
+            },
+            "addressLine2": {
+              "type": "string",
+              "nullable": true
+            },
+            "birthday": {
+              "type": "string",
+              "format": "date"
+            },
+            "placeOfBirth": {
+              "type": "string"
+            },
+            "countryOfResidence": {
+              "type": "string"
+            },
+            "age": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "province": {
+              "type": "string"
+            },
+            "postalCode": {
+              "type": "string"
+            },
+            "emailAddress": {
+              "type": "string"
+            },
+            "phoneNumber": {
+              "type": "string"
+            },
+            "countryOfBirth": {
+              "type": "string"
+            },
+            "middleName": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "journeyId",
+        "amendmentsData",
+        "originalData",
+        "personalDetails",
+        "id"
+      ]
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "@MFX-org/first",
-  "version": "7.1.158",
+  "version": "7.1.160",
   "description": "Testing patch 1",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,7 +11,7 @@
   "dependencies": {
     "@changesets/cli": "^2.26.2",
     "express": "^4.18.2",
-    "lerna": "^7.1.4",
+    "lerna": "^8.0.0",
     "semver": "^7.5.4",
     "standard-version": "^9.5.0"
   },

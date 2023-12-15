@@ -1,0 +1,6 @@
+- op: replace
+  path: /spec/rules/0/host
+  value: playwright-ui.staging.nexera.id
+- op: replace
+  path: /spec/tls/0/hosts/0
+  value: playwright-ui.staging.nexera.id

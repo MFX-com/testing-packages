@@ -1,0 +1,22 @@
+- op: replace
+  path: /spec/rules/0/host
+  value: cms-prod.nexera.id
+- op: replace
+  path: /spec/tls/0/hosts/0
+  value: cms-prod.nexera.id
+- op: add
+  path: /spec/rules/1
+  value:
+    host: cms.nexera.id
+    http:
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: cms
+              port:
+                number: 3004
+- op: add
+  path: /spec/tls/0/hosts/1
+  value: cms.nexera.id

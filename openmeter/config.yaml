@@ -1,0 +1,79 @@
+ingest:
+  kafka:
+    broker: kafka:29092
+
+aggregation:
+  clickhouse:
+    address: clickhouse:9000
+
+sink:
+  minCommitCount: 1
+  namespaceRefetch: 1s
+
+portal:
+  enabled: true
+  tokenSecret: test_secret
+
+meters:
+  - slug: customer_risk_level_changed_slug
+    description: Collection of CUSTOMER_RISK_LEVEL_CHANGED events
+    eventType: CUSTOMER_RISK_LEVEL_CHANGED
+    aggregation: AVG
+    valueProperty: $.riskNumber
+    groupBy:
+      toRiskLevel: $.toRiskLevel
+      cmsProjectId: $.cmsProjectId
+      customerId: $.customerId
+
+  - slug: customer_country_slug
+    description: Collection of CUSTOMER_COUNTRY events
+    eventType: CUSTOMER_COUNTRY
+    aggregation: COUNT
+    groupBy:
+      country: $.country
+      customerId: $.customerId
+      cmsProjectId: $.cmsProjectId
+
+  - slug: customer_created_slug
+    description: Collection of CUSTOMER_CREATED events
+    eventType: CUSTOMER_CREATED
+    aggregation: COUNT
+    groupBy:
+      cmsProjectId: $.cmsProjectId
+
+  - slug: customer_status_changed_slug
+    description: Collection of CUSTOMER_STATUS_CHANGED events
+    eventType: CUSTOMER_STATUS_CHANGED
+    aggregation: COUNT
+    groupBy:
+      cmsProjectId: $.cmsProjectId
+      toStatus: $.toStatus
+
+  - slug: nexera_ssid_counts_slug
+    description: Collection of NEXERA_SSID events
+    eventType: NEXERA_SSID
+    aggregation: COUNT
+    groupBy:
+      cmsProjectId: $.cmsProjectId
+      wallet: $.wallet
+      type: $.type
+
+  - slug: nexera_ssid_duration_slug
+    description: Duration of NEXERA_SSID events
+    eventType: NEXERA_SSID
+    aggregation: AVG
+    valueProperty: $.duration
+    groupBy:
+      cmsProjectId: $.cmsProjectId
+      wallet: $.wallet
+      type: $.type
+
+  - slug: rule_engine_slug
+    description: Collection of RULE_ENGINE events
+    eventType: RULE_ENGINE
+    aggregation: COUNT
+    groupBy:
+      cmsProjectId: $.cmsProjectId
+      scenarioId: $.scenarioId
+      scenarioExecutionId: $.scenarioExecutionId
+      result: $.result

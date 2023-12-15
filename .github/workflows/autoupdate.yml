@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Generate token
         id: generate_token
-        uses: tibdex/github-app-token@v1
+        uses: tibdex/github-app-token@v2
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.PRIVATE_KEY }}
@@ -31,4 +31,16 @@ jobs:
           PR_READY_STATE: "ready_for_review"
           RETRY_COUNT: "5"
           RETRY_SLEEP: "300"
-          MERGE_CONFLICT_ACTION: "fail"
+          MERGE_CONFLICT_ACTION: "ignore"
+
+      - name: Merge conflicts found
+        if: ${{ steps.autoupdate.outputs.conflicted }}
+        shell: bash
+        run: |
+          echo "test 1"
+
+      - name: No merge conflicts found
+        if: ${{ !steps.autoupdate.outputs.conflicted }}
+        shell: bash
+        run: |
+          echo "test 2"

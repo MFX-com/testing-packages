@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vitest-ui
+spec:
+  replicas: 1
+  template:
+    spec:
+      serviceAccountName: vitest-ui
+      containers:
+        - image: ghcr.io/nexeraprotocol/nexeraid/apps/vitest-ui:placeholder
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /__vitest__/
+              port: 51204
+              scheme: HTTP
+            initialDelaySeconds: 3
+            periodSeconds: 3
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: vitest-ui
+          envFrom:
+            - secretRef:
+                name: vitest-ui
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1Gi
+            requests:
+              cpu: 300m
+              memory: 384Mi

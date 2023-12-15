@@ -76,7 +76,7 @@ jobs:
 
       - name: Generate token
         id: generate_token
-        uses: tibdex/github-app-token@v1
+        uses: tibdex/github-app-token@v2
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.PRIVATE_KEY }}
@@ -108,3 +108,33 @@ jobs:
             https://api.github.com/repos/MFX-com/testing-packages \
             -d '{"allow_merge_commit":false}' \
             --output /dev/null
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          submodules: recursive
+          fetch-depth: 0
+          token: ${{ steps.generate_token.outputs.token }}
+
+      - name: Update branch in schema path files
+        run: |
+          # e.g. Replace "/development/" with "/staging/" in all schemas
+          find examples/**/*.json -type f -exec sed -i -e 's/\/${{ github.event.pull_request.head.ref }}\//\/${{ github.event.pull_request.base.ref }}\//g' {} +
+          find examples/**/*.jsonld -type f -exec sed -i -e 's/\/${{ github.event.pull_request.head.ref }}\//\/${{ github.event.pull_request.base.ref }}\//g' {} +
+
+          find polygon-id/**/*.json -type f -exec sed -i -e 's/\/${{ github.event.pull_request.head.ref }}\//\/${{ github.event.pull_request.base.ref }}\//g' {} +
+          find polygon-id/**/*.jsonld -type f -exec sed -i -e 's/\/${{ github.event.pull_request.head.ref }}\//\/${{ github.event.pull_request.base.ref }}\//g' {} +
+
+      - name: Initialize mandatory git config
+        run: |
+          git config --global user.name "nexera-release[bot]"
+          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
+
+      - name: Commit changes
+        continue-on-error: true
+        run: |
+          git add .
+          git commit -m "Change ${{ github.event.pull_request.head.ref }} to ${{ github.event.pull_request.base.ref }} branch in schema path files"
+          git push
+

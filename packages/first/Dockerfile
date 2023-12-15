@@ -2,7 +2,7 @@ FROM node:18.17-alpine
 
 RUN apk add --no-cache libc6-compat g++ make py3-pip
 RUN apk update
-RUN npm install -g pnpm@8.7.5
+RUN npm install -g pnpm@8.9.2
 
 # Create app directory
 WORKDIR /usr/src/app

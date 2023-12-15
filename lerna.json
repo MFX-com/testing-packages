@@ -12,7 +12,9 @@
       "conventionalCommits": true,
       "message": "chore(release): version and release commit",
       "allowBranch": [
-        "main"
+        "main",
+        "staging",
+        "development"
       ],
       "ignoreChanges": [
         "**/*.md",

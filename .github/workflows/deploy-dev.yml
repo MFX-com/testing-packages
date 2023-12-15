@@ -152,7 +152,7 @@ jobs:
 #              -H "accept: application/json" \
 #              -H "content-type: application/json" \
 #              -u "admin:FPSllsker" \
-#              -d "{\"url\":\"https://raw.githubusercontent.com/MFX-com/testing-packages/main/${file}\",\"schemaType\":\"${schema}\",\"version\":\"${version}\"}"
+#              -d "{\"url\":\"https://raw.githubusercontent.com/mfx-com/testing-packages/main/${file}\",\"schemaType\":\"${schema}\",\"version\":\"${version}\"}"
 #          done
 
 

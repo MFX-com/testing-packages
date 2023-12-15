@@ -10,63 +10,70 @@ sink:
   minCommitCount: 1
   namespaceRefetch: 1s
 
+portal:
+  enabled: true
+  tokenSecret: test_secret
+
 meters:
-  - slug: kyc_journey_data_submitted_slug
-    description: Collection of KYC_JOURNEY_DATA_SUBMITTED events
-    eventType: KYC_JOURNEY_DATA_SUBMITTED
-    aggregation: COUNT
-    windowSize: DAY
+  - slug: customer_risk_level_changed_slug
+    description: Collection of CUSTOMER_RISK_LEVEL_CHANGED events
+    eventType: CUSTOMER_RISK_LEVEL_CHANGED
+    aggregation: AVG
+    valueProperty: $.riskNumber
+    groupBy:
+      toRiskLevel: $.toRiskLevel
+      cmsProjectId: $.cmsProjectId
+      customerId: $.customerId
 
-  - slug: kyc_auth_access_token_slug
-    description: Collection of KYC_AUTH_ACCESS_TOKEN events
-    eventType: KYC_AUTH_ACCESS_TOKEN
+  - slug: customer_country_slug
+    description: Collection of CUSTOMER_COUNTRY events
+    eventType: CUSTOMER_COUNTRY
     aggregation: COUNT
-    windowSize: DAY
+    groupBy:
+      country: $.country
+      customerId: $.customerId
+      cmsProjectId: $.cmsProjectId
 
-  - slug: kyc_auth_access_token_slugsss
-    description: Collection of KYC_AUTH_ACCESS_TOKEN events
-    eventType: KYC_AUTH_ACCESS_TOKEN_LOL
+  - slug: customer_created_slug
+    description: Collection of CUSTOMER_CREATED events
+    eventType: CUSTOMER_CREATED
     aggregation: COUNT
-    windowSize: DAY
+    groupBy:
+      cmsProjectId: $.cmsProjectId
 
-  - slug: kyc_journey_ip_check_request_slug
-    description: Collection of KYC_JOURNEY_IP_CHECK_REQUEST events
-    eventType: KYC_JOURNEY_IP_CHECK_REQUEST
+  - slug: customer_status_changed_slug
+    description: Collection of CUSTOMER_STATUS_CHANGED events
+    eventType: CUSTOMER_STATUS_CHANGED
     aggregation: COUNT
-    windowSize: DAY
+    groupBy:
+      cmsProjectId: $.cmsProjectId
+      toStatus: $.toStatus
 
-  - slug: kyc_journey_big_bitrank_requests_slug
-    description: Collection of KYC_JOURNEY_BIG_BITRANK_REQUEST events
-    eventType: KYC_JOURNEY_BIG_BITRANK_REQUEST
+  - slug: nexera_ssid_counts_slug
+    description: Collection of NEXERA_SSID events
+    eventType: NEXERA_SSID
     aggregation: COUNT
-    windowSize: DAY
+    groupBy:
+      cmsProjectId: $.cmsProjectId
+      wallet: $.wallet
+      type: $.type
 
-  - slug: kyc_journey_scorechain_requests_slug
-    description: Collection of KYC_JOURNEY_SCORECHAIN_REQUEST events
-    eventType: KYC_JOURNEY_SCORECHAIN_REQUEST
-    aggregation: COUNT
-    windowSize: DAY
+  - slug: nexera_ssid_duration_slug
+    description: Duration of NEXERA_SSID events
+    eventType: NEXERA_SSID
+    aggregation: AVG
+    valueProperty: $.duration
+    groupBy:
+      cmsProjectId: $.cmsProjectId
+      wallet: $.wallet
+      type: $.type
 
-  - slug: kyc_journey_gbg_id3_completed_slug
-    description: Collection of KYC_JOURNEY_GBG_ID3_COMPLETED events
-    eventType: KYC_JOURNEY_GBG_ID3_COMPLETED
+  - slug: rule_engine_slug
+    description: Collection of RULE_ENGINE events
+    eventType: RULE_ENGINE
     aggregation: COUNT
-    windowSize: DAY
-
-  - slug: kyc_journey_gbg_started_slug
-    description: Collection of KYC_JOURNEY_GBG_STARTED events
-    eventType: KYC_JOURNEY_GBG_STARTED
-    aggregation: COUNT
-    windowSize: DAY
-
-  - slug: kyc_journey_gbg_end_slug
-    description: Collection of KYC_JOURNEY_GBG_END events
-    eventType: KYC_JOURNEY_GBG_END
-    aggregation: COUNT
-    windowSize: DAY
-
-  - slug: kyc_journey_gbg_idscan_completed_slug
-    description: Collection of KYC_JOURNEY_GBG_IDSCAN_COMPLETED events
-    eventType: KYC_JOURNEY_GBG_IDSCAN_COMPLETED
-    aggregation: COUNT
-    windowSize: DAY
+    groupBy:
+      cmsProjectId: $.cmsProjectId
+      scenarioId: $.scenarioId
+      scenarioExecutionId: $.scenarioExecutionId
+      result: $.result

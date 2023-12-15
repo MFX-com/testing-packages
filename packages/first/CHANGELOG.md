@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.1.161](https://github.com/MFX-com/testing-packages/compare/@MFX-org/first@7.1.160...@MFX-org/first@7.1.161) (2023-12-15)
+
+
+### Bug Fixes
+
+* **dependencies:** update dependency lerna to v8 ([9d3181c](https://github.com/MFX-com/testing-packages/commit/9d3181cbbf32dda008cf2b2cd5366daf072dc749))
+
+
+
+
+
 ## [7.1.160](https://github.com/MFX-com/testing-packages/compare/@MFX-org/first@7.1.159...@MFX-org/first@7.1.160) (2023-10-11)
 
 **Note:** Version bump only for package @MFX-org/first

@@ -5,9 +5,9 @@
   "keywords": [],
   "engines": {
     "node": ">=20.9.0",
-    "pnpm": ">=8.7.5"
+    "pnpm": ">=8.9.2"
   },
-  "packageManager": "pnpm@8.7.5",
+  "packageManager": "pnpm@8.9.2",
   "workspaces": [
     "packages/*"
   ],
@@ -22,21 +22,21 @@
     "release": "changeset publish",
     "docker:first": "docker build -f packages/first/Dockerfile -t first-app .",
     "docker:second": "docker build -f packages/second/Dockerfile -t second-app .",
-    "build:@MFX-org/first": "turbo run build --filter @MFX-org/first",
-    "bump:@MFX-org/first": "turbo run bump --filter @MFX-org/first",
-    "build:@MFX-org/second": "turbo run build --filter @MFX-org/second",
-    "bump:@MFX-org/second": "turbo run bump --filter @MFX-org/second",
-    "build:@MFX-org/private": "turbo run build --filter @MFX-org/private",
-    "bump:@MFX-org/private": "turbo run bump --filter @MFX-org/private"
+    "build:@mfx-com/first": "turbo run build --filter @mfx-com/first",
+    "bump:@mfx-com/first": "turbo run bump --filter @mfx-com/first",
+    "build:@mfx-com/second": "turbo run build --filter @mfx-com/second",
+    "bump:@mfx-com/second": "turbo run bump --filter @mfx-com/second",
+    "build:@mfx-com/private": "turbo run build --filter @mfx-com/private",
+    "bump:@mfx-com/private": "turbo run bump --filter @mfx-com/private"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.26.2",
-    "ethers": "^6.8.0",
-    "lerna": "^8.0.0",
-    "turbo": "^1.10.15"
+    "@changesets/cli": "^2.27.1",
+    "ethers": "^6.9.0",
+    "lerna": "^8.0.1",
+    "turbo": "^1.11.2"
   },
   "dependencies": {
-    "@aws-sdk/client-rds-data": "^3.427.0",
+    "@aws-sdk/client-rds-data": "^3.474.0",
     "drizzle-orm": "^0.28.6"
   }
 }

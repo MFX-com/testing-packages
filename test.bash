@@ -17,7 +17,7 @@ approvedUsers=($(curl -L \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer xxx" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
-  https://api.github.com/repos/MFX-com/testing-packages/pulls/15/reviews | jq -r '.[] | select(.state == "APPROVED") | .user.id'))
+  https://api.github.com/repos/mfx-com/testing-packages/pulls/15/reviews | jq -r '.[] | select(.state == "APPROVED") | .user.id'))
 
 for value in "${approvedUsers[@]}"
 do
@@ -29,19 +29,19 @@ teamUserIDs=($(curl -L \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer xxx" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
-  https://api.github.com/orgs/MFX-com/teams/mfx_staging/members | jq  -r '.[].id'))
+  https://api.github.com/orgs/mfx-com/teams/mfx_staging/members | jq  -r '.[].id'))
 
 #          curl -L \
 #            -H "Accept: application/vnd.github+json" \
 #            -H "Authorization: Bearer ${{ secrets.BOT_ACCESS_TOKEN }}" \
 #            -H "X-GitHub-Api-Version: 2022-11-28" \
-#            https://api.github.com/repos/MFX-com/testing-packages/pulls/${{ env.PR_NUMBER }}/reviews
+#            https://api.github.com/repos/mfx-com/testing-packages/pulls/${{ env.PR_NUMBER }}/reviews
 #
 #          curl -L \
 #            -H "Accept: application/vnd.github+json" \
 #            -H "Authorization: Bearer ${{ secrets.BOT_ACCESS_TOKEN }}" \
 #            -H "X-GitHub-Api-Version: 2022-11-28" \
-#            https://api.github.com/orgs/MFX-com/teams/mfx_staging/members
+#            https://api.github.com/orgs/mfx-com/teams/mfx_staging/members
 
 # !!
 
@@ -49,7 +49,7 @@ teamUserIDs=($(curl -L \
 #  -H "Accept: application/vnd.github+json" \
 #  -H "Authorization: Bearer xxx" \
 #  -H "X-GitHub-Api-Version: 2022-11-28" \
-#  https://api.github.com/orgs/MFX-com/teams/mfx_staging/members
+#  https://api.github.com/orgs/mfx-com/teams/mfx_staging/members
 
 COUNTER=0
 for value in "${approvedUsers[@]}"

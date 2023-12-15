@@ -89,7 +89,7 @@
 #    -H "accept: application/json" \
 #    -H "content-type: application/json" \
 #    -u "admin:FPSllsker" \
-#    -d "{\"url\":\"https://raw.githubusercontent.com/MFX-com/testing-packages/main/${file}\",\"schemaType\":\"${schema}\",\"version\":\"${version}\"}"
+#    -d "{\"url\":\"https://raw.githubusercontent.com/mfx-com/testing-packages/main/${file}\",\"schemaType\":\"${schema}\",\"version\":\"${version}\"}"
 #done
 
 #for file in $(find polygon-id -type f -name "*.jsonld"); do
@@ -113,7 +113,7 @@
 #          -H "Authorization: token xxx"\
 #          -H "X-GitHub-Api-Version: 2022-11-28" \
 #          -X PUT \
-#          https://api.github.com/repos/MFX-com/testing-packages/branches/main/protection \
+#          https://api.github.com/repos/mfx-com/testing-packages/branches/main/protection \
 #          -d '{"enforce_admins":false, "required_pull_request_reviews":null, "required_status_checks":null, "restrictions":null}'
 
 #changes="PR Message"

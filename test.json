@@ -24,15 +24,15 @@
     },
     "body": "",
     "state": "APPROVED",
-    "html_url": "https://github.com/MFX-com/testing-packages/pull/14#pullrequestreview-1493646878",
-    "pull_request_url": "https://api.github.com/repos/MFX-com/testing-packages/pulls/14",
+    "html_url": "https://github.com/mfx-com/testing-packages/pull/14#pullrequestreview-1493646878",
+    "pull_request_url": "https://api.github.com/repos/mfx-com/testing-packages/pulls/14",
     "author_association": "MEMBER",
     "_links": {
       "html": {
-        "href": "https://github.com/MFX-com/testing-packages/pull/14#pullrequestreview-1493646878"
+        "href": "https://github.com/mfx-com/testing-packages/pull/14#pullrequestreview-1493646878"
       },
       "pull_request": {
-        "href": "https://api.github.com/repos/MFX-com/testing-packages/pulls/14"
+        "href": "https://api.github.com/repos/mfx-com/testing-packages/pulls/14"
       }
     },
     "submitted_at": "2023-06-22T16:57:37Z",
@@ -63,15 +63,15 @@
     },
     "body": "",
     "state": "APPROVED",
-    "html_url": "https://github.com/MFX-com/testing-packages/pull/14#pullrequestreview-1493647541",
-    "pull_request_url": "https://api.github.com/repos/MFX-com/testing-packages/pulls/14",
+    "html_url": "https://github.com/mfx-com/testing-packages/pull/14#pullrequestreview-1493647541",
+    "pull_request_url": "https://api.github.com/repos/mfx-com/testing-packages/pulls/14",
     "author_association": "MEMBER",
     "_links": {
       "html": {
-        "href": "https://github.com/MFX-com/testing-packages/pull/14#pullrequestreview-1493647541"
+        "href": "https://github.com/mfx-com/testing-packages/pull/14#pullrequestreview-1493647541"
       },
       "pull_request": {
-        "href": "https://api.github.com/repos/MFX-com/testing-packages/pulls/14"
+        "href": "https://api.github.com/repos/mfx-com/testing-packages/pulls/14"
       }
     },
     "submitted_at": "2023-06-22T16:58:02Z",

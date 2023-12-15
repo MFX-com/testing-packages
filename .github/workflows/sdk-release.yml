@@ -4,24 +4,26 @@ on:
   push:
     branches:
       - main
+      - staging
+      - development
 
 jobs:
   versions:
     name: Versions
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [ 18.17 ]
-        pnpm-version: [ 8.7.5 ]
-        apps:
-          - api
-          - cms
-    environment:
-      name: ${{ matrix.apps }}-dev
+#    strategy:
+#      matrix:
+#        node-version: [ 18.17 ]
+#        pnpm-version: [ 8.9.2 ]
+#        apps:
+#          - api
+#          - cms
+#    environment:
+#      name: ${{ matrix.apps }}-dev
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      NODE_VERSION: 18.17.1
-      PNPM_VERSION: 8.7.5
+      NODE_VERSION: 20.9.0
+      PNPM_VERSION: 8.9.2
     steps:
       - name: Generate token
         id: generate_token
@@ -30,11 +32,11 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.PRIVATE_KEY }}
 
-      - uses: actions/checkout@v4 # v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ steps.generate_token.outputs.token }}
-#          token: ${{ secrets.GITHUB_TOKEN }}
+#          token: ${{ steps.generate_token.outputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 #          persist-credentials: false
 
 #      - name: Config git user
@@ -108,7 +110,7 @@ jobs:
 #          -H "Accept: application/vnd.github+json" \
 #          -H "Authorization: token ${{ secrets.BOT_ACCESS_TOKEN }}"\
 #          -H "X-GitHub-Api-Version: 2022-11-28" \
-#            https://api.github.com/repos/MFX-com/testing-packages \
+#            https://api.github.com/repos/mfx-com/testing-packages \
 #          -d '{"enforce_admins":false}' \
 #          --output /dev/null
 
@@ -129,7 +131,7 @@ jobs:
 #          -H "Accept: application/vnd.github+json" \
 #          -H "Authorization: token ${{ secrets.BOT_ACCESS_TOKEN }}"\
 #          -H "X-GitHub-Api-Version: 2022-11-28" \
-#            https://api.github.com/repos/MFX-com/testing-packages \
+#            https://api.github.com/repos/mfx-com/testing-packages \
 #          -d '{"enforce_admins":true}' \
 #          --output /dev/null
 
@@ -161,9 +163,9 @@ jobs:
 
 #      - name: Bump versions
 #        run: |
-#          pnpm run --filter "@MFX-org/first" bump
-#          pnpm run --filter "@MFX-org/private" bump
-#          pnpm run --filter "@MFX-org/second" bump
+#          pnpm run --filter "@mfx-com/first" bump
+#          pnpm run --filter "@mfx-com/private" bump
+#          pnpm run --filter "@mfx-com/second" bump
 
       # People can bump manually a package in their merge request
       # Once merged to development, it will automatically take it in consideration
@@ -176,7 +178,7 @@ jobs:
 #          touch .changeset/my-commit-message.md
 #          cat <<EOF > .changeset/my-commit-message.md
 #            ---
-#            "@MFX-org/second": patch
+#            "@mfx-com/second": patch
 #            ---
 #
 #            AAA
@@ -204,27 +206,71 @@ jobs:
 
 #      - name: Build
 #        run: |
-#          pnpm run build:@MFX-org/first
-#          pnpm run build:@MFX-org/second
+#          pnpm run build:@mfx-com/first
+#          pnpm run build:@mfx-com/second
 
 #      - name: Check version again
 #        run: |
 #          cat packages/first/package.json
 
-#      - name: Publish to npm
-#        env:
-#          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        run: |
-#          pnpm --filter "@MFX-org/first" publish --no-git-checks --registry https://npm.pkg.github.com/
-#          pnpm --filter "@MFX-org/second" publish --no-git-checks --registry https://npm.pkg.github.com/
+      - name: Publish to npm (dev)
+        if: ${{ github.ref == 'refs/heads/development' }}
+        env:
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag dev
+          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag dev
+
+      - name: Publish to npm (staging)
+        if: ${{ github.ref == 'refs/heads/staging' }}
+        env:
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag staging
+          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag staging
+
+      - name: Publish to npm (prod)
+        if: ${{ github.ref == 'refs/heads/main' }}
+        env:
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/
+          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/
+
+      - name: Publish to public npm (dev)
+        if: ${{ github.ref == 'refs/heads/development' }}
+        env:
+          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
+
+          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/ --tag dev
+
+      - name: Publish to public npm (staging)
+        if: ${{ github.ref == 'refs/heads/staging' }}
+        env:
+          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
+
+          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/ --tag staging
+
+      - name: Publish to public npm (prod)
+        if: ${{ github.ref == 'refs/heads/main' }}
+        env:
+          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
+
+          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
 
 #      - name: Publish to public npm
 #        env:
 #          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
 #        run: |
 #          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
-#          pnpm --filter "@MFX-org/first" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
-#          pnpm --filter "@MFX-org/second" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
+#          pnpm --filter "@mfx-com/first" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
+#          pnpm --filter "@mfx-com/second" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
 
 
 #      - name: Slack Notification
@@ -239,11 +285,11 @@ jobs:
 #          SLACK_USERNAME: nexera-bot
 #          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
-      - name: Export timer variable
-        id: rollout
-        shell: bash
-        run: |
-          echo "rollout_time=$(date +%s%3N)" >> $GITHUB_OUTPUT
+#      - name: Export timer variable
+#        id: rollout
+#        shell: bash
+#        run: |
+#          echo "rollout_time=$(date +%s%3N)" >> $GITHUB_OUTPUT
 
 #      - name: Set secondary healthcheck URL
 #        continue-on-error: true
@@ -255,124 +301,124 @@ jobs:
 #          echo "${{ env.SECONDARY_HEALTHCHECK_URL }}"
 #          echo "url=${{ env.SECONDARY_HEALTHCHECK_URL }}" >> $GITHUB_OUTPUT
 
-      - name: Check service status
-        shell: bash
-        id: health_status
-        run: |
-          echo ${{ steps.rollout.outputs.rollout_time }}
-          # Initial sleep to make sure they are running
-          sleep 5
-
-          attempts=0
-          max_attempts=2
-          while [ $attempts -lt $max_attempts ]; do
-            status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL }})
-            secondary_status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL_SECONDARY }})
-            #status_code=500
-            #secondary_status_code=404
-            printf "The response code is: %d\n" "$status_code"
-            printf "The secondary response code is: %d\n" "$secondary_status_code"
-
-            if [ "$status_code" -eq 200 ] && [ "$secondary_status_code" -eq 200 ]; then
-              attempts=$((attempts+1))
-              echo "health_code=$status_code" >> $GITHUB_OUTPUT
-              echo "health_code_secondary=$secondary_status_code" >> $GITHUB_OUTPUT
-              sleep 3
-            else
-              echo "health_code=$status_code" >> $GITHUB_OUTPUT
-              echo "health_code_secondary=$secondary_status_code" >> $GITHUB_OUTPUT
-              printf "The application has issues starting up, check the logs!"
-              exit 1
-            fi
-          done
-
-      - name: Fail the job
-        shell: bash
-        id: service_status
-        run: |
-          exit 0
+#      - name: Check service status
+#        shell: bash
+#        id: health_status
+#        run: |
+#          echo ${{ steps.rollout.outputs.rollout_time }}
+#          # Initial sleep to make sure they are running
+#          sleep 5
+#
+#          attempts=0
+#          max_attempts=2
+#          while [ $attempts -lt $max_attempts ]; do
+#            status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL }})
+#            secondary_status_code=$(curl -s -o /dev/null -w '%{http_code}' ${{ vars.HEALTHCHECK_URL_SECONDARY }})
+#            #status_code=500
+#            #secondary_status_code=404
+#            printf "The response code is: %d\n" "$status_code"
+#            printf "The secondary response code is: %d\n" "$secondary_status_code"
+#
+#            if [ "$status_code" -eq 200 ] && [ "$secondary_status_code" -eq 200 ]; then
+#              attempts=$((attempts+1))
+#              echo "health_code=$status_code" >> $GITHUB_OUTPUT
+#              echo "health_code_secondary=$secondary_status_code" >> $GITHUB_OUTPUT
+#              sleep 3
+#            else
+#              echo "health_code=$status_code" >> $GITHUB_OUTPUT
+#              echo "health_code_secondary=$secondary_status_code" >> $GITHUB_OUTPUT
+#              printf "The application has issues starting up, check the logs!"
+#              exit 1
+#            fi
+#          done
+#
+#      - name: Fail the job
+#        shell: bash
+#        id: service_status
+#        run: |
+#          exit 0
 
 #      - name: Dump GitHub context
 #        env:
 #          GITHUB_CONTEXT: ${{ toJson(github) }}
 #        run: echo "$GITHUB_CONTEXT"
 #
-      - name: Prettify output
-        if: always()
-        id: pretty_output
-        shell: bash
-        run: |
-          pretty_app="UNKNOWN"
-
-          if [ "${{ matrix.apps }}" == "cms" ]; then
-            pretty_app="CMS"
-          elif [ "${{ matrix.apps }}" == "api" ]; then
-            pretty_app="API"
-          elif [ "${{ matrix.apps }}" == "data-storage" ]; then
-            pretty_app="Data Storage"
-          elif [ "${{ matrix.apps }}" == "zk-verifier" ]; then
-            pretty_app="ZK Verifier"
-          fi
-
-          echo $pretty_app
-          echo "app_name=$pretty_app" >> $GITHUB_OUTPUT
-
-      - name: Set changes
-        if: always()
-        id: changes_output
-        shell: bash
-        run: |
-          changes="Manual deploy"
-
-          if [ "${{ github.event.pull_request }}" != "" ]; then
-            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.number }}>)"
-          else
-            commit_message="$(git log --pretty=%B -1 ${{ github.sha }} | cat - | head -n1)"
-            changes="Manual deploy: $commit_message - <${{ github.event.repository.html_url }}/commit/${{ github.sha }}|${{ github.sha }}>"
-          fi
-
-          echo $changes
-          echo "changes=$changes" >> $GITHUB_OUTPUT
-
-      - name: Check output
-        if: always()
-        shell: bash
-        run: |
-          echo ${{ steps.service_status.outcome }}
-          echo ${{ steps.service_status }}
-          echo ${{ steps.health_status.outputs.health_code }}
-          echo ${{ steps.health_status.outputs.health_code_secondary }}
-
-      - name: Notify
-        uses: ravsamhq/notify-slack-action@v2
-        if: always() && steps.health_status.outputs.health_code == 200 && steps.health_status.outputs.health_code_secondary == 200
-        with:
-          status: ${{ job.status }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          notification_title: ""
-          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.service_status.outcome != 'success' && '<!here>' || '' }}
-          \n\n<${{ vars.APP_URL }}|View URL> | <${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}|View Grafana>
-          \n\n*Changes*\n ${{ steps.changes_output.outputs.changes }}"
-          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
-          notify_when: "success,failure"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-
-      - name: Notify
-        uses: ravsamhq/notify-slack-action@v2
-        if: always() && (steps.health_status.outputs.health_code != 200 || steps.health_status.outputs.health_code_secondary != 200)
-        with:
-          status: ${{ job.status }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          notification_title: ""
-          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.service_status.outcome != 'success' && '<!here>' || '' }}
-          \n\n<${{ vars.APP_URL }}|View URL> | <${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}|View Grafana>
-          \n\n*Healthcheck status*\n ${{ vars.HEALTHCHECK_URL }} :arrow_right: *${{ steps.health_status.outputs.health_code }}*\n ${{ vars.HEALTHCHECK_URL_SECONDARY }} :arrow_right: *${{ steps.health_status.outputs.health_code_secondary }}*
-          \n\n*Changes*\n ${{ steps.changes_output.outputs.changes }}"
-          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
-          notify_when: "success,failure"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+#      - name: Prettify output
+#        if: always()
+#        id: pretty_output
+#        shell: bash
+#        run: |
+#          pretty_app="UNKNOWN"
+#
+#          if [ "${{ matrix.apps }}" == "cms" ]; then
+#            pretty_app="CMS"
+#          elif [ "${{ matrix.apps }}" == "api" ]; then
+#            pretty_app="API"
+#          elif [ "${{ matrix.apps }}" == "data-storage" ]; then
+#            pretty_app="Data Storage"
+#          elif [ "${{ matrix.apps }}" == "zk-verifier" ]; then
+#            pretty_app="ZK Verifier"
+#          fi
+#
+#          echo $pretty_app
+#          echo "app_name=$pretty_app" >> $GITHUB_OUTPUT
+#
+#      - name: Set changes
+#        if: always()
+#        id: changes_output
+#        shell: bash
+#        run: |
+#          changes="Manual deploy"
+#
+#          if [ "${{ github.event.pull_request }}" != "" ]; then
+#            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.number }}>)"
+#          else
+#            commit_message="$(git log --pretty=%B -1 ${{ github.sha }} | cat - | head -n1)"
+#            changes="Manual deploy: $commit_message - <${{ github.event.repository.html_url }}/commit/${{ github.sha }}|${{ github.sha }}>"
+#          fi
+#
+#          echo $changes
+#          echo "changes=$changes" >> $GITHUB_OUTPUT
+#
+#      - name: Check output
+#        if: always()
+#        shell: bash
+#        run: |
+#          echo ${{ steps.service_status.outcome }}
+#          echo ${{ steps.service_status }}
+#          echo ${{ steps.health_status.outputs.health_code }}
+#          echo ${{ steps.health_status.outputs.health_code_secondary }}
+#
+#      - name: Notify
+#        uses: ravsamhq/notify-slack-action@v2
+#        if: always() && steps.health_status.outputs.health_code == 200 && steps.health_status.outputs.health_code_secondary == 200
+#        with:
+#          status: ${{ job.status }}
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          notification_title: ""
+#          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.service_status.outcome != 'success' && '<!here>' || '' }}
+#          \n\n<${{ vars.APP_URL }}|View URL> | <${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}|View Grafana>
+#          \n\n*Changes*\n ${{ steps.changes_output.outputs.changes }}"
+#          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
+#          notify_when: "success,failure"
+#        env:
+#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+#
+#      - name: Notify
+#        uses: ravsamhq/notify-slack-action@v2
+#        if: always() && (steps.health_status.outputs.health_code != 200 || steps.health_status.outputs.health_code_secondary != 200)
+#        with:
+#          status: ${{ job.status }}
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          notification_title: ""
+#          message_format: "{emoji} *${{ steps.pretty_output.outputs.app_name }}* deployment to DEV has {status_message} ${{ steps.service_status.outcome != 'success' && '<!here>' || '' }}
+#          \n\n<${{ vars.APP_URL }}|View URL> | <${{ vars.GRAFANA_URL }}&from=${{ steps.rollout.outputs.rollout_time }}|View Grafana>
+#          \n\n*Healthcheck status*\n ${{ vars.HEALTHCHECK_URL }} :arrow_right: *${{ steps.health_status.outputs.health_code }}*\n ${{ vars.HEALTHCHECK_URL_SECONDARY }} :arrow_right: *${{ steps.health_status.outputs.health_code_secondary }}*
+#          \n\n*Changes*\n ${{ steps.changes_output.outputs.changes }}"
+#          footer: "Linked repo <{repo_url}|{repo}> | <{workflow_url}|View workflow> | <{run_url}|View runs>"
+#          notify_when: "success,failure"
+#        env:
+#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
 #  release:
 #    name: Release
@@ -382,7 +428,7 @@ jobs:
 #    strategy:
 #      matrix:
 #        node-version: [ 18.17 ]
-#        pnpm-version: [ 8.7.5 ]
+#        pnpm-version: [ 8.9.2 ]
 #    steps:
 #      - uses: actions/checkout@v3
 #        with:

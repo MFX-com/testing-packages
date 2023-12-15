@@ -1,0 +1,20 @@
+{
+  "name": "@MFX-com/pubpack",
+  "version": "1.5.0",
+  "description": "Testing patch 1",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"building first\"",
+    "start": "node src/server.js",
+    "bump": "lerna version --yes"
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.27.1",
+    "express": "^4.18.2",
+    "lerna": "^8.0.1",
+    "semver": "^7.5.4",
+    "standard-version": "^9.5.0"
+  },
+  "author": "",
+  "license": "MIT"
+}

@@ -22,12 +22,12 @@
     "release": "changeset publish",
     "docker:first": "docker build -f packages/first/Dockerfile -t first-app .",
     "docker:second": "docker build -f packages/second/Dockerfile -t second-app .",
-    "build:@MFX-com/first": "turbo run build --filter @MFX-com/first",
-    "bump:@MFX-com/first": "turbo run bump --filter @MFX-com/first",
-    "build:@MFX-com/second": "turbo run build --filter @MFX-com/second",
-    "bump:@MFX-com/second": "turbo run bump --filter @MFX-com/second",
-    "build:@MFX-com/private": "turbo run build --filter @MFX-com/private",
-    "bump:@MFX-com/private": "turbo run bump --filter @MFX-com/private"
+    "build:@mfx-com/first": "turbo run build --filter @mfx-com/first",
+    "bump:@mfx-com/first": "turbo run bump --filter @mfx-com/first",
+    "build:@mfx-com/second": "turbo run build --filter @mfx-com/second",
+    "bump:@mfx-com/second": "turbo run bump --filter @mfx-com/second",
+    "build:@mfx-com/private": "turbo run build --filter @mfx-com/private",
+    "bump:@mfx-com/private": "turbo run bump --filter @mfx-com/private"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",

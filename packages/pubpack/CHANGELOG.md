@@ -5,4 +5,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 1.5.1 (2023-12-15)
 
-**Note:** Version bump only for package @MFX-com/pubpack
+**Note:** Version bump only for package @mfx-com/pubpack

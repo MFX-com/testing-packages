@@ -8,27 +8,27 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **dependencies:** update all non-major dependencies ([#56](https://github.com/MFX-com/testing-packages/issues/56)) ([2a4dd9d](https://github.com/MFX-com/testing-packages/commit/2a4dd9dfaeb51305235c1f7c19d2d7e5d6f217c3))
-* **dependencies:** update dependency lerna to v8 ([9d3181c](https://github.com/MFX-com/testing-packages/commit/9d3181cbbf32dda008cf2b2cd5366daf072dc749))
+* **dependencies:** update all non-major dependencies ([#56](https://github.com/mfx-com/testing-packages/issues/56)) ([2a4dd9d](https://github.com/mfx-com/testing-packages/commit/2a4dd9dfaeb51305235c1f7c19d2d7e5d6f217c3))
+* **dependencies:** update dependency lerna to v8 ([9d3181c](https://github.com/mfx-com/testing-packages/commit/9d3181cbbf32dda008cf2b2cd5366daf072dc749))
 
 
 
 
 
-## [1.1.10](https://github.com/MFX-com/testing-packages/compare/@MFX-com/priv@1.1.9...@MFX-com/priv@1.1.10) (2023-12-15)
+## [1.1.10](https://github.com/mfx-com/testing-packages/compare/@mfx-com/priv@1.1.9...@mfx-com/priv@1.1.10) (2023-12-15)
 
-**Note:** Version bump only for package @MFX-com/priv
-
-
+**Note:** Version bump only for package @mfx-com/priv
 
 
 
-## [1.1.9](https://github.com/MFX-com/testing-packages/compare/@MFX-com/priv@1.1.8...@MFX-com/priv@1.1.9) (2023-11-23)
+
+
+## [1.1.9](https://github.com/mfx-com/testing-packages/compare/@mfx-com/priv@1.1.8...@mfx-com/priv@1.1.9) (2023-11-23)
 
 
 ### Bug Fixes
 
-* **dependencies:** update dependency lerna to v8 ([9d3181c](https://github.com/MFX-com/testing-packages/commit/9d3181cbbf32dda008cf2b2cd5366daf072dc749))
+* **dependencies:** update dependency lerna to v8 ([9d3181c](https://github.com/mfx-com/testing-packages/commit/9d3181cbbf32dda008cf2b2cd5366daf072dc749))
 
 
 
@@ -39,23 +39,23 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **dependencies:** update all non-major dependencies ([#56](https://github.com/MFX-com/testing-packages/issues/56)) ([2a4dd9d](https://github.com/MFX-com/testing-packages/commit/2a4dd9dfaeb51305235c1f7c19d2d7e5d6f217c3))
+* **dependencies:** update all non-major dependencies ([#56](https://github.com/mfx-com/testing-packages/issues/56)) ([2a4dd9d](https://github.com/mfx-com/testing-packages/commit/2a4dd9dfaeb51305235c1f7c19d2d7e5d6f217c3))
 
 
 
 
 
-## [1.1.7](https://github.com/MFX-com/testing-packages/compare/@MFX-com/priv@1.1.6...@MFX-com/priv@1.1.7) (2023-06-29)
+## [1.1.7](https://github.com/mfx-com/testing-packages/compare/@mfx-com/priv@1.1.6...@mfx-com/priv@1.1.7) (2023-06-29)
 
-**Note:** Version bump only for package @MFX-com/priv
-
-
+**Note:** Version bump only for package @mfx-com/priv
 
 
 
-## [1.1.6](https://github.com/MFX-com/testing-packages/compare/@MFX-com/priv@0.1.5...@MFX-com/priv@1.1.6) (2023-06-29)
 
-**Note:** Version bump only for package @MFX-com/priv
+
+## [1.1.6](https://github.com/mfx-com/testing-packages/compare/@mfx-com/priv@0.1.5...@mfx-com/priv@1.1.6) (2023-06-29)
+
+**Note:** Version bump only for package @mfx-com/priv
 
 
 
@@ -63,7 +63,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.1.5 (2023-06-29)
 
-**Note:** Version bump only for package @MFX-com/priv
+**Note:** Version bump only for package @mfx-com/priv
 
 
 
@@ -71,23 +71,23 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.1.4 (2023-06-29)
 
-**Note:** Version bump only for package @MFX-com/priv
+**Note:** Version bump only for package @mfx-com/priv
 
 
 
 
 
-## [0.1.3](https://github.com/MFX-com/testing-packages/compare/@MFX-com/priv@0.0.10...@MFX-com/priv@0.1.3) (2023-06-28)
+## [0.1.3](https://github.com/mfx-com/testing-packages/compare/@mfx-com/priv@0.0.10...@mfx-com/priv@0.1.3) (2023-06-28)
 
-**Note:** Version bump only for package @MFX-com/priv
-
-
+**Note:** Version bump only for package @mfx-com/priv
 
 
 
-## [0.1.2](https://github.com/MFX-com/testing-packages/compare/@MFX-com/priv@0.0.10...@MFX-com/priv@0.1.2) (2023-06-28)
 
-**Note:** Version bump only for package @MFX-com/priv
+
+## [0.1.2](https://github.com/mfx-com/testing-packages/compare/@mfx-com/priv@0.0.10...@mfx-com/priv@0.1.2) (2023-06-28)
+
+**Note:** Version bump only for package @mfx-com/priv
 
 
 
@@ -95,7 +95,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.1.1 (2023-06-28)
 
-**Note:** Version bump only for package @MFX-com/priv
+**Note:** Version bump only for package @mfx-com/priv
 
 
 
@@ -106,15 +106,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **test:** test ([4594663](https://github.com/MFX-com/testing-packages/commit/45946636673884a211bb2e568153a3d47d4f0f9b))
+* **test:** test ([4594663](https://github.com/mfx-com/testing-packages/commit/45946636673884a211bb2e568153a3d47d4f0f9b))
 
 
 
 
 
-## [0.0.13](https://github.com/MFX-com/testing-packages/compare/@MFX-com/priv@0.0.10...@MFX-com/priv@0.0.13) (2023-06-28)
+## [0.0.13](https://github.com/mfx-com/testing-packages/compare/@mfx-com/priv@0.0.10...@mfx-com/priv@0.0.13) (2023-06-28)
 
-**Note:** Version bump only for package @MFX-com/priv
+**Note:** Version bump only for package @mfx-com/priv
 
 
 
@@ -123,7 +123,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.0.12 (2023-06-28)
 
-**Note:** Version bump only for package @MFX-com/priv
+**Note:** Version bump only for package @mfx-com/priv
 
 
 
@@ -131,7 +131,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.0.11 (2023-06-28)
 
-**Note:** Version bump only for package @MFX-com/priv
+**Note:** Version bump only for package @mfx-com/priv
 
 
 
@@ -139,7 +139,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.0.10 (2023-06-28)
 
-**Note:** Version bump only for package @MFX-com/priv
+**Note:** Version bump only for package @mfx-com/priv
 
 
 

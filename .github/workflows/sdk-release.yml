@@ -110,7 +110,7 @@ jobs:
 #          -H "Accept: application/vnd.github+json" \
 #          -H "Authorization: token ${{ secrets.BOT_ACCESS_TOKEN }}"\
 #          -H "X-GitHub-Api-Version: 2022-11-28" \
-#            https://api.github.com/repos/MFX-com/testing-packages \
+#            https://api.github.com/repos/mfx-com/testing-packages \
 #          -d '{"enforce_admins":false}' \
 #          --output /dev/null
 
@@ -131,7 +131,7 @@ jobs:
 #          -H "Accept: application/vnd.github+json" \
 #          -H "Authorization: token ${{ secrets.BOT_ACCESS_TOKEN }}"\
 #          -H "X-GitHub-Api-Version: 2022-11-28" \
-#            https://api.github.com/repos/MFX-com/testing-packages \
+#            https://api.github.com/repos/mfx-com/testing-packages \
 #          -d '{"enforce_admins":true}' \
 #          --output /dev/null
 
@@ -163,9 +163,9 @@ jobs:
 
 #      - name: Bump versions
 #        run: |
-#          pnpm run --filter "@MFX-com/first" bump
-#          pnpm run --filter "@MFX-com/private" bump
-#          pnpm run --filter "@MFX-com/second" bump
+#          pnpm run --filter "@mfx-com/first" bump
+#          pnpm run --filter "@mfx-com/private" bump
+#          pnpm run --filter "@mfx-com/second" bump
 
       # People can bump manually a package in their merge request
       # Once merged to development, it will automatically take it in consideration
@@ -178,7 +178,7 @@ jobs:
 #          touch .changeset/my-commit-message.md
 #          cat <<EOF > .changeset/my-commit-message.md
 #            ---
-#            "@MFX-com/second": patch
+#            "@mfx-com/second": patch
 #            ---
 #
 #            AAA
@@ -206,8 +206,8 @@ jobs:
 
 #      - name: Build
 #        run: |
-#          pnpm run build:@MFX-com/first
-#          pnpm run build:@MFX-com/second
+#          pnpm run build:@mfx-com/first
+#          pnpm run build:@mfx-com/second
 
 #      - name: Check version again
 #        run: |
@@ -218,24 +218,24 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pnpm --filter "@MFX-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag dev
-          pnpm --filter "@MFX-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag dev
+          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag dev
+          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag dev
 
       - name: Publish to npm (staging)
         if: ${{ github.ref == 'refs/heads/staging' }}
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pnpm --filter "@MFX-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag staging
-          pnpm --filter "@MFX-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag staging
+          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag staging
+          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag staging
 
       - name: Publish to npm (prod)
         if: ${{ github.ref == 'refs/heads/main' }}
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pnpm --filter "@MFX-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/
-          pnpm --filter "@MFX-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/
+          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/
+          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/
 
       - name: Publish to public npm (dev)
         if: ${{ github.ref == 'refs/heads/development' }}
@@ -244,7 +244,7 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
 
-          pnpm --filter "@MFX-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/ --tag dev
+          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/ --tag dev
 
       - name: Publish to public npm (staging)
         if: ${{ github.ref == 'refs/heads/staging' }}
@@ -253,7 +253,7 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
 
-          pnpm --filter "@MFX-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/ --tag staging
+          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/ --tag staging
 
       - name: Publish to public npm (prod)
         if: ${{ github.ref == 'refs/heads/main' }}
@@ -262,15 +262,15 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
 
-          pnpm --filter "@MFX-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
+          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
 
 #      - name: Publish to public npm
 #        env:
 #          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
 #        run: |
 #          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
-#          pnpm --filter "@MFX-com/first" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
-#          pnpm --filter "@MFX-com/second" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
+#          pnpm --filter "@mfx-com/first" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
+#          pnpm --filter "@mfx-com/second" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
 
 
 #      - name: Slack Notification

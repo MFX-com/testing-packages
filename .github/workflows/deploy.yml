@@ -8,7 +8,7 @@ name: Deploy docker images
 on:
   push:
     branches:
-      - staging
+      - stagingz
 
 jobs:
   setup-job:

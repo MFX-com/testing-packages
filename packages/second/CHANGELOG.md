@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.9.0 (2023-12-15)
+
+
+### Bug Fixes
+
+* **dependencies:** update all non-major dependencies ([#56](https://github.com/MFX-com/testing-packages/issues/56)) ([2a4dd9d](https://github.com/MFX-com/testing-packages/commit/2a4dd9dfaeb51305235c1f7c19d2d7e5d6f217c3))
+* **dependencies:** update dependency lerna to v8 ([9d3181c](https://github.com/MFX-com/testing-packages/commit/9d3181cbbf32dda008cf2b2cd5366daf072dc749))
+
+
+### Features
+
+* **@MFX-com/first:** testing ([3e6d491](https://github.com/MFX-com/testing-packages/commit/3e6d491f11ce0de106fe8dd233bfaa7539288f75))
+* **@MFX-org/first:** new version ([025d03f](https://github.com/MFX-com/testing-packages/commit/025d03fc6dc92608fcb44c2abe9d9f0b7916e034))
+* **@MFX-org/first:** new version! ([d048687](https://github.com/MFX-com/testing-packages/commit/d04868769bdc97420b74113cd07055872eef69b4))
+* **testing:** bump version ([#28](https://github.com/MFX-com/testing-packages/issues/28)) ([95d13ae](https://github.com/MFX-com/testing-packages/commit/95d13ae75037675af2054be485f3e12b815c0dff))
+* **test:** update ([10da64d](https://github.com/MFX-com/testing-packages/commit/10da64dc8397d97ebee6a27bf86e6561b36b5fe0))
+
+
+
+
+
 ## [1.8.4](https://github.com/MFX-com/testing-packages/compare/@MFX-com/second@1.8.3...@MFX-com/second@1.8.4) (2023-12-15)
 
 **Note:** Version bump only for package @MFX-com/second

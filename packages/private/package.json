@@ -1,7 +1,7 @@
 {
   "name": "@MFX-com/priv",
   "private": true,
-  "version": "1.1.11",
+  "version": "1.1.12",
   "description": "Testing patch private",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

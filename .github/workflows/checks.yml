@@ -17,6 +17,20 @@ jobs:
         node-version: [ 18.17 ]
         pnpm-version: [ 8.9.2 ]
     steps:
+      - name: Create commit file
+        run: |
+          pull_request_number=${{ github.event.pull_request.number }}
+          echo $pull_request_number
+
+          commit_message=$(curl -L \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{ secrets.BOT_ACCESS_TOKEN }}" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              https://api.github.com/repos/MFX-com/testing-packages/pulls/${{ github.event.pull_request.number }} |  jq  -r '.title'
+             )
+
+          echo $commit_message
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0

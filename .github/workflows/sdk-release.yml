@@ -113,6 +113,10 @@ jobs:
 #            https://api.github.com/repos/mfx-com/testing-packages \
 #          -d '{"enforce_admins":false}' \
 #          --output /dev/null
+      - name: Show commit
+        run: |
+          commit_message=$(git show -s --format=%s)
+          echo $commit_message
 
       - name: Bump versions
         if: ${{ github.ref == 'refs/heads/development' }}

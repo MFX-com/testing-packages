@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.0.4](https://github.com/MFX-com/testing-packages/compare/@mfx-com/first@9.0.3...@mfx-com/first@9.0.4) (2023-12-20)
+
+**Note:** Version bump only for package @mfx-com/first
+
+
+
+
+
 ## [9.0.3](https://github.com/MFX-com/testing-packages/compare/@mfx-com/first@9.0.2...@mfx-com/first@9.0.3) (2023-12-20)
 
 **Note:** Version bump only for package @mfx-com/first

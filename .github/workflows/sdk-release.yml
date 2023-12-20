@@ -245,8 +245,8 @@ jobs:
           version=$(pnpm view "@mfx-com/second" version)
           pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/second"
           
-          version=$(pnpm view "@mfx-com/pubpack" version)
-          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/pubpack"
+#          version=$(pnpm view "@mfx-com/pubpack" version)
+#          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/pubpack"
 
 #      - name: Publish to npm (dev)
 #        if: ${{ github.ref == 'refs/heads/development' }}
@@ -277,7 +277,7 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
 
-          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/  --tag ${{ steps.tag_release.outputs.release_tag }}
+#          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/  --tag ${{ steps.tag_release.outputs.release_tag }}
 
 #      - name: Publish to public npm
 #        env:

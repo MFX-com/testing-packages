@@ -241,11 +241,11 @@ jobs:
         run: |
           echo ${{ steps.tag_release.outputs.release_tag }}
 
-          first_version=$(pnpm view "@mfx-com/first" version)
+          first_version=$(pnpm view "@mfx-com/first" version --tag ${{ steps.tag_release.outputs.release_tag }})
           pnpm pkg set version="$first_version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/first"
           echo $first_version
 
-          second_version=$(pnpm view "@mfx-com/second" version)
+          second_version=$(pnpm view "@mfx-com/second" version --tag ${{ steps.tag_release.outputs.release_tag }})
           pnpm pkg set version="$second_version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/second"
           echo $second_version
           

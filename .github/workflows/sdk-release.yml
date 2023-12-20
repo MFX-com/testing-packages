@@ -218,56 +218,66 @@ jobs:
 #        run: |
 #          cat packages/first/package.json
 
-      - name: Publish to npm (dev)
-        if: ${{ github.ref == 'refs/heads/development' }}
+      - name: Set release tag
+        id: tag_release
+        run: |
+          release_tag="dev"
+          
+          if [ ${{ github.ref }} == 'refs/heads/staging' ]; then
+            echo "staging release"
+            release_tag="staging"
+          elif [ ${{ github.ref }} == 'refs/heads/main' ]; then
+            echo "production release"
+            release_tag="latest"
+          elif [ ${{ github.ref }} == 'refs/heads/development' ]; then
+            echo "dev release"
+            release_tag="dev"
+          fi
+          
+          echo "release_tag=$release_tag" >> $GITHUB_OUTPUT
+
+      - name: Prepare release version
+        if: ${{ github.ref == 'refs/heads/development' || github.ref == 'refs/heads/staging' }}
+        run: |
+          version=$(pnpm view "@mfx-com/first" version)
+          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/first"
+          
+          version=$(pnpm view "@mfx-com/second" version)
+          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/second"
+          
+          version=$(pnpm view "@mfx-com/pubpack" version)
+          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/pubpack"
+
+#      - name: Publish to npm (dev)
+#        if: ${{ github.ref == 'refs/heads/development' }}
+#        env:
+#          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+#          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+#
+#      - name: Publish to npm (staging)
+#        if: ${{ github.ref == 'refs/heads/staging' }}
+#        env:
+#          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+#          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+
+      - name: Publish to npm
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag dev
-          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag dev
+          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
 
-      - name: Publish to npm (staging)
-        if: ${{ github.ref == 'refs/heads/staging' }}
-        env:
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag staging
-          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag staging
-
-      - name: Publish to npm (prod)
-        if: ${{ github.ref == 'refs/heads/main' }}
-        env:
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/
-          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/
-
-      - name: Publish to public npm (dev)
-        if: ${{ github.ref == 'refs/heads/development' }}
+      - name: Publish to public npm
         env:
           NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
 
-          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/ --tag dev
-
-      - name: Publish to public npm (staging)
-        if: ${{ github.ref == 'refs/heads/staging' }}
-        env:
-          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
-        run: |
-          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
-
-          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/ --tag staging
-
-      - name: Publish to public npm (prod)
-        if: ${{ github.ref == 'refs/heads/main' }}
-        env:
-          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
-        run: |
-          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
-
-          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
+          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/  --tag ${{ steps.tag_release.outputs.release_tag }}
 
 #      - name: Publish to public npm
 #        env:

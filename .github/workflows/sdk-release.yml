@@ -239,11 +239,12 @@ jobs:
       - name: Prepare release version
         if: ${{ github.ref == 'refs/heads/development' || github.ref == 'refs/heads/staging' }}
         run: |
-          version=$(pnpm view "@mfx-com/first" version)
-          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/first"
-          
-          version=$(pnpm view "@mfx-com/second" version)
-          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/second"
+          echo "Test"
+#          version=$(pnpm view "@mfx-com/first" version)
+#          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/first"
+#
+#          version=$(pnpm view "@mfx-com/second" version)
+#          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/second"
           
 #          version=$(pnpm view "@mfx-com/pubpack" version)
 #          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/pubpack"

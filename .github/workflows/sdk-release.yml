@@ -7,6 +7,13 @@ on:
       - staging
       - development
 
+env:
+  CMS_IMAGE: "ghcr.io/nexeraprotocol/nexeraid/apps/cms"
+  API_IMAGE: "ghcr.io/nexeraprotocol/nexeraid/apps/api"
+  DATA_ANALYTICS_IMAGE: "ghcr.io/nexeraprotocol/nexeraid/apps/data-analytics"
+  ZK_VERIFIER_IMAGE: "ghcr.io/nexeraprotocol/nexeraid/apps/zk-verifier"
+  BLOCKCHAIN_LISTENER_IMAGE: "ghcr.io/nexeraprotocol/nexeraid/apps/blockchain-listener"
+
 jobs:
   versions:
     name: Versions
@@ -31,6 +38,30 @@ jobs:
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.PRIVATE_KEY }}
+
+      - name: Set image
+        id: image_name
+        run: |
+          pretty_app="UNKNOWN"
+
+          if [ "${{ matrix.apps }}" == "cms" ]; then
+            pretty_app="${{ env.CMS_IMAGE }}"
+          elif [ "${{ matrix.apps }}" == "api" ]; then
+            pretty_app="${{ env.API_IMAGE }}"
+          elif [ "${{ matrix.apps }}" == "data-analytics" ]; then
+            pretty_app="${{ env.DATA_ANALYTICS_IMAGE }}"
+          elif [ "${{ matrix.apps }}" == "zk-verifier" ]; then
+            pretty_app="${{ env.ZK_VERIFIER_IMAGE }}"
+          elif [ "${{ matrix.apps }}" == "blockchain-listener" ]; then
+            pretty_app="${{ env.BLOCKCHAIN_LISTENER_IMAGE }}"
+          fi
+          
+          echo $pretty_app
+          echo "app_name=$pretty_app" >> $GITHUB_OUTPUT
+
+      - name: Print image name
+        run: |
+          echo ${{ steps.image_name.outputs.app_name }}
 
       - uses: actions/checkout@v4
         with:

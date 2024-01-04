@@ -18,13 +18,13 @@ jobs:
   versions:
     name: Versions
     runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
+    strategy:
+      matrix:
 #        node-version: [ 18.17 ]
 #        pnpm-version: [ 8.9.2 ]
-#        apps:
-#          - api
-#          - cms
+        apps:
+          - api
+          - cms
 #    environment:
 #      name: ${{ matrix.apps }}-dev
     env:

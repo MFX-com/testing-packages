@@ -13,6 +13,7 @@ env:
   DATA_ANALYTICS_IMAGE: "ghcr.io/nexeraprotocol/nexeraid/apps/data-analytics"
   ZK_VERIFIER_IMAGE: "ghcr.io/nexeraprotocol/nexeraid/apps/zk-verifier"
   BLOCKCHAIN_LISTENER_IMAGE: "ghcr.io/nexeraprotocol/nexeraid/apps/blockchain-listener"
+  TIMESTAMP_GEN: ${{ date +%s%3N }}
 
 jobs:
   versions:
@@ -43,6 +44,7 @@ jobs:
         id: image_name
         run: |
           pretty_app="UNKNOWN"
+          echo ${{ env.TIMESTAMP_GEN }}
 
           if [ "${{ matrix.apps }}" == "cms" ]; then
             pretty_app="${{ env.CMS_IMAGE }}"

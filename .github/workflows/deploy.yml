@@ -25,7 +25,7 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
 
       - name: Check for changes in polygon-id directory
-        uses: dorny/paths-filter@v2
+        uses: dorny/paths-filter@v3
         id: changes
         with:
           filters: |

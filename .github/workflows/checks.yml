@@ -12,6 +12,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    environment: api-dev
     strategy:
       matrix:
         node-version: [ 18.17 ]
@@ -85,3 +86,13 @@ jobs:
       - name: Install Dependencies
         run: |
           pnpm install --no-frozen-lockfile
+
+      - name: Tests
+        run: |
+          if [ ${{ secrets.MUMBAI_PROVIDER_URL }} == 'HTTPS' ]; then
+            echo "ONE"
+            exit 1
+          elif [ ${{ env.MUMBAI_PROVIDER_URL }} == 'HTTPS' ]; then
+            echo "TWO"
+            exit 1
+          fi

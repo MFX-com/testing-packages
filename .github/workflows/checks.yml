@@ -89,6 +89,10 @@ jobs:
 
       - name: Tests
         run: |
+          echo ${{ github.sha }} >> .testing
+          cat .testing
+        
+          
           if [ ${{ secrets.MUMBAI_PROVIDER_URL }} == 'HTTPS' ]; then
             echo "ONE"
             exit 1

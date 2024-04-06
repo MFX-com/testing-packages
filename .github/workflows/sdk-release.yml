@@ -330,7 +330,7 @@ jobs:
           git config --global user.name "nexera-release[bot]"
           git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
 
-          lerna publish --canary --no-git-reset --from-git --temp-tag ${{ steps.tag_release.outputs.release_tag }}
+          lerna publish from-git --canary --no-git-reset --temp-tag ${{ steps.tag_release.outputs.release_tag }}
 
 #      - name: Publish to public npm
 #        env:

@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.1](https://github.com/MFX-com/testing-packages/compare/v1.5.6...v1.9.1) (2024-04-06)
+
+**Note:** Version bump only for package @mfx-com/priv
+
+
+
+
+
+
 ## 1.1.12 (2023-12-15)
 
 

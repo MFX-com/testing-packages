@@ -152,16 +152,16 @@ jobs:
           commit_message=$(git show -s --format=%s)
           echo $commit_message
 
-      - name: Bump versions
-        if: ${{ github.ref == 'refs/heads/development' }}
-        shell: bash
-        env:
-          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
-        run: |
-          git config --global user.name "nexera-release[bot]"
-          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
-
-          lerna version --yes
+#      - name: Bump versions
+#        if: ${{ github.ref == 'refs/heads/development' }}
+#        shell: bash
+#        env:
+#          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+#        run: |
+#          git config --global user.name "nexera-release[bot]"
+#          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
+#
+#          lerna version --yes
 
 #      - name: Update settings
 #        shell: bash
@@ -330,7 +330,7 @@ jobs:
           git config --global user.name "nexera-release[bot]"
           git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
 
-          lerna publish from-git --canary --no-git-reset --pre-dist-tag ${{ steps.tag_release.outputs.release_tag }}
+          lerna publish from-git --canary --pre-dist-tag ${{ steps.tag_release.outputs.release_tag }}
 
 #      - name: Publish to public npm
 #        env:

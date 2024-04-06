@@ -303,20 +303,30 @@ jobs:
 #          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
 #          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
 
-      - name: Publish to npm
+#      - name: Publish to NPM
+#        env:
+#          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+#          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+#
+#      - name: Publish to public NPM
+#        env:
+#          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
+#        run: |
+#          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
+#
+#          pnpm --filter "@mfx-com/pubpack-2" publish --access=public --no-git-checks --registry https://registry.npmjs.org/  --tag ${{ steps.tag_release.outputs.release_tag }}
+
+
+      - name: Publish packages
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
-          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
-
-      - name: Publish to public npm
-        env:
           NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
 
-          pnpm --filter "@mfx-com/pubpack-2" publish --access=public --no-git-checks --registry https://registry.npmjs.org/  --tag ${{ steps.tag_release.outputs.release_tag }}
+          lerna publish --canary --no-git-reset --tag ${{ steps.tag_release.outputs.release_tag }}
 
 #      - name: Publish to public npm
 #        env:

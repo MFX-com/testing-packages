@@ -283,7 +283,7 @@ jobs:
           pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/second"
           echo $version
           
-          version=$(cat packages/second/pubpack.json | jq -r '.version')
+          version=$(cat packages/pubpack/pubpack.json | jq -r '.version')
           pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/pubpack"
           echo $version
 

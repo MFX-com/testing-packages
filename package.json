@@ -4,10 +4,10 @@
   "description": "aaa",
   "keywords": [],
   "engines": {
-    "node": ">=20.9.0",
-    "pnpm": ">=8.9.2"
+    "node": ">=20.12.0",
+    "pnpm": ">=8.15.6"
   },
-  "packageManager": "pnpm@8.9.2",
+  "packageManager": "pnpm@8.15.6",
   "workspaces": [
     "packages/*"
   ],

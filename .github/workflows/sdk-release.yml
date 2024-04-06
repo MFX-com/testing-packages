@@ -316,7 +316,7 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
 
-#          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/  --tag ${{ steps.tag_release.outputs.release_tag }}
+          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/  --tag ${{ steps.tag_release.outputs.release_tag }}
 
 #      - name: Publish to public npm
 #        env:

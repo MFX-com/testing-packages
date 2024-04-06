@@ -1,6 +1,6 @@
 {
   "name": "@mfx-com/second",
-  "version": "1.9.1",
+  "version": "1.9.3",
   "description": "Testing patch 2",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

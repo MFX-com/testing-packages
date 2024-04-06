@@ -21,11 +21,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-#        node-version: [ 18.17 ]
-#        pnpm-version: [ 8.9.2 ]
-        apps:
-          - api
-          - cms
+        node-version: [ 18.17 ]
+        pnpm-version: [ 8.9.2 ]
+#        apps:
+#          - api
+#          - cms
 #    environment:
 #      name: ${{ matrix.apps }}-dev
     env:
@@ -40,31 +40,31 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.PRIVATE_KEY }}
 
-      - name: Set image
-        id: image_name
-        run: |
-          pretty_app="UNKNOWN"
-
-          echo ${{ env.TIMESTAMP_GEN }}
-
-          if [ "${{ matrix.apps }}" == "cms" ]; then
-            pretty_app="${{ env.CMS_IMAGE }}"
-          elif [ "${{ matrix.apps }}" == "api" ]; then
-            pretty_app="${{ env.API_IMAGE }}"
-          elif [ "${{ matrix.apps }}" == "data-analytics" ]; then
-            pretty_app="${{ env.DATA_ANALYTICS_IMAGE }}"
-          elif [ "${{ matrix.apps }}" == "zk-verifier" ]; then
-            pretty_app="${{ env.ZK_VERIFIER_IMAGE }}"
-          elif [ "${{ matrix.apps }}" == "blockchain-listener" ]; then
-            pretty_app="${{ env.BLOCKCHAIN_LISTENER_IMAGE }}"
-          fi
-          
-          echo $pretty_app
-          echo "app_name=$pretty_app" >> $GITHUB_OUTPUT
-
-      - name: Print image name
-        run: |
-          echo ${{ steps.image_name.outputs.app_name }}
+#      - name: Set image
+#        id: image_name
+#        run: |
+#          pretty_app="UNKNOWN"
+#
+#          echo ${{ env.TIMESTAMP_GEN }}
+#
+#          if [ "${{ matrix.apps }}" == "cms" ]; then
+#            pretty_app="${{ env.CMS_IMAGE }}"
+#          elif [ "${{ matrix.apps }}" == "api" ]; then
+#            pretty_app="${{ env.API_IMAGE }}"
+#          elif [ "${{ matrix.apps }}" == "data-analytics" ]; then
+#            pretty_app="${{ env.DATA_ANALYTICS_IMAGE }}"
+#          elif [ "${{ matrix.apps }}" == "zk-verifier" ]; then
+#            pretty_app="${{ env.ZK_VERIFIER_IMAGE }}"
+#          elif [ "${{ matrix.apps }}" == "blockchain-listener" ]; then
+#            pretty_app="${{ env.BLOCKCHAIN_LISTENER_IMAGE }}"
+#          fi
+#
+#          echo $pretty_app
+#          echo "app_name=$pretty_app" >> $GITHUB_OUTPUT
+#
+#      - name: Print image name
+#        run: |
+#          echo ${{ steps.image_name.outputs.app_name }}
 
       - uses: actions/checkout@v4
         with:
@@ -283,7 +283,7 @@ jobs:
           pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/second"
           echo $version
           
-          version=$(cat packages/pubpack/pubpack.json | jq -r '.version')
+          version=$(cat packages/pubpack/package.json | jq -r '.version')
           pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/pubpack"
           echo $version
 

@@ -152,16 +152,16 @@ jobs:
           commit_message=$(git show -s --format=%s)
           echo $commit_message
 
-      - name: Bump versions
-        if: ${{ github.ref == 'refs/heads/development' }}
-        shell: bash
-        env:
-          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
-        run: |
-          git config --global user.name "nexera-release[bot]"
-          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
-
-          lerna version --yes
+#      - name: Bump versions
+#        if: ${{ github.ref == 'refs/heads/development' }}
+#        shell: bash
+#        env:
+#          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+#        run: |
+#          git config --global user.name "nexera-release[bot]"
+#          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
+#
+#          lerna version --yes
 
 #      - name: Update settings
 #        shell: bash
@@ -323,10 +323,14 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
+          
+          git config --global user.name "nexera-release[bot]"
+          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
 
-          lerna publish --canary --no-git-reset --temp-tag ${{ steps.tag_release.outputs.release_tag }}
+          lerna publish --canary --no-git-reset --from-git --temp-tag ${{ steps.tag_release.outputs.release_tag }}
 
 #      - name: Publish to public npm
 #        env:

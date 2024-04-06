@@ -326,7 +326,7 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
 
-          lerna publish --canary --no-git-reset --tag ${{ steps.tag_release.outputs.release_tag }}
+          lerna publish --canary --no-git-reset --temp-tag ${{ steps.tag_release.outputs.release_tag }}
 
 #      - name: Publish to public npm
 #        env:

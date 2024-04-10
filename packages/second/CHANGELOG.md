@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.1.0-beta.1](https://github.com/MFX-com/testing-packages/compare/@mfx-com/second@10.1.0-beta.0...@mfx-com/second@10.1.0-beta.1) (2024-04-10)
+
+**Note:** Version bump only for package @mfx-com/second
+
+
+
+
+
 # 10.1.0-beta.0 (2024-04-10)
 
 

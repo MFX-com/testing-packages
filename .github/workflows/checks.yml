@@ -3,21 +3,61 @@ name: SDK Release - checks
 on:
   pull_request:
     types:
-     - opened
-     - synchronize
+      - opened
+      - reopened
+      - synchronize
+      - edited
 
 jobs:
   release:
     name: Release
-    runs-on: ubuntu-latest
+#    runs-on: ubuntu-latest
+    runs-on: blacksmith-2vcpu-ubuntu-2204
+    environment: api-dev
     strategy:
       matrix:
-        node-version: [ 18.17 ]
-        pnpm-version: [ 8.9.2 ]
+        node-version: [ 20.12.0 ]
+        pnpm-version: [ 8.15.6 ]
     steps:
+      - name: Create commit file
+        run: |
+          pull_request_number=${{ github.event.pull_request.number }}
+          echo $pull_request_number
+
+          commit_message=$(curl -L \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{ secrets.BOT_ACCESS_TOKEN }}" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              https://api.github.com/repos/MFX-com/testing-packages/pulls/${{ github.event.pull_request.number }} |  jq  -r '.title'
+             )
+
+          echo $commit_message
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
 
       - uses: pnpm/action-setup@v3.0.0
         name: Install pnpm
@@ -31,7 +71,8 @@ jobs:
         run: |
           echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
 
-      - uses: actions/cache@v4
+#      - uses: actions/cache@v4
+      - uses: useblacksmith/cache@v5
         name: Setup pnpm cache
         with:
           path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
@@ -39,7 +80,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-      - uses: actions/setup-node@v4
+#      - uses: actions/setup-node@v4
+      - uses: useblacksmith/setup-node@v5
         with:
           cache: 'pnpm'
           node-version: ${{ matrix.node-version }}
@@ -47,3 +89,15 @@ jobs:
       - name: Install Dependencies
         run: |
           pnpm install --no-frozen-lockfile
+
+      - name: Tests
+        run: |
+          echo GIT_COMMIT_REF=${{ github.sha }} >> .testing
+          cat .testing
+        
+          
+          if [ ${{ secrets.MUMBAI_PROVIDER_URL }} == 'HTTPS' ]; then
+            echo "ONE"
+          elif [ ${{ env.MUMBAI_PROVIDER_URL }} == 'HTTPS' ]; then
+            echo "TWO"
+          fi

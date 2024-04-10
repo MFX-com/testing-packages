@@ -1,8 +1,8 @@
-FROM node:18.17-alpine
+FROM node:20.12.0-alpine
 
 RUN apk add --no-cache libc6-compat g++ make py3-pip
 RUN apk update
-RUN npm install -g pnpm@8.9.2
+RUN npm install -g pnpm@8.15.6
 
 # Create app directory
 WORKDIR /usr/src/app

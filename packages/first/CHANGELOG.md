@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.12](https://github.com/MFX-com/testing-packages/compare/@mfx-com/first@10.0.10-alpha.0...@mfx-com/first@10.0.12) (2024-04-10)
+
+**Note:** Version bump only for package @mfx-com/first
+
+
+
+
+
 ## [10.0.10-alpha.0](https://github.com/MFX-com/testing-packages/compare/@mfx-com/first@9.0.4...@mfx-com/first@10.0.10-alpha.0) (2024-04-10)
 
 

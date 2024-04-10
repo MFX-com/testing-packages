@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 10.0.6-beta.0 (2024-04-10)
+
+
+
+## 1.9.4 (2024-04-06)
+
+
+
+## 1.9.3 (2024-04-06)
+
+
+
+## 1.9.1 (2024-04-06)
+
+
+### Bug Fixes
+
+* **dependencies:** update all non-major dependencies ([#56](https://github.com/MFX-com/testing-packages/issues/56)) ([2a4dd9d](https://github.com/MFX-com/testing-packages/commit/2a4dd9dfaeb51305235c1f7c19d2d7e5d6f217c3))
+* **dependencies:** update dependency lerna to v8 ([9d3181c](https://github.com/MFX-com/testing-packages/commit/9d3181cbbf32dda008cf2b2cd5366daf072dc749))
+
+
+
+
+
 ## [1.9.4](https://github.com/MFX-com/testing-packages/compare/v1.9.3...v1.9.4) (2024-04-06)
 
 **Note:** Version bump only for package @mfx-com/priv

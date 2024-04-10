@@ -16,5 +16,9 @@
     "standard-version": "^9.5.0"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
 }

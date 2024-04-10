@@ -7,14 +7,22 @@ on:
       - staging
       - development
 
+env:
+  CMS_IMAGE: "ghcr.io/nexeraprotocol/nexeraid/apps/cms"
+  API_IMAGE: "ghcr.io/nexeraprotocol/nexeraid/apps/api"
+  DATA_ANALYTICS_IMAGE: "ghcr.io/nexeraprotocol/nexeraid/apps/data-analytics"
+  ZK_VERIFIER_IMAGE: "ghcr.io/nexeraprotocol/nexeraid/apps/zk-verifier"
+  BLOCKCHAIN_LISTENER_IMAGE: "ghcr.io/nexeraprotocol/nexeraid/apps/blockchain-listener"
+  TIMESTAMP_GEN: ${{ github.run_number }}
+
 jobs:
   versions:
     name: Versions
     runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        node-version: [ 18.17 ]
-#        pnpm-version: [ 8.9.2 ]
+    strategy:
+      matrix:
+        node-version: [ 20.12.0 ]
+        pnpm-version: [ 8.15.6 ]
 #        apps:
 #          - api
 #          - cms
@@ -22,8 +30,8 @@ jobs:
 #      name: ${{ matrix.apps }}-dev
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      NODE_VERSION: 20.9.0
-      PNPM_VERSION: 8.9.2
+      NODE_VERSION: 20.12.0
+      PNPM_VERSION: 8.15.6
     steps:
       - name: Generate token
         id: generate_token
@@ -31,6 +39,32 @@ jobs:
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.PRIVATE_KEY }}
+
+#      - name: Set image
+#        id: image_name
+#        run: |
+#          pretty_app="UNKNOWN"
+#
+#          echo ${{ env.TIMESTAMP_GEN }}
+#
+#          if [ "${{ matrix.apps }}" == "cms" ]; then
+#            pretty_app="${{ env.CMS_IMAGE }}"
+#          elif [ "${{ matrix.apps }}" == "api" ]; then
+#            pretty_app="${{ env.API_IMAGE }}"
+#          elif [ "${{ matrix.apps }}" == "data-analytics" ]; then
+#            pretty_app="${{ env.DATA_ANALYTICS_IMAGE }}"
+#          elif [ "${{ matrix.apps }}" == "zk-verifier" ]; then
+#            pretty_app="${{ env.ZK_VERIFIER_IMAGE }}"
+#          elif [ "${{ matrix.apps }}" == "blockchain-listener" ]; then
+#            pretty_app="${{ env.BLOCKCHAIN_LISTENER_IMAGE }}"
+#          fi
+#
+#          echo $pretty_app
+#          echo "app_name=$pretty_app" >> $GITHUB_OUTPUT
+#
+#      - name: Print image name
+#        run: |
+#          echo ${{ steps.image_name.outputs.app_name }}
 
       - uses: actions/checkout@v4
         with:
@@ -113,9 +147,35 @@ jobs:
 #            https://api.github.com/repos/mfx-com/testing-packages \
 #          -d '{"enforce_admins":false}' \
 #          --output /dev/null
+      - name: Show commit
+        run: |
+          commit_message=$(git show -s --format=%s)
+          echo $commit_message
 
-      - name: Bump versions
+      - name: Bump versions (development)
         if: ${{ github.ref == 'refs/heads/development' }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+        run: |
+          git config --global user.name "nexera-release[bot]"
+          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
+
+          lerna version --yes --conventional-prerelease --preid alpha
+
+      - name: Bump versions (staging)
+        if: ${{ github.ref == 'refs/heads/staging' }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+        run: |
+          git config --global user.name "nexera-release[bot]"
+          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
+
+          lerna version --yes --conventional-prerelease --preid beta
+
+      - name: Bump versions (production)
+        if: ${{ github.ref == 'refs/heads/main' }}
         shell: bash
         env:
           GH_TOKEN: ${{ steps.generate_token.outputs.token }}
@@ -214,56 +274,85 @@ jobs:
 #        run: |
 #          cat packages/first/package.json
 
-      - name: Publish to npm (dev)
-        if: ${{ github.ref == 'refs/heads/development' }}
+      - name: Set release tag
+        id: tag_release
+        run: |
+          release_tag="dev"
+          
+          if [ ${{ github.ref }} == 'refs/heads/staging' ]; then
+            echo "staging release"
+            release_tag="staging"
+          elif [ ${{ github.ref }} == 'refs/heads/main' ]; then
+            echo "production release"
+            release_tag="latest"
+          elif [ ${{ github.ref }} == 'refs/heads/development' ]; then
+            echo "dev release"
+            release_tag="dev"
+          fi
+          
+          echo "release_tag=$release_tag" >> $GITHUB_OUTPUT
+
+#      - name: Prepare release version
+#        if: ${{ github.ref == 'refs/heads/development' || github.ref == 'refs/heads/staging' }}
+#        run: |
+#          echo ${{ steps.tag_release.outputs.release_tag }}
+#
+#          version=$(cat packages/first/package.json | jq -r '.version')
+#          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/first"
+#          echo $version
+#
+#          version=$(cat packages/second/package.json | jq -r '.version')
+#          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/second"
+#          echo $version
+#
+#          version=$(cat packages/pubpack/package.json | jq -r '.version')
+#          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/pubpack-2"
+#          echo $version
+
+      #      - name: Publish to npm (dev)
+#        if: ${{ github.ref == 'refs/heads/development' }}
+#        env:
+#          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+#          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+#
+#      - name: Publish to npm (staging)
+#        if: ${{ github.ref == 'refs/heads/staging' }}
+#        env:
+#          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+#          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+
+      - name: Publish to NPM
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag dev
-          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag dev
+          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
 
-      - name: Publish to npm (staging)
-        if: ${{ github.ref == 'refs/heads/staging' }}
-        env:
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag staging
-          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag staging
-
-      - name: Publish to npm (prod)
-        if: ${{ github.ref == 'refs/heads/main' }}
-        env:
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/
-          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/
-
-      - name: Publish to public npm (dev)
-        if: ${{ github.ref == 'refs/heads/development' }}
+      - name: Publish to public NPM
         env:
           NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
 
-          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/ --tag dev
+          pnpm --filter "@mfx-com/pubpack-2" publish --access=public --no-git-checks --registry https://registry.npmjs.org/  --tag ${{ steps.tag_release.outputs.release_tag }}
 
-      - name: Publish to public npm (staging)
-        if: ${{ github.ref == 'refs/heads/staging' }}
-        env:
-          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
-        run: |
-          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
 
-          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/ --tag staging
-
-      - name: Publish to public npm (prod)
-        if: ${{ github.ref == 'refs/heads/main' }}
-        env:
-          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
-        run: |
-          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
-
-          pnpm --filter "@mfx-com/pubpack" publish --access=public --no-git-checks --registry https://registry.npmjs.org/
+#      - name: Publish packages
+#        env:
+#          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
+#          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+#        run: |
+#          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
+#
+#          git config --global user.name "nexera-release[bot]"
+#          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
+#
+#          lerna publish --yes --canary --pre-dist-tag ${{ steps.tag_release.outputs.release_tag }}
 
 #      - name: Publish to public npm
 #        env:
@@ -428,8 +517,8 @@ jobs:
 #      - versions
 #    strategy:
 #      matrix:
-#        node-version: [ 18.17 ]
-#        pnpm-version: [ 8.9.2 ]
+#        node-version: [ 20.12.0 ]
+#        pnpm-version: [ 8.15.6 ]
 #    steps:
 #      - uses: actions/checkout@v3
 #        with:

@@ -1,6 +1,6 @@
 {
-  "name": "@mfx-com/pubpack",
-  "version": "1.5.2",
+  "name": "@mfx-com/pubpack-2",
+  "version": "10.0.10-beta.0",
   "description": "Testing patch 1",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@changesets/cli": "^2.27.1",
-    "express": "^4.18.2",
+    "express": "^4.19.2",
     "lerna": "^8.1.2",
     "semver": "^7.6.0",
     "standard-version": "^9.5.0"

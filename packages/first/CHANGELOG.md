@@ -3,6 +3,71 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.10-beta.0](https://github.com/MFX-com/testing-packages/compare/@mfx-com/first@9.0.4...@mfx-com/first@10.0.10-beta.0) (2024-04-10)
+
+
+
+## 10.0.9 (2024-04-10)
+
+
+
+## 10.0.8 (2024-04-10)
+
+**Note:** Version bump only for package @mfx-com/first
+
+
+
+
+
+## [10.0.9](https://github.com/MFX-com/testing-packages/compare/v10.0.8...v10.0.9) (2024-04-10)
+
+**Note:** Version bump only for package @mfx-com/first
+
+
+
+
+
+## [10.0.8](https://github.com/MFX-com/testing-packages/compare/v10.0.7...v10.0.8) (2024-04-10)
+
+**Note:** Version bump only for package @mfx-com/first
+
+
+
+
+
+
+## [9.0.4](https://github.com/MFX-com/testing-packages/compare/@mfx-com/first@9.0.3...@mfx-com/first@9.0.4) (2023-12-20)
+
+**Note:** Version bump only for package @mfx-com/first
+
+
+
+
+
+## [9.0.3](https://github.com/MFX-com/testing-packages/compare/@mfx-com/first@9.0.2...@mfx-com/first@9.0.3) (2023-12-20)
+
+**Note:** Version bump only for package @mfx-com/first
+
+
+
+
+
+## [9.0.2](https://github.com/MFX-com/testing-packages/compare/@mfx-com/first@9.0.1...@mfx-com/first@9.0.2) (2023-12-20)
+
+**Note:** Version bump only for package @mfx-com/first
+
+
+
+
+
+## [9.0.1](https://github.com/MFX-com/testing-packages/compare/@mfx-com/first@9.0.0...@mfx-com/first@9.0.1) (2023-12-15)
+
+**Note:** Version bump only for package @mfx-com/first
+
+
+
+
+
 # 9.0.0 (2023-12-15)
 
 

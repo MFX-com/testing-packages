@@ -28,5 +28,5 @@ jobs:
           token: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Auto Bump Run
-        uses: francescoferraioli/autobump@v4.0.2
+        uses: francescoferraioli/autobump@v4.0.3
         with:

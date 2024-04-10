@@ -1,6 +1,6 @@
 {
   "name": "@mfx-com/other",
-  "version": "10.0.5",
+  "version": "10.0.11",
   "description": "Testing other!",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

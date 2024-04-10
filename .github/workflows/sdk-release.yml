@@ -152,27 +152,39 @@ jobs:
           commit_message=$(git show -s --format=%s)
           echo $commit_message
 
-      - name: Bump versions (development)
-        if: ${{ github.ref == 'refs/heads/development' }}
-        shell: bash
-        env:
-          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
-        run: |
-          git config --global user.name "nexera-release[bot]"
-          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
+#      - name: Bump versions (development)
+#        if: ${{ github.ref == 'refs/heads/development' }}
+#        shell: bash
+#        env:
+#          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+#        run: |
+#          git config --global user.name "nexera-release[bot]"
+#          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
+#
+#          lerna version --yes --conventional-prerelease --preid alpha
 
-          lerna version --yes --conventional-prerelease --preid alpha
+#      - name: Bump versions (staging)
+#        if: ${{ github.ref == 'refs/heads/staging' }}
+#        shell: bash
+#        env:
+#          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+#        run: |
+#          git config --global user.name "nexera-release[bot]"
+#          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
+#
+#          lerna version --yes --conventional-prerelease --preid beta
+#
+#      - name: Bump versions (production)
+#        if: ${{ github.ref == 'refs/heads/main' }}
+#        shell: bash
+#        env:
+#          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+#        run: |
+#          git config --global user.name "nexera-release[bot]"
+#          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
+#
+#          lerna version --yes --conventional-graduate
 
-      - name: Bump versions (staging)
-        if: ${{ github.ref == 'refs/heads/staging' }}
-        shell: bash
-        env:
-          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
-        run: |
-          git config --global user.name "nexera-release[bot]"
-          git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
-
-          lerna version --yes --conventional-prerelease --preid beta
 
       - name: Bump versions (production)
         if: ${{ github.ref == 'refs/heads/main' }}
@@ -292,22 +304,22 @@ jobs:
           
           echo "release_tag=$release_tag" >> $GITHUB_OUTPUT
 
-#      - name: Prepare release version
-#        if: ${{ github.ref == 'refs/heads/development' || github.ref == 'refs/heads/staging' }}
-#        run: |
-#          echo ${{ steps.tag_release.outputs.release_tag }}
-#
-#          version=$(cat packages/first/package.json | jq -r '.version')
-#          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/first"
-#          echo $version
-#
-#          version=$(cat packages/second/package.json | jq -r '.version')
-#          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/second"
-#          echo $version
-#
-#          version=$(cat packages/pubpack/package.json | jq -r '.version')
-#          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/pubpack-2"
-#          echo $version
+      - name: Prepare release version
+        if: ${{ github.ref == 'refs/heads/development' || github.ref == 'refs/heads/staging' }}
+        run: |
+          echo ${{ steps.tag_release.outputs.release_tag }}
+
+          version=$(pnpm pkg get version -w "@mfx-com/first" | jq -r '.["@mfx-com/first"]')
+          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/first"
+          echo $version
+
+          version=$(pnpm pkg get version -w "@mfx-com/second" | jq -r '.["@mfx-com/second"]')
+          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/second"
+          echo $version
+
+          version=$(pnpm pkg get version -w "@mfx-com/pubpack-2" | jq -r '.["@mfx-com/pubpack-2"]')
+          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/pubpack-2"
+          echo $version
 
       #      - name: Publish to npm (dev)
 #        if: ${{ github.ref == 'refs/heads/development' }}
@@ -340,6 +352,19 @@ jobs:
 
           pnpm --filter "@mfx-com/pubpack-2" publish --access=public --no-git-checks --registry https://registry.npmjs.org/  --tag ${{ steps.tag_release.outputs.release_tag }}
 
+      - name: Create main to development versions pull request
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: devops-infra/action-pull-request@v0.5.5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: "main"
+          target_branch: "development"
+          title: main to development
+          body: "**Automated pull request**"
+          assignee: markoftw
+          label: automerge
+          draft: false
+          ignore_users: "dependabot"
 
 #      - name: Publish packages
 #        env:

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.7](https://github.com/MFX-com/testing-packages/compare/v10.0.6...v10.0.7) (2024-04-10)
+
+**Note:** Version bump only for package nexera-monorepo
+
+
+
+
+
 ## [10.0.6](https://github.com/MFX-com/testing-packages/compare/v1.9.4...v10.0.6) (2024-04-10)
 
 

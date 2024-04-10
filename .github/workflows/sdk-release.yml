@@ -183,7 +183,7 @@ jobs:
           git config --global user.name "nexera-release[bot]"
           git config --global user.email "137495321+nexera-release[bot]@users.noreply.github.com"
 
-          lerna version --yes
+          lerna version --yes --conventional-graduate
 
 #      - name: Update settings
 #        shell: bash

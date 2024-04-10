@@ -1,6 +1,6 @@
 {
   "name": "@mfx-com/pubpack-2",
-  "version": "10.0.8-alpha.0",
+  "version": "10.0.8",
   "description": "Testing patch 1",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

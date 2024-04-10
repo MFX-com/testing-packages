@@ -270,22 +270,22 @@ jobs:
           
           echo "release_tag=$release_tag" >> $GITHUB_OUTPUT
 
-      - name: Prepare release version
-        if: ${{ github.ref == 'refs/heads/development' || github.ref == 'refs/heads/staging' }}
-        run: |
-          echo ${{ steps.tag_release.outputs.release_tag }}
-          
-          version=$(cat packages/first/package.json | jq -r '.version')
-          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/first"
-          echo $version
-
-          version=$(cat packages/second/package.json | jq -r '.version')
-          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/second"
-          echo $version
-          
-          version=$(cat packages/pubpack/package.json | jq -r '.version')
-          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/pubpack-2"
-          echo $version
+#      - name: Prepare release version
+#        if: ${{ github.ref == 'refs/heads/development' || github.ref == 'refs/heads/staging' }}
+#        run: |
+#          echo ${{ steps.tag_release.outputs.release_tag }}
+#
+#          version=$(cat packages/first/package.json | jq -r '.version')
+#          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/first"
+#          echo $version
+#
+#          version=$(cat packages/second/package.json | jq -r '.version')
+#          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/second"
+#          echo $version
+#
+#          version=$(cat packages/pubpack/package.json | jq -r '.version')
+#          pnpm pkg set version="$version-${{ steps.tag_release.outputs.release_tag }}" -w "@mfx-com/pubpack-2"
+#          echo $version
 
       #      - name: Publish to npm (dev)
 #        if: ${{ github.ref == 'refs/heads/development' }}
@@ -303,20 +303,20 @@ jobs:
 #          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
 #          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
 
-#      - name: Publish to NPM
-#        env:
-#          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        run: |
-#          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
-#          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
-#
-#      - name: Publish to public NPM
-#        env:
-#          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
-#        run: |
-#          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
-#
-#          pnpm --filter "@mfx-com/pubpack-2" publish --access=public --no-git-checks --registry https://registry.npmjs.org/  --tag ${{ steps.tag_release.outputs.release_tag }}
+      - name: Publish to NPM
+        env:
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+
+      - name: Publish to public NPM
+        env:
+          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
+
+          pnpm --filter "@mfx-com/pubpack-2" publish --access=public --no-git-checks --registry https://registry.npmjs.org/  --tag ${{ steps.tag_release.outputs.release_tag }}
 
 
 #      - name: Publish packages

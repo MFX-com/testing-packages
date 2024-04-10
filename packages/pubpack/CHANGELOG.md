@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.6](https://github.com/MFX-com/testing-packages/compare/v1.9.4...v10.0.6) (2024-04-10)
+
+**Note:** Version bump only for package @mfx-com/pubpack-2
+
+
+
+
+
+
 ## [1.9.2](https://github.com/MFX-com/testing-packages/compare/v1.9.1...v1.9.2) (2024-04-06)
 
 **Note:** Version bump only for package @mfx-com/pubpack-2

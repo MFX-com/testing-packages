@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.0.6](https://github.com/MFX-com/testing-packages/compare/v1.9.4...v10.0.6) (2024-04-10)
+
+
+### Bug Fixes
+
+* **dependencies:** update all non-major dependencies ([45d43e8](https://github.com/MFX-com/testing-packages/commit/45d43e89d07f9ea8344e675d0372523f67c8fbad))
+
+
+
+
+
+
 ## [1.9.4](https://github.com/MFX-com/testing-packages/compare/v1.9.3...v1.9.4) (2024-04-06)
 
 **Note:** Version bump only for package nexera-monorepo

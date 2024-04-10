@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 10.0.8-alpha.0 (2024-04-10)
+
+
+
+## 10.0.7 (2024-04-10)
+
+
+
+## 10.0.6 (2024-04-10)
+
+
+
+## 1.9.2 (2024-04-06)
+
+
+
+## 1.5.6 (2024-04-06)
+
+**Note:** Version bump only for package @mfx-com/pubpack-2
+
+
+
+
+
 ## [10.0.7](https://github.com/MFX-com/testing-packages/compare/v10.0.6...v10.0.7) (2024-04-10)
 
 **Note:** Version bump only for package @mfx-com/pubpack-2

@@ -4,7 +4,7 @@
   "description": "aaa",
   "keywords": [],
   "engines": {
-    "node": ">=20.12.0",
+    "node": ">=20.12.2",
     "pnpm": ">=8.15.6"
   },
   "packageManager": "pnpm@8.15.6",
@@ -36,7 +36,7 @@
     "turbo": "^1.13.2"
   },
   "dependencies": {
-    "@aws-sdk/client-rds-data": "^3.549.0",
-    "drizzle-orm": "^0.28.6"
+    "@aws-sdk/client-rds-data": "^3.554.0",
+    "drizzle-orm": "^0.30.8"
   }
 }

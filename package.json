@@ -5,12 +5,20 @@
   "keywords": [],
   "engines": {
     "node": ">=20.12.0",
-    "pnpm": ">=8.15.6"
+    "pnpm": ">=9.0.5"
   },
-  "packageManager": "pnpm@8.15.6",
+  "packageManager": "pnpm@9.0.5",
   "workspaces": [
     "packages/*"
   ],
+  "pnpm": {
+    "overrides": {
+      "sharp": "0.30.1",
+      "nx": "16.5.1",
+      "hardhat-deploy": "0.11.12",
+      "hardhat-deploy-ethers": "0.3.0-beta.13"
+    }
+  },
   "scripts": {
     "release:major": "npm version $(semver $npm_package_version -i major)",
     "release:minor": "npm version $(semver $npm_package_version -i minor)",

@@ -14,7 +14,7 @@ concurrency:
 env:
   FIRST_IMAGE: "ghcr.io/mfx-com/testing-packages/apps/first-app"
   NODE_VERSION: 20.12.0
-  PNPM_VERSION: 8.15.6
+  PNPM_VERSION: 9.0.5
 
 jobs:
   prepare-environment:

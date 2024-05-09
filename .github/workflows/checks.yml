@@ -59,7 +59,7 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
 
-      - uses: pnpm/action-setup@v3.0.0
+      - uses: pnpm/action-setup@v4.0.0
         name: Install pnpm
         id: pnpm-install
         with:

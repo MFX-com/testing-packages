@@ -15,18 +15,18 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
-
       - uses: pnpm/action-setup@v3
         name: Install pnpm
         id: pnpm-install
         with:
           version: 9.2.0
-          run_install: true
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
 
       - uses: nick-fields/retry@v3
         with:

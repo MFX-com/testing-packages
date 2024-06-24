@@ -28,16 +28,23 @@ jobs:
           node-version: 20
           cache: 'pnpm'
 
-      - name: Install Dependencies
-        run: |
-          pnpm install
+#      - name: Install Dependencies
+#        run: |
+#          pnpm install
 
       - uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           max_attempts: 3
           retry_on: error
-          command: pnpm run test-retry
+          command: pnpm install
+
+#      - uses: nick-fields/retry@v3
+#        with:
+#          timeout_minutes: 10
+#          max_attempts: 3
+#          retry_on: error
+#          command: pnpm run test-retry
 
       - name: Test echo
         run: |

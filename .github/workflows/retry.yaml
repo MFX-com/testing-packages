@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - development
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - uses: nick-fields/retry@v3
+        with:
+          max_attempts: 3
+          retry_on: error
+          command: pnpm run test-retry
+
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 9.2.0
+          run_install: true

@@ -508,8 +508,8 @@ jobs:
         run: |
           changes="Manual deploy"
 
-          if [ "${{ github.event.pull_request.title }}" != "" ]; then
-            title=${{ github.event.pull_request.title }}
+          if [ "${{ github.event.ref }}" != "" ]; then
+            title=${{ github.event.ref }}
             if [[ "$title" == *\"* ]]; then
               changes="Pull request (<${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }}>)"
             else

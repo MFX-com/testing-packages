@@ -501,23 +501,28 @@ jobs:
 #          echo $pretty_app
 #          echo "app_name=$pretty_app" >> $GITHUB_OUTPUT
 #
-#      - name: Set changes
-#        if: always()
-#        id: changes_output
-#        shell: bash
-#        run: |
-#          changes="Manual deploy"
-#
-#          if [ "${{ github.event.pull_request }}" != "" ]; then
-#            changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.number }}>)"
-#          else
-#            commit_message="$(git log --pretty=%B -1 ${{ github.sha }} | cat - | head -n1)"
-#            changes="Manual deploy: $commit_message - <${{ github.event.repository.html_url }}/commit/${{ github.sha }}|${{ github.sha }}>"
-#          fi
-#
-#          echo $changes
-#          echo "changes=$changes" >> $GITHUB_OUTPUT
-#
+      - name: Set changes
+        if: always()
+        id: changes_output
+        shell: bash
+        run: |
+          changes="Manual deploy"
+
+          if [ "${{ github.event.pull_request.title }}" != "" ]; then
+            title=${{ github.event.pull_request.title }}
+            if [[ "$title" == *\"* ]]; then
+              changes="Pull request (<${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }}>)"
+            else
+              changes="${{ github.event.pull_request.title }} (<${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }}>)"
+            fi
+          else
+            commit_message="$(git log --pretty=%B -1 ${{ inputs.commit-sha }} | cat - | head -n1 | tr -d '"')"
+            changes="Manual deploy: $commit_message - <${{ github.event.repository.html_url }}/commit/${{ inputs.commit-sha }}|${{ inputs.commit-sha }}>"
+          fi
+
+          echo $changes
+          echo "changes=$changes" >> $GITHUB_OUTPUT
+
 #      - name: Check output
 #        if: always()
 #        shell: bash

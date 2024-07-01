@@ -507,6 +507,7 @@ jobs:
         shell: bash
         run: |
           changes="Manual deploy"
+          
 
           if [ "${{ github.event.head_commit.message }}" != "" ]; then
             title=${{ github.event.head_commit.message }}

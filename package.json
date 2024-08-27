@@ -33,7 +33,7 @@
     "@changesets/cli": "^2.27.1",
     "ethers": "^6.11.1",
     "lerna": "^8.1.2",
-    "turbo": "^1.13.2"
+    "turbo": "^2.1.0"
   },
   "dependencies": {
     "@aws-sdk/client-rds-data": "^3.554.0",

@@ -360,34 +360,34 @@ jobs:
 #          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
 #          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
 
-      - name: Publish to NPM
-        env:
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
-          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
-
-      - name: Publish to public NPM
-        env:
-          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
-        run: |
-          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
-
-          pnpm --filter "@mfx-com/pubpack-2" publish --access=public --no-git-checks --registry https://registry.npmjs.org/  --tag ${{ steps.tag_release.outputs.release_tag }}
-
-      - name: Create main to development versions pull request
-        if: ${{ github.ref == 'refs/heads/main' }}
-        uses: devops-infra/action-pull-request@v0.5.5
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: "main"
-          target_branch: "development"
-          title: main to development
-          body: "**Automated pull request**"
-          assignee: markoftw
-          label: automerge
-          draft: false
-          ignore_users: "dependabot"
+#      - name: Publish to NPM
+#        env:
+#          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          pnpm --filter "@mfx-com/first" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+#          pnpm --filter "@mfx-com/second" publish --no-git-checks --registry https://npm.pkg.github.com/ --tag ${{ steps.tag_release.outputs.release_tag }}
+#
+#      - name: Publish to public NPM
+#        env:
+#          NPMJS_COM_TOKEN: ${{ secrets.NPMJS_COM_TOKEN }}
+#        run: |
+#          echo "//registry.npmjs.org/:_authToken=$NPMJS_COM_TOKEN" > .npmrc
+#
+#          pnpm --filter "@mfx-com/pubpack-2" publish --access=public --no-git-checks --registry https://registry.npmjs.org/  --tag ${{ steps.tag_release.outputs.release_tag }}
+#
+#      - name: Create main to development versions pull request
+#        if: ${{ github.ref == 'refs/heads/main' }}
+#        uses: devops-infra/action-pull-request@v0.5.5
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          source_branch: "main"
+#          target_branch: "development"
+#          title: main to development
+#          body: "**Automated pull request**"
+#          assignee: markoftw
+#          label: automerge
+#          draft: false
+#          ignore_users: "dependabot"
 
 #      - name: Publish packages
 #        env:

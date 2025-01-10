@@ -22,7 +22,11 @@ permissions:
 jobs:
   versions:
     name: Versions
-    runs-on: ubuntu-latest
+#    runs-on: ubuntu-latest
+    runs-on:
+      - runs-on
+      - runner=4cpu-linux-x64
+      - run-id=${{ github.run_id }}
     strategy:
       matrix:
         node-version: [ 20.12.0 ]

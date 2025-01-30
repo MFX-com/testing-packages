@@ -23,9 +23,14 @@ jobs:
   versions:
     name: Versions
 #    runs-on: ubuntu-latest
+#    runs-on:
+#      - run-id=${{ github.run_id }}
+#      - runner=4cpu-linux-x64
     runs-on:
-      - run-id=${{ github.run_id }}
-      - runner=4cpu-linux-x64
+      - self-hosted
+      - x64
+      - linux
+      - ubuntu
     strategy:
       matrix:
         node-version: [ 20.12.0 ]

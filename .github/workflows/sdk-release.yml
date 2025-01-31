@@ -28,8 +28,9 @@ jobs:
 #      - runner=4cpu-linux-x64
     runs-on:
       - self-hosted
-      # - linux-x64
-#      - ubuntu-latest
+      - linux
+      - x64
+      - ubuntu-latest
     strategy:
       matrix:
 #        node-version: [ 20.12.0 ]

@@ -7,9 +7,33 @@ on:
 jobs:
   run-on-webhook:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
     steps:
       - name: Check out code
         uses: actions/checkout@v4
 
       - name: Print webhook payload
         run: echo '${{ toJson(github.event.client_payload) }}'
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          workload_identity_provider: 'projects/646380729727/locations/global/workloadIdentityPools/github-actions-cloud-run'
+          service_account: 'ai-dashboard-agents@ai-dashboard-agents.iam.gserviceaccount.com'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+          version: '>= 363.0.0'
+
+      - name: 'Use gcloud CLI'
+        run: 'gcloud info'
+
+      - name: Setup variables
+        run: |
+          export VERTEXAI_PROJECT=ai-dashboard-agents
+          export VERTEXAI_LOCATION=europe-west1

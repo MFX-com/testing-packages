@@ -1,0 +1,15 @@
+name: Webhook Triggered Workflow
+
+on:
+  repository_dispatch:
+    types: [claude-event]
+
+jobs:
+  run-on-webhook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Print webhook payload
+        run: echo '${{ toJson(github.event.client_payload) }}'

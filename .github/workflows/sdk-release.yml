@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - staging
-      - development
+#      - development
 
 env:
   CMS_IMAGE: "ghcr.io/nexeraprotocol/nexeraid/apps/cms"

@@ -22,8 +22,10 @@ jobs:
       - id: 'auth'
         uses: 'google-github-actions/auth@v2'
         with:
-          workload_identity_provider: 'projects/646380729727/locations/global/workloadIdentityPools/github-actions-cloud-run/attribute.repository/MFX-com/testing-packages'
-          service_account: 'ai-dashboard-agents@ai-dashboard-agents.iam.gserviceaccount.com'
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+#        with:
+#          workload_identity_provider: 'projects/646380729727/locations/global/workloadIdentityPools/github-actions-cloud-run/attribute.repository/MFX-com/testing-packages'
+#          service_account: 'ai-dashboard-agents@ai-dashboard-agents.iam.gserviceaccount.com'
 
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v2'

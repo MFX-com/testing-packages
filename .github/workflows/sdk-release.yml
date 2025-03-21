@@ -24,7 +24,7 @@ jobs:
     name: Versions
 #    runs-on: ubuntu-latest
     runs-on:
-      - run-id=${{ github.run_id }}
+      - runs-on=${{ github.run_id }}
       - runner=4cpu-linux-x64
 #    runs-on:
 #      - self-hosted

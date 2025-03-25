@@ -25,6 +25,11 @@ jobs:
 #    runs-on: ubuntu-latest
     runs-on:
       - codebuild-runson-mfx-${{ github.run_id }}-${{ github.run_attempt }}
+#      - image:arm-3.0
+      - instance-size:large
+      - image:ubuntu-7.0
+#      - fleet:myFleet
+#      - buildspec-override:true
 #    runs-on:
 #      - runs-on=${{ github.run_id }}
 #      - runner=2cpu-linux-x64

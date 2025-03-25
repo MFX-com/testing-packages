@@ -39,7 +39,7 @@ jobs:
 #        pnpm-version: [ 9.0.5 ]
         apps:
           - api
-          - cms2
+#          - cms2
 #          - cms3
 #          - cms4
 #          - cms5
@@ -70,6 +70,8 @@ jobs:
       - name: Install packages
         run: |
           yum install -y curl jq
+          yum groupinstall -y "Development Tools"
+          yum install -y glibc-devel glibc-headers
 
       - name: Generate token
         id: generate_token

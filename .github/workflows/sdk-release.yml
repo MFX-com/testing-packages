@@ -67,11 +67,11 @@ jobs:
       NODE_VERSION: 20.12.0
       PNPM_VERSION: 9.0.5
     steps:
-      - name: Install packages
-        run: |
-          yum install -y curl jq
-          yum groupinstall -y "Development Tools"
-          yum install -y glibc-devel glibc-headers
+#      - name: Install packages
+#        run: |
+#          yum install -y curl jq
+#          yum groupinstall -y "Development Tools"
+#          yum install -y glibc-devel glibc-headers
 
       - name: Generate token
         id: generate_token

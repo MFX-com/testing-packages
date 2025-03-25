@@ -7,7 +7,6 @@ on:
 jobs:
   run-on-webhook:
     runs-on: ubuntu-latest
-
     permissions:
       contents: 'read'
       id-token: 'write'

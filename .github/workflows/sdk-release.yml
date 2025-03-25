@@ -25,10 +25,10 @@ jobs:
 #    runs-on: ubuntu-latest
     runs-on:
       - codebuild-runson-mfx-${{ github.run_id }}-${{ github.run_attempt }}
-      - instance-size:medium
-      - image:linux-5.0
-#      - instance-size:large
-#      - image:ubuntu-7.0
+#      - instance-size:medium
+#      - image:linux-5.0
+      - instance-size:small
+      - image:ubuntu-7.0
 #      - fleet:myFleet
 #      - buildspec-override:true
 #    runs-on:

@@ -24,13 +24,17 @@ jobs:
     name: Versions
 #    runs-on: ubuntu-latest
     runs-on:
-      - codebuild-runson-mfx-${{ github.run_id }}-${{ github.run_attempt }}
-#      - instance-size:medium
-#      - image:linux-5.0
-      - instance-size:small
-      - image:ubuntu-7.0
-#      - fleet:myFleet
-#      - buildspec-override:true
+      - self-hosted
+      - linux
+      - ec2
+    #    runs-on:
+#      - codebuild-runson-mfx-${{ github.run_id }}-${{ github.run_attempt }}
+##      - instance-size:medium
+##      - image:linux-5.0
+#      - instance-size:small
+#      - image:ubuntu-7.0
+##      - fleet:myFleet
+##      - buildspec-override:true
 #    runs-on:
 #      - runs-on=${{ github.run_id }}
 #      - runner=2cpu-linux-x64

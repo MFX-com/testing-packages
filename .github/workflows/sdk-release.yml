@@ -25,7 +25,7 @@ jobs:
 #    runs-on: ubuntu-latest
     runs-on:
       - self-hosted
-      - fargate
+      - ec2
     #    runs-on:
 #      - codebuild-runson-mfx-${{ github.run_id }}-${{ github.run_attempt }}
 ##      - instance-size:medium

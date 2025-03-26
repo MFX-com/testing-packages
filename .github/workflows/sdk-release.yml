@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - staging
-#      - development
+      - development
 
 env:
   CMS_IMAGE: "ghcr.io/nexeraprotocol/nexeraid/apps/cms"
@@ -48,27 +48,27 @@ jobs:
 #        pnpm-version: [ 9.0.5 ]
         apps:
           - api
-#          - cms2
-#          - cms3
-#          - cms4
-#          - cms5
-#          - cms6
-#          - cms7
-#          - cms8
-#          - cms9
-#          - cms10
-#          - cms11
-#          - cms12
-#          - cms13
-#          - cms14
-#          - cms15
-#          - cms16
-#          - cms17
-#          - cms18
-#          - cms19
-#          - cms20
-#          - cms21
-#          - cms22
+          - cms2
+          - cms3
+          - cms4
+          - cms5
+          - cms6
+          - cms7
+          - cms8
+          - cms9
+          - cms10
+          - cms11
+          - cms12
+          - cms13
+          - cms14
+          - cms15
+          - cms16
+          - cms17
+          - cms18
+          - cms19
+          - cms20
+          - cms21
+          - cms22
 #    environment:
 #      name: ${{ matrix.apps }}-dev
     env:

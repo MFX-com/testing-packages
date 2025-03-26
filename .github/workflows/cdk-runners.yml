@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - staging
-#      - development
+      - development
 
 permissions:
   id-token: write # This is required for requesting the JWT
@@ -148,11 +148,80 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
 
+  ec2-spot:
+    name: EC2 Spot
+    runs-on:
+      - self-hosted
+      - custom-ec2
+      - spot
+    strategy:
+      matrix:
+        apps:
+          - api
+    env:
+      NODE_VERSION: 20.12.0
+      PNPM_VERSION: 9.0.5
+    steps:
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v2
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          #          token: ${{ steps.generate_token.outputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      #          persist-credentials: false
+
+      - uses: pnpm/action-setup@v3.0.0
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          cache: 'pnpm'
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Dependencies
+        run: |
+          pnpm install --no-frozen-lockfile
+
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      #      - name: Dump matrix context
+      #        env:
+      #          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+      #        run: echo "$MATRIX_CONTEXT"
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
   ec2:
     name: EC2
     runs-on:
       - self-hosted
-      - ec2
+      - custom-ec2
+      - on-demand
     strategy:
       matrix:
         apps:
@@ -220,7 +289,77 @@ jobs:
     name: CodeBuild
     runs-on:
       - self-hosted
-      - codebuild
+      - custom-codebuild
+      - small
+    strategy:
+      matrix:
+        apps:
+          - api
+    env:
+      NODE_VERSION: 20.12.0
+      PNPM_VERSION: 9.0.5
+    steps:
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v2
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          #          token: ${{ steps.generate_token.outputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      #          persist-credentials: false
+
+      - uses: pnpm/action-setup@v3.0.0
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          cache: 'pnpm'
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Dependencies
+        run: |
+          pnpm install --no-frozen-lockfile
+
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      #      - name: Dump matrix context
+      #        env:
+      #          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+      #        run: echo "$MATRIX_CONTEXT"
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+  fargate-spot:
+    name: Fargate Spot
+    runs-on:
+      - self-hosted
+      - custom-fargate
+      - spot
     strategy:
       matrix:
         apps:
@@ -288,7 +427,8 @@ jobs:
     name: Fargate
     runs-on:
       - self-hosted
-      - fargate
+      - custom-fargate
+      - on-demand
     strategy:
       matrix:
         apps:

@@ -23,7 +23,7 @@ jobs:
   versions:
     name: Versions
 #    runs-on: ubuntu-latest
-    runs-on: sprinters:aws:ubuntu-latest
+    runs-on: sprinters:aws:r7a.16xlarge:spot=auto:ubuntu-latest
 #    runs-on:
 #      - self-hosted
 #      - custom-fargate
